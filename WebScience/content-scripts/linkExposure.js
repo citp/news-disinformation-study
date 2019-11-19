@@ -47,6 +47,18 @@ if(matchingLinks.length > 0) {
   });
 }
 
+// TODO : matching for urls must be done prior to regular expression matching
+
+function fb_decode(url) {
+  var u = new URL(url);
+  // this is for facebook posts
+  hasU = u.searchParams.get('u') != null;
+  if(hasU) {
+      return u.searchParams.get("u").split('?')[0];
+  }
+  return u.href;
+}
+
 // TODO add logic to handle link presentation/redirection quirks, including:
 // * Facebook - e.g., https://l.facebook.com/l.php?u=... this should be
 //   straightforward, just parsing the URL out of a parameter
