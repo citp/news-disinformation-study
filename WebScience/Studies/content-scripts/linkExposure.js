@@ -12,7 +12,8 @@ var initialVisibility = document.visibilityState == "visible";
 // Get all the links on the page that have an href attribute
 // Not that this is using the slower querySelectorAll, which returns a static NodeList
 // We might want to use the faster getElement, which returns a live (possibly risky) HTMLCollection
-// We also might want to try embedding the matching domains into the CSS selector, which might be faster
+// We also might want to try embedding the matching domains into the CSS
+//  selector, which might be faster
 var aElements = document.body.querySelectorAll("a[href]");
 
 var matchingLinks = [ ];
@@ -21,7 +22,7 @@ var matchingLinks = [ ];
 for(var aElement of aElements) {
 
   // Use a DOM expando attribute to label a tags with whether the domain matches
-  aElement.linkExposureMatchingDomain = domainMatcher.test(aElement.href);
+  aElement.linkExposureMatchingDomain = urlMatcher.test(aElement.href);
 
   // TODO check that we aren't missing href attributes that omit the current domain
   // e.g., <a href="/foo/bar.html">

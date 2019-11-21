@@ -1,33 +1,5 @@
-import * as Navigation from "/WebScience/study-modules/Navigation.js"
-export { Navigation }
+import * as Studies from "/WebScience/Studies/Studies.js"
+export { Studies }
 
-import * as LinkExposure from "/WebScience/study-modules/LinkExposure.js"
-export { LinkExposure }
-
-import * as SocialMediaSharing from "/WebScience/study-modules/SocialMediaSharing.js"
-export { SocialMediaSharing }
-
-/* Module Variables */
-
-var studySpecificConsentRequired = true;
-
-const debug = true;
-
-/*  Consent - components related to checking for and obtaining user consent. */
-
-export function disableStudySpecificConsent() {
-  studySpecificConsentRequired = false;
-}
-
-// TODO implement logic for pausing studies until the user consents, if consent
-// is needed for a study
-export function requestConsent() {
-  browser.runtime.openOptionsPage();
-}
-
-/* Utilities */
-
-function debugLog(text) {
-  if(debug == true)
-    console.log(text);
-}
+import * as Utilities from "/WebScience/Utilities/Utilities.js"
+export { Utilities }

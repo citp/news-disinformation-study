@@ -1,6 +1,6 @@
 import { localforage } from "/WebScience/dependencies/localforagees6.min.js"
-
-const debug = true;
+import * as WebScience from "/WebScience/WebScience.js"
+var debugLog = WebScience.Utilities.DebugLog.debugLog;
 
 /* SocialMediaSharing - This module is used to run studies that track the user's
    social media sharing of links. */
@@ -20,7 +20,8 @@ async function initializeStorage() {
   });
 
   storage.shares = await localforage.createInstance( { name: "socialMediaSharing.shares" } );
-  storage.configuration = await localforage.createInstance( { name: "socialMediaSharing.configuration" } );
+  storage.configuration = await localforage.createInstance( 
+      { name: "socialMediaSharing.configuration" } );
 }
 
 /* runStudy - Starts a SocialMediaSharing study. Note that only one study is supported
@@ -44,13 +45,7 @@ export async function runStudy({
 
   await initializeStorage();
 
-  // Generate the regular expression object for domain matching
-  // Uses the built-in regular expression library for performance
-  var domainMatchRE = "^(?:http|https)://(?:[A-Za-z0-9\\-]+\\.)*(?:";
-  for (const domain of domains)
-    domainMatchRE = domainMatchRE + domain.replace(/\./g, "\\.") + "|";
-  domainMatchRE = domainMatchRE.substring(0, domainMatchRE.length - 1) + ")(?:$|/.*)";
-  const domainMatcher = new RegExp(domainMatchRE);
+  const urlMatcher = new WebScience.Utilities.Matching.UrlMatcher(domains);
 
   // Use a unique identifier for each webpage the user visits
   var nextShareId = await storage.configuration.getItem("nextShareId");
@@ -76,7 +71,10 @@ export async function runStudy({
       return;
 
     // Check that this is a recognizable status update (i.e., tweet) request
-    if ((requestDetails.requestBody == null) || !("formData" in requestDetails.requestBody) || !("status" in requestDetails.requestBody.formData) || (requestDetails.requestBody.formData["status"].length == 0))
+    if ((requestDetails.requestBody == null) ||
+        !("formData" in requestDetails.requestBody) ||
+        !("status" in requestDetails.requestBody.formData) ||
+        (requestDetails.requestBody.formData["status"].length == 0))
       return;
 
     var shareTime = Date.now();
@@ -88,7 +86,7 @@ export async function runStudy({
 
     // If there's a URL match, record the sharing event
     for (var tweetToken of tweetTokens) {
-      if (domainMatcher.test(tweetToken)) {
+      if (urlMatcher.testUrl(tweetToken)) {
         var shareRecord = createShareRecord(shareTime, "twitter", tweetToken, "tweet");
         storage.shares.setItem("" + nextShareId, shareRecord);
         nextShareId = nextShareId + 1;
@@ -98,7 +96,8 @@ export async function runStudy({
     }
 
   },
-  { urls: [ "https://api.twitter.com/*/statuses/update.json" ] }, // Using a wildcard for the API version in case that changes
+  // Using a wildcard for the API version in case that changes
+  { urls: [ "https://api.twitter.com/*/statuses/update.json" ] }, 
   [ "requestBody" ]);
 
   // TODO handle retweets
@@ -138,7 +137,8 @@ export async function runStudy({
     var shareTime = Date.now();
 
     // Handle if there's a URL attached to the post
-    if(("url" in requestDetails.requestBody.formData) && (requestDetails.requestBody.formData["url"].length == 1)) {
+    if(("url" in requestDetails.requestBody.formData) &&
+        (requestDetails.requestBody.formData["url"].length == 1)) {
         var postUrl = requestDetails.requestBody.formData["url"][0];
         if(domainMatcher.test(postUrl)) {
           var shareRecord = createShareRecord(shareTime, "reddit", postUrl, "post");
@@ -152,7 +152,8 @@ export async function runStudy({
     // TODO handle if there's a URL embedded in the post body
 
   },
-  { urls: [ "https://oauth.reddit.com/api/submit*" ] }, // Using a wildcard at the end of the URL because Reddit adds parameters
+  // Using a wildcard at the end of the URL because Reddit adds parameters
+  { urls: [ "https://oauth.reddit.com/api/submit*" ] }, 
   [ "requestBody" ]);
 
 }
@@ -166,11 +167,6 @@ function createShareRecord(shareTime, platform, url, event) {
     url: url,
     event: event
   };
-}
-
-function debugLog(text) {
-  if(debug == true)
-    console.log(text);
 }
 
 // Helper function that dumps the navigation study data as an object

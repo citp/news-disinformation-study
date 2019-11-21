@@ -1,6 +1,6 @@
 import { localforage } from "/WebScience/dependencies/localforagees6.min.js"
-
-const debug = true;
+import * as WebScience from "/WebScience/WebScience.js"
+var debugLog = WebScience.Utilities.DebugLog.debugLog;
 
 /* Navigation - This module is used to run studies that track the user's
    navigation of and attention to webpages. */
@@ -41,13 +41,7 @@ export async function runStudy({
 
   await initializeStorage();
 
-  // Generate the regular expression object for domain matching
-  // Uses the built-in regular expression library for performance
-  var domainMatchRE = "^(?:http|https)://(?:[A-Za-z0-9\\-]+\\.)*(?:";
-  for (const domain of domains)
-    domainMatchRE = domainMatchRE + domain.replace(/\./g, "\\.") + "|";
-  domainMatchRE = domainMatchRE.substring(0, domainMatchRE.length - 1) + ")(?:$|/.*)";
-  const domainMatcher = new RegExp(domainMatchRE);
+  const urlMatcher = new WebScience.Utilities.Matching.UrlMatcher(domains);
 
   // Use a unique identifier for each webpage the user visits that has a matching domain
   var nextPageId = await storage.configuration.getItem("nextPageId");
@@ -65,7 +59,7 @@ export async function runStudy({
   // If the webpage doesn't have a matching domain, it's ignored
   // If the webpage does have a matching domain, create a new record
   async function startPageVisit(tabId, url) {
-    if(!domainMatcher.test(url))
+    if(!urlMatcher.testUrl(url))
       return;
     if(tabId in currentTabInfo)
       return;
@@ -109,7 +103,7 @@ export async function runStudy({
   // Set up the content script for determining the referrer of a page with a matching domain
   await browser.contentScripts.register({
       matches: contentScriptMatches,
-      js: [ { file: "/WebScience/content-scripts/referrer.js" } ],
+      js: [ { file: "/WebScience/Studies/content-scripts/referrer.js" } ],
       runAt: "document_start"
   });
 
@@ -132,12 +126,14 @@ export async function runStudy({
   if(savePageContent) {
     await browser.contentScripts.register({
         matches: contentScriptMatches,
-        js: [ { file: "/WebScience/content-scripts/pageContent.js" } ],
+        js: [ { file: "/WebScience/Studies/content-scripts/pageContent.js" } ],
         runAt: "document_idle"
     });
 
     browser.runtime.onMessage.addListener((message, sender) => {
-      if((message == null) || !("type" in message) || message.type != "WebScience.pageContentUpdate")
+      if((message == null) ||
+          !("type" in message) ||
+          message.type != "WebScience.pageContentUpdate")
         return;
 
       // If the page content message isn't from a tab or we aren't tracking the tab,
@@ -162,7 +158,8 @@ export async function runStudy({
 
   // Helper function for determining whether a specified tab and window have the user's attention
   function checkTabAndWindowHaveAttention(tabId, windowId) {
-    return ((attentionState.currentActiveTab == tabId) && (attentionState.currentFocusedWindow == windowId));
+    return ((attentionState.currentActiveTab == tabId) &&
+            (attentionState.currentFocusedWindow == windowId));
   }
 
   // Helper function for determining whether a specified window has the user's attention
@@ -183,18 +180,25 @@ export async function runStudy({
   }
 
   // Helper function for ending a user attention span
-  // If the previously active window and tab contained a page with a matching domain, update the attention information
-  // Note that the retainWindow parameter is needed to handle the case where the user closes the active tab in the focused window
+  // If the previously active window and tab contained a page with a matching
+  //  domain, update the attention information
+  // Note that the retainWindow parameter is needed to handle the case where
+  //  the user closes the active tab in the focused window
   function stopAttentionSpan(retainWindow) {
     if(!trackUserAttention)
       return;
 
-    // If the tab that's losing attention was getting tracked, update the attention information for that tab
+    // If the tab that's losing attention was getting tracked, update the
+    //  attention information for that tab
     if(attentionState.currentActiveTabNeedsAttentionTracking) {
       var currentTime = Date.now();
-      currentTabInfo[attentionState.currentActiveTab].attentionDuration = currentTabInfo[attentionState.currentActiveTab].attentionDuration + (currentTime - attentionState.startOfCurrentAttentionSpan);
-      currentTabInfo[attentionState.currentActiveTab].attentionSpanCount = currentTabInfo[attentionState.currentActiveTab].attentionSpanCount + 1;
-      currentTabInfo[attentionState.currentActiveTab].attentionSpanStarts.push(attentionState.startOfCurrentAttentionSpan);
+      currentTabInfo[attentionState.currentActiveTab].attentionDuration =
+            currentTabInfo[attentionState.currentActiveTab].attentionDuration
+            + (currentTime - attentionState.startOfCurrentAttentionSpan);
+      currentTabInfo[attentionState.currentActiveTab].attentionSpanCount =
+            currentTabInfo[attentionState.currentActiveTab].attentionSpanCount + 1;
+      currentTabInfo[attentionState.currentActiveTab].attentionSpanStarts
+            .push(attentionState.startOfCurrentAttentionSpan);
       currentTabInfo[attentionState.currentActiveTab].attentionSpanEnds.push(currentTime);
     }
 
@@ -206,11 +210,13 @@ export async function runStudy({
     debugLog("stopAttentionSpan");
   };
 
-  // Get the currently active tab and current window when the study starts running in this browser session
+  // Get the currently active tab and current window when the study starts
+  //  running in this browser session
   // Note that we're assuming the current window is focused
   // If the page in that tab has a matching domain, start tracking it and shift attention to it
   var activeTabAtStartup = null;
-  var activeTabsAtStartup = await browser.tabs.query({ windowId: browser.windows.WINDOW_ID_CURRENT, active: true });
+  var activeTabsAtStartup = await browser.tabs.query(
+      { windowId: browser.windows.WINDOW_ID_CURRENT, active: true });
   if(activeTabsAtStartup.length > 0) {
     activeTabAtStartup = activeTabsAtStartup[0];
     startPageVisit(activeTabAtStartup.id, activeTabAtStartup.url);
@@ -314,11 +320,6 @@ export async function runStudy({
 }
 
 /* Utilities */
-
-function debugLog(text) {
-  if(debug == true)
-    console.log(text);
-}
 
 // Helper function that dumps the navigation study data as an object
 export async function getStudyDataAsObject() {
