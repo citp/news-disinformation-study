@@ -77,6 +77,10 @@ function fb_decode(url) {
 //   is embedded with some unusual twist on base64url encoding (e.g.,
 //   https://news.google.com/articles/...)
 
+// TODO add logic to handle popular third-party link shorteners, e.g., bit.ly,
+// goo.gl, etc., and custom domains for those shorters, e.g., nyti.ms and
+// theatln.tc
+
 // TODO add logic to handle new a tags added to the DOM, would start with
 // periodicially iterating the a tags and ignoring tags we've already tagged with
 // an expando attribute
