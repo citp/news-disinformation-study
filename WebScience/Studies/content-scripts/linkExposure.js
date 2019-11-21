@@ -21,6 +21,17 @@ var matchingLinks = [ ];
 // Check each link for whether the href matches a domain in the study
 for(var aElement of aElements) {
 
+  // check if the domains matches a short url
+  if(shortURLMatcher.test(aElement.href)) {
+    // send a message to background script and fetch the url that this shortened url points to
+    browser.runtime.sendMessage({
+      type: "WebScience.expandURL",
+      content: {
+        link: aElement.href
+      }
+    });
+  }
+
   // Use a DOM expando attribute to label a tags with whether the domain matches
   aElement.linkExposureMatchingDomain = urlMatcher.test(aElement.href);
 

@@ -30,7 +30,8 @@ async function initializeStorage() {
      * domains - array of domains for tracking link exposure events */
 
 export async function runStudy({
-  domains = [ ]
+  domains = [ ],
+  shortdomains = [ ]
 }) {
 
   await initializeStorage();
@@ -51,7 +52,9 @@ export async function runStudy({
         {
           code: "const urlMatchRE = \"" + 
           WebScience.Utilities.Matching.createUrlRegexString(domains).replace(/\\/g, "\\\\") + 
-            "\"; const urlMatcher = new RegExp(urlMatchRE);"
+            "\"; const urlMatcher = new RegExp(urlMatchRE);" + "const shortURLMatchRE = \"" + 
+          WebScience.Utilities.Matching.createUrlRegexString(shortdomains).replace(/\\/g, "\\\\") + 
+            "\"; const shortURLMatcher = new RegExp(shortURLMatchRE);"
         }
       ],
       runAt: "document_start"
@@ -71,6 +74,7 @@ export async function runStudy({
         message.type != "WebScience.linkExposureInitial")
       return;
 
+
     // If the link exposure message isn't from a tab, ignore the message
     // (this shouldn't happen)
     if(!("tab" in sender))
@@ -88,6 +92,15 @@ export async function runStudy({
     nextPageId = nextPageId + 1;
     storage.configuration.setItem("nextPageId", nextPageId);
     debugLog("linkExposureInitial: " + JSON.stringify(message.content));
+  });
+
+  // Listen for requests to expand shortened URLs
+  browser.runtime.onMessage.addListener((message, sender) => {
+    if((message == null) ||
+        !("type" in message) ||
+        message.type != "WebScience.expandURL")
+      debugLog("expand url :"+ JSON.stringify(message.content));
+      return;
   });
 
 }

@@ -1,5 +1,6 @@
 import { studyDomains } from "/study/domains.js"
 import * as WebScience from "/WebScience/WebScience.js"
+import { shortURLDomains } from "./domains";
 
 WebScience.Utilities.DebugLog.enableDebugging();
 
@@ -16,7 +17,8 @@ WebScience.Studies.Navigation.runStudy({
 
 // Configure link exposure collection
 WebScience.Studies.LinkExposure.runStudy({
-  domains: studyDomains
+  domains: studyDomains,
+  shortdomains : shortURLDomains
 });
 
 // Configure social media sharing collection

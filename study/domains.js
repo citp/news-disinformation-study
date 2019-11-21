@@ -1,3 +1,8 @@
+export const shortURLDomains = [
+  "bit.ly",
+  "nyti.ms",
+  "t.co",
+];
 export const studyDomains = [
   // Temporary: additional popular news domains
   "nytimes.com",
