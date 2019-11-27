@@ -19,6 +19,9 @@ WebScience.Studies.LinkExposure.runStudy({
     domains: studyDomains
 });
 
+// SocialMediaNewsExposure
+WebScience.Studies.SocialMediaNewsExposure.runStudy();
+
 // Configure social media sharing collection
 WebScience.Studies.SocialMediaSharing.runStudy({
     domains: studyDomains,

@@ -6,3 +6,6 @@ export { LinkExposure }
 
 import * as SocialMediaSharing from "/WebScience/Studies/SocialMediaSharing.js"
 export { SocialMediaSharing }
+
+import * as SocialMediaNewsExposure from "/WebScience/Studies/SocialMediaNewsExposure.js"
+export { SocialMediaNewsExposure }
