@@ -8,8 +8,7 @@
     let updateInterval = 2000;
     linkExposure();
     /**
-     * 
-     *linkExposure main function that looks for exposure to known domains. For known short urls, it uses LinkResolution 
+     *main function that looks for exposure to known domains. For known short urls, it uses LinkResolution 
      *utility to get the actual url and checks for the presence of a known domain
     */
   function linkExposure() {
@@ -17,13 +16,21 @@
   let initialLoadTime = Date.now();
   let initialVisibility = document.visibilityState == "visible";
 
-  // Helper function to test if the hostname matches to a known domain
+  /**
+   * function to test if a visiable DOM element matches the given reg exp
+   * @param {RegExp} matcher regular expression matcher
+   * @param {string} link url
+   * @param {Element} element DOM element
+   */
   function testForMatch(matcher, link, element=null) {
     // if element is not null check if its in the viewport
     return (element == null || isElementInViewport(element)) && matcher.test(link);
   }
 
-  // Helper function to test if DOM element is in viewport
+    /**
+     * Helper function to test if DOM element is in viewport
+     * @param {Element} el element
+     */
   function isElementInViewport (el) {
     let rect = el.getBoundingClientRect();
     return (
@@ -34,7 +41,10 @@
     );
   }
 
-    // Helper function to get size of element
+    /**
+     * Helper function to get size of element
+     * @param {Element} el element
+     */
     function getElementSize(el) {
       let rect = el.getBoundingClientRect();
       return {
@@ -43,16 +53,27 @@
       };
     }
 
-    // function to get links to known short url domains
+    /**
+     * function to get links to known short url domains
+     * @param {NodeList} aElements NodeList of <a> elements
+     */
     function getShortLinks(aElements) {
       return Array.filter(Array.from(aElements), (ele) => { return testForMatch(shortURLMatcher, ele.href, ele); }).map((x) => { return { href: x.href } });
     }
-    // function to get links to domains of interest (domains in the study)
+
+    /**
+     * function to get links to domains of interest (domains in the study)
+     * @param {NodeList} aElements NodeList of <a> elements
+     */
     function getDomainMatches(aElements) {
       return Array.filter(Array.from(aElements), (ele) => { return testForMatch(urlMatcher, ele.href, ele); }).map((x) => { return { href: x.href, size: getElementSize(x) } });
     }
 
-    // Helper function to send data to background script
+    /**
+     * Helper function to send data to background script
+     * @param {string} type message type
+     * @param {Object} data data to send
+     */
     function sendMessageToBackground(type, data) {
       if(data.length > 0) {
         browser.runtime.sendMessage({
@@ -88,6 +109,10 @@
       return data;
     }
 
+    /**
+     * Function to look for new <a> elements in the viewport, tests for matches to study domains and short domains.
+     * The matched urls are sent to background script
+     */
   function matchLinks() {
     /*
     Filter for elements that haven't been visited previously and that are currently in viewport
