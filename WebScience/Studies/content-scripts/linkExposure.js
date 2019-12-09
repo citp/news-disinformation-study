@@ -93,21 +93,13 @@
     /**
      * Get link size
      * 
-     * For short urls that are resolved to domains of interest, get the link size.
-     * @param {Array} links array of resolved urls
-     * @param {string} links[].init short url
-     * @param {string} links[].href resolved url
+     * @param {string} link url on the page
      */
-    function getLinkSize(links) {
+    function getLinkSize(link) {
       // create an object with key = init and value is resolved url
-      let resolvedUrlsByPageUrls = {};
-      links.forEach((key, i) => resolvedUrlsByPageUrls[key.init] = key.href);
-      let query = links.map(x => { return ["a[href='", x.init, "']"].join("");}).join(",");
+      let query = "a[href='"+link+"']";
       let elements = document.body.querySelectorAll(query);
-      let data = Array.from(elements).map(x => {
-        return {href: resolvedUrlsByPageUrls[x.href], size: getElementSize(x)}
-      });
-      return data;
+      return (elements.length > 0 ? getElementSize(elements[0]) : null);
     }
 
     /**
@@ -147,6 +139,14 @@
     /** Listen for resolved url messages; check if the domain matches and then send a message back to store it */
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
+      let source = data.source;
+      if(testForMatch(urlMatcher, dest)) {
+        // get source size
+        let sz = getLinkSize(source);
+        let data = [{href: dest, size: sz}];
+        sendMessageToBackground("WebScience.linkExposureInitial", data);
+      }
+      return Promise.resolve({ response: "received messages" });
     });
   }
 }

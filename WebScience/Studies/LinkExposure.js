@@ -67,18 +67,12 @@ export async function runStudy({
     if(!("tab" in sender))
       return;
       debugLog("incoming requests " + message.content.links);
-    var promises = [];
     for (var link of message.content.links) {
-        var p = WebScience.Utilities.LinkResolution.resolveURL(link.href);
-        promises.push(p);
+      let promise = WebScience.Utilities.LinkResolution.resolveURL2(link.href);
+      promise.then(function (result) {
+        browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
+      });
     }
-    Promise.all(promises.map(reflect)).then(function (results) {
-      var success = results.filter(x => x.status === "fulfilled");
-      var errors = results.filter(x => x.status === "rejected");
-      debugLog("success " + success);
-      success.map(x => debugLog(x.v));
-      browser.tabs.sendMessage(sender.tab.id, {'links': success}).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
-    });
   });
 
   // Listen for initial link exposure messages and save them to the database
