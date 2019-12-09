@@ -34,6 +34,7 @@
   function isElementInViewport (el) {
     let rect = el.getBoundingClientRect();
     return (
+        el.style.display != "none" &&
         rect.top > 0 && // should this be strictly greater ? With >= invisible links have 0,0,0,0 in bounding rect
         rect.left > 0 &&
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
@@ -134,7 +135,7 @@
   // call update every 2 seconds
   setInterval(matchLinks, updateInterval);
 
-    browser.runtime.onMessage.addListener((data, sender) => {
+    /*browser.runtime.onMessage.addListener((data, sender) => {
       console.log("Message from the background script:");
       console.log(data.links);
       // get domain matching links from texpanded links
@@ -142,6 +143,10 @@
       // send the new filtered links to background script for storage
       sendMessageToBackground("WebScience.linkExposureInitial", getLinkSize(newlinks));
       return Promise.resolve({ response: "received messages" });
+    });*/
+    /** Listen for resolved url messages; check if the domain matches and then send a message back to store it */
+    browser.runtime.onMessage.addListener((data, sender) => {
+      let dest = data.dest;
     });
   }
 }

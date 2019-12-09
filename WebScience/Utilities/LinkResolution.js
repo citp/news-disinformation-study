@@ -115,3 +115,28 @@ export function resolveURL(url) {
   });
   return promiseTimeout(1000, p);
 }
+
+export function resolveURL2(url) {
+  return new Promise(function(resolve, reject) {
+    var http = new XMLHttpRequest();
+    var resolveObj = new Object();
+    http.open('HEAD', url);
+    http.setRequestHeader("User-Agent", 'curl/7.37.0');
+    http.onreadystatechange = function () {
+      if (this.readyState === this.DONE) {
+        //chain.push(url);
+        //chain.push(this.responseURL);
+        resolveObj.source = url;
+        resolveObj.dest = this.responseURL;
+        resolve(resolveObj);
+      }
+    };
+    http.onerror = function() {
+      reject({
+        status: this.status,
+        statusText: http.statusText
+      })
+    };
+    http.send();
+  });
+}
