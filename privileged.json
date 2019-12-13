@@ -1,0 +1,14 @@
+[
+    {
+        "namespace": "privileged",
+        "functions": [
+            {
+                "name": "run",
+                "type": "function",
+                "description": "Runs privileged code.",
+                "async": false,
+                "parameters": [ ]
+            }
+        ]
+    }
+]

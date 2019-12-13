@@ -11,7 +11,8 @@
                 "fileName": "${workspaceFolder}/log.txt",
                 "fileLevel": {
                     "default": "Debug"
-                },
+                }
+            }
         },
         // Note: automatic extension reloading is not reliable... after the first reload, the debugger appears
         // to remain connected, but the Visual Studio debug console disconnects and the Firefox debug console
@@ -36,7 +37,9 @@
                 "devtools.browserconsole.filter.info": false,
                 "devtools.browserconsole.filter.log": false,
                 "devtools.browserconsole.filter.warn": false,
-                "app.normandy.enabled": false
+                "app.normandy.enabled": false,
+                "extensions.legacy.enabled": true,
+                "xpinstall.signatures.required": false
             }
         },
         // Note: it's possible to manually reload the extension inside Firefox from about:debugging
@@ -47,7 +50,7 @@
             "reAttach": false,
             "popupAutohideButton": false,
             "addonPath": "${workspaceFolder}",
-            "firefoxArgs": [  "-jsconsole", "-foreground", "-new-window", "about:blank", "-url", "about:debugging#/runtime/this-firefox" ],
+            "firefoxArgs": [  "-jsconsole", "-foreground" ],
             "preferences": {
                 "devtools.browserconsole.contentMessages": true,
                 "devtools.browserconsole.filter.debug": true,
@@ -55,7 +58,9 @@
                 "devtools.browserconsole.filter.info": false,
                 "devtools.browserconsole.filter.log": false,
                 "devtools.browserconsole.filter.warn": false,
-                "app.normandy.enabled": false
+                "app.normandy.enabled": false,
+                "extensions.legacy.enabled": true,
+                "xpinstall.signatures.required": false
             }
         }
     ]

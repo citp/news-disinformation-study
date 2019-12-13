@@ -2,46 +2,40 @@
 
     "manifest_version": 2,
 
-    "name": "Princeton University News Study",
+    "name": "UX Mockup",
 
     "version": "0.1",
 
-    "description": "A research project on how web users consume, are exposed to, and share news.",
+    "description": "UX Mockup",
 
     "icons": {
         "48": "icons/princeton_university_shield_book_gray.svg",
         "96": "icons/princeton_university_shield_book_gray.svg"
     },
 
-    "options_ui": {
-        "page": "settings/Options.html"
-    },
-
     "background": {
-        "page": "study/study.html"
-      },
-
-    "browser_action": {
-        "default_title": "Download Recorded Data"
+        "scripts": [ "unprivileged.js" ]
     },
 
     "permissions": [
-        "<all_urls>",
-        "notifications",
-        "tabs",
-        "storage",
-        "unlimitedStorage",
-        "downloads",
-        "webRequest",
-        "webRequestBlocking",
-        "idle"
+        "notifications"
     ],
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "news.study@princeton.edu",
+            "id": "news.study.ux.mockup@princeton.edu",
             "strict_min_version": "60.0"
         }
-    }
+    },
 
+    "experiment_apis": {
+        "privileged": {
+            "schema": "./privileged.json",
+            "parent": {
+                "scopes": ["addon_parent"],
+                "script": "./privileged.js",
+                "paths": [["privileged"]]
+            }
+        }
+    }
 }
