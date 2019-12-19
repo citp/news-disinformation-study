@@ -34,7 +34,6 @@ export async function runStudy({
     "\"; const urlMatcher = new RegExp(urlMatchRE);" +  "const shortURLMatchRE = \"" + 
           WebScience.Utilities.Matching.createUrlRegexString(shortdomains).replace(/\\/g, "\\\\") + 
             "\"; const shortURLMatcher = new RegExp(shortURLMatchRE);"
-  console.log("code is "+injectcode);
 
   // Add a dynamically generated content script to every HTTP/HTTPS page that
   // supports checking for whether a link's domain matches the set for the study
