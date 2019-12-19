@@ -1,5 +1,6 @@
 // Utility to resolve amp urls
-const cacheDomains = ["cdn.ampproject.org", "amp.cloudflare.com", "bing-amp.com", "guardian.com"];
+// Caches : https://github.com/ampproject/amphtml/blob/master/build-system/global-configs/caches.json
+const cacheDomains = ["cdn.ampproject.org", "amp.cloudflare.com", "bing-amp.com"];
 const domRegex = /.*?\/{1,2}(.*?)(\.).*/gm;
 
 /**
