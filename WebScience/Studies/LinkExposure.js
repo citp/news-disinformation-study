@@ -1,16 +1,10 @@
-import * as WebScience from "/WebScience/WebScience.js"
+import * as WebScience from "/WebScience/WebScience.js";
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("Studies.LinkExposure");
 
 /*  LinkExposure - This module is used to run studies that track the user's
     exposure to links. */
 
 var storage = null;
-
-// helper function to get results of promises
-function reflect(promise){
-  return promise.then(function(v){ return {v:v, status: "fulfilled" }},
-                      function(e){ return {e:e, status: "rejected" }});
-}
 
 /* runStudy - Starts a LinkExposure study. Note that only one study is supported
    per extension. runStudy requires an options object with the following
@@ -33,7 +27,7 @@ export async function runStudy({
   WebScience.Utilities.Matching.createUrlRegexString(domains).replace(/\\/g, "\\\\") + 
     "\"; const urlMatcher = new RegExp(urlMatchRE);" +  "const shortURLMatchRE = \"" + 
           WebScience.Utilities.Matching.createUrlRegexString(shortdomains).replace(/\\/g, "\\\\") + 
-            "\"; const shortURLMatcher = new RegExp(shortURLMatchRE);"
+            "\"; const shortURLMatcher = new RegExp(shortURLMatchRE);";
 
   // Add a dynamically generated content script to every HTTP/HTTPS page that
   // supports checking for whether a link's domain matches the set for the study
@@ -66,11 +60,15 @@ export async function runStudy({
     if(!("tab" in sender))
       return;
       debugLog("incoming requests " + message.content.links);
-    for (var link of message.content.links) {
-      let promise = WebScience.Utilities.LinkResolution.resolveURL2(link.href);
-      promise.then(function (result) {
+    
+      function respond(result) {
         browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
-      });
+      }
+    for (var link of message.content.links) {
+      let promise = WebScience.Utilities.LinkResolution.resolveURL2(link.href).then(respond);
+      //promise.then(result => {
+        //return browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
+      //});
     }
   });
 
@@ -94,7 +92,7 @@ export async function runStudy({
     nextPageIdCounter.getAndIncrement().then(pageId => {
       storage.set(pageId.toString(), message.content).then(() => {
         debugLog("linkExposureInitial: " + JSON.stringify(message.content));
-      })
+      });
   });
   });
 

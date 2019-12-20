@@ -12,6 +12,32 @@
      *utility to get the actual url and checks for the presence of a known domain
     */
   function linkExposure() {
+    // configure the intersection observer instance
+    var intersectionObserverOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
+    };
+    var observer = new IntersectionObserver(onIntersection, intersectionObserverOptions);
+    function onIntersection(entries){
+      entries.forEach(entry => {
+        entry.target.classList.toggle('visible', entry.intersectionRatio > 0);
+        // Are we in viewport?
+        if (entry.intersectionRatio > 0) {
+          // check if the target is short url
+          if(testForMatch(shortURLMatcher, entry.target.href)) {
+              sendMessageToBackground("WebScience.shortLinks", [{href: entry.target.href}]);
+          }
+          // check for domain matching
+          if(testForMatch(urlMatcher, entry.target.href)) {
+              sendMessageToBackground("WebScience.linkExposureInitial", [{href: entry.target.href, size: getElementSize(entry.target)}]);
+          }
+          // Stop watching the target
+          observer.unobserve(entry.target);
+        }
+      });
+    }
+
   // Save the time the page initially completed loading
   let initialLoadTime = Date.now();
   let initialVisibility = document.visibilityState == "visible";
@@ -22,24 +48,9 @@
    * @param {string} link url
    * @param {Element} element DOM element
    */
-  function testForMatch(matcher, link, element=null) {
+  function testForMatch(matcher, link) {
     // if element is not null check if its in the viewport
-    return (element == null || isElementInViewport(element)) && matcher.test(link);
-  }
-
-    /**
-     * Helper function to test if DOM element is in viewport
-     * @param {Element} el element
-     */
-  function isElementInViewport (el) {
-    let rect = el.getBoundingClientRect();
-    return (
-        el.style.display != "none" &&
-        rect.top > 0 && // should this be strictly greater ? With >= invisible links have 0,0,0,0 in bounding rect
-        rect.left > 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+    return matcher.test(link);
   }
 
     /**
@@ -50,24 +61,9 @@
       let rect = el.getBoundingClientRect();
       return {
         width: rect.right - rect.left,
-        height: rect.bottom - rect.top
+        height: rect.bottom - rect.top,
+        rect: rect
       };
-    }
-
-    /**
-     * function to get links to known short url domains
-     * @param {NodeList} aElements NodeList of <a> elements
-     */
-    function getShortLinks(aElements) {
-      return Array.filter(Array.from(aElements), (ele) => { return testForMatch(shortURLMatcher, ele.href, ele); }).map((x) => { return { href: x.href } });
-    }
-
-    /**
-     * function to get links to domains of interest (domains in the study)
-     * @param {NodeList} aElements NodeList of <a> elements
-     */
-    function getDomainMatches(aElements) {
-      return Array.filter(Array.from(aElements), (ele) => { return testForMatch(urlMatcher, ele.href, ele); }).map((x) => { return { href: x.href, size: getElementSize(x) } });
     }
 
     /**
@@ -108,35 +104,20 @@
      */
   function matchLinks() {
     /*
-    Filter for elements that haven't been visited previously and that are currently in viewport
+    Filter for elements that haven't been visited previously and observe them with intersection observer
     Use isVisited attribute to track elements that have been visited
     */
-    let aElements = Array.filter(document.body.querySelectorAll("a[href]"), (x) => x.isVisited == null && isElementInViewport(x)).map((x) => {
-      x.isVisited = true;
-      return x;
-    })
-    let matchingLinks = getDomainMatches(aElements);
-    let shortLinks = getShortLinks(aElements);
-
-    // send matched short links to background script for resolution
-    sendMessageToBackground("WebScience.shortLinks", shortLinks);
-    // send exposed links to background script for storage
-    sendMessageToBackground("WebScience.linkExposureInitial", matchingLinks);
+   let aElements = Array.from(document.body.querySelectorAll("a[href")).filter(link => link.isVisited == null).map(
+     element => {
+       observer.observe(element);
+       element.isVisited = true;
+       return element;
+     }
+   );
   }
 
   // call update every 2 seconds
   setInterval(matchLinks, updateInterval);
-
-    /*browser.runtime.onMessage.addListener((data, sender) => {
-      console.log("Message from the background script:");
-      console.log(data.links);
-      // get domain matching links from texpanded links
-      let newlinks = Array.from(data.links).map(x => { return { href: x.v[x.v.length - 1], init: x.v[0] } }).filter(link => testForMatch(urlMatcher, link.href));
-      // send the new filtered links to background script for storage
-      sendMessageToBackground("WebScience.linkExposureInitial", getLinkSize(newlinks));
-      return Promise.resolve({ response: "received messages" });
-    });*/
-    /** Listen for resolved url messages; check if the domain matches and then send a message back to store it */
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
       let source = data.source;
