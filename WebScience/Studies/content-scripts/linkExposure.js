@@ -16,12 +16,12 @@
     var intersectionObserverOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 1.0
+      threshold: 0.0
     };
     var observer = new IntersectionObserver(onIntersection, intersectionObserverOptions);
     function onIntersection(entries){
       entries.forEach(entry => {
-        entry.target.classList.toggle('visible', entry.intersectionRatio > 0);
+        //entry.target.classList.toggle('visible', entry.intersectionRatio > 0);
         // Are we in viewport?
         if (entry.intersectionRatio > 0) {
           // check if the target is short url
@@ -32,8 +32,9 @@
           if(testForMatch(urlMatcher, entry.target.href)) {
               sendMessageToBackground("WebScience.linkExposureInitial", [{href: entry.target.href, size: getElementSize(entry.target)}]);
           }
-          // Stop watching the target
-          observer.unobserve(entry.target);
+            entry.target.isVisited = true;
+            // Stop watching the target
+            observer.unobserve(entry.target);
         }
       });
     }
@@ -107,13 +108,16 @@
     Filter for elements that haven't been visited previously and observe them with intersection observer
     Use isVisited attribute to track elements that have been visited
     */
-   let aElements = Array.from(document.body.querySelectorAll("a[href")).filter(link => link.isVisited == null).map(
+   Array.from(document.body.querySelectorAll("a[href]")).filter(link => link.isVisited == null).forEach(element => {
+     observer.observe(element);
+   });
+   /*(let aElements = Array.from(document.body.querySelectorAll("a[href")).filter(link => link.isVisited == null).map(
      element => {
        observer.observe(element);
        element.isVisited = true;
        return element;
      }
-   );
+   );*/
   }
 
   // call update every 2 seconds
