@@ -59,7 +59,7 @@ export async function runStudy({
     // (this shouldn't happen)
     if(!("tab" in sender))
       return;
-      debugLog("incoming requests " + message.content.links);
+    debugLog("incoming requests " + JSON.stringify(message.content.links));
 
     function respond(result) {
       browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));

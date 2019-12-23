@@ -8,11 +8,45 @@
     let updateInterval = 2000;
     linkExposure();
 
+    const isThresholdValid = threshold =>
+      Number(threshold) === threshold && threshold >= 0 && threshold <= 1;
 
     /**
-     *main function that looks for exposure to known domains. For known short urls, it uses LinkResolution 
-     *utility to get the actual url and checks for the presence of a known domain
-    */
+     * Function to observe intersection of dom elements with viewport
+     * @param {DOMElement} targetElement element to observe for intersection with viewport
+     * @param {*} threshold intersection ratio
+     * 
+     * @returns promise that resolves to element when it intersects with viewport
+     */
+    function observeElement(targetElement, threshold) {
+      new Promise((resolve, reject) => {
+        const observerOptions = {
+          root: null, // Document viewport
+          rootMargin: "0px",
+          threshold // Visible amount of item shown in relation to root. 1.0 dictates that every pixel of element is visible.
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+          /**
+           * When the IntersectionObserver is instantiated the callback is ran once
+           * as a detection for whether the element is in view or not
+           * and if its intersection ratio exceeds the given threshold.
+           */
+          targetElement.isObserved = true;
+          if (
+            !entries[0].isIntersecting// ||
+            //entries[0].intersectionRatio < threshold
+          ) {
+            return;
+          }
+          observer.disconnect();
+          return resolve(entries[0]);
+        }, observerOptions);
+
+        observer.observe(targetElement);
+      });
+
+    }
+
   function linkExposure() {
 
     // Save the time the page initially completed loading
@@ -22,6 +56,8 @@
     /**
      * Convert relative url to abs url
      * @param {string} url 
+     * 
+     * @returns {string} absolute url
      */
     function rel_to_abs(url) {
       /* Only accept commonly trusted protocols:
@@ -54,6 +90,8 @@
     /**
      * Helper function to get size of element
      * @param {Element} el element
+     * 
+     * @returns Object with width and height of element
      */
     function getElementSize(el) {
       let rect = el.getBoundingClientRect();
@@ -68,6 +106,8 @@
      * Get link size
      * 
      * @param {string} link url on the page
+     * 
+     * @returns element size
      */
     function getLinkSize(link) {
       // create an object with key = init and value is resolved url
@@ -96,45 +136,63 @@
       }
     }
 
-    function listen(element) {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.isObserved = true;
-            let url = rel_to_abs(entry.target.href);
-            if (shortURLMatcher.test(url)) {
-              sendMessageToBackground("WebScience.shortLinks", [{ href: url }]);
-            }
-            // check for domain matching
-            if (urlMatcher.test(url)) {
-              sendMessageToBackground("WebScience.linkExposureInitial", [{ href: url, size: getElementSize(entry.target) }]);
-            }
-            observer.unobserve(entry = entry.target);
-          }
-        });
-      });
-      observer.observe(element);
+    /**
+    * Helper function to test if DOM element is in viewport
+    * @param {Element} el element
+    */
+    function isElementInViewport(el) {
+      let rect = el.getBoundingClientRect();
+      return (
+        //el.style.display != "none" &&
+        rect.top >= 0 && // should this be strictly greater ? With >= invisible links have 0,0,0,0 in bounding rect
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
     }
 
+    /**
+     * Function takes an <a> element, test it for matches with link shorteners or domains of interest and
+     * sends it to background script for resolution/storage
+     * @param {DOMElement} element element to match for short links or domains of interest
+     */
+    function matchElement(element) {
+      element.isObserved = true;
+      let url = rel_to_abs(element.href);
+      if (shortURLMatcher.test(url)) {
+        sendMessageToBackground("WebScience.shortLinks", [{ href: url }]);
+      }
+      // check for domain matching
+      if (urlMatcher.test(url)) {
+        sendMessageToBackground("WebScience.linkExposureInitial", [{ href: url, size: getElementSize(element) }]);
+      }
+    }
 
     /**
-     * Function to look for new <a> elements and create an intersection obs listener
+     * Function to look for new <a> elements that are in viewport
      */
-    function matchLinks() {
+    function observeChanges() {
       /*
       Filter for elements that haven't been visited previously and observe them with intersection observer
       */
       Array.from(document.body.querySelectorAll("a[href]")).filter(link => link.isObserved == null).forEach(element => {
-        listen(element);
+        //observeElement(element, 0.0).then(matchElement);
+        let inView = isElementInViewport(element);
+        if(inView) {
+          matchElement(element);
+        }
       });
     }
 
-  // call update every 2 seconds
-  setInterval(matchLinks, updateInterval);
+  // call update ever.hrefeconds
+  setInterval(observeChanges, updateInterval);
 
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
       let source = data.source;
+      /*if(shortURLMatcher.test(dest)) {
+        sendMessageToBackground("WebScience.shortLinks", [{ href: dest }]);
+      }*/
       if (urlMatcher.test(dest)) {
         // get source size
         let sz = getLinkSize(source);
