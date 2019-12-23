@@ -52,6 +52,9 @@
     // Save the time the page initially completed loading
     let initialLoadTime = Date.now();
     let initialVisibility = document.visibilityState == "visible";
+    
+    // Elements that we've checked for link exposure
+    let checkedElements = new Set();
 
     /**
      * Convert relative url to abs url
@@ -157,7 +160,8 @@
      * @param {DOMElement} element element to match for short links or domains of interest
      */
     function matchElement(element) {
-      element.isObserved = true;
+      //element.isObserved = true;
+      checkedElements.add(element);
       let url = rel_to_abs(element.href);
       if (shortURLMatcher.test(url)) {
         sendMessageToBackground("WebScience.shortLinks", [{ href: url }]);
@@ -174,7 +178,7 @@
     function observeChanges() {
       // Filter for elements that haven't been visited previously and observe them with intersection observer
       let count = 0;
-      Array.from(document.body.querySelectorAll("a[href]")).filter(link => link.isObserved == null).forEach(element => {
+      Array.from(document.body.querySelectorAll("a[href]")).filter(link => !checkedElements.has(link)).forEach(element => {
         //observeElement(element, 0.0).then(matchElement);
         let inView = isElementInViewport(element);
         if(inView) {
