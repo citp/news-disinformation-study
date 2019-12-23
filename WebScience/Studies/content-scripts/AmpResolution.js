@@ -27,12 +27,24 @@ function resolveAmpUrl(url) {
             // extract the domain prefix by removing protocol and cache domain suffix
             let domainPrefix = getDomainPrefix(url);
             if (domainPrefix != null) {
-                // replace - with . and -- with a -
+                //Punycode Decode the publisher domain. See RFC 3492
+                //Replace any ‘-’ (hyphen) character in the output of step 1 with ‘--’ (two hyphens).
+                //Replace any ‘.’ (dot) character in the output of step 2 with ‘-’ (hyphen).
+                //Punycode Encode the output of step 3. See RFC 3492
+
+                // Code below reverses the encoding
+                // 1. replace - with . and -- with a -
                 let domain = domainPrefix.replace("-", ".");
+                // 2. replace two . with --
+                domains = domain.replace("..", "--");
                 domain = domain.replace("--", "-");
-                return domain;
+                // 3. get the actual url
+                let split = url.split(domain);
+                let sourceUrl = domain + split[1];
+                let arr = url.split("/");
+                return [domain, arr[0] + "//" + sourceUrl];
             }
         }
     }
-    return null;
+    return [];
 }

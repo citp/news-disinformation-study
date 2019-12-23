@@ -163,6 +163,10 @@
       //element.isObserved = true;
       checkedElements.add(element);
       let url = rel_to_abs(element.href);
+      let res = resolveAmpUrl("https://amp-dev.cdn.ampproject.org/c/s/amp.dev/index.amp.html");
+      if(res.length > 0) {
+        url = rel_to_abs(res[1]);
+      }
       if (shortURLMatcher.test(url)) {
         sendMessageToBackground("WebScience.shortLinks", [{ href: url }]);
       }
