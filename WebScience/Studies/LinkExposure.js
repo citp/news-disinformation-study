@@ -60,15 +60,12 @@ export async function runStudy({
     if(!("tab" in sender))
       return;
       debugLog("incoming requests " + message.content.links);
-    
-      function respond(result) {
-        browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
-      }
+
+    function respond(result) {
+      browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
+    }
     for (var link of message.content.links) {
-      let promise = WebScience.Utilities.LinkResolution.resolveURL2(link.href).then(respond);
-      //promise.then(result => {
-        //return browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
-      //});
+      WebScience.Utilities.LinkResolution.resolveURL(link.href).then(respond);
     }
   });
 
