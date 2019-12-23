@@ -1,4 +1,5 @@
 import { getDebuggingLog } from './Debugging.js';
+import { shortDomains } from './shortdomains.js';
 const debugLog = getDebuggingLog("Studies.LinkExposure");
 
 
@@ -87,3 +88,7 @@ function responseHeaderListener(details) {
 
 // register listener for header
 browser.webRequest.onHeadersReceived.addListener(responseHeaderListener, {urls : ["<all_urls>"]}, ["responseHeaders"]);
+
+export function getShortDomains() {
+  return shortDomains;
+}

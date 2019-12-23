@@ -1,5 +1,4 @@
 import { studyDomains } from "/study/domains.js"
-import { shortDomains } from "/study/shortdomains.js"
 import { socialMedia } from "/study/socialmedia.js"
 import * as WebScience from "/WebScience/WebScience.js"
 
@@ -40,8 +39,7 @@ function runStudies() {
 
 // Configure link exposure collection
 WebScience.Studies.LinkExposure.runStudy({
-  domains: studyDomains,
-  shortdomains: shortDomains
+  domains: studyDomains
 });
 
 // Configure link exposure collection

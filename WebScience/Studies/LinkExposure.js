@@ -14,7 +14,6 @@ var storage = null;
 
 export async function runStudy({
   domains = [ ],
-  shortdomains = []
 }) {
 
   storage = await (new WebScience.Utilities.Storage.KeyValueStorage("WebScience.Studies.LinkExposure")).initialize();
@@ -26,7 +25,7 @@ export async function runStudy({
   var injectcode = "const urlMatchRE = \"" + 
   WebScience.Utilities.Matching.createUrlRegexString(domains).replace(/\\/g, "\\\\") + 
     "\"; const urlMatcher = new RegExp(urlMatchRE);" +  "const shortURLMatchRE = \"" + 
-          WebScience.Utilities.Matching.createUrlRegexString(shortdomains).replace(/\\/g, "\\\\") + 
+          WebScience.Utilities.Matching.createUrlRegexString(WebScience.Utilities.LinkResolution.getShortDomains()).replace(/\\/g, "\\\\") + 
             "\"; const shortURLMatcher = new RegExp(shortURLMatchRE);";
 
   // Add a dynamically generated content script to every HTTP/HTTPS page that
