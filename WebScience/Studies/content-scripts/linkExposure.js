@@ -172,20 +172,32 @@
      * Function to look for new <a> elements that are in viewport
      */
     function observeChanges() {
-      /*
-      Filter for elements that haven't been visited previously and observe them with intersection observer
-      */
+      // Filter for elements that haven't been visited previously and observe them with intersection observer
+      let count = 0;
       Array.from(document.body.querySelectorAll("a[href]")).filter(link => link.isObserved == null).forEach(element => {
         //observeElement(element, 0.0).then(matchElement);
         let inView = isElementInViewport(element);
         if(inView) {
           matchElement(element);
+          count++;
         }
       });
+      return count;
     }
 
-  // call update ever.hrefeconds
-  setInterval(observeChanges, updateInterval);
+    let handleUpdates = function () {
+      let nlinks = [];
+      let nrecords = 10;
+      let timer = setTimeout(function run() {
+        let nchanges = observeChanges();
+        if (nlinks.length >= nrecords) {
+          nlinks.shift();
+        }
+        nlinks.push(nchanges);
+        timer = setTimeout(run, updateInterval);
+      }, updateInterval);
+    };
+    handleUpdates();
 
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
