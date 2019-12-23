@@ -135,7 +135,7 @@
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
       let source = data.source;
-      if (testForMatch(urlMatcher, dest)) {
+      if (urlMatcher.test(dest)) {
         // get source size
         let sz = getLinkSize(source);
         let data = [{ href: dest, size: sz }];
