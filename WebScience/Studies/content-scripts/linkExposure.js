@@ -139,6 +139,22 @@
       }
     }
 
+    const elemIsVisible = elem => {
+      const rect = elem.getBoundingClientRect();
+      const st = window.getComputedStyle(elem);
+      return (
+        elem &&
+        elem.offsetHeight > 0 &&
+        elem.offsetWidth > 0 &&
+        rect &&
+        rect.height > 0 &&
+        rect.width > 0 &&
+        st &&
+        st.display && st.display !== "none" &&
+        st.opacity && st.opacity !== "0"
+      );
+    };
+
     /**
     * Helper function to test if DOM element is in viewport
     * @param {Element} el element
@@ -185,6 +201,7 @@
       Array.from(document.body.querySelectorAll("a[href]")).filter(link => !checkedElements.has(link)).forEach(element => {
         //observeElement(element, 0.0).then(matchElement);
         let inView = isElementInViewport(element);
+        //let inView = elemIsVisible(element);
         if(inView) {
           matchElement(element);
           count++;
