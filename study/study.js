@@ -37,6 +37,8 @@ function runStudies() {
     savePageContent: false
   });
 
+  // Configure link resolution module
+  WebScience.Utilities.LinkResolution.initialize();
 // Configure link exposure collection
 WebScience.Studies.LinkExposure.runStudy({
   domains: studyDomains
