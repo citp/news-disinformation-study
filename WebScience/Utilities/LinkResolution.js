@@ -3,6 +3,7 @@ import { shortDomains } from './shortdomains.js';
 const debugLog = getDebuggingLog("Studies.LinkExposure");
 
 
+let initialized = false;
 // promiseStore is a mapping from a url to resolve and the resolve objects associated with it
 let promiseStore = new Map();
 // trackLinks is a set for which the headers are observed
@@ -17,6 +18,9 @@ let links = new Map();
  * @returns promise
  */
 export function resolveURL(url) {
+  if(!initialized) {
+    return Promise.reject("module not initialized");
+  }
   var p = new Promise(function (resolve, reject) {
     // store this resolve object in promiseStore
     let resolves = promiseStore[url] || [];
@@ -86,8 +90,10 @@ function responseHeaderListener(details) {
   }
 }
 
-// register listener for header
-browser.webRequest.onHeadersReceived.addListener(responseHeaderListener, {urls : ["<all_urls>"]}, ["responseHeaders"]);
+export function initialize() {
+  initialized = true;
+  let listener = browser.webRequest.onHeadersReceived.addListener(responseHeaderListener, {urls : ["<all_urls>"]}, ["responseHeaders"]);
+}
 
 export function getShortDomains() {
   return shortDomains;
