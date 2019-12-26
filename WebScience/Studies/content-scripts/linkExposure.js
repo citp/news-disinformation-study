@@ -141,10 +141,16 @@
       }
     }
 
+    const properties = elem => {
+      const rect = elem.getBoundingClientRect();
+      const st = window.getComputedStyle(elem);
+      return [elem, elem.offsetHeight, elem.offsetWidth, rect, rect.height, rect.width, st, st.display, st.opacity];
+    }
+
     const elemIsVisible = elem => {
       const rect = elem.getBoundingClientRect();
       const st = window.getComputedStyle(elem);
-      return (
+      let ret = (
         elem &&
         elem.offsetHeight > 0 &&
         elem.offsetWidth > 0 &&
@@ -155,6 +161,7 @@
         st.display && st.display !== "none" &&
         st.opacity && st.opacity !== "0"
       );
+      return ret;
     };
 
     /**
@@ -179,7 +186,7 @@
      */
     function matchElement(element) {
       //element.isObserved = true;
-      checkedElements.add(element);
+      //checkedElements.add(element);
       let url = rel_to_abs(element.href);
       let res = resolveAmpUrl("https://amp-dev.cdn.ampproject.org/c/s/amp.dev/index.amp.html");
       if(res.length > 0) {
@@ -205,6 +212,7 @@
         let inView = isElementInViewport(element);
         //let inView = elemIsVisible(element);
         if(inView) {
+          checkedElements.add(element);
           matchElement(element);
           count++;
         }
