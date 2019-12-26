@@ -61,7 +61,7 @@ export async function runStudy({
     debugLog("incoming requests " + JSON.stringify(message.content.links));
 
     function respond(result) {
-      browser.tabs.sendMessage(sender.tab.id, result).then(resp => debugLog(resp)).catch(err => debugLog("error in sending " + err));
+      browser.tabs.sendMessage(sender.tab.id, result).then(response => debugLog(response.response)).catch(err => debugLog("error in sending " + err));
     }
     for (var link of message.content.links) {
       WebScience.Utilities.LinkResolution.resolveURL(link.href).then(respond);

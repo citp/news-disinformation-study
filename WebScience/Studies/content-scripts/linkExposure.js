@@ -281,7 +281,7 @@
         let data = [{ href: dest, size: sz }];
         sendMessageToBackground("WebScience.linkExposureInitial", data);
       }
-      return Promise.resolve({ response: "received messages" });
+      return Promise.resolve({ response: "cs received messages" });
     });
   } // End of link exposure function
 } // end of anon function
