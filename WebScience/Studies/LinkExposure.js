@@ -64,7 +64,7 @@ export async function runStudy({
       browser.tabs.sendMessage(sender.tab.id, result).then(response => debugLog(response.response)).catch(err => debugLog("error in sending " + err));
     }
     for (var link of message.content.links) {
-      WebScience.Utilities.LinkResolution.resolveURL(link.href).then(respond);
+      WebScience.Utilities.LinkResolution.resolveURL(link.href).then(respond).catch(error => debugLog("error in resolution " + error));
     }
   });
 
