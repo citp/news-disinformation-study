@@ -47,6 +47,8 @@
 
     }
 
+  
+
   function linkExposure() {
 
     // Save the time the page initially completed loading
@@ -210,19 +212,54 @@
       return count;
     }
 
-    let handleUpdates = function () {
-      let nlinks = [];
-      let nrecords = 10;
-      let timer = setTimeout(function run() {
-        let nchanges = observeChanges();
-        if (nlinks.length >= nrecords) {
-          nlinks.shift();
+    /**
+     * UpdateHandler class to observe the document for changes in specified time
+     * intervals. It also stores the number of changes in the last ncalls.
+     * 
+     */
+    class UpdateHandler {
+      /**
+       * 
+       * @param {int} updateInterval number of milliseconds between updates
+       * @param {int} numUpdates maximum number of updates. ** Negative number implies function doesn't stop
+       * @param {int} nrecords maximum number of results stored
+       */
+      constructor(updateInterval, numUpdates, nrecords=10) {
+        this.updateInterval = updateInterval;
+        this.numUpdates = numUpdates;
+        this.count = 0;
+        this.nlinks = [];
+        this.nrecords = nrecords;
+      }
+
+      start() {
+        this.timer = setInterval(() => this.run(), this.updateInterval);
+      }
+
+      stop() {
+        if(this.timer) clearInterval(this.timer);
+      }
+
+      /**
+       * run function stops timer if it reached max number of updates
+       * Otherwise, we look for changes in the document by invoking
+       * observeChanges function
+       */
+      run() {
+        if(this.numUpdates > 0 && this.count >= this.numUpdates) {
+          this.stop();
         }
-        nlinks.push(nchanges);
-        timer = setTimeout(run, updateInterval);
-      }, updateInterval);
-    };
-    handleUpdates();
+        let nchanges = observeChanges();
+        if (this.nlinks.length >= this.nrecords) {
+          this.nlinks.shift();
+        }
+        this.nlinks.push(nchanges);
+        this.count++;
+      }
+    }
+    
+    let handler = new UpdateHandler(updateInterval, -1);
+    handler.start();
 
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
