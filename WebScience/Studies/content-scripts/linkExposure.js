@@ -171,7 +171,6 @@
     function isElementInViewport(el) {
       let rect = el.getBoundingClientRect();
       return (
-        //el.style.display != "none" &&
         rect.top >= 0 && // should this be strictly greater ? With >= invisible links have 0,0,0,0 in bounding rect
         rect.left >= 0 &&
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
