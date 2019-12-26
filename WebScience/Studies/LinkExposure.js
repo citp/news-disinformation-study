@@ -72,7 +72,7 @@ export async function runStudy({
   browser.runtime.onMessage.addListener((message, sender) => {
     if((message == null) ||
         !("type" in message) ||
-        message.type != "WebScience.linkExposureInitial")
+        message.type != "WebScience.linkExposure")
       return;
     // If the link exposure message isn't from a tab, ignore the message
     // (this shouldn't happen)
@@ -87,7 +87,7 @@ export async function runStudy({
 
     nextPageIdCounter.getAndIncrement().then(pageId => {
       storage.set(pageId.toString(), message.content).then(() => {
-        debugLog("linkExposureInitial: " + JSON.stringify(message.content));
+        debugLog("linkExposure: " + JSON.stringify(message.content));
       });
   });
   });

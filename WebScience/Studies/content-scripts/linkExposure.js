@@ -53,6 +53,7 @@
 
     // Save the time the page initially completed loading
     let initialLoadTime = Date.now();
+    const isDocVisible = () => document.visibilityState === "visible";
     let initialVisibility = document.visibilityState == "visible";
     
     // Elements that we've checked for link exposure
@@ -184,10 +185,8 @@
      * @param {DOMElement} element element to match for short links or domains of interest
      */
     function matchElement(element) {
-      //element.isObserved = true;
-      //checkedElements.add(element);
       let url = rel_to_abs(element.href);
-      let res = resolveAmpUrl("https://amp-dev.cdn.ampproject.org/c/s/amp.dev/index.amp.html");
+      let res = resolveAmpUrl(url);
       if(res.length > 0) {
         url = rel_to_abs(res[1]);
       }
@@ -196,7 +195,7 @@
       }
       // check for domain matching
       if (urlMatcher.test(url)) {
-        sendMessageToBackground("WebScience.linkExposureInitial", [{ href: url, size: getElementSize(element) }]);
+        sendMessageToBackground("WebScience.linkExposure", [{ href: url, size: getElementSize(element) }]);
       }
     }
 
@@ -204,12 +203,15 @@
      * Function to look for new <a> elements that are in viewport
      */
     function observeChanges() {
+      // check the visibility state of document
+      if(!isDocVisible()) {
+        return
+      }
       // Filter for elements that haven't been visited previously and observe them with intersection observer
       let count = 0;
       Array.from(document.body.querySelectorAll("a[href]")).filter(link => !checkedElements.has(link)).forEach(element => {
         //observeElement(element, 0.0).then(matchElement);
         let inView = isElementInViewport(element);
-        //let inView = elemIsVisible(element);
         if(inView) {
           checkedElements.add(element);
           matchElement(element);
@@ -278,7 +280,7 @@
         // get source size
         let sz = getLinkSize(source);
         let data = [{ href: dest, size: sz }];
-        sendMessageToBackground("WebScience.linkExposureInitial", data);
+        sendMessageToBackground("WebScience.linkExposure", data);
       }
       return Promise.resolve({ response: "cs received messages" });
     });
