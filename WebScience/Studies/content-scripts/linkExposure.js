@@ -45,6 +45,7 @@
      */
     function matchElement(element) {
       let url = rel_to_abs(element.href);
+      url = removeShim(url);
       let res = resolveAmpUrl(url);
       if(res.length > 0) {
         url = rel_to_abs(res[1]);

@@ -31,3 +31,26 @@ function rel_to_abs(url) {
         .replace(/'/g, "%27").replace(/</g, "%3C").replace(/>/g, "%3E");
     return url;
 }
+
+// helper function for parsing fb urls
+function fbShim(url) {
+    var u = new URL(url);
+    // this is for facebook posts
+    hasU = u.searchParams.get('u') != null;
+    if (hasU) {
+        return u.searchParams.get("u").split('?')[0];
+    }
+    return "";
+}
+
+const fbRegex = /https?:\/\/l.facebook.com\/l\.php\?u=/gm;
+const isFb = url => {
+    return fbRegex.test(url);
+};
+function removeShim(url) {
+    // check if the url matches shim
+    if(isFb(url)) {
+        return fbShim(url);
+    }
+    return url;
+}
