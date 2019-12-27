@@ -19,12 +19,12 @@ let links = new Map();
  */
 export function resolveURL(url) {
   if(!initialized) {
-    return Promise.reject("module not initialized");
+    return Promise.reject("module not initialized" + url);
   }
   var p = new Promise(function (resolve, reject) {
     // store this resolve object in promiseStore
     let resolves = promiseStore[url] || [];
-    resolves.push(resolve);
+    resolves.push({ resolve : resolve, reject : reject});
     promiseStore.set(url, resolves);
     trackLinks.add(url);
     // fetch this url
@@ -81,7 +81,7 @@ function responseHeaderListener(details) {
         let resolves = promiseStore.get(url) || [];
         let resolveObj = { source: url, dest: details.url };
         for (var i = 0; i < resolves.length; i++) {
-          var r = resolves[i];
+          var r = resolves[i].resolve;
           r(resolveObj);
         }
         promiseStore.delete(url);
@@ -90,9 +90,22 @@ function responseHeaderListener(details) {
   }
 }
 
+function trackError(responseDetails) {
+  let url = responseDetails.url;
+  if(promiseStore.has(url)) {
+    let resolves = promiseStore.get(url) || [];
+    for (let i = 0; i < resolves.length; i++) {
+      let r = resolves[i].reject;
+      r(responseDetails.error);
+    }
+    promiseStore.delete(url);
+  }
+}
+
 export function initialize() {
   initialized = true;
-  let listener = browser.webRequest.onHeadersReceived.addListener(responseHeaderListener, {urls : ["<all_urls>"]}, ["responseHeaders"]);
+  let headerListener = browser.webRequest.onHeadersReceived.addListener(responseHeaderListener, {urls : ["<all_urls>"]}, ["responseHeaders"]);
+  let errorListener = browser.webRequest.onErrorOccurred.addListener(trackError, {urls : ["<all_urls>"]});
 }
 
 export function getShortDomains() {
