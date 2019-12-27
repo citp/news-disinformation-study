@@ -44,6 +44,9 @@ WebScience.Studies.LinkExposure.runStudy({
   domains: studyDomains
 });
 
+// Social media news exposure
+WebScience.Studies.SocialMediaNewsExposure.runStudy();
+
 // Configure link exposure collection
 /*WebScience.Studies.SocialMediaLinkExposure.runStudy({
   domains: studyDomains,
