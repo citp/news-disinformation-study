@@ -82,7 +82,7 @@
                     visible: initialVisibility,
                     url: document.location.href,
                     referrer: document.referrer,
-                    data: { title: videoTitle }
+                    data: { title: videoTitle, url: document.location.href }
                 }
             });
         }
