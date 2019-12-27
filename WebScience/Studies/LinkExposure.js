@@ -44,8 +44,24 @@ export async function runStudy({
   // Add the content script for checking links on pages
   await browser.contentScripts.register({
       matches: [ "*://*/*" ],
-      js: [ {file: "/WebScience/Studies/content-scripts/AmpResolution.js"}, { file: "/WebScience/Studies/content-scripts/linkExposure.js" } ],
-      runAt: "document_idle"
+    js: [{ file: "/WebScience/Studies/content-scripts/ElementProperties.js" },
+    { file: "/WebScience/Studies/content-scripts/Utils.js" },
+    { file: "/WebScience/Studies/content-scripts/AmpResolution.js" },
+    { file: "/WebScience/Studies/content-scripts/linkExposure.js" }],
+    runAt: "document_idle"
+  });
+
+  // Listen for requests to expand short urls
+  browser.runtime.onMessage.addListener((message, sender) => {
+    if((message == null) ||
+        !("type" in message) ||
+        message.type != "WebScience.debug")
+      return;
+    // If the link exposure message isn't from a tab, ignore the message
+    // (this shouldn't happen)
+    if(!("tab" in sender))
+      return;
+    debugLog("debug messages" + JSON.stringify(message.content.links));
   });
 
   // Listen for requests to expand short urls
