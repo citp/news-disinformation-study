@@ -1,5 +1,5 @@
 import { getDebuggingLog } from './Debugging.js';
-import { shortDomains } from './shortdomains.js';
+import { shortDomains } from '/WebScience/dependencies/shortdomains.js';
 const debugLog = getDebuggingLog("Studies.LinkExposure");
 
 
