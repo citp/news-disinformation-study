@@ -99,15 +99,12 @@
         this.nlinks = [];
         this.nrecords = nrecords;
       }
-
       start() {
         this.timer = setInterval(() => this.run(), this.updateInterval);
       }
-
       stop() {
         if(this.timer) clearInterval(this.timer);
       }
-
       /**
        * run function stops timer if it reached max number of updates
        * Otherwise, we look for changes in the document by invoking
@@ -132,9 +129,6 @@
     browser.runtime.onMessage.addListener((data, sender) => {
       let dest = data.dest;
       let source = data.source;
-      /*if(shortURLMatcher.test(dest)) {
-        sendMessageToBackground("WebScience.shortLinks", [{ href: dest }]);
-      }*/
       if (urlMatcher.test(dest)) {
         // get source size
         let sz = getLinkSize(source);

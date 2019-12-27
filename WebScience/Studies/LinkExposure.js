@@ -19,10 +19,10 @@ export async function runStudy({
   storage = await (new WebScience.Utilities.Storage.KeyValueStorage("WebScience.Studies.LinkExposure")).initialize();
 
   // Use a unique identifier for each webpage the user visits
-  var nextPageIdCounter = await (new WebScience.Utilities.Storage.Counter("WebScience.Studies.LinkExposure.nextPageId")).initialize();
+  let nextPageIdCounter = await (new WebScience.Utilities.Storage.Counter("WebScience.Studies.LinkExposure.nextPageId")).initialize();
 
   // create code for url and short domain matching
-  var injectcode = "const urlMatchRE = \"" + 
+  let injectcode = "const urlMatchRE = \"" + 
   WebScience.Utilities.Matching.createUrlRegexString(domains).replace(/\\/g, "\\\\") + 
     "\"; const urlMatcher = new RegExp(urlMatchRE);" +  "const shortURLMatchRE = \"" + 
           WebScience.Utilities.Matching.createUrlRegexString(WebScience.Utilities.LinkResolution.getShortDomains()).replace(/\\/g, "\\\\") + 
