@@ -6,6 +6,8 @@
      * are exposed to in known domains
      */
     let updateInterval = 2000;
+    /** mapping between de-shim url and its size */
+    let elementSizeCache = new Map();
     linkExposure();
 
   function linkExposure() {
@@ -45,7 +47,11 @@
      */
     function matchElement(element) {
       let url = rel_to_abs(element.href);
-      url = removeShim(url);
+      let ret = removeShim(url);
+      if(ret.isShim) {
+        elementSizeCache.set(ret.url, getElementSize(element));
+        url = ret.url;
+      }
       let res = resolveAmpUrl(url);
       if(res.length > 0) {
         url = rel_to_abs(res[1]);
@@ -134,6 +140,12 @@
       if (urlMatcher.test(dest)) {
         // get source size
         let sz = getLinkSize(source);
+        if(sz == null) {
+          // check in cache
+          sz = elementSizeCache.has(source) ? elementSizeCache.get(source) : null;
+          // remove the url from cache
+          elementSizeCache.delete(source);
+        }
         let data = [{ href: dest, size: sz }];
         sendMessageToBackground("WebScience.linkExposure", data);
       }

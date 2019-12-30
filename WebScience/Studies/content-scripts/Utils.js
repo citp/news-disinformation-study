@@ -50,7 +50,7 @@ const isFb = url => {
 function removeShim(url) {
     // check if the url matches shim
     if(isFb(url)) {
-        return fbShim(url);
+        return { url : fbShim(url), isShim : true};
     }
-    return url;
+    return { url : url, isShim : false};
 }
