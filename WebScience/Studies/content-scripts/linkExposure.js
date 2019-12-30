@@ -82,13 +82,14 @@
     }
 
     /**
+     * @classdesc
      * UpdateHandler class to observe the document for changes in specified time
      * intervals. It also stores the number of changes in the last ncalls.
      * 
      */
     class UpdateHandler {
       /**
-       * 
+       * @constructor
        * @param {int} updateInterval number of milliseconds between updates
        * @param {int} numUpdates maximum number of updates. ** Negative number implies function doesn't stop
        * @param {int} nrecords maximum number of results stored

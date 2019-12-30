@@ -48,12 +48,12 @@ export async function runStudy() {
       runAt: "document_idle"
   });
 
-  await browser.contentScripts.register({
+  /*await browser.contentScripts.register({
       //matches: socialmedia,
       matches: [ "*://*.facebook.com/*" ],
       js: [ { file: "/WebScience/Studies/content-scripts/socialMediaNewsExposure-fb.js" } ],
       runAt: "document_idle"
-  });
+  });*/
 
   // Listen for initial link exposure messages and save them to the database
   browser.runtime.onMessage.addListener((message, sender) => {
