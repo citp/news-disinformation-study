@@ -36,6 +36,11 @@ function observeElement(targetElement, threshold) {
     });
 }
 
+/**
+ * @function
+ * @param {Element} elem DOM element
+ * @returns {Number[]} properties of element
+ */
 const properties = elem => {
     const rect = elem.getBoundingClientRect();
     const st = window.getComputedStyle(elem);
@@ -61,7 +66,7 @@ const elemIsVisible = elem => {
 
 /**
 * Helper function to test if DOM element is in viewport
-* @param {Element} el element
+* @param {Element} el check if {@link el} is in current viewport
 */
 function isElementInViewport(el) {
     let rect = el.getBoundingClientRect();
@@ -91,10 +96,8 @@ function getElementSize(el) {
 
 /**
  * Get link size
- * 
  * @param {string} link url on the page
- * 
- * @returns element size
+ * @returns {(size|null)} size of the element
  */
 function getLinkSize(link) {
     // create an object with key = init and value is resolved url

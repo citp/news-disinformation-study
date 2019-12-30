@@ -5,7 +5,7 @@ const domRegex = /.*?\/{1,2}(.*?)(\.).*/gm;
 
 /**
  * Get the encoded domain (part of url between the last / and the first .)
- * @param {string} url 
+ * @param {string} url - get domain from amp url 
  */
 function getDomainPrefix(url) {
     let match = domRegex.exec(url);
@@ -16,7 +16,7 @@ function getDomainPrefix(url) {
 }
 /**
  * Function to get publisher domain and actual url from a amp link
- * @param {string} url amp url
+ * @param {string} url - the {@link url} to be resolved
  */
 function resolveAmpUrl(url) {
     // 1. check if url contains any of the cacheDomains
