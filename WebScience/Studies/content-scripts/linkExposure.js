@@ -7,8 +7,7 @@
      * are exposed to in known domains
      */
     const updateInterval = 2000;
-    /** @const mapping between de-shim url and its size */
-    const elementSizeCache = new Map();
+    const elementSizeCache = new WeakMap();
     linkExposure();
 
   /**
@@ -29,7 +28,7 @@
     let initialVisibility = document.visibilityState == "visible";
     
     // Elements that we've checked for link exposure
-    let checkedElements = new Set();
+    let checkedElements = new WeakSet();
 
     /**
      * Helper function to send data to background script
@@ -55,7 +54,7 @@
     /**
      * Function takes an <a> element, test it for matches with link shorteners or domains of interest and
      * sends it to background script for resolution/storage
-     * @param {DOMElement} element - element to match for short links or domains of interest
+     * @param {HTMLElement} element - element to match for short links or domains of interest
      * @returns {void} Nothing
      */
     function matchElement(element) {
