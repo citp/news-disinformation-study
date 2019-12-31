@@ -3,8 +3,8 @@ const isThresholdValid = threshold =>
 
 /**
  * Function to observe intersection of dom elements with viewport
- * @param {DOMElement} targetElement element to observe for intersection with viewport
- * @param {*} threshold intersection ratio
+ * @param {HTMLElement} targetElement - element to observe for intersection with viewport
+ * @param {number} threshold - intersection ratio
  * 
  * @returns promise that resolves to element when it intersects with viewport
  */
@@ -23,15 +23,14 @@ function observeElement(targetElement, threshold) {
              */
             targetElement.isObserved = true;
             if (
-                !entries[0].isIntersecting// ||
-                //entries[0].intersectionRatio < threshold
+                !entries[0].isIntersecting ||
+                entries[0].intersectionRatio < threshold
             ) {
                 return;
             }
             observer.disconnect();
             return resolve(entries[0]);
         }, observerOptions);
-
         observer.observe(targetElement);
     });
 }
