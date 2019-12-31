@@ -4,8 +4,8 @@ export { Navigation }
 import * as LinkExposure from "/WebScience/Studies/LinkExposure.js"
 export { LinkExposure }
 
-//import * as SocialMediaLinkExposure from "/WebScience/Studies/SocialMediaLinkExposure.js"
-//export { SocialMediaLinkExposure }
+import * as SocialMediaAccountExposure from "/WebScience/Studies/SocialMediaAccountExposure.js"
+export { SocialMediaAccountExposure }
 
 import * as SocialMediaNewsExposure from "/WebScience/Studies/SocialMediaNewsExposure.js"
 export { SocialMediaNewsExposure }
