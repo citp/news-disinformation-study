@@ -45,7 +45,7 @@ WebScience.Studies.LinkExposure.runStudy({
 });
 
 // Social media news exposure
-WebScience.Studies.SocialMediaNewsExposure.runStudy();
+//WebScience.Studies.SocialMediaNewsExposure.runStudy();
 
 // Configure link exposure collection
 /*WebScience.Studies.SocialMediaLinkExposure.runStudy({
@@ -65,13 +65,14 @@ WebScience.Studies.SocialMediaNewsExposure.runStudy();
   // TODO configure social media account exposure collection
   // Something like...
 
-  /*
-  WebScience.Studies.SocialMediaAccountExposure.runStudy({
+  
+  WebScience.Studies.SocialMediaAccountExposure.runStudy();
+  /*WebScience.Studies.SocialMediaAccountExposure.runStudy({
     facebookAccounts: [ ],
     twitterAccounts: [ ],
     youtubeAccounts: [ ]
-  });
-  */
+  });*/
+  
 
   // TODO configure social media news exposure collection (i.e., content
   // recognized by platforms as news regardless of whether we recognize the domain
