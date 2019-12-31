@@ -2,18 +2,29 @@
 (
   function() {
     /**
+     * @const
      * updateInterval (number of milliseconds) is the interval at which we look for new links that users
      * are exposed to in known domains
      */
-    let updateInterval = 2000;
-    /** mapping between de-shim url and its size */
-    let elementSizeCache = new Map();
+    const updateInterval = 2000;
+    /** @const mapping between de-shim url and its size */
+    const elementSizeCache = new Map();
     linkExposure();
 
+  /**
+   * @function
+   * linkExposure function looks for the presence of links from known domains
+   * in the browser viewport and sends this information to the background script.
+   */
   function linkExposure() {
 
-    // Save the time the page initially completed loading
+    /** time when the document is loaded */
     let initialLoadTime = Date.now();
+    /**
+     * @function
+     * Use document's visibility state to test if the document is visible
+     * @returns {boolean} true if the document is visible
+     */
     const isDocVisible = () => document.visibilityState === "visible";
     let initialVisibility = document.visibilityState == "visible";
     
@@ -22,8 +33,9 @@
 
     /**
      * Helper function to send data to background script
-     * @param {string} type message type
-     * @param {Object} data data to send
+     * @param {string} type - message type
+     * @param {Object} data - data to send
+     * @returns {void} Nothing
      */
     function sendMessageToBackground(type, data) {
       if(data.length > 0) {
@@ -43,7 +55,8 @@
     /**
      * Function takes an <a> element, test it for matches with link shorteners or domains of interest and
      * sends it to background script for resolution/storage
-     * @param {DOMElement} element element to match for short links or domains of interest
+     * @param {DOMElement} element - element to match for short links or domains of interest
+     * @returns {void} Nothing
      */
     function matchElement(element) {
       let url = rel_to_abs(element.href);
@@ -67,6 +80,7 @@
 
     /**
      * Function to look for new <a> elements that are in viewport
+     * @returns {int} number of new links in the viewport
      */
     function observeChanges() {
       // check the visibility state of document
@@ -96,20 +110,32 @@
     class UpdateHandler {
       /**
        * @constructor
-       * @param {int} updateInterval number of milliseconds between updates
-       * @param {int} numUpdates maximum number of updates. ** Negative number implies function doesn't stop
-       * @param {int} nrecords maximum number of results stored
+       * @param {int} updateInterval - number of milliseconds between updates
+       * @param {int} numUpdates - maximum number of updates. ** Negative number implies function doesn't stop
+       * @param {int} nrecords - maximum number of results stored
        */
       constructor(updateInterval, numUpdates, nrecords=10) {
+        /** @member {int} - number of milliseconds */
         this.updateInterval = updateInterval;
+        /** @member {int} - maximum number of updates or unlimited if negative */
         this.numUpdates = numUpdates;
+        /** @member {int} - Number of times update has run */
         this.count = 0;
+        /** @member {Array} - Number of links discovered in each run */
         this.nlinks = [];
+        /** @member {int} - History length to maintain */
         this.nrecords = nrecords;
       }
+      /**
+       * calls the run method every @see run
+       * @return {void} Nothing
+       */
       start() {
         this.timer = setInterval(() => this.run(), this.updateInterval);
       }
+      /**
+       * stops the execution of @see run method
+       */
       stop() {
         if(this.timer) clearInterval(this.timer);
       }
@@ -117,6 +143,7 @@
        * run function stops timer if it reached max number of updates
        * Otherwise, we look for changes in the document by invoking
        * observeChanges function
+       * @function
        */
       run() {
         if(this.numUpdates > 0 && this.count >= this.numUpdates) {
@@ -134,9 +161,17 @@
     let handler = new UpdateHandler(updateInterval, -1);
     handler.start();
 
-    browser.runtime.onMessage.addListener((data, sender) => {
-      let dest = data.dest;
-      let source = data.source;
+    /**
+     * @function
+     * callback function for link resolution response messages from background script
+     * Each message is an object containing source and dest is the url after resolution
+     * @param {Object} message - object containing source and dest fields
+     * @param {*} sender - sender of the message
+     * @returns {void} Nothing
+     */
+    function listenerForLinkResolutionResponse(message, sender) {
+      let source = message.source;
+      let dest = message.dest;
       if (urlMatcher.test(dest)) {
         // get source size
         let sz = getLinkSize(source);
@@ -150,7 +185,9 @@
         sendMessageToBackground("WebScience.linkExposure", data);
       }
       return Promise.resolve({ response: "cs received messages" });
-    });
+    }
+
+    browser.runtime.onMessage.addListener(listenerForLinkResolutionResponse);
   } // End of link exposure function
 } // end of anon function
 )(); // encapsulate and invoke
