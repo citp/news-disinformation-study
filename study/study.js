@@ -1,4 +1,5 @@
 import { studyDomains } from "/study/domains.js"
+import { facebookAccounts } from "/study/mediaFbAccounts.js"
 import { socialMedia } from "/study/socialmedia.js"
 import * as WebScience from "/WebScience/WebScience.js"
 
@@ -66,7 +67,9 @@ WebScience.Studies.LinkExposure.runStudy({
   // Something like...
 
   
-  WebScience.Studies.SocialMediaAccountExposure.runStudy();
+  WebScience.Studies.SocialMediaAccountExposure.runStudy({
+    fbaccounts: facebookAccounts
+  });
   /*WebScience.Studies.SocialMediaAccountExposure.runStudy({
     facebookAccounts: [ ],
     twitterAccounts: [ ],

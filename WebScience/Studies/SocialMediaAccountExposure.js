@@ -29,7 +29,9 @@ async function initializeStorage() {
 
      * domains - array of domains for tracking link exposure events through social media */
 
-export async function runStudy() {
+export async function runStudy({
+  fbaccounts = [ ],
+}) {
 
   await initializeStorage();
 
@@ -47,10 +49,27 @@ export async function runStudy() {
       runAt: "document_idle"
   });
 
+  // create code for url and short domain matching
+  let fbAccountMatchCode = "const fbAccountMatchRE = \"" + 
+  WebScience.Utilities.Matching.createUrlRegexString(fbaccounts).replace(/\\/g, "\\\\") + 
+    "\"; const fbAccountMatcher = new RegExp(fbAccountMatchRE);";
+  
+  debugLog("fb account match code" + fbAccountMatchCode);
+
   await browser.contentScripts.register({
-      matches: [ "*://*.facebook.com/*" ],
-      js: [ { file: "/WebScience/Studies/content-scripts/socialMediaAccountExposure-fb.js" } ],
-      runAt: "document_idle"
+    matches: ["*://*.facebook.com/*"],
+      js: [
+        {
+          code: fbAccountMatchCode
+        }
+      ],
+      runAt: "document_start"
+  });
+
+  await browser.contentScripts.register({
+    matches: ["*://*.facebook.com/*"],
+    js: [ { file: "/WebScience/Studies/content-scripts/socialMediaAccountExposure-fb.js" }],
+    runAt: "document_idle"
   });
 
   // Listen for initial link exposure messages and save them to the database

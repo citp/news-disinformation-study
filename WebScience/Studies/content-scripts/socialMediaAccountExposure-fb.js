@@ -37,10 +37,14 @@
                 return false;
             }
             // check if post has title in any of the links
-            let notitle = links.every(x => {
-                return x.attributes.getNamedItem("title") == null;
+            let hasTitle = links.some(x => {
+                return x.attributes.getNamedItem("title") != null;
             });
-            if(!notitle) {
+            // check if the post is from known media
+            let knownMedia = links.some(x => {
+                return fbAccountMatcher.test(x.href);
+            });
+            if(hasTitle || !knownMedia) {
                 return false;
             }
             return true;
