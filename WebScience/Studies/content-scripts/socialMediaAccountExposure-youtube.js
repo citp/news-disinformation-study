@@ -29,8 +29,7 @@
             }
             let channels = checkForSocialMediaChannels();
             if(channels.length > 0) {
-                // TODO : filter on relevant channels
-                sendMessage([...new Set(channels.map(x => {return x.href}))]);
+                sendMessage([...new Set(channels.filter(x => ytChannelMatcher.test(x.href)).map(x => {return x.href;}))]);
             }
         }
         /** @name isYoutube returns true if the current location is youtube watch url */

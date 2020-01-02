@@ -31,6 +31,7 @@ async function initializeStorage() {
 
 export async function runStudy({
   fbaccounts = [ ],
+  ytchannels = [ ],
 }) {
 
   await initializeStorage();
@@ -41,6 +42,22 @@ export async function runStudy({
     nextPageId = 0;
     await storage.configuration.setItem("nextPageId", nextPageId);
   }
+
+  // create code for url and short domain matching
+  let ytChannelMatchCode = "const ytChannelMatchRE = \"" + 
+  WebScience.Utilities.Matching.createUrlRegexString(ytchannels).replace(/\\/g, "\\\\") + 
+    "\"; const ytChannelMatcher = new RegExp(ytChannelMatchRE);";
+  debugLog("youtube account match code " + ytChannelMatchCode);
+
+  await browser.contentScripts.register({
+      matches: [ "*://*.youtube.com/*" ],
+      js: [
+        {
+          code: ytChannelMatchCode
+        }
+      ],
+      runAt: "document_start"
+  });
 
   // Add the content script for checking links on pages
   await browser.contentScripts.register({
@@ -54,7 +71,7 @@ export async function runStudy({
   WebScience.Utilities.Matching.createUrlRegexString(fbaccounts).replace(/\\/g, "\\\\") + 
     "\"; const fbAccountMatcher = new RegExp(fbAccountMatchRE);";
   
-  debugLog("fb account match code" + fbAccountMatchCode);
+  debugLog("fb account match code " + fbAccountMatchCode);
 
   await browser.contentScripts.register({
     matches: ["*://*.facebook.com/*"],

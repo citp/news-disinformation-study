@@ -1,7 +1,8 @@
-import { studyDomains } from "/study/domains.js"
-import { facebookAccounts } from "/study/mediaFbAccounts.js"
-import { socialMedia } from "/study/socialmedia.js"
-import * as WebScience from "/WebScience/WebScience.js"
+import { studyDomains } from "/study/domains.js";
+import { facebookAccounts } from "/study/mediaFbAccounts.js";
+import { youtubeChannels } from "/study/mediaYtChannels.js";
+import { socialMedia } from "/study/socialmedia.js";
+import * as WebScience from "/WebScience/WebScience.js";
 
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
@@ -68,7 +69,8 @@ WebScience.Studies.LinkExposure.runStudy({
 
   
   WebScience.Studies.SocialMediaAccountExposure.runStudy({
-    fbaccounts: facebookAccounts
+    fbaccounts: facebookAccounts,
+    ytchannels: youtubeChannels
   });
   /*WebScience.Studies.SocialMediaAccountExposure.runStudy({
     facebookAccounts: [ ],
