@@ -25,19 +25,20 @@ this.privileged = class extends ExtensionAPI {
                     var notificationBox = currentWindow.gHighPriorityNotificationBox;
 
                     var notice = notificationBox.appendNotification(
-                        "Message Content", // label
+                        "Firefox has partnered with researchers from Princeton University to study the health of the web. Learn how you can opt-in to participating.", // label
                         "uxmockup", // value
                         "", // image
                         notificationBox.PRIORITY_INFO_HIGH, // priority
                         // buttons
                         [
                           {
-                            label: "Button 1",
+                            label: "Learn more",
                             isDefault: true,
                             callback: function () { }
                           },
+
                           {
-                            label: "Button 2",
+                            label: "No thanks",
                             callback: function () { }
                           },
                         ]
@@ -48,20 +49,27 @@ this.privileged = class extends ExtensionAPI {
                     currentWindow.PopupNotifications.show(
                         currentWindow.gBrowser.selectedBrowser, // browser
                         "uxmockup-popup", // id
-                        "Message Content", // message
+                        "Firefox has partnered with researchers from Princeton University to study the health of the web. Learn how you can opt-in to participating.", // message
                         null, // anchor id
                         { // main action
-                            label: "Button 1",
+                            label: "Learn more",
                             accessKey: "1",
                             callback: function() { }
                         },
+
                         [ // secondary actions
                             {
-                                label: "Button 2",
+                                label: "No thanks",
                                 accessKey: "2",
                                 callback: function() { }
                             }
-                        ]
+                        ],
+                        // temporary options
+                        {
+                            "persistence": 10,
+                            "persistWhileVisible": true,
+                            "dismissed": true
+                        }
                     );
                     
                 }
