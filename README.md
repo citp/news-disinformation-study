@@ -13,3 +13,21 @@ The language and icons are still preliminary.
 ### Option 2:
 `PopupNotifications` API:
 ![PopupNotifications](./samples/PopupNotifications.png "Using the PopupNotifications API")
+
+## Decisions
+### For both consent and surveys
+- Which of these two (or other) designs
+- Language for the main text
+- Language for the buttons (yes, no (and later?))
+- Icons
+- If using PopupNotifications, which UI element it's anchored to
+
+### For consent
+- Where buttons lead (options page? external SUMO page?)
+- Process for overall consent vs. per-study consent
+
+### For surveys
+- Where buttons lead (directly to survey platform? info page, then platform?)
+- Whether surveys are baked-in and scheduled, or can be deployed dynamically
+
+See issue #4 for previous discussion.
