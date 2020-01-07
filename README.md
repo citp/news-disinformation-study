@@ -4,7 +4,7 @@ If you want to test the options yourself, note that you'll need to run a [nightl
 version of Firefox](https://www.mozilla.org/en-US/firefox/channel/desktop/).
 
 Below are two options for the notification, with sample language for requesting consent.
-The language is still preliminary.
+The language and icons are still preliminary.
 
 ### Option 1:
 `appendNotification` API:
