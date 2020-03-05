@@ -2,7 +2,7 @@ import { studyDomains } from "/study/newsDomains.js"
 import { youtubeChannels } from "/study/newsYouTubeChannels.js";
 import { facebookAccounts } from "/study/newsFacebookAccounts.js";
 import { twitterHandles } from "/study/newsTwitterHandles.js";
-import * as WebScience from "../WebScience/WebScience.js"
+import * as WebScience from "./WebScience.js"
 
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
