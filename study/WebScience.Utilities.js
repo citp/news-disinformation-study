@@ -1,3 +1,5 @@
+// Convenience ES6 module re-exports to assemble the WebScience.Utilities namespace
+
 // Note that the order of module imports matters, since utility
 // modules can depend on other utility modules
 

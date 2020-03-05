@@ -11,8 +11,8 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
  *  in response to study events (e.g. stating the necessity of consent)
  *  and user actions (e.g. giving or revoking consent).
  */
-WebScience.Utilities.Consent.registerStudyStartedListener(runStudies);
-WebScience.Utilities.Consent.registerStudyEndedListener(stopStudies);
+WebScience.Utilities.Consent.registerStudyStartedListener(runStudy);
+WebScience.Utilities.Consent.registerStudyEndedListener(stopStudy);
 
 /* This is a study that won't involve identifiable data or any intervention,
  *  so we're disabling the study-specific consent feature.
@@ -25,28 +25,28 @@ WebScience.Utilities.Consent.disableStudySpecificConsent();
  */
 WebScience.Utilities.Consent.requestConsentAndBegin();
 
-function stopStudies() {
+function stopStudy() {
     // TODO -- send Telemetry message to delete remote data, and uninstall
     debugLog("Ending study");
 }
 
-function runStudies() {
+function runStudy() {
     debugLog("Beginning study");
     // Configure navigation collection
-    WebScience.Studies.Navigation.runStudy({
+    WebScience.Measurements.PageNavigation.runStudy({
         domains: studyDomains,
         trackUserAttention: true
       });
 
     // Configure link exposure collection
     WebScience.Utilities.LinkResolution.initialize();
-    WebScience.Studies.LinkExposure.runStudy({
+    WebScience.Measurements.LinkExposure.runStudy({
         domains: studyDomains,
         privateWindows : false,
     });
 
     // Configure social media account exposure study
-    WebScience.Studies.SocialMediaAccountExposure.runStudy({
+    WebScience.Measurements.SocialMediaAccountExposure.runStudy({
         fbaccounts: facebookAccounts,
         ytchannels: youtubeChannels,
         twitterHandles : twitterHandles,
@@ -54,12 +54,12 @@ function runStudies() {
     });
 
     // Configure social media news exposure study
-    WebScience.Studies.SocialMediaNewsExposure.runStudy({
+    WebScience.Measurements.SocialMediaNewsExposure.runStudy({
         privateWindows : false,
     });
 
     // Configure social media sharing collection
-    WebScience.Studies.SocialMediaSharing.runStudy({
+    WebScience.Measurements.SocialMediaSharing.runStudy({
         domains: studyDomains,
         facebook: true,
         twitter: true,
