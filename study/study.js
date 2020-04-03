@@ -71,7 +71,6 @@ async function runStudy() {
     await WebScience.Utilities.DataAnalysis.registerAnalysisResultListener("/WebScience/Measurements/Analysis.js", (result) => {
         debugLog("received result" + result);
     });
-    WebScience.Utilities.DataAnalysis.triggerAnalysisScripts();
     // Configure surveys (pending choices)
     
     WebScience.Utilities.UserSurvey.runStudy({
