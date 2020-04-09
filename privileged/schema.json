@@ -18,7 +18,7 @@
                     {
                         "name": "url",
                         "type": "string",
-                        "description": "The url of the survey"
+                        "description": "Url of the survey"
                     },
                     {
                         "name": "surveyTime",
@@ -45,7 +45,7 @@
               "parameters": [
                 {
                   "type": "integer",
-                  "name": "id"
+                  "name": "consent state (0: learn more, 1 : accept -1: reject)"
                 }
               ]
             }
