@@ -1,20 +1,10 @@
-ChromeUtils.import("resource://gre/modules/Console.jsm");
 ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 ChromeUtils.import("resource://gre/modules/ExtensionUtils.jsm");
 
-var ww = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
-                   .getService(Components.interfaces.nsIWindowWatcher);
-
 const { EventManager } = ExtensionCommon;
 const EventEmitter =
   ExtensionCommon.EventEmitter || ExtensionUtils.EventEmitter;
-
-var {Services} = ChromeUtils.import("resource://gre/modules/Services.jsm");
-// load utilityOverlay module for openLinkIn
-Services.scriptloader.loadSubScript("chrome://browser/content/utilityOverlay.js", this);
-
-const DEFAULT_WINDOW_LOCATION = "chrome://browser/content/aboutDialog.xhtml"
 
 XPCOMUtils.defineLazyModuleGetter(
     this,
@@ -25,12 +15,12 @@ XPCOMUtils.defineLazyModuleGetter(
 let gManager = {
     onSurveyPopupListeners: new Set(),
     onConsentPopupListeners: new Set(),
-  };
+};
 
-  function generateUUID(base) { // Public Domain/MIT
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+function generateUUID(base) { // Public Domain/MIT
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16;//random number between 0 and 16
-        r = (base + r)%16 | 0;
+        r = (base + r) % 16 | 0;
         //d = Math.floor(d/16);
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
@@ -55,33 +45,31 @@ this.privileged = class extends ExtensionAPI {
                         { // main action
                             label: "Learn more",
                             accessKey: "L",
-                            callback: function() {
+                            callback: function () {
                                 gManager.onConsentPopupListeners.forEach((listener) => {
                                     listener(0);
-                                  });
+                                });
                             }
                         },
                         [ // secondary actions
                             {
                                 label: "Yes, I agree",
                                 accessKey: "1",
-                                callback: function() {
-                                  //currentWindow.alert("First secondary option selected.");
-                                gManager.onConsentPopupListeners.forEach((listener) => {
-                                    listener(1);
-                                  });
+                                callback: function () {
+                                    gManager.onConsentPopupListeners.forEach((listener) => {
+                                        listener(1);
+                                    });
                                 }
-                              },
-                              {
+                            },
+                            {
                                 label: "No, I disagree",
                                 accessKey: "2",
-                                callback: function() {
-                                  //currentWindow.alert("Second secondary option selected.");
-                                gManager.onConsentPopupListeners.forEach((listener) => {
-                                    listener(-1);
-                                  });
+                                callback: function () {
+                                    gManager.onConsentPopupListeners.forEach((listener) => {
+                                        listener(-1);
+                                    });
                                 }
-                              }
+                            }
                         ],
                         // temporary options
                         {
@@ -111,14 +99,14 @@ this.privileged = class extends ExtensionAPI {
                             callback: function () {
                                 let surveyId = generateUUID(surveyTime);
                                 gManager.onSurveyPopupListeners.forEach((listener) => {
-                                    listener(url+surveyId);
-                                  });
+                                    listener(url + surveyId);
+                                });
                                 /*
                                 Methods which didn't work :
                                 1. open a window with default location and
                                    assign new url
                                    --> This works only for pages in
-                                   browser/content
+                                   chrome://browser/content
                                 //var features = "chrome,";
                                 //features += "centerscreen,dependent,resizeable,location=1,scrollbars=1,status=1";
                                 //let window = currentWindow.open(DEFAULT_WINDOW_LOCATION, "", features);
@@ -134,17 +122,16 @@ this.privileged = class extends ExtensionAPI {
                                    argument from the background script. These
                                    objects cannot be pickled.
                                 */
-                             }
+                            }
                         },
                         [ // secondary actions
                             {
                                 label: "No thanks",
                                 accessKey: "N",
-                                callback: function () { 
+                                callback: function () {
                                 }
                             }
                         ],
-                        // temporary options
                         {
                             "persistence": 10,
                             "persistWhileVisible": true,
@@ -158,29 +145,29 @@ this.privileged = class extends ExtensionAPI {
                     context: context,
                     name: "privileged.onSurveyPopup",
                     register: (fire) => {
-                      let listener = (id, data) => {
-                        fire.async(id, data);
-                      };
-                      gManager.onSurveyPopupListeners.add(listener);
-                      return () => {
-                        gManager.onSurveyPopupListeners.delete(listener);
-                      };
+                        let listener = (id, data) => {
+                            fire.async(id, data);
+                        };
+                        gManager.onSurveyPopupListeners.add(listener);
+                        return () => {
+                            gManager.onSurveyPopupListeners.delete(listener);
+                        };
                     }
-                  }).api(),
+                }).api(),
                 onConsentPopup: new ExtensionCommon.EventManager({
                     context: context,
                     name: "privileged.onConsentPopup",
                     register: (fire) => {
-                      let listener = (id, data) => {
-                        fire.async(id, data);
-                      };
-                      gManager.onConsentPopupListeners.add(listener);
-                      return () => {
-                        gManager.onConsentPopupListeners.delete(listener);
-                      };
+                        let listener = (id, data) => {
+                            fire.async(id, data);
+                        };
+                        gManager.onConsentPopupListeners.add(listener);
+                        return () => {
+                            gManager.onConsentPopupListeners.delete(listener);
+                        };
                     }
-                  }).api()
+                }).api()
             }
         }
     }
-  }
+}

@@ -47,10 +47,10 @@
 
     "experiment_apis": {
         "privileged": {
-            "schema": "./privileged.json",
+            "schema": "./privileged/schema.json",
             "parent": {
                 "scopes": [ "addon_parent" ],
-                "script": "./privileged.js",
+                "script": "./privileged/api.js",
                 "paths": [[ "privileged" ]]
             }
         }
