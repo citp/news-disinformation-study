@@ -3,6 +3,13 @@ ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 ChromeUtils.import("resource://gre/modules/ExtensionUtils.jsm");
 
+var ww = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
+                   .getService(Components.interfaces.nsIWindowWatcher);
+/* eslint-disable no-undef */
+const { EventManager } = ExtensionCommon;
+const EventEmitter =
+  ExtensionCommon.EventEmitter || ExtensionUtils.EventEmitter;
+
 var {Services} = ChromeUtils.import("resource://gre/modules/Services.jsm");
 // load utilityOverlay module for openLinkIn
 Services.scriptloader.loadSubScript("chrome://browser/content/utilityOverlay.js", this);
@@ -13,8 +20,15 @@ XPCOMUtils.defineLazyModuleGetter(
     "resource:///modules/BrowserWindowTracker.jsm",
 );
 
+class PrivilegedEventEmitter extends EventEmitter {
+    emitSurveyConsentAccept() {
+      this.emit("survey-consent-accept");
+    }
+  }
+
 this.privileged = class extends ExtensionAPI {
     getAPI(context) {
+        const privilegedEventEmitter = new PrivilegedEventEmitter();
         return {
             privileged: {
                 createConsentPopup() {
@@ -69,73 +83,16 @@ this.privileged = class extends ExtensionAPI {
                             accessKey: "O",
                             callback: function () {
                                 var features = "chrome,";
-                                features += "centerscreen,dependent,dialog=no";
-                                currentWindow.openDialog(url, "", features);
-                            //var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                            //.getService(Components.interfaces.nsIWindowMediator);
-                            //currentWindow.alert(wm.getMostRecentWindow("navigator:browser"));
-                            //var recentWindow = wm.getMostRecentWindow("navigator:browser");
-                            //var newTabBrowser = currentWindow.gBrowser.getBrowserForTab(currentWindow.gBrowser.addTab("http://www.google.com/"));
-                            //currentWindow.alert(currentWindow.gBrowser.loadOneTab);
-                            //let uriObj = Services.io.newURI(url, null, null);
-                            //currentWindow.alert(currentWindow.gBrowser.currentURI.spec);
-                            //var features = "chrome,";
-                            //features += "centerscreen,dependent,dialog=no";
-                        
-                            //currentWindow.openDialog("chrome://browser/content/aboutDialog.xhtml",
-                            //"", features);
-                            //currentWindow.openDialog("chrome://browser/content/aboutDialog.xhtml", url, features);
-                            //currentWindow.alert(openAboutDialog);
-                            //currentWindow.gBrowser.loadOneTab(url);
-                            //openLinkIn(url, "tabshifted");
-                            //currentWindow.gBrowser.removeCurrentTab();
-                            //currentWindow.alert(recentWindow.gBrowser.addTab("http://www.google.com/"));
-                                        //currentWindow.gBrowser.removeCurrentTab();
-                                        // Create new tab, but don't load the content.
-                                //var url = "https://developer.mozilla.org";
-                                //var tab = currentWindow.gBrowser.addTab(null, {relatedToCurrent: true});
-                                /*gSessionStore.setTabState(tab, JSON.stringify({
-                                entries: [
-                                    { title: url }
-                                ],
-                                userTypedValue: url,
-                                userTypedClear: 2,
-                                lastAccessed: tab.lastAccessed,
-                                index: 1,
-                                hidden: false,
-                                attributes: {},
-                                image: null
-                                }));*/
-                                //currentWindow.gBrowser.tabContainer.advanceSelectedTab(1, true);
-                                /*
-                                NOTE :
-                                https://developer.mozilla.org/en-US/docs/Archive/Mozilla/XUL/tabbrowser
-                                
-                                Note: Starting in Firefox 3 (XULRunner/Gecko
-                                1.9), this is only used in the main Firefox
-                                window
-                                and cannot be used in other XUL windows by third-party applications or extensions.
-                                */
-
-                                //currentWindow.alert(url);
-                                //currentWindow.maximize();
-                                //currentWindow.alert(url);
-                                //let uriObj = ios.newURI(url, null, null);
-                                //currentWindow.alert(uriObj);
-                                //var WindowMediator = Components
-                                //.classes['@mozilla.org/appshell/window-mediator;1']
-                                //.getService(Components.interfaces.nsIWindowMediator);
-                                //var browser = WindowMediator.getMostRecentWindow(null);
-                                //currentWindow.gBrowser._tabs[0].update({url: "https://developer.mozilla.org"});
-                                //browser.gBrowser.reloadTab();
-                                //browser.gBrowser.addTab("https://google.com");
-                                //currentWindow.alert(context.innerWindowId);
-                                //currentWindow.alert(browser.gBrowser.currentURI);
-                                //currentWindow.gBrowser.loadURI('http://www.gihyo.co.jp/magazines/SD', referrer);
-                                //obj.create("https://google.com");
-                                //currentWindow.alert(referrer);
-                                //currentWindow.gBrowser.addTab("http://www.google.com/");
-                                //currentWindow.alert(currentWindow.gBrowser.constructor);
+                                features += "centerscreen,dependent,resizeable,location=1,scrollbars=1,status=1";
+                                //privilegedEventEmitter.emitSurveyConsentAccept();
+                                let window = currentWindow.open(url, "", features);
+                                //let newlocation = "chrome://browser/content/aboutDialog.xhtml";
+                                //let newlocation2 = "https://google.com";
+                                window.location.assign(newlocation);
+                                //currentWindow.alert(ww.openWindow);
+                                //var win = ww.openWindow(null, "chrome://browser/content/aboutDialog.xhtml",
+                                //"aboutMyExtension", "chrome,centerscreen", null);
+                                //currentWindow.gBrowser.selectedBrowser.loadOneTab(url, {inBackground: false});
                              }
                         },
                         [ // secondary actions
@@ -143,7 +100,6 @@ this.privileged = class extends ExtensionAPI {
                                 label: "No thanks",
                                 accessKey: "N",
                                 callback: function () { 
-                                    currentWindow.alert("No thanks");
                                 }
                             }
                         ],
@@ -157,7 +113,21 @@ this.privileged = class extends ExtensionAPI {
                         }
                     );
 
-                }
+                },
+                onSurveyConsentAccept: new EventManager({
+                    context,
+                    name: "privileged.onSurveyConsentAccept",
+                    register: fire => {
+
+                    const callback = () => {
+                        fire.async();
+                    };
+                    RegisterSomeInternalCallback(callback);
+                    return () => {
+                        UnregisterInternalCallback(callback);
+                    };
+                    }
+                }).api()
             }
         }
     }
