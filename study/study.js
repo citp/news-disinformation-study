@@ -68,10 +68,10 @@ function runStudy() {
     });
     
     // Configure surveys (pending choices)
-    /*
+    
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://www.mozilla.org/en-US/",
+        surveyUrl: "chrome://browser/content/aboutDialog.xhtml",
         surveyTimeAfterInitialRun: 5000
     });
-    */
+    
 }
