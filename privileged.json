@@ -19,8 +19,35 @@
                         "name": "url",
                         "type": "string",
                         "description": "The url of the survey"
+                    },
+                    {
+                        "name": "surveyTime",
+                        "type": "integer",
+                        "description": "Time when the survey consent is generated"
                     }
                 ]
+            }
+        ],
+        "events": [
+            {
+              "name": "onSurveyPopup",
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "string",
+                  "name": "survey url"
+                }
+              ]
+            },
+            {
+              "name": "onConsentPopup",
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "integer",
+                  "name": "id"
+                }
+              ]
             }
         ]
     }
