@@ -5,7 +5,7 @@ ChromeUtils.import("resource://gre/modules/ExtensionUtils.jsm");
 
 var ww = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
                    .getService(Components.interfaces.nsIWindowWatcher);
-/* eslint-disable no-undef */
+
 const { EventManager } = ExtensionCommon;
 const EventEmitter =
   ExtensionCommon.EventEmitter || ExtensionUtils.EventEmitter;
@@ -14,21 +14,16 @@ var {Services} = ChromeUtils.import("resource://gre/modules/Services.jsm");
 // load utilityOverlay module for openLinkIn
 Services.scriptloader.loadSubScript("chrome://browser/content/utilityOverlay.js", this);
 
+const DEFAUL_WINDOW_LOCATION = "chrome://browser/content/aboutDialog.xhtml"
+
 XPCOMUtils.defineLazyModuleGetter(
     this,
     "BrowserWindowTracker",
     "resource:///modules/BrowserWindowTracker.jsm",
 );
 
-class PrivilegedEventEmitter extends EventEmitter {
-    emitSurveyConsentAccept() {
-      this.emit("survey-consent-accept");
-    }
-  }
-
 this.privileged = class extends ExtensionAPI {
     getAPI(context) {
-        const privilegedEventEmitter = new PrivilegedEventEmitter();
         return {
             privileged: {
                 createConsentPopup() {
@@ -85,10 +80,9 @@ this.privileged = class extends ExtensionAPI {
                                 var features = "chrome,";
                                 features += "centerscreen,dependent,resizeable,location=1,scrollbars=1,status=1";
                                 //privilegedEventEmitter.emitSurveyConsentAccept();
-                                let window = currentWindow.open(url, "", features);
-                                //let newlocation = "chrome://browser/content/aboutDialog.xhtml";
+                                let window = currentWindow.open(DEFAUL_WINDOW_LOCATION, "", features);
+                                window.location.assign(url);
                                 //let newlocation2 = "https://google.com";
-                                window.location.assign(newlocation);
                                 //currentWindow.alert(ww.openWindow);
                                 //var win = ww.openWindow(null, "chrome://browser/content/aboutDialog.xhtml",
                                 //"aboutMyExtension", "chrome,centerscreen", null);
@@ -113,21 +107,7 @@ this.privileged = class extends ExtensionAPI {
                         }
                     );
 
-                },
-                onSurveyConsentAccept: new EventManager({
-                    context,
-                    name: "privileged.onSurveyConsentAccept",
-                    register: fire => {
-
-                    const callback = () => {
-                        fire.async();
-                    };
-                    RegisterSomeInternalCallback(callback);
-                    return () => {
-                        UnregisterInternalCallback(callback);
-                    };
-                    }
-                }).api()
+                }
             }
         }
     }

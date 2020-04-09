@@ -22,13 +22,6 @@
                     }
                 ]
             }
-        ],
-        "events": [
-            {
-              "name": "onSurveyConsentAccept",
-              "type": "function",
-              "description": "User accepted the survey"
-            }
-          ]
+        ]
     }
 ]
