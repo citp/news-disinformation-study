@@ -70,7 +70,7 @@ function runStudy() {
     // Configure surveys (pending choices)
     
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "chrome://browser/content/aboutDialog.xhtml",
+        surveyUrl: "chrome://browser/content/newInstallPage.html",
         surveyTimeAfterInitialRun: 5000
     });
     
