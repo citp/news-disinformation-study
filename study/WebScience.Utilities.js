@@ -44,3 +44,6 @@ export { UserSurvey }
 
 import * as SocialMediaActivity from "../WebScience/Utilities/SocialMediaActivity.js"
 export { SocialMediaActivity }
+
+import * as DataAnalysis from "../WebScience/Utilities/DataAnalysis.js"
+export { DataAnalysis }

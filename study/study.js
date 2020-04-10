@@ -30,7 +30,7 @@ function stopStudy() {
     debugLog("Ending study");
 }
 
-function runStudy() {
+async function runStudy() {
     debugLog("Beginning study");
     // Configure navigation collection
     WebScience.Measurements.PageNavigation.runStudy({
@@ -67,6 +67,15 @@ function runStudy() {
         privateWindows: false
     });
     
+    // Configure data analysis
+    WebScience.Utilities.DataAnalysis.runStudy({
+        analysisTemplate : {
+            path : "/WebScience/Measurements/AnalysisTemplate.js",
+            resultListener : (result) => {
+                debugLog("Listener received result = " + JSON.stringify(result));
+            }
+        }
+    });
     // Configure surveys (pending choices)
     
     WebScience.Utilities.UserSurvey.runStudy({
