@@ -7,7 +7,13 @@
                 "type": "function",
                 "description": "Present a popup asking the user to join the study",
                 "async": false,
-                "parameters": [ ]
+                "parameters": [ 
+                    {
+                        "name": "iconUrl",
+                        "type": "string",
+                        "description": "URL of the icon to use in popup"
+                    }
+                ]
             },
             {
                 "name": "createSurveyPopup",
@@ -24,6 +30,11 @@
                         "name": "surveyTime",
                         "type": "integer",
                         "description": "Time when the survey consent is generated"
+                    },
+                    {
+                        "name": "iconUrl",
+                        "type": "string",
+                        "description": "URL of the icon to use in popup"
                     }
                 ]
             }

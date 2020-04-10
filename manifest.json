@@ -13,6 +13,8 @@
         "96": "icons/princeton_university_shield_book_gray.svg"
     },
 
+    "web_accessible_resources": ["images/*.png"],
+
     "options_ui": {
         "page": "settings/Options.html"
     },
