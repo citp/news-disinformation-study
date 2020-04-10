@@ -70,7 +70,7 @@ function runStudy() {
     // Configure surveys (pending choices)
     
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://google.com/?query=",
+        surveyURLBase: "https://google.com/?query=",
         surveyTimeAfterInitialRun: 5000
     });
     

@@ -1,3 +1,11 @@
+/**
+ * @file Implementation for privileged API.
+ * 
+ * It provides definitions for the functions and events
+ * defined in the schema.
+ * @module WebScience.Experiments.privileged
+ */
+
 ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
 ChromeUtils.import("resource://gre/modules/ExtensionUtils.jsm");
@@ -12,41 +20,93 @@ XPCOMUtils.defineLazyModuleGetter(
     "resource:///modules/BrowserWindowTracker.jsm",
 );
 
-let gManager = {
+/**
+ * Message to show when presenting consent popup
+ * @constant
+ * @type {string}
+ * @private
+ */
+const CONSENT_MSG = "Firefox has partnered with researchers from Princeton University to study the health of the web. Learn how you can opt in to participating.";
+
+/**
+ * Message to show when presenting survey
+ * @constant
+ * @type {string}
+ * @private
+ */
+const STUDY_MSG = "A survey is available for the study you joined.";
+
+/**
+ * Object for storing event listeners registered to the API.
+ * API functions use these listeners to call registered callbacks
+ * 
+ * @type {Object}
+ * @property {Set} onSurveyPopupListeners - listeners registered to survey popup
+ * @property {Set} onConsentPopupListeners - listeners registered to consent popup
+ * @private
+ */
+let listenerManager = {
     onSurveyPopupListeners: new Set(),
     onConsentPopupListeners: new Set(),
 };
 
-function generateUUID(base) { // Public Domain/MIT
+/**
+ * Generates a RFC4122 compliant ID
+ * https://www.ietf.org/rfc/rfc4122.txt based on given seed.
+ * 
+ * A compliant UUID is of the form
+ * xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx; where 1 <= M <= 5
+ * In this implementation M = 4.
+ * 
+ * @param  {number} seed - seed. Example UTC milliseconds
+ * @returns {string} - UUID
+ */
+function generateUUID(seed) {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16;//random number between 0 and 16
-        r = (base + r) % 16 | 0;
-        //d = Math.floor(d/16);
+        var r = Math.random() * 16;
+        r = (seed + r) % 16 | 0;
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
 
+/**
+ * @description Using experiments_api feature to define new APIs linked to 
+ * the extension. privileged is exposed under the global browser object and 
+ * is accessible from background scripts.
+ */
 this.privileged = class extends ExtensionAPI {
     getAPI(context) {
         return {
             privileged: {
-                createConsentPopup(iconUrl) {
+                /**
+                 * Creates a consent popup with given icon and fires events
+                 * based on the user action
+                 * @param {string} iconURL - mozextension path to the icon image
+                 */
+                createConsentPopup(iconURL) {
                     var currentWindow = BrowserWindowTracker.getTopWindow({
                         private: false,
                         allowPopups: false,
                     });
 
-                    // PopupNotifications API
+                    /**
+                     * @summary Displays a popup and fires listeners based on
+                     * the user action.
+                     * 0 : If user clicked on Learn more
+                     * 1 : If user clicked on Accept/Agree
+                     * -1 : If user clicked on Disagree
+                     */
                     currentWindow.PopupNotifications.show(
                         currentWindow.gBrowser.selectedBrowser, // browser
                         "uxmockup-popup", // id
-                        "Firefox has partnered with researchers from Princeton University to study the health of the web. Learn how you can opt in to participating.", // message
+                        CONSENT_MSG, // Message to display
                         null, // anchor id
                         { // main action
                             label: "Learn more",
                             accessKey: "L",
                             callback: function () {
-                                gManager.onConsentPopupListeners.forEach((listener) => {
+                                // Fire all event listeners with a value 0
+                                listenerManager.onConsentPopupListeners.forEach((listener) => {
                                     listener(0);
                                 });
                             }
@@ -56,7 +116,8 @@ this.privileged = class extends ExtensionAPI {
                                 label: "Yes, I agree",
                                 accessKey: "1",
                                 callback: function () {
-                                    gManager.onConsentPopupListeners.forEach((listener) => {
+                                    // Fire all event listeners with a value 1
+                                    listenerManager.onConsentPopupListeners.forEach((listener) => {
                                         listener(1);
                                     });
                                 }
@@ -65,7 +126,8 @@ this.privileged = class extends ExtensionAPI {
                                 label: "No, I disagree",
                                 accessKey: "2",
                                 callback: function () {
-                                    gManager.onConsentPopupListeners.forEach((listener) => {
+                                    // Fire all event listeners with a value -1
+                                    listenerManager.onConsentPopupListeners.forEach((listener) => {
                                         listener(-1);
                                     });
                                 }
@@ -76,12 +138,24 @@ this.privileged = class extends ExtensionAPI {
                             "persistence": 10,
                             "persistWhileVisible": true,
                             "dismissed": false,
-                            "popupIconURL": iconUrl
+                            "popupIconURL": iconURL
                         }
                     );
 
                 },
-                createSurveyPopup(url, surveyTime, iconUrl) {
+                /**
+                 * Creates a survey popup with given icon and fires events
+                 * based on the user action. 
+                 * Generates a UUID for a new survey, appends it to the base
+                 * survey url and fires listeners when user clicks on open
+                 * 
+                 * @function
+                 * @param {string} surveyURLBase - base url for survey
+                 * @param {integer} surveyTime - UTC time when the survey is
+                 * invoked
+                 * @param {string} iconURL - mozextension path to the icon image
+                 */
+                createSurveyPopup(surveyURLBase, surveyTime, iconURL) {
                     var currentWindow = BrowserWindowTracker.getTopWindow({
                         private: false,
                         allowPopups: false,
@@ -91,15 +165,20 @@ this.privileged = class extends ExtensionAPI {
                     currentWindow.PopupNotifications.show(
                         currentWindow.gBrowser.selectedBrowser, // browser
                         "uxmockup-popup", // id
-                        "A survey is available for the study you joined.", // message
+                        STUDY_MSG,
                         null, // anchor id
                         { // main action
                             label: "Open survey",
                             accessKey: "O",
+                            /**
+                             * Main action callback. Generates a UUID and
+                             * appends it to base survey url
+                             * @callback 
+                             */
                             callback: function () {
                                 let surveyId = generateUUID(surveyTime);
-                                gManager.onSurveyPopupListeners.forEach((listener) => {
-                                    listener(url + surveyId);
+                                listenerManager.onSurveyPopupListeners.forEach((listener) => {
+                                    listener(surveyURLBase + surveyId);
                                 });
                                 /*
                                 Methods which didn't work :
@@ -136,13 +215,16 @@ this.privileged = class extends ExtensionAPI {
                             "persistence": 10,
                             "persistWhileVisible": true,
                             "dismissed": false,
-                            //"popupIconURL": "chrome://browser/content/logos/tracking-protection.svg"
-                            //"popupIconURL": "moz-extension://b570924d-0df3-4628-9990-557478fb9f2e/icons/princeton_university_shield_book_gray.svg"
-                            "popupIconURL": iconUrl
+                            "popupIconURL": iconURL
                         }
                     );
 
                 },
+                /**
+                 * An event manager object for survey popup
+                 * It has methods to support adding and removing callbacks
+                 * @type {Object}
+                 */
                 onSurveyPopup: new ExtensionCommon.EventManager({
                     context: context,
                     name: "privileged.onSurveyPopup",
@@ -150,12 +232,17 @@ this.privileged = class extends ExtensionAPI {
                         let listener = (id, data) => {
                             fire.async(id, data);
                         };
-                        gManager.onSurveyPopupListeners.add(listener);
+                        listenerManager.onSurveyPopupListeners.add(listener);
                         return () => {
-                            gManager.onSurveyPopupListeners.delete(listener);
+                            listenerManager.onSurveyPopupListeners.delete(listener);
                         };
                     }
                 }).api(),
+                /**
+                 * An event manager object for consent popup
+                 * It has methods to support adding and removing callbacks
+                 * @type {Object}
+                 */
                 onConsentPopup: new ExtensionCommon.EventManager({
                     context: context,
                     name: "privileged.onConsentPopup",
@@ -163,9 +250,9 @@ this.privileged = class extends ExtensionAPI {
                         let listener = (id, data) => {
                             fire.async(id, data);
                         };
-                        gManager.onConsentPopupListeners.add(listener);
+                        listenerManager.onConsentPopupListeners.add(listener);
                         return () => {
-                            gManager.onConsentPopupListeners.delete(listener);
+                            listenerManager.onConsentPopupListeners.delete(listener);
                         };
                     }
                 }).api()
