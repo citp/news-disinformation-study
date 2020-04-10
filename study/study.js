@@ -70,7 +70,7 @@ async function runStudy() {
     // Configure data analysis
     WebScience.Utilities.DataAnalysis.runStudy({
         analysisTemplate : {
-            path : "/WebScience/Measurements/Analysis.js",
+            path : "/WebScience/Measurements/AnalysisTemplate.js",
             resultListener : (result) => {
                 debugLog("Listener received result = " + JSON.stringify(result));
             }
