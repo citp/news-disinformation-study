@@ -30,7 +30,7 @@ this.privileged = class extends ExtensionAPI {
     getAPI(context) {
         return {
             privileged: {
-                createConsentPopup() {
+                createConsentPopup(iconUrl) {
                     var currentWindow = BrowserWindowTracker.getTopWindow({
                         private: false,
                         allowPopups: false,
@@ -76,12 +76,12 @@ this.privileged = class extends ExtensionAPI {
                             "persistence": 10,
                             "persistWhileVisible": true,
                             "dismissed": false,
-                            "popupIconURL": "chrome://browser/content/logos/tracking-protection.svg"
+                            "popupIconURL": iconUrl
                         }
                     );
 
                 },
-                createSurveyPopup(url, surveyTime) {
+                createSurveyPopup(url, surveyTime, iconUrl) {
                     var currentWindow = BrowserWindowTracker.getTopWindow({
                         private: false,
                         allowPopups: false,
@@ -136,7 +136,9 @@ this.privileged = class extends ExtensionAPI {
                             "persistence": 10,
                             "persistWhileVisible": true,
                             "dismissed": false,
-                            "popupIconURL": "chrome://browser/content/logos/tracking-protection.svg"
+                            //"popupIconURL": "chrome://browser/content/logos/tracking-protection.svg"
+                            //"popupIconURL": "moz-extension://b570924d-0df3-4628-9990-557478fb9f2e/icons/princeton_university_shield_book_gray.svg"
+                            "popupIconURL": iconUrl
                         }
                     );
 
