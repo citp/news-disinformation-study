@@ -19,7 +19,7 @@ WebScience.Utilities.Consent.registerStudyEndedListener(stopStudy);
  * The user can still opt-out by going to the settings page and
  *  turning off the data collection.
  */
-WebScience.Utilities.Consent.disableStudySpecificConsent();
+//WebScience.Utilities.Consent.disableStudySpecificConsent();
 
 /* Will get consent, if necessary, and start the study when ready.
  */
@@ -68,10 +68,10 @@ function runStudy() {
     });
     
     // Configure surveys (pending choices)
-    /*
+    
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://www.mozilla.org/en-US/",
+        surveyURLBase: "https://google.com/?query=",
         surveyTimeAfterInitialRun: 5000
     });
-    */
+    
 }

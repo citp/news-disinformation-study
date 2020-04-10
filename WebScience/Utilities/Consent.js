@@ -5,8 +5,15 @@
  * @module WebScience.Utilities.Consent
  */
 
+import {
+  getDebuggingLog
+} from './Debugging.js';
+
 import * as Storage from "./Storage.js"
 import * as Messaging from "./Messaging.js"
+import {SHIELD_URL} from "./UserSurvey.js"
+
+const debugLog = getDebuggingLog("Utilities.Consent");
 
  /**
   * A flag for whether this study needs individual consent, rather than
@@ -146,6 +153,30 @@ If you'd still like to participate in the study, you may keep the extension inst
 }
 
 /**
+ * Listen for user actions on consent popup
+ * If user clicks on Learn more then creates a new tab
+ * If user clicks on agree then starts study
+ * If user clicks on disagree then end study
+ * @callback
+ */
+browser.privileged.onConsentPopup.addListener((value) => {
+    debugLog("consent value ( 0 Learn more, 1 : Agree, -1 : Disagree) = "+ value);
+    switch(value) {
+      case 0:
+        browser.tabs.create({
+          url : "https://github.com/citp/news-disinformation-study"
+        });
+        break;
+      case 1:
+        startStudy();
+        break;
+      case -1:
+        endStudy();
+        break;
+    }
+});
+
+/**
  * After calling setup functions above, this requests
  * consent if it is necessary, and begins the study if not.
  */
@@ -164,7 +195,8 @@ export async function requestConsentAndBegin() {
 
   // temp, pending choices about how we implement consent
   // Note that a dev build of Firefox is required to use the experimental API
-  // To see the popup, comment out the call to disableStudySpecificConsent in study.js (and run dev FF)
-  if (studySpecificConsentRequired) { browser.privileged.createConsentPopup(); }
+  // To see the popup, comment out the call to disableStudySpecificConsent in
+  // study.js (and run dev FF)
+  if (studySpecificConsentRequired) { browser.privileged.createConsentPopup(SHIELD_URL); }
   else { startStudy(); }
 }

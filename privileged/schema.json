@@ -1,0 +1,65 @@
+[
+    {
+        "namespace": "privileged",
+        "functions": [
+            {
+                "name": "createConsentPopup",
+                "type": "function",
+                "description": "Present a popup asking the user to join the study",
+                "async": false,
+                "parameters": [ 
+                    {
+                        "name": "iconUrl",
+                        "type": "string",
+                        "description": "URL of the icon to use in popup"
+                    }
+                ]
+            },
+            {
+                "name": "createSurveyPopup",
+                "type": "function",
+                "description": "Present a popup asking the user to fill out a survey",
+                "async": false,
+                "parameters": [
+                    {
+                        "name": "url",
+                        "type": "string",
+                        "description": "Url of the survey"
+                    },
+                    {
+                        "name": "surveyTime",
+                        "type": "integer",
+                        "description": "Time when the survey consent is generated"
+                    },
+                    {
+                        "name": "iconUrl",
+                        "type": "string",
+                        "description": "URL of the icon to use in popup"
+                    }
+                ]
+            }
+        ],
+        "events": [
+            {
+              "name": "onSurveyPopup",
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "string",
+                  "name": "survey url"
+                }
+              ]
+            },
+            {
+              "name": "onConsentPopup",
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "integer",
+                  "name": "consent state (0: learn more, 1 : accept -1: reject)"
+                }
+              ]
+            }
+        ]
+    }
+]
