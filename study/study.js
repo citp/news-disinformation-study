@@ -67,9 +67,14 @@ async function runStudy() {
         privateWindows: false
     });
     
-    // Initialize analysis scripts
-    await WebScience.Utilities.DataAnalysis.registerAnalysisResultListener("/WebScience/Measurements/Analysis.js", (result) => {
-        debugLog("received result" + result);
+    // Configure data analysis
+    WebScience.Utilities.DataAnalysis.runStudy({
+        analysisTemplate : {
+            path : "/WebScience/Measurements/Analysis.js",
+            resultListener : (result) => {
+                debugLog("Listener received result = " + JSON.stringify(result));
+            }
+        }
     });
     // Configure surveys (pending choices)
     
