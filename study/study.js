@@ -59,7 +59,7 @@ function runStudies() {
     });
 
     // Configure social media sharing collection
-    WebScience.Studies.SocialMediaSharing.runStudy({
+    WebScience.Studies.SocialMediaLinkSharing.runStudy({
         domains: studyDomains,
         facebook: true,
         twitter: true,
