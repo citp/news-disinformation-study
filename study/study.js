@@ -2,7 +2,7 @@ import { studyDomains } from "/study/newsDomains.js"
 import { youtubeChannels } from "/study/newsYouTubeChannels.js";
 import { facebookAccounts } from "/study/newsFacebookAccounts.js";
 import { twitterHandles } from "/study/newsTwitterHandles.js";
-import * as WebScience from "../WebScience/WebScience.js"
+import * as WebScience from "./WebScience.js"
 
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
@@ -11,42 +11,42 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
  *  in response to study events (e.g. stating the necessity of consent)
  *  and user actions (e.g. giving or revoking consent).
  */
-WebScience.Utilities.Consent.registerStudyStartedListener(runStudies);
-WebScience.Utilities.Consent.registerStudyEndedListener(stopStudies);
+WebScience.Utilities.Consent.registerStudyStartedListener(runStudy);
+WebScience.Utilities.Consent.registerStudyEndedListener(stopStudy);
 
 /* This is a study that won't involve identifiable data or any intervention,
  *  so we're disabling the study-specific consent feature.
  * The user can still opt-out by going to the settings page and
  *  turning off the data collection.
  */
-WebScience.Utilities.Consent.disableStudySpecificConsent();
+//WebScience.Utilities.Consent.disableStudySpecificConsent();
 
 /* Will get consent, if necessary, and start the study when ready.
  */
 WebScience.Utilities.Consent.requestConsentAndBegin();
 
-function stopStudies() {
+function stopStudy() {
     // TODO -- send Telemetry message to delete remote data, and uninstall
     debugLog("Ending study");
 }
 
-function runStudies() {
+async function runStudy() {
     debugLog("Beginning study");
     // Configure navigation collection
-    WebScience.Studies.Navigation.runStudy({
+    WebScience.Measurements.PageNavigation.runStudy({
         domains: studyDomains,
         trackUserAttention: true
       });
 
     // Configure link exposure collection
     WebScience.Utilities.LinkResolution.initialize();
-    WebScience.Studies.LinkExposure.runStudy({
+    WebScience.Measurements.LinkExposure.runStudy({
         domains: studyDomains,
         privateWindows : false,
     });
 
     // Configure social media account exposure study
-    WebScience.Studies.SocialMediaAccountExposure.runStudy({
+    WebScience.Measurements.SocialMediaAccountExposure.runStudy({
         fbaccounts: facebookAccounts,
         ytchannels: youtubeChannels,
         twitterHandles : twitterHandles,
@@ -54,7 +54,7 @@ function runStudies() {
     });
 
     // Configure social media news exposure study
-    WebScience.Studies.SocialMediaNewsExposure.runStudy({
+    WebScience.Measurements.SocialMediaNewsExposure.runStudy({
         privateWindows : false,
     });
 
@@ -67,11 +67,20 @@ function runStudies() {
         privateWindows: false
     });
     
+    // Configure data analysis
+    WebScience.Utilities.DataAnalysis.runStudy({
+        analysisTemplate : {
+            path : "/WebScience/Measurements/AnalysisTemplate.js",
+            resultListener : (result) => {
+                debugLog("Listener received result = " + JSON.stringify(result));
+            }
+        }
+    });
     // Configure surveys (pending choices)
-    /*
+    
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://www.mozilla.org/en-US/",
+        surveyURLBase: "https://google.com/?query=",
         surveyTimeAfterInitialRun: 5000
     });
-    */
+    
 }

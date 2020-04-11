@@ -13,6 +13,8 @@
         "96": "icons/princeton_university_shield_book_gray.svg"
     },
 
+    "web_accessible_resources": ["images/*.png"],
+
     "options_ui": {
         "page": "settings/Options.html"
     },
@@ -47,10 +49,10 @@
 
     "experiment_apis": {
         "privileged": {
-            "schema": "./privileged.json",
+            "schema": "./privileged/schema.json",
             "parent": {
                 "scopes": [ "addon_parent" ],
-                "script": "./privileged.js",
+                "script": "./privileged/api.js",
                 "paths": [[ "privileged" ]]
             }
         }
