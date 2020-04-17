@@ -1,0 +1,110 @@
+{
+  "3": {
+    "pageId": 3,
+    "url": "https://www.cnn.com/",
+    "referrer": "",
+    "visitStart": 1587141199274,
+    "visitEnd": 1587141241214,
+    "attentionDuration": 15717,
+    "attentionSpanCount": 5,
+    "attentionSpanStarts": [
+      1587141199274,
+      1587141209213,
+      1587141229008,
+      1587141238120,
+      1587141239437
+    ],
+    "attentionSpanEnds": [
+      1587141200121,
+      1587141220292,
+      1587141230277,
+      1587141238865,
+      1587141241214
+    ]
+  },
+  "8": {
+    "pageId": 8,
+    "url": "https://www.cnn.com/videos/health/2020/04/17/dr-chris-murray-town-hall-us-death-rate-projections-sot-vpx.cnn",
+    "referrer": "",
+    "visitStart": 1587141212878,
+    "visitEnd": 1587141255149,
+    "attentionDuration": 6282,
+    "attentionSpanCount": 2,
+    "attentionSpanStarts": [
+      1587141228047,
+      1587141249828
+    ],
+    "attentionSpanEnds": [
+      1587141229008,
+      1587141255149
+    ]
+  },
+  "9": {
+    "pageId": 9,
+    "url": "https://www.cnn.com/2020/04/17/politics/tom-massie-liz-cheney-stimulus-vote/index.html",
+    "referrer": "",
+    "visitStart": 1587141214121,
+    "visitEnd": 1587141259210,
+    "attentionDuration": 3551,
+    "attentionSpanCount": 2,
+    "attentionSpanStarts": [
+      1587141230277,
+      1587141256122
+    ],
+    "attentionSpanEnds": [
+      1587141230740,
+      1587141259210
+    ]
+  },
+  "10": {
+    "pageId": 10,
+    "url": "https://www.cnn.com/2020/04/16/politics/fact-check-trump-april-16/index.html",
+    "referrer": "https://www.cnn.com/",
+    "visitStart": 1587141215224,
+    "visitEnd": 1587141263377,
+    "attentionDuration": 4873,
+    "attentionSpanCount": 2,
+    "attentionSpanStarts": [
+      1587141230740,
+      1587141259212
+    ],
+    "attentionSpanEnds": [
+      1587141231448,
+      1587141263377
+    ]
+  },
+  "12": {
+    "pageId": 12,
+    "url": "https://www.cnn.com/2020/04/17/us/quaranteam-coronavirus-wellness-trnd/index.html",
+    "referrer": "https://www.cnn.com/",
+    "visitStart": 1587141241214,
+    "visitEnd": 1587141247703,
+    "attentionDuration": 4760,
+    "attentionSpanCount": 2,
+    "attentionSpanStarts": [
+      1587141241214,
+      1587141246649
+    ],
+    "attentionSpanEnds": [
+      1587141244920,
+      1587141247703
+    ]
+  },
+  "13": {
+    "pageId": 13,
+    "url": "https://www.cnn.com/specials/world/coronavirus-outbreak-intl-hnk",
+    "referrer": "",
+    "visitStart": 1587141245145,
+    "visitEnd": 1587141249826,
+    "attentionDuration": 3625,
+    "attentionSpanCount": 2,
+    "attentionSpanStarts": [
+      1587141245145,
+      1587141247705
+    ],
+    "attentionSpanEnds": [
+      1587141246649,
+      1587141249826
+    ]
+  }
+}

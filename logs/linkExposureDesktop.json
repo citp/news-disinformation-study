@@ -1,0 +1,5438 @@
+{
+  "0": {
+    "originalUrl": "https://www.nytimes.com/subscription?campaignId=79FKF",
+    "size": {
+      "width": 119.23333740234375,
+      "height": 32
+    },
+    "firstSeen": 1587140287352,
+    "duration": 14087,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "1": {
+    "originalUrl": "https://myaccount.nytimes.com/auth/login?response_type=cookie&client_id=vi&redirect_uri=https%3A%2F%2Fwww.nytimes.com%2Fsubscription%2Fmultiproduct%2Flp8KQUS.html%3FcampaignId%3D7QQFH%26EXIT_URI%3Dhttps%253A%252F%252Fwww.nytimes.com%252F",
+    "size": {
+      "width": 63.416656494140625,
+      "height": 32
+    },
+    "firstSeen": 1587140287352,
+    "duration": 14087,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "2": {
+    "originalUrl": "https://www.nytimes.com/",
+    "size": {
+      "width": 430,
+      "height": 58
+    },
+    "firstSeen": 1587140287438,
+    "duration": 14001,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "3": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/podcasts/the-daily/alexandria-ocasio-cortez-coronavirus.html?action=click&module=Briefings&pgtype=Homepage",
+    "size": {
+      "width": 55,
+      "height": 55
+    },
+    "firstSeen": 1587140280714,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "4": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/podcasts/the-daily/alexandria-ocasio-cortez-coronavirus.html?action=click&module=Briefings&pgtype=Homepage",
+    "size": {
+      "width": 212.2833251953125,
+      "height": 48.5
+    },
+    "firstSeen": 1587140289129,
+    "duration": 12310,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "5": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/podcasts/rabbit-hole-internet-youtube-virus.html?action=click&module=Briefings&pgtype=Homepage",
+    "size": {
+      "width": 55,
+      "height": 55
+    },
+    "firstSeen": 1587140280714,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "6": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/podcasts/rabbit-hole-internet-youtube-virus.html?action=click&module=Briefings&pgtype=Homepage",
+    "size": {
+      "width": 212.3000030517578,
+      "height": 48.5
+    },
+    "firstSeen": 1587140289129,
+    "duration": 12310,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "7": {
+    "originalUrl": "https://www.nytimes.com/newsletters/watching?action=click&module=Briefings&pgtype=Homepage",
+    "size": {
+      "width": 55,
+      "height": 55
+    },
+    "firstSeen": 1587140280714,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "8": {
+    "originalUrl": "https://www.nytimes.com/newsletters/watching?action=click&module=Briefings&pgtype=Homepage",
+    "size": {
+      "width": 212.3000030517578,
+      "height": 48.5
+    },
+    "firstSeen": 1587140289129,
+    "duration": 12310,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "9": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/us/coronavirus-updates.html?action=click&module=Spotlight&pgtype=Homepage",
+    "size": {
+      "width": 267.86663818359375,
+      "height": 262
+    },
+    "firstSeen": 1587140280714,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "10": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/us/coronavirus-updates.html?action=click&module=Spotlight&pgtype=Homepage",
+    "size": {
+      "width": 495.75,
+      "height": 330.4666748046875
+    },
+    "firstSeen": 1587140280714,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "11": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/business/china-coronavirus-economy.html?action=click&module=Spotlight&pgtype=Homepage",
+    "size": {
+      "width": 373.79998779296875,
+      "height": 100
+    },
+    "firstSeen": 1587140280714,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "12": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/business/economy/coronavirus-economy.html?action=click&module=Spotlight&pgtype=Homepage",
+    "size": {
+      "width": 373.816650390625,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20724,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "13": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/nyregion/coronavirus-new-york-update.html?type=styln-live-updates&label=new%20york&index=0&action=click&module=Spotlight&pgtype=Homepage#link-5d8fc556",
+    "size": {
+      "width": 366.4166564941406,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20724,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "14": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/nyregion/coronavirus-new-york-update.html?type=styln-live-updates&label=new%20york&index=0&action=click&module=Spotlight&pgtype=Homepage#link-5122e675",
+    "size": {
+      "width": 366.4166564941406,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "15": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/business/stock-market-today-coronavirus.html?type=styln-live-updates&label=markets&index=1&action=click&module=Spotlight&pgtype=Homepage#link-75288d8c",
+    "size": {
+      "width": 366.4166564941406,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "16": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/world/coronavirus-news.html?type=styln-live-updates&label=global&index=2&action=click&module=Spotlight&pgtype=Homepage#link-f029419",
+    "size": {
+      "width": 366.4166564941406,
+      "height": 38
+    },
+    "firstSeen": 1587140283405,
+    "duration": 18035,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "17": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/nyregion/michael-cohen-release-prison-otisville-virus.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 373.316650390625,
+      "height": 113
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "18": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/technology/bill-gates-virus-conspiracy-theories.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 171.89999389648438,
+      "height": 176
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "19": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/us/coronavirus-nebraska-mall-reopen-business.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 171.39999389648438,
+      "height": 138
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "20": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/world/europe/coronavirus-france-digital-tracking.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 267.86663818359375,
+      "height": 155
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "21": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/world/europe/denmark-schools-coronavirus.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 267.86663818359375,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "22": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/world/europe/denmark-schools-coronavirus.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 495.75,
+      "height": 363.5
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "23": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/technology/amazon-coronavirus.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 454.6666564941406,
+      "height": 90
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "24": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/technology/uber-lift-coronavirus.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 292.95001220703125,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "25": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/health/coronavirus-best-face-masks.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 470.26666259765625,
+      "height": 126
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "26": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/health/coronavirus-best-face-masks.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 293.3499755859375,
+      "height": 210.56666564941406
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "27": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/us/coronavirus-death-rate.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 454.6666564941406,
+      "height": 62
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "28": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/world/asia/china-wuhan-coronavirus-death-toll.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 292.95001220703125,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "29": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/obituaries/people-died-coronavirus-obituaries.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 267.86663818359375,
+      "height": 109
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "30": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/obituaries/people-died-coronavirus-obituaries.html?action=click&module=Top%20Stories&pgtype=Homepage",
+    "size": {
+      "width": 495.75,
+      "height": 345.5
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "31": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/04/17/opinion/inequality-economy-1980.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 190.90000915527344,
+      "height": 125
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "32": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/04/17/opinion/inequality-economy-1980.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.41665649414062,
+      "height": 176.41665649414062
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "33": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/opinion/coronavirus-relief-trump.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.65000915527344,
+      "height": 163
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "34": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/opinion/trump-coronavirus-economy.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.65000915527344,
+      "height": 63
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "35": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/opinion/coronavirus-medical-training.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.65000915527344,
+      "height": 63
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "36": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/opinion/coronavirus-trump-republicans.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.65000915527344,
+      "height": 82
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "37": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/opinion/coronavirus-texas-republicans.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.64999389648438,
+      "height": 82
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "38": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/opinion/khan-academy-us-inequality.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.64999389648438,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "39": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/opinion/covid-ocean-research.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.64999389648438,
+      "height": 63
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "40": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/opinion/wisconsin-coronavirus-elections-mail.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.64999389648438,
+      "height": 82
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "41": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/opinion/robert-rubin-coronavirus-economy.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.64999389648438,
+      "height": 63
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "42": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/opinion/cuba-coronavirus-trump.html?action=click&module=Opinion&pgtype=Homepage",
+    "size": {
+      "width": 176.64999389648438,
+      "height": 63
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "43": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/arts/music/new-york-accent.html?action=click&module=Editors%20Picks&pgtype=Homepage",
+    "size": {
+      "width": 382.316650390625,
+      "height": 269.8666687011719
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "44": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/arts/music/new-york-accent.html?action=click&module=Editors%20Picks&pgtype=Homepage",
+    "size": {
+      "width": 382.316650390625,
+      "height": 107
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "45": {
+    "originalUrl": "https://www.nytimes.com/2020/04/13/dining/native-americans-coronavirus.html?action=click&module=Editors%20Picks&pgtype=Homepage",
+    "size": {
+      "width": 175.90000915527344,
+      "height": 157
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "46": {
+    "originalUrl": "https://www.nytimes.com/2020/04/13/dining/native-americans-coronavirus.html?action=click&module=Editors%20Picks&pgtype=Homepage",
+    "size": {
+      "width": 176.41665649414062,
+      "height": 176.4166717529297
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "47": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/style/modern-love-coronavirus-end-of-long-distance-marriage.html?action=click&module=Editors%20Picks&pgtype=Homepage",
+    "size": {
+      "width": 175.90000915527344,
+      "height": 138
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "48": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/style/modern-love-coronavirus-end-of-long-distance-marriage.html?action=click&module=Editors%20Picks&pgtype=Homepage",
+    "size": {
+      "width": 176.41665649414062,
+      "height": 176.4166717529297
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "49": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/nyregion/eva-candelaria-coronavirus-brooklyn.html",
+    "size": {
+      "width": 457.76666259765625,
+      "height": 320.16668701171875
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "50": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/nyregion/eva-candelaria-coronavirus-brooklyn.html",
+    "size": {
+      "width": 343.316650390625,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "51": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/us/coronavirus-pandemic-historians-archive.html",
+    "size": {
+      "width": 229.13333129882812,
+      "height": 138
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "52": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/us/coronavirus-pandemic-historians-archive.html",
+    "size": {
+      "width": 214.63333129882812,
+      "height": 143.26666259765625
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "53": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/parenting/spain-kids-lockdown-coronavirus.html",
+    "size": {
+      "width": 229.13333129882812,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "54": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/parenting/spain-kids-lockdown-coronavirus.html",
+    "size": {
+      "width": 214.63333129882812,
+      "height": 143.0833282470703
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "55": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/technology/john-horton-conway-dead-coronavirus.html",
+    "size": {
+      "width": 229.13333129882812,
+      "height": 138
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "56": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/technology/john-horton-conway-dead-coronavirus.html",
+    "size": {
+      "width": 214.63333129882812,
+      "height": 143.26666259765625
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "57": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/us/politics/roger-stone-new-trial-denied.html",
+    "size": {
+      "width": 214.38333129882812,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "58": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/business/media/dr-oz-apology-coronavirus.html",
+    "size": {
+      "width": 214.38333129882812,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "59": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/your-money/coronavirus-fraud.html",
+    "size": {
+      "width": 214.38333129882812,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "60": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/us/politics/prepublication-review-lawsuit.html",
+    "size": {
+      "width": 214.38333129882812,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "61": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/us/massachusetts-bomb-jewish-nursing-home.html",
+    "size": {
+      "width": 214.38333129882812,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "62": {
+    "originalUrl": "https://www.nytimes.com/article/copyrights-trademarks-patents.html?algo=identity&fellback=false&imp_id=749807844&imp_id=51983539",
+    "size": {
+      "width": 213.38333129882812,
+      "height": 142.43333435058594
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "63": {
+    "originalUrl": "https://www.nytimes.com/article/copyrights-trademarks-patents.html?algo=identity&fellback=false&imp_id=749807844&imp_id=51983539",
+    "size": {
+      "width": 213.38333129882812,
+      "height": 57
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "64": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/smarter-living/coronavirus-introverts-lonely.html?algo=identity&fellback=false&imp_id=512123178&imp_id=400699181",
+    "size": {
+      "width": 213.38333129882812,
+      "height": 142.43333435058594
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "65": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/smarter-living/coronavirus-introverts-lonely.html?algo=identity&fellback=false&imp_id=512123178&imp_id=400699181",
+    "size": {
+      "width": 213.38333129882812,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "66": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/smarter-living/coronavirus-roommate-fight-home.html?algo=identity&fellback=false&imp_id=415527726&imp_id=757031180",
+    "size": {
+      "width": 213.71665954589844,
+      "height": 142.65000915527344
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "67": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/smarter-living/coronavirus-roommate-fight-home.html?algo=identity&fellback=false&imp_id=415527726&imp_id=757031180",
+    "size": {
+      "width": 213.71665954589844,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "68": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/smarter-living/coronavirus-eating-advice.html?algo=identity&fellback=false&imp_id=207158709&imp_id=964480388",
+    "size": {
+      "width": 213.7166748046875,
+      "height": 142.65000915527344
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "69": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/smarter-living/coronavirus-eating-advice.html?algo=identity&fellback=false&imp_id=207158709&imp_id=964480388",
+    "size": {
+      "width": 213.7166748046875,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "70": {
+    "originalUrl": "https://www.nytimes.com/2020/04/07/well/how-to-celebrate-a-birthday-during-the-coronavirus-shutdown.html?algo=identity&fellback=false&imp_id=112527931&imp_id=389505277",
+    "size": {
+      "width": 213.71665954589844,
+      "height": 142.65000915527344
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "71": {
+    "originalUrl": "https://www.nytimes.com/2020/04/07/well/how-to-celebrate-a-birthday-during-the-coronavirus-shutdown.html?algo=identity&fellback=false&imp_id=112527931&imp_id=389505277",
+    "size": {
+      "width": 213.71665954589844,
+      "height": 38
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "72": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/style/prom-canceled-coronavirus.html",
+    "size": {
+      "width": 702.566650390625,
+      "height": 483.3666687011719
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "73": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/style/prom-canceled-coronavirus.html",
+    "size": {
+      "width": 526.9166259765625,
+      "height": 107
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "74": {
+    "originalUrl": "https://www.nytimes.com/2020/04/14/books/review/dalia-sofer-man-of-my-time.html",
+    "size": {
+      "width": 214.18333435058594,
+      "height": 142.9666748046875
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "75": {
+    "originalUrl": "https://www.nytimes.com/2020/04/14/books/review/dalia-sofer-man-of-my-time.html",
+    "size": {
+      "width": 214.18333435058594,
+      "height": 119
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "76": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/arts/television/blackaf-review.html",
+    "size": {
+      "width": 213.18331909179688,
+      "height": 142.11666870117188
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "77": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/arts/television/blackaf-review.html",
+    "size": {
+      "width": 213.18331909179688,
+      "height": 119
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "78": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/arts/television/late-night-state-protests-coronavirus.html",
+    "size": {
+      "width": 214.18333435058594,
+      "height": 142.96665954589844
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "79": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/arts/television/late-night-state-protests-coronavirus.html",
+    "size": {
+      "width": 214.18333435058594,
+      "height": 157
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "80": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/sports/basketball/liberty-wnba-draft-sabrina-ionescu.html",
+    "size": {
+      "width": 213.18331909179688,
+      "height": 142.2833251953125
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "81": {
+    "originalUrl": "https://www.nytimes.com/2020/04/17/sports/basketball/liberty-wnba-draft-sabrina-ionescu.html",
+    "size": {
+      "width": 213.18331909179688,
+      "height": 138
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "82": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/parenting/postpartum-sleep.html?algo=identity&fellback=false&imp_id=125946109&imp_id=316720579",
+    "size": {
+      "width": 335.566650390625,
+      "height": 238.6999969482422
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "83": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/parenting/postpartum-sleep.html?algo=identity&fellback=false&imp_id=125946109&imp_id=316720579",
+    "size": {
+      "width": 335.566650390625,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "84": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/well/family/coronavirus-elderly-relatives-quarantine.html?algo=identity&fellback=false&imp_id=573074628&imp_id=975794346",
+    "size": {
+      "width": 335.58331298828125,
+      "height": 238.7166748046875
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "85": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/well/family/coronavirus-elderly-relatives-quarantine.html?algo=identity&fellback=false&imp_id=573074628&imp_id=975794346",
+    "size": {
+      "width": 335.58331298828125,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "86": {
+    "originalUrl": "https://www.nytimes.com/2020/04/13/health/coronavirus-arthritis-drug-baricitinib.html?algo=identity&fellback=false&imp_id=62192350&imp_id=938924752",
+    "size": {
+      "width": 229.13333129882812,
+      "height": 119
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "87": {
+    "originalUrl": "https://www.nytimes.com/2020/04/13/health/coronavirus-arthritis-drug-baricitinib.html?algo=identity&fellback=false&imp_id=62192350&imp_id=938924752",
+    "size": {
+      "width": 214.63333129882812,
+      "height": 143.26666259765625
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "88": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/parenting/baby/wermke-prespeech-development-wurzburg.html?algo=identity&fellback=false&imp_id=79281156&imp_id=711959643",
+    "size": {
+      "width": 229.13333129882812,
+      "height": 100
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "89": {
+    "originalUrl": "https://www.nytimes.com/2020/04/15/parenting/baby/wermke-prespeech-development-wurzburg.html?algo=identity&fellback=false&imp_id=79281156&imp_id=711959643",
+    "size": {
+      "width": 214.63333129882812,
+      "height": 143.2666778564453
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "90": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/style/coronavirus-public-shaming.html?algo=top_conversion&fellback=false&imp_id=356790562&imp_id=592006386",
+    "size": {
+      "width": 213.68331909179688,
+      "height": 142.63333129882812
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "91": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/style/coronavirus-public-shaming.html?algo=top_conversion&fellback=false&imp_id=356790562&imp_id=592006386",
+    "size": {
+      "width": 213.68331909179688,
+      "height": 157
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "92": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/health/coronavirus-best-face-masks.html?algo=top_conversion&fellback=false&imp_id=914697122&imp_id=260881284",
+    "size": {
+      "width": 213.70001220703125,
+      "height": 142.63333129882812
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "93": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/health/coronavirus-best-face-masks.html?algo=top_conversion&fellback=false&imp_id=914697122&imp_id=260881284",
+    "size": {
+      "width": 213.70001220703125,
+      "height": 119
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "94": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/opinion/coronavirus-medical-training.html?algo=top_conversion&fellback=false&imp_id=944619781&imp_id=148100520",
+    "size": {
+      "width": 213.68333435058594,
+      "height": 142.63333129882812
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "95": {
+    "originalUrl": "https://www.nytimes.com/2020/04/16/opinion/coronavirus-medical-training.html?algo=top_conversion&fellback=false&imp_id=944619781&imp_id=148100520",
+    "size": {
+      "width": 213.68333435058594,
+      "height": 105
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "96": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/04/17/opinion/inequality-economy-1980.html?algo=top_conversion&fellback=false&imp_id=766525491&imp_id=844092203",
+    "size": {
+      "width": 213.68333435058594,
+      "height": 142.63333129882812
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "97": {
+    "originalUrl": "https://www.nytimes.com/interactive/2020/04/17/opinion/inequality-economy-1980.html?algo=top_conversion&fellback=false&imp_id=766525491&imp_id=844092203",
+    "size": {
+      "width": 213.68333435058594,
+      "height": 107
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "98": {
+    "originalUrl": "https://www.nytimes.com/puzzles/tiles",
+    "size": {
+      "width": 213.18331909179688,
+      "height": 81
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "99": {
+    "originalUrl": "https://www.nytimes.com/crosswords",
+    "size": {
+      "width": 213.18331909179688,
+      "height": 119
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "100": {
+    "originalUrl": "https://help.nytimes.com/hc/en-us/articles/115014792127-Copyright-notice",
+    "size": {
+      "width": 179.68333435058594,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "101": {
+    "originalUrl": "https://help.nytimes.com/hc/en-us/articles/115015385887-Contact-Us",
+    "size": {
+      "width": 51.166656494140625,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "102": {
+    "originalUrl": "https://help.nytimes.com/hc/en-us/articles/115014892108-Privacy-policy",
+    "size": {
+      "width": 75.25,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "103": {
+    "originalUrl": "https://help.nytimes.com/hc/en-us/articles/115014892108-Privacy-policy",
+    "size": {
+      "width": 33.69999694824219,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "104": {
+    "originalUrl": "https://help.nytimes.com/hc/en-us/articles/115014893428-Terms-of-service",
+    "size": {
+      "width": 77.19999694824219,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "105": {
+    "originalUrl": "https://help.nytimes.com/hc/en-us/articles/115014893968-Terms-of-sale",
+    "size": {
+      "width": 62.81666564941406,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20725,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "106": {
+    "originalUrl": "https://spiderbites.nytimes.com/",
+    "size": {
+      "width": 41.43333435058594,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20726,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "107": {
+    "originalUrl": "https://www.nytimes.com/subscription?campaignId=37WXW",
+    "size": {
+      "width": 63.2166748046875,
+      "height": 32
+    },
+    "firstSeen": 1587140280715,
+    "duration": 20726,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.nytimes.com/",
+      "loadTime": 1587140278558,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "108": {
+    "originalUrl": "https://www.theguardian.com/world/coronavirus-outbreak",
+    "size": {
+      "width": 145.51666259765625,
+      "height": 31
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "109": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates",
+    "size": {
+      "width": 647.8499755859375,
+      "height": 68
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "110": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d50b8f080ee110446f2f",
+    "size": {
+      "width": 233.10000610351562,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "111": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d2cb8f08b7689b030768",
+    "size": {
+      "width": 233.09999084472656,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "112": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d3598f080ee110446f0e",
+    "size": {
+      "width": 233.10000610351562,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "113": {
+    "originalUrl": "https://www.theguardian.com/world/live/2020/apr/17/coronavirus-live-news-trump-says-29-states-could-reopen-relatively-soon-as-global-deaths-near-145000",
+    "size": {
+      "width": 173.38333129882812,
+      "height": 118
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "114": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/17/us-food-banks-over-budget-demand-coronavirus",
+    "size": {
+      "width": 196.38333129882812,
+      "height": 82
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "115": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/sick-elderly-pregnant-the-california-renters-being-evicted-even-during-the-pandemic",
+    "size": {
+      "width": 209.78334045410156,
+      "height": 82
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "116": {
+    "originalUrl": "https://www.theguardian.com/world/coronavirus-outbreak+tone/explainers",
+    "size": {
+      "width": 140,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "117": {
+    "originalUrl": "https://www.theguardian.com/society/2020/apr/17/us-children-mental-health-coronavirus",
+    "size": {
+      "width": 187.23333740234375,
+      "height": 118
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "118": {
+    "originalUrl": "https://www.theguardian.com/world/ng-interactive/2020/apr/16/coronavirus-map-of-the-us-latest-cases-state-by-state",
+    "size": {
+      "width": 191.46665954589844,
+      "height": 72
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "119": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/coronavirus-five-months-on-what-scientists-now-know-about-covid-19",
+    "size": {
+      "width": 194.26666259765625,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "120": {
+    "originalUrl": "https://www.theguardian.com/lifeandstyle/2020/apr/16/ideas-what-to-do-with-stimulus-check",
+    "size": {
+      "width": 174.3000030517578,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "121": {
+    "originalUrl": "https://www.theguardian.com/world/coronavirus-outbreak+us/us",
+    "size": {
+      "width": 140,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "122": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/17/us-prisons-coronavirus-deep-south",
+    "size": {
+      "width": 243.5,
+      "height": 72
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "123": {
+    "originalUrl": "https://www.theguardian.com/environment/2020/apr/17/chicken-factory-tyson-arkansas-food-workers-coronavirus",
+    "size": {
+      "width": 287.98333740234375,
+      "height": 62
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "124": {
+    "originalUrl": "https://www.theguardian.com/business/2020/apr/17/us-airlines-empty-planes-coronavirus-environment",
+    "size": {
+      "width": 260.51666259765625,
+      "height": 42
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "125": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/16/santa-monica-nurses-suspended-n95-masks-coronavirus",
+    "size": {
+      "width": 275.04998779296875,
+      "height": 62
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "126": {
+    "originalUrl": "https://www.theguardian.com/world/coronavirus-outbreak+world/world",
+    "size": {
+      "width": 140,
+      "height": 85
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "127": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/uber-driver-dies-from-covid-19-after-hiding-it-over-fear-of-eviction",
+    "size": {
+      "width": 197.38333129882812,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "128": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/china-denies-cover-up-as-wuhan-coronavirus-deaths-revised-up-50",
+    "size": {
+      "width": 207.9499969482422,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "129": {
+    "originalUrl": "https://www.theguardian.com/science/2020/apr/17/international-space-station-crew-return-to-earth",
+    "size": {
+      "width": 186.93333435058594,
+      "height": 118
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "130": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/lula-bolsonaro-brazil-to-slaughterhouse-covid-19-coronavirus",
+    "size": {
+      "width": 200.13333129882812,
+      "height": 118
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "131": {
+    "originalUrl": "https://www.theguardian.com/world/coronavirus-outbreak+commentisfree/commentisfree",
+    "size": {
+      "width": 140,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "132": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/rural-america-coronavirus-kansas",
+    "size": {
+      "width": 195.86666870117188,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "133": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/coronavirus-deficit-american-economy",
+    "size": {
+      "width": 209.06666564941406,
+      "height": 72
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "134": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/coronavirus-discriminate-humans-racism-sexism-inequality",
+    "size": {
+      "width": 209.60000610351562,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "135": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/16/when-is-the-right-time-to-reopen-the-us-economy-coronavirus-our-panelists-verdict",
+    "size": {
+      "width": 204.10000610351562,
+      "height": 95
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "136": {
+    "originalUrl": "https://www.theguardian.com/world/2020/mar/18/coronavirus-the-week-explained-sign-up-for-our-email-newsletter",
+    "size": {
+      "width": 129.56666564941406,
+      "height": 45
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "137": {
+    "originalUrl": "https://www.theguardian.com/world/coronavirus-outbreak",
+    "size": {
+      "width": 319.01666259765625,
+      "height": 58
+    },
+    "firstSeen": 1587140307979,
+    "duration": 11968,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "138": {
+    "originalUrl": "https://www.theguardian.com/us-news/series/guardian-us-briefing",
+    "size": {
+      "width": 140,
+      "height": 30
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "139": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/17/michael-cohen-trump-ex-fixer-prison-release-coronavirus",
+    "size": {
+      "width": 204.5833282470703,
+      "height": 166
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "140": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/17/joe-biden-presidential-campaign-online-lockdown-coronavirus",
+    "size": {
+      "width": 203,
+      "height": 118
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "141": {
+    "originalUrl": "https://www.theguardian.com/environment/2020/apr/17/us-shale-industry-expected-shrink-oil-price-falls",
+    "size": {
+      "width": 208.6999969482422,
+      "height": 72
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "142": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/haiti-church-burned-unesco-world-heritage",
+    "size": {
+      "width": 205.38333129882812,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "143": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/you-cant-leave-that-lion-there-big-cats-nap-on-road-in-south-africa-amid-covid19-lockdown",
+    "size": {
+      "width": 195.85000610351562,
+      "height": 82
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "144": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/17/no-reopening-in-sight-for-us-cinemas-after-federal-guidelines-issued-coronavirus",
+    "size": {
+      "width": 195.38333129882812,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "145": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/us-aid-palestinians-coronavirus-trump-cut",
+    "size": {
+      "width": 207.60000610351562,
+      "height": 82
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "146": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/south-korean-businessman-rape-suspended-sentence-db-group-kim-jun-ki",
+    "size": {
+      "width": 202.43333435058594,
+      "height": 82
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "147": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/outspoken-saudi-princess-reveals-that-she-is-in-prison",
+    "size": {
+      "width": 203.48333740234375,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "148": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/16/roger-stone-trump-denied-new-trial",
+    "size": {
+      "width": 197.86666870117188,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "149": {
+    "originalUrl": "https://www.theguardian.com/environment/2020/apr/17/north-atlantic-right-whales-were-watching-them-die",
+    "size": {
+      "width": 409.1333312988281,
+      "height": 58
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "150": {
+    "originalUrl": "https://www.theguardian.com/culture/2020/apr/17/jimmy-kimmel-donald-trump-stephen-colbert-trevor-noah",
+    "size": {
+      "width": 208.93333435058594,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "151": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/17/rita-wilson-tom-hanks-coronavirus-choloroquine-covid",
+    "size": {
+      "width": 205.43333435058594,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "152": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/17/kindergarten-teacher-maggie-gyllenhaal-streaming",
+    "size": {
+      "width": 286.8666687011719,
+      "height": 42
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "153": {
+    "originalUrl": "https://www.theguardian.com/music/2020/apr/17/everyones-stuck-at-home-so-why-are-people-streaming-less-music-lady-gaga-dua-lipa",
+    "size": {
+      "width": 296.16668701171875,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "154": {
+    "originalUrl": "https://www.theguardian.com/media/gallery/2020/apr/17/world-press-photo-contest-2020-the-winning-pictures",
+    "size": {
+      "width": 272.6333312988281,
+      "height": 42
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "155": {
+    "originalUrl": "https://www.theguardian.com/us/commentisfree",
+    "size": {
+      "width": 140,
+      "height": 31
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "156": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2015/may/11/sign-up-for-the-best-of-opinion-us-daily-email",
+    "size": {
+      "width": 140,
+      "height": 30
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "157": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/rural-america-coronavirus-kansas",
+    "size": {
+      "width": 185.39999389648438,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "158": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/amazon-coronavirus-public-utility-workers",
+    "size": {
+      "width": 205.48333740234375,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "159": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/us-coronavirus-people-of-color-pollution",
+    "size": {
+      "width": 292.16668701171875,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "160": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/coronavirus-discriminate-humans-racism-sexism-inequality",
+    "size": {
+      "width": 260.25,
+      "height": 42
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "161": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/video/2020/apr/17/owen-jones-goes-queer-clubbing-during-the-coronavirus-quarantine",
+    "size": {
+      "width": 274.8500061035156,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "162": {
+    "originalUrl": "https://www.theguardian.com/world/commentisfree/2020/apr/16/coronavirus-30000-americans-trump-blame-who",
+    "size": {
+      "width": 267.66668701171875,
+      "height": 62
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "163": {
+    "originalUrl": "https://www.theguardian.com/us/sport",
+    "size": {
+      "width": 140,
+      "height": 31
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "164": {
+    "originalUrl": "https://www.theguardian.com/sport/2020/apr/17/cam-newton-marcus-mariota-next-team",
+    "size": {
+      "width": 210.6999969482422,
+      "height": 139
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "165": {
+    "originalUrl": "https://www.theguardian.com/football/2020/apr/17/premier-league-return-depends-on-progress-of-mass-testing-clubs-told",
+    "size": {
+      "width": 209.8000030517578,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "166": {
+    "originalUrl": "https://www.theguardian.com/football/2020/apr/17/arsenal-first-team-players-set-to-agree-125-salary-cuts-in-next-48-hours",
+    "size": {
+      "width": 210,
+      "height": 34
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "167": {
+    "originalUrl": "https://www.theguardian.com/sport/2020/apr/17/nba-horse-winner-conley-lavine-quigley-billups",
+    "size": {
+      "width": 183.9499969482422,
+      "height": 95
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "168": {
+    "originalUrl": "https://www.theguardian.com/sport/live/2020/apr/16/nba-horse-challenge-finals-live",
+    "size": {
+      "width": 210,
+      "height": 34
+    },
+    "firstSeen": 1587140307980,
+    "duration": 11967,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "169": {
+    "originalUrl": "https://www.theguardian.com/sport/2020/apr/16/kyle-larson-fired-driver-n-word-nascar-motor-sports",
+    "size": {
+      "width": 199.03334045410156,
+      "height": 95
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "170": {
+    "originalUrl": "https://www.theguardian.com/sport/2020/apr/16/what-ufc-can-learn-from-boxings-mistakes-during-the-spanish-flu-outbreak",
+    "size": {
+      "width": 285.66668701171875,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "171": {
+    "originalUrl": "https://www.theguardian.com/football/2020/apr/17/andres-iniesta-vissel-kobe-japan-coronavirus",
+    "size": {
+      "width": 285.2166748046875,
+      "height": 42
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "172": {
+    "originalUrl": "https://www.theguardian.com/sport/2020/apr/16/us-open-2020-coronavirus-decision",
+    "size": {
+      "width": 297.25,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "173": {
+    "originalUrl": "https://www.theguardian.com/sport/2020/apr/16/i-was-lost-coco-gauff-depression-tennis",
+    "size": {
+      "width": 292.933349609375,
+      "height": 42
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "174": {
+    "originalUrl": "https://www.theguardian.com/news/series/todayinfocus",
+    "size": {
+      "width": 140,
+      "height": 58
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "175": {
+    "originalUrl": "https://www.theguardian.com/news/audio/2020/apr/17/the-story-of-one-care-home-hit-by-coronavirus",
+    "size": {
+      "width": 440.8999938964844,
+      "height": 59
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "176": {
+    "originalUrl": "https://www.theguardian.com/news/series/todayinfocus",
+    "size": {
+      "width": 162.98333740234375,
+      "height": 50
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "177": {
+    "originalUrl": "https://www.theguardian.com/us/culture",
+    "size": {
+      "width": 140,
+      "height": 31
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "178": {
+    "originalUrl": "https://www.theguardian.com/music/2020/apr/17/anne-frank-indiana-jones-bob-dylan-new-song-contain-multitudes",
+    "size": {
+      "width": 180.96665954589844,
+      "height": 118
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "179": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/17/neverending-stories-five-of-the-best-very-long-films",
+    "size": {
+      "width": 204.06666564941406,
+      "height": 72
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "180": {
+    "originalUrl": "https://www.theguardian.com/music/2020/apr/17/johnny-depp-jeff-beck-album-john-lennon-isolation",
+    "size": {
+      "width": 202.51666259765625,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "181": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/16/brian-dennehy-actor-dies-aged-81",
+    "size": {
+      "width": 205.98333740234375,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "182": {
+    "originalUrl": "https://www.theguardian.com/books/2020/apr/17/sally-rooney-i-want-the-next-thing-i-do-to-be-the-best-thing-ive-ever-done",
+    "size": {
+      "width": 198.5,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "183": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/17/my-favourite-film-aged-12-goldeneye-james-bond",
+    "size": {
+      "width": 199.71665954589844,
+      "height": 42
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "184": {
+    "originalUrl": "https://www.theguardian.com/us-news",
+    "size": {
+      "width": 140,
+      "height": 58
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "185": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/15/nurses-surgeons-janitors-first-us-health-workers-to-die-covid-19",
+    "size": {
+      "width": 193.21665954589844,
+      "height": 95
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "186": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/13/lost-on-the-frontline-us-healthcare-coronavirus-deaths",
+    "size": {
+      "width": 210,
+      "height": 51
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "187": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/15/why-were-tracking-every-us-health-worker-who-dies-from-coronavirus",
+    "size": {
+      "width": 209.5833282470703,
+      "height": 118
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "188": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/16/ivanka-trump-defies-social-distancing-to-celebrate-passover-at-golf-club",
+    "size": {
+      "width": 204.4166717529297,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "189": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/15/new-york-nurses-deaths-coronavirus-vigil-ppe",
+    "size": {
+      "width": 197.1666717529297,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "190": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/16/elizabeth-warren-says-she-would-accept-being-joe-bidens-running-mate",
+    "size": {
+      "width": 180.8333282470703,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "191": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/16/profit-over-people-cost-over-care-americas-broken-healthcare-exposed-by-virus",
+    "size": {
+      "width": 172.64999389648438,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "192": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/16/us-medical-workers-lives-upended-coronavirus",
+    "size": {
+      "width": 198.96665954589844,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "193": {
+    "originalUrl": "https://www.theguardian.com/environment/2020/apr/16/trump-border-wall-coronavirus-pandemic-ajo-arizona",
+    "size": {
+      "width": 205.5,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "194": {
+    "originalUrl": "https://www.theguardian.com/world",
+    "size": {
+      "width": 140,
+      "height": 58
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "195": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/greece-to-use-drones-to-stop-crowds-gathering-for-orthodox-easter-covid-19",
+    "size": {
+      "width": 208.56666564941406,
+      "height": 95
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "196": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/israels-first-coronavirus-victim-survived-holocaust-hiding-in-cellars-arie-even",
+    "size": {
+      "width": 176.1666717529297,
+      "height": 95
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "197": {
+    "originalUrl": "https://www.theguardian.com/uk-news/2020/apr/17/sadiq-khan-face-masks-compulsory-london-transport",
+    "size": {
+      "width": 191.9499969482422,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "198": {
+    "originalUrl": "https://www.theguardian.com/music/2020/apr/17/christophe-celebrated-french-pop-balladeer-dies-aged-74",
+    "size": {
+      "width": 192.9499969482422,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "199": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/belarus-crowdfunds-to-fight-coronavirus-as-leader-denies-it-exists",
+    "size": {
+      "width": 163.71665954589844,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "200": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/china-economy-shrinks-record-wuhan-covid-19-death-toll-rises-50-percent",
+    "size": {
+      "width": 195.6999969482422,
+      "height": 82
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "201": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/singapores-cramped-migrant-worker-dorms-hide-covid-19-surge-risk",
+    "size": {
+      "width": 449.1000061035156,
+      "height": 42
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "202": {
+    "originalUrl": "https://www.theguardian.com/lifeandstyle/2020/apr/17/experience-i-lost-a-fight-with-a-fox",
+    "size": {
+      "width": 286.7833251953125,
+      "height": 49
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "203": {
+    "originalUrl": "https://www.theguardian.com/lifeandstyle/2020/apr/17/no-spare-time-lockdown-not-such-a-bad-thing-oliver-burkeman",
+    "size": {
+      "width": 285.566650390625,
+      "height": 42
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "204": {
+    "originalUrl": "https://www.theguardian.com/lifeandstyle/2020/apr/17/the-best-to-be-given-treat-offer-upgrade-for-free-hannah-jane-parkinson",
+    "size": {
+      "width": 280.3833312988281,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "205": {
+    "originalUrl": "https://www.theguardian.com/environment/2020/apr/16/home-birds-how-to-spot-20-of-the-most-common-species-from-your-window-walk-or-garden",
+    "size": {
+      "width": 267.20001220703125,
+      "height": 62
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "206": {
+    "originalUrl": "https://www.theguardian.com/video",
+    "size": {
+      "width": 66.73333740234375,
+      "height": 31
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "207": {
+    "originalUrl": "https://www.theguardian.com/us-news/series/anywhere-but-washington",
+    "size": {
+      "width": 140,
+      "height": 30
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "208": {
+    "originalUrl": "https://www.theguardian.com/world/video/2020/apr/17/lions-and-other-wild-animals-relax-in-south-africa-golf-club-during-lockdown-video",
+    "size": {
+      "width": 184.6666717529297,
+      "height": 118
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "209": {
+    "originalUrl": "https://www.theguardian.com/us-news/video/2020/apr/17/trump-defers-state-governors-guidelines-lifting-coronavirus-lockdowns-video",
+    "size": {
+      "width": 193.9166717529297,
+      "height": 118
+    },
+    "firstSeen": 1587140307981,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "210": {
+    "originalUrl": "https://www.theguardian.com/us-news/video/2020/apr/16/new-york-pause-to-continue-until-16-may-video",
+    "size": {
+      "width": 203.73333740234375,
+      "height": 72
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "211": {
+    "originalUrl": "https://www.theguardian.com/environment/video/2020/apr/17/can-cloud-brightening-help-save-the-great-barrier-reef-trials-have-begun-video",
+    "size": {
+      "width": 203.9166717529297,
+      "height": 72
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "212": {
+    "originalUrl": "https://www.theguardian.com/world/video/2020/apr/16/merkel-sets-out-clear-explanation-of-how-coronavirus-transmission-works-video",
+    "size": {
+      "width": 206.73333740234375,
+      "height": 95
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "213": {
+    "originalUrl": "https://www.theguardian.com/global/video/2020/apr/16/armed-protesters-demand-an-end-to-michigans-coronavirus-lockdown-orders-video",
+    "size": {
+      "width": 198.13333129882812,
+      "height": 95
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "214": {
+    "originalUrl": "https://www.theguardian.com/global/video/2020/apr/16/trump-threatens-to-close-congress-over-obstruction-video-highlights",
+    "size": {
+      "width": 199.25,
+      "height": 72
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "215": {
+    "originalUrl": "https://www.theguardian.com/world/video/2020/apr/15/its-about-leadership-ardern-takes-20-pay-cut-over-coronavirus-video",
+    "size": {
+      "width": 203.60000610351562,
+      "height": 95
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "216": {
+    "originalUrl": "https://www.theguardian.com/world/video/2020/apr/15/timelapse-shows-busy-wuhan-streets-as-coronavirus-lockdown-is-lifted-video",
+    "size": {
+      "width": 197.5500030517578,
+      "height": 95
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "217": {
+    "originalUrl": "https://www.theguardian.com/us-news/video/2020/apr/14/barack-obama-endorses-joe-biden-for-president-video",
+    "size": {
+      "width": 184.98333740234375,
+      "height": 72
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "218": {
+    "originalUrl": "https://www.theguardian.com/world/video/2020/apr/14/the-coronavirus-propaganda-video-trump-played-to-media-video",
+    "size": {
+      "width": 205.8000030517578,
+      "height": 118
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11965,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "219": {
+    "originalUrl": "https://www.theguardian.com/world/video/2020/apr/10/new-york-city-subway-coronavirus-video",
+    "size": {
+      "width": 184.1999969482422,
+      "height": 95
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "220": {
+    "originalUrl": "https://www.theguardian.com/inpictures",
+    "size": {
+      "width": 140,
+      "height": 31
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "221": {
+    "originalUrl": "https://www.theguardian.com/news/gallery/2020/apr/17/wild-boars-and-a-safe-landing-fridays-best-photos",
+    "size": {
+      "width": 424.16668701171875,
+      "height": 58
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "222": {
+    "originalUrl": "https://www.theguardian.com/artanddesign/gallery/2020/apr/16/sunbathing-by-the-cement-factory-spain-strangest-hotspots-in-pictures-txema-salvans",
+    "size": {
+      "width": 174.8000030517578,
+      "height": 95
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "223": {
+    "originalUrl": "https://www.theguardian.com/news/gallery/2020/apr/15/bluebells-and-a-bathing-elephant-wednesdays-top-photos",
+    "size": {
+      "width": 204.6999969482422,
+      "height": 72
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "224": {
+    "originalUrl": "https://www.theguardian.com/help/ng-interactive/2017/mar/17/contact-the-guardian-securely",
+    "size": {
+      "width": 105.01666259765625,
+      "height": 29
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "225": {
+    "originalUrl": "https://www.theguardian.com/help/ng-interactive/2017/mar/17/contact-the-guardian-securely",
+    "size": {
+      "width": 797.4666748046875,
+      "height": 53.5
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "226": {
+    "originalUrl": "https://www.theguardian.com/us#tabs-popular-1",
+    "size": {
+      "width": 80.51666259765625,
+      "height": 48
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "227": {
+    "originalUrl": "https://www.theguardian.com/us#tabs-popular-2",
+    "size": {
+      "width": 96.06666564941406,
+      "height": 48
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "228": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/16/coronavirus-point-roberts-geography",
+    "size": {
+      "width": 208.89999389648438,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "229": {
+    "originalUrl": "https://www.theguardian.com/world/ng-interactive/2020/apr/16/coronavirus-map-of-the-us-latest-cases-state-by-state",
+    "size": {
+      "width": 208.06666564941406,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "230": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/17/us-governors-coronavirus-best-worst-andrew-cuomo",
+    "size": {
+      "width": 233.71665954589844,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "231": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates",
+    "size": {
+      "width": 217.76666259765625,
+      "height": 82
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "232": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/far-right-coronavirus-protests-restrictions",
+    "size": {
+      "width": 223.10000610351562,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "233": {
+    "originalUrl": "https://www.theguardian.com/world/live/2020/apr/17/coronavirus-live-news-trump-says-29-states-could-reopen-relatively-soon-as-global-deaths-near-145000",
+    "size": {
+      "width": 199.35000610351562,
+      "height": 82
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "234": {
+    "originalUrl": "https://www.theguardian.com/environment/2020/apr/11/positively-alpine-disbelief-air-pollution-falls-lockdown-coronavirus",
+    "size": {
+      "width": 200.88333129882812,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "235": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/china-denies-cover-up-as-wuhan-coronavirus-deaths-revised-up-50",
+    "size": {
+      "width": 207.48333740234375,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "236": {
+    "originalUrl": "https://www.theguardian.com/film/2020/apr/17/rita-wilson-tom-hanks-coronavirus-choloroquine-covid",
+    "size": {
+      "width": 223.26666259765625,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "237": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/16/santa-monica-nurses-suspended-n95-masks-coronavirus",
+    "size": {
+      "width": 195.75,
+      "height": 62
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "238": {
+    "originalUrl": "https://www.theguardian.com/commentisfree/2020/apr/17/amazon-coronavirus-public-utility-workers",
+    "size": {
+      "width": 319,
+      "height": 133.33334350585938
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "239": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/uk-woman-dies-from-coronavirus-eight-days-after-giving-birth-salina-shaw",
+    "size": {
+      "width": 319,
+      "height": 126
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "240": {
+    "originalUrl": "https://www.theguardian.com/us-news",
+    "size": {
+      "width": 27.633331298828125,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "241": {
+    "originalUrl": "https://www.theguardian.com/us-news/us-elections-2020",
+    "size": {
+      "width": 116.56666564941406,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "242": {
+    "originalUrl": "https://www.theguardian.com/world",
+    "size": {
+      "width": 50.98333740234375,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "243": {
+    "originalUrl": "https://www.theguardian.com/us/environment",
+    "size": {
+      "width": 100,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "244": {
+    "originalUrl": "https://www.theguardian.com/football",
+    "size": {
+      "width": 54.96665954589844,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "245": {
+    "originalUrl": "https://www.theguardian.com/us-news/us-politics",
+    "size": {
+      "width": 83.60000610351562,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "246": {
+    "originalUrl": "https://www.theguardian.com/us/business",
+    "size": {
+      "width": 69.5,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "247": {
+    "originalUrl": "https://www.theguardian.com/us/technology",
+    "size": {
+      "width": 41.116668701171875,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "248": {
+    "originalUrl": "https://www.theguardian.com/science",
+    "size": {
+      "width": 61.5333251953125,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "249": {
+    "originalUrl": "https://www.theguardian.com/us",
+    "size": {
+      "width": 170,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "250": {
+    "originalUrl": "https://www.theguardian.com/us/commentisfree",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "251": {
+    "originalUrl": "https://www.theguardian.com/us/sport",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "252": {
+    "originalUrl": "https://www.theguardian.com/us/culture",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "253": {
+    "originalUrl": "https://www.theguardian.com/us/lifeandstyle",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "254": {
+    "originalUrl": "https://www.theguardian.com/info/about-guardian-us",
+    "size": {
+      "width": 63.78334045410156,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "255": {
+    "originalUrl": "https://www.theguardian.com/info/about-guardian-us/contact",
+    "size": {
+      "width": 75.81666564941406,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "256": {
+    "originalUrl": "https://www.theguardian.com/info/complaints-and-corrections",
+    "size": {
+      "width": 140,
+      "height": 50.40000915527344
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "257": {
+    "originalUrl": "https://www.theguardian.com/securedrop",
+    "size": {
+      "width": 83.01666259765625,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "258": {
+    "originalUrl": "https://workforus.theguardian.com/",
+    "size": {
+      "width": 82.03334045410156,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "259": {
+    "originalUrl": "https://www.theguardian.com/info/privacy",
+    "size": {
+      "width": 97.98333740234375,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "260": {
+    "originalUrl": "https://www.theguardian.com/info/cookies",
+    "size": {
+      "width": 94.94999694824219,
+      "height": 31.20001220703125
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "261": {
+    "originalUrl": "https://www.theguardian.com/help/terms-of-service",
+    "size": {
+      "width": 136.11666870117188,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "262": {
+    "originalUrl": "https://www.theguardian.com/help",
+    "size": {
+      "width": 33.850006103515625,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "263": {
+    "originalUrl": "https://www.theguardian.com/index/subjects/a",
+    "size": {
+      "width": 67.13333129882812,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "264": {
+    "originalUrl": "https://www.theguardian.com/index/contributors",
+    "size": {
+      "width": 73.81666564941406,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "265": {
+    "originalUrl": "https://advertising.theguardian.com/us/advertising",
+    "size": {
+      "width": 123.60000610351562,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "266": {
+    "originalUrl": "https://www.theguardian.com/guardian-labs-us",
+    "size": {
+      "width": 100.85000610351562,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "267": {
+    "originalUrl": "https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_US_GU_JOBS",
+    "size": {
+      "width": 80.80000305175781,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "268": {
+    "originalUrl": "https://soulmates.theguardian.com/?INTCMP=soulmates_us_web_footer",
+    "size": {
+      "width": 47.41667175292969,
+      "height": 31.20001220703125
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "269": {
+    "originalUrl": "https://discountcode.theguardian.com/us",
+    "size": {
+      "width": 110.13333129882812,
+      "height": 31.199996948242188
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "270": {
+    "originalUrl": "https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22%3A%22ACQUISITIONS_FOOTER%22%2C%22componentId%22%3A%22footer_support_contribute%22%2C%22source%22%3A%22GUARDIAN_WEB%22%2C%22referrerPageviewId%22%3A%22k94ecx1km2mfi1024ijf%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fus%22%7D",
+    "size": {
+      "width": 125.11666870117188,
+      "height": 32
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "271": {
+    "originalUrl": "https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22%3A%22ACQUISITIONS_FOOTER%22%2C%22componentId%22%3A%22footer_support_subscribe%22%2C%22source%22%3A%22GUARDIAN_WEB%22%2C%22referrerPageviewId%22%3A%22k94ecx1km2mfi1024ijf%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fus%22%7D",
+    "size": {
+      "width": 117.30000305175781,
+      "height": 32
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "272": {
+    "originalUrl": "https://www.theguardian.com/us#top",
+    "size": {
+      "width": 140.10000610351562,
+      "height": 42
+    },
+    "firstSeen": 1587140307982,
+    "duration": 11966,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "273": {
+    "originalUrl": "https://www.theguardian.com/us",
+    "size": {
+      "width": 295,
+      "height": 95
+    },
+    "firstSeen": 1587140313459,
+    "duration": 10495,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "274": {
+    "originalUrl": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_contribute%22%2C%22source%22%3A%22GUARDIAN_WEB%22%2C%22referrerPageviewId%22%3A%22k94ecx1km2mfi1024ijf%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fus%22%7D",
+    "size": {
+      "width": 125.11666870117188,
+      "height": 32
+    },
+    "firstSeen": 1587140313513,
+    "duration": 10441,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "275": {
+    "originalUrl": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_subscribe%22%2C%22source%22%3A%22GUARDIAN_WEB%22%2C%22referrerPageviewId%22%3A%22k94ecx1km2mfi1024ijf%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fus%22%7D",
+    "size": {
+      "width": 117.30000305175781,
+      "height": 32
+    },
+    "firstSeen": 1587140313513,
+    "duration": 10441,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "276": {
+    "originalUrl": "https://jobs.theguardian.com/?INTCMP=jobs_us_web_newheader",
+    "size": {
+      "width": 94.13333129882812,
+      "height": 34
+    },
+    "firstSeen": 1587140313459,
+    "duration": 10495,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "277": {
+    "originalUrl": "https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN",
+    "size": {
+      "width": 83.18333435058594,
+      "height": 35
+    },
+    "firstSeen": 1587140313459,
+    "duration": 10495,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "278": {
+    "originalUrl": "https://support.theguardian.com/contribute?acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_THRASHER%22%2C%22componentId%22%3A%22hpthrasher%22%2C%22campaignCode%22%3A%22hpthrasher%22%7D&INTCMP=hpthrasher",
+    "size": {
+      "width": 126.06666564941406,
+      "height": 45
+    },
+    "firstSeen": 1587140313463,
+    "duration": 10491,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "279": {
+    "originalUrl": "https://www.theguardian.com/us",
+    "size": {
+      "width": 170,
+      "height": 42
+    },
+    "firstSeen": 1587140316447,
+    "duration": 11510,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "280": {
+    "originalUrl": "https://www.theguardian.com/us/commentisfree",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140316447,
+    "duration": 11511,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "281": {
+    "originalUrl": "https://www.theguardian.com/us/sport",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140316447,
+    "duration": 11511,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "282": {
+    "originalUrl": "https://www.theguardian.com/us/culture",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140316447,
+    "duration": 11511,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "283": {
+    "originalUrl": "https://www.theguardian.com/us/lifeandstyle",
+    "size": {
+      "width": 160,
+      "height": 42
+    },
+    "firstSeen": 1587140316447,
+    "duration": 11511,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "284": {
+    "originalUrl": "https://www.theguardian.com/us-news",
+    "size": {
+      "width": 27.633331298828125,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "285": {
+    "originalUrl": "https://www.theguardian.com/us-news/us-elections-2020",
+    "size": {
+      "width": 116.56666564941406,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "286": {
+    "originalUrl": "https://www.theguardian.com/world",
+    "size": {
+      "width": 50.98333740234375,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "287": {
+    "originalUrl": "https://www.theguardian.com/us/environment",
+    "size": {
+      "width": 100,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "288": {
+    "originalUrl": "https://www.theguardian.com/football",
+    "size": {
+      "width": 54.96665954589844,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "289": {
+    "originalUrl": "https://www.theguardian.com/us-news/us-politics",
+    "size": {
+      "width": 83.60000610351562,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "290": {
+    "originalUrl": "https://www.theguardian.com/us/business",
+    "size": {
+      "width": 69.5,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "291": {
+    "originalUrl": "https://www.theguardian.com/us/technology",
+    "size": {
+      "width": 41.116668701171875,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "292": {
+    "originalUrl": "https://www.theguardian.com/science",
+    "size": {
+      "width": 61.5333251953125,
+      "height": 42
+    },
+    "firstSeen": 1587140316713,
+    "duration": 11245,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "293": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/far-right-coronavirus-protests-restrictions",
+    "size": {
+      "width": 213.3333282470703,
+      "height": 68
+    },
+    "firstSeen": 1587140323580,
+    "duration": 27166,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "294": {
+    "originalUrl": "https://www.theguardian.com/world/2020/apr/17/trump-world-health-organization-reforms-china",
+    "size": {
+      "width": 213.33334350585938,
+      "height": 68
+    },
+    "firstSeen": 1587140323580,
+    "duration": 27166,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "295": {
+    "originalUrl": "https://www.theguardian.com/us-news/2020/apr/17/us-governors-coronavirus-best-worst-andrew-cuomo",
+    "size": {
+      "width": 213.3333282470703,
+      "height": 51
+    },
+    "firstSeen": 1587140323580,
+    "duration": 27166,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "296": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d50b8f080ee110446f2f",
+    "size": {
+      "width": 233.10000610351562,
+      "height": 58
+    },
+    "firstSeen": 1587140350755,
+    "duration": 10007,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "297": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d2cb8f08b7689b030768",
+    "size": {
+      "width": 233.09999084472656,
+      "height": 58
+    },
+    "firstSeen": 1587140350755,
+    "duration": 10007,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "298": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d3598f080ee110446f0e",
+    "size": {
+      "width": 233.10000610351562,
+      "height": 58
+    },
+    "firstSeen": 1587140350756,
+    "duration": 10006,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "299": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d50b8f080ee110446f2f",
+    "size": {
+      "width": 233.10000610351562,
+      "height": 58
+    },
+    "firstSeen": 1587140370788,
+    "duration": 11985,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "300": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d2cb8f08b7689b030768",
+    "size": {
+      "width": 233.09999084472656,
+      "height": 58
+    },
+    "firstSeen": 1587140370788,
+    "duration": 11985,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  },
+  "301": {
+    "originalUrl": "https://www.theguardian.com/us-news/live/2020/apr/17/coronavirus-us-live-trump-reopening-plan-states-governors-latest-updates#block-5e99d3598f080ee110446f0e",
+    "size": {
+      "width": 233.10000610351562,
+      "height": 58
+    },
+    "firstSeen": 1587140370788,
+    "duration": 11985,
+    "isShortenedUrl": false,
+    "resolutionSucceded": true,
+    "metadata": {
+      "location": "https://www.theguardian.com/us",
+      "loadTime": 1587140305943,
+      "visible": true,
+      "referrer": "",
+      "domainCategory": "news"
+    }
+  }
+}
