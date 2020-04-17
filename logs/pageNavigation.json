@@ -1,110 +1,83 @@
 {
-  "3": {
-    "pageId": 3,
-    "url": "https://www.cnn.com/",
+  "2": {
+    "pageId": 2,
+    "url": "https://www.theguardian.com/us",
     "referrer": "",
-    "visitStart": 1587141199274,
-    "visitEnd": 1587141241214,
-    "attentionDuration": 15717,
-    "attentionSpanCount": 5,
-    "attentionSpanStarts": [
-      1587141199274,
-      1587141209213,
-      1587141229008,
-      1587141238120,
-      1587141239437
-    ],
-    "attentionSpanEnds": [
-      1587141200121,
-      1587141220292,
-      1587141230277,
-      1587141238865,
-      1587141241214
-    ]
-  },
-  "8": {
-    "pageId": 8,
-    "url": "https://www.cnn.com/videos/health/2020/04/17/dr-chris-murray-town-hall-us-death-rate-projections-sot-vpx.cnn",
-    "referrer": "",
-    "visitStart": 1587141212878,
-    "visitEnd": 1587141255149,
-    "attentionDuration": 6282,
+    "visitStart": 1587151761690,
+    "visitEnd": 1587151785993,
+    "attentionDuration": 13795,
     "attentionSpanCount": 2,
     "attentionSpanStarts": [
-      1587141228047,
-      1587141249828
+      1587151761690,
+      1587151772598
     ],
     "attentionSpanEnds": [
-      1587141229008,
-      1587141255149
+      1587151762090,
+      1587151785993
     ]
   },
-  "9": {
-    "pageId": 9,
-    "url": "https://www.cnn.com/2020/04/17/politics/tom-massie-liz-cheney-stimulus-vote/index.html",
-    "referrer": "",
-    "visitStart": 1587141214121,
-    "visitEnd": 1587141259210,
-    "attentionDuration": 3551,
+  "5": {
+    "pageId": 5,
+    "url": "https://www.theguardian.com/commentisfree/2012/sep/04/cnn-business-state-sponsored-news",
+    "referrer": "https://www.theguardian.com/us",
+    "visitStart": 1587151785993,
+    "visitEnd": 1587151844505,
+    "attentionDuration": 17174,
     "attentionSpanCount": 2,
     "attentionSpanStarts": [
-      1587141230277,
-      1587141256122
+      1587151785993,
+      1587151841268
     ],
     "attentionSpanEnds": [
-      1587141230740,
-      1587141259210
+      1587151799930,
+      1587151844505
+    ]
+  },
+  "6": {
+    "pageId": 6,
+    "url": "https://www.theguardian.com/world/2012/sep/04/cnn-international-documentary-bahrain-arab-spring-repression",
+    "referrer": "",
+    "visitStart": 1587151791426,
+    "visitEnd": 1587151848812,
+    "attentionDuration": 3219,
+    "attentionSpanCount": 1,
+    "attentionSpanStarts": [
+      1587151845593
+    ],
+    "attentionSpanEnds": [
+      1587151848812
     ]
   },
   "10": {
     "pageId": 10,
-    "url": "https://www.cnn.com/2020/04/16/politics/fact-check-trump-april-16/index.html",
-    "referrer": "https://www.cnn.com/",
-    "visitStart": 1587141215224,
-    "visitEnd": 1587141263377,
-    "attentionDuration": 4873,
-    "attentionSpanCount": 2,
-    "attentionSpanStarts": [
-      1587141230740,
-      1587141259212
-    ],
-    "attentionSpanEnds": [
-      1587141231448,
-      1587141263377
-    ]
-  },
-  "12": {
-    "pageId": 12,
-    "url": "https://www.cnn.com/2020/04/17/us/quaranteam-coronavirus-wellness-trnd/index.html",
-    "referrer": "https://www.cnn.com/",
-    "visitStart": 1587141241214,
-    "visitEnd": 1587141247703,
-    "attentionDuration": 4760,
-    "attentionSpanCount": 2,
-    "attentionSpanStarts": [
-      1587141241214,
-      1587141246649
-    ],
-    "attentionSpanEnds": [
-      1587141244920,
-      1587141247703
-    ]
-  },
-  "13": {
-    "pageId": 13,
-    "url": "https://www.cnn.com/specials/world/coronavirus-outbreak-intl-hnk",
+    "url": "https://www.nytimes.com/",
     "referrer": "",
-    "visitStart": 1587141245145,
-    "visitEnd": 1587141249826,
-    "attentionDuration": 3625,
+    "visitStart": 1587152346978,
+    "visitEnd": 1587152391084,
+    "attentionDuration": 32267,
     "attentionSpanCount": 2,
     "attentionSpanStarts": [
-      1587141245145,
-      1587141247705
+      1587152346978,
+      1587152389865
     ],
     "attentionSpanEnds": [
-      1587141246649,
-      1587141249826
+      1587152378026,
+      1587152391084
+    ]
+  },
+  "15": {
+    "pageId": 15,
+    "url": "https://www.washingtonpost.com/",
+    "referrer": "",
+    "visitStart": 1587152655625,
+    "visitEnd": 1587152656686,
+    "attentionDuration": 1061,
+    "attentionSpanCount": 1,
+    "attentionSpanStarts": [
+      1587152655625
+    ],
+    "attentionSpanEnds": [
+      1587152656686
     ]
   }
 }
