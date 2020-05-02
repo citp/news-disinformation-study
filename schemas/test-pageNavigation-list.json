@@ -1,0 +1,43 @@
+{
+    "numUntrackedVisits" : 500,
+    "trackedVisitsByDomain" : [
+        {
+            "domain": "nytimes.com",
+            "numSessions": 3,
+            "visitsByReferrer": [
+                {
+                    "referrerDomain": "google.com",
+                    "dayOfWeek": "mon",
+                    "timeOfDay": "8-12",
+                    "pageCategory": "politicalNews",
+                    "numVisits": 10,
+                    "totalAttention": 500
+                },
+                {
+                    "referrerDomain": "google.com",
+                    "dayOfWeek": "mon",
+                    "timeOfDay": "8-12",
+                    "pageCategory": "nonpoliticalNews",
+                    "numVisits": 5,
+                    "totalAttention": 2000
+                },
+                {
+                    "referrerDomain": "google.com",
+                    "dayOfWeek": "mon",
+                    "timeOfDay": "12-16",
+                    "pageCategory": "nonpoliticalNews",
+                    "numVisits": 3,
+                    "totalAttention": 300
+                },
+                {
+                    "referrerDomain": "facebook.com",
+                    "dayOfWeek": "mon",
+                    "timeOfDay": "0-4",
+                    "pageCategory": "nonpoliticalNews",
+                    "numVisits": 3,
+                    "totalAttention": 1000
+                }
+            ]
+        }
+    ]
+}
