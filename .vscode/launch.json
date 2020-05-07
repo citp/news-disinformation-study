@@ -20,6 +20,12 @@
         {
             "name": "Launch WebExtension (With Automatic Extension Reloading)",
             "type": "firefox",
+            // To use the privileged API, you'll need to run a developer version of Firefox.
+            //   Set the environment variable FFDEVLOC to the folder containing a dev version,
+            //   and then uncomment the line below. If you don't set firefoxExecutable,
+            //   but do have the developer version installed such that VS Code can  find it,
+            //   it should use it automatically.
+            //"firefoxExecutable": "${env:FFDEVLOC}",
             "request": "launch",
             "reAttach": false,
             "reloadOnChange": {
@@ -38,13 +44,20 @@
                 "devtools.browserconsole.filter.log": false,
                 "devtools.browserconsole.filter.warn": false,
                 "app.normandy.enabled": false,
-                "extensions.allowPrivateBrowsingByDefault": true
+                "extensions.allowPrivateBrowsingByDefault": true,
+                "extensions.experiments.enabled": true
             }
         },
         // Note: it's possible to manually reload the extension inside Firefox from about:debugging
         {
             "name": "Launch WebExtension (Without Automatic Extension Reloading)",
             "type": "firefox",
+            // To use the privileged API, you'll need to run a developer version of Firefox.
+            //   Set the environment variable FFDEVLOC to the folder containing a dev version,
+            //   and then uncomment the line below. If you don't set firefoxExecutable,
+            //   but do have the developer version installed such that VS Code can  find it,
+            //   it should use it automatically.
+            //"firefoxExecutable": "${env:FFDEVLOC}",
             "request": "launch",
             "reAttach": false,
             "popupAutohideButton": false,
@@ -58,7 +71,8 @@
                 "devtools.browserconsole.filter.log": false,
                 "devtools.browserconsole.filter.warn": false,
                 "app.normandy.enabled": false,
-                "extensions.allowPrivateBrowsingByDefault": true
+                "extensions.allowPrivateBrowsingByDefault": true,
+                "extensions.experiments.enabled": true
             }
         }
     ]

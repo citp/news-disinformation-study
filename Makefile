@@ -3,19 +3,21 @@ default:
 	web-ext run
 beta: check-ffbeta
 	web-ext lint
-	web-ext run --firefox=$(ffbetaloc)/firefox/firefox
+	web-ext run --firefox=$(FFBETALOC)/firefox/firefox \
+	  --pref extensions.experiments.enabled=true
 dev: check-ffdev
 	web-ext lint
-	web-ext run --firefox=$(ffdevloc)/firefox/firefox
+	web-ext run --firefox=$(FFDEVLOC)/firefox/firefox \
+	  --pref extensions.experiments.enabled=true
 
 check-ffbeta:
-ifndef ffbetaloc
-	$(error ffbetaloc should be set to the location of a beta version of Firefox)
+ifndef FFBETALOC
+	$(error FFBETALOC should be set to the location of a beta version of Firefox)
 endif
 
 check-ffdev:
-ifndef ffdevloc
-	$(error ffdevloc should be set to the location of a developer version of Firefox)
+ifndef FFDEVLOC
+	$(error FFDEVLOC should be set to the location of a developer version of Firefox)
 endif
 
 docs:
