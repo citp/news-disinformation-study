@@ -1,6 +1,6 @@
 /**
- * Classify web pages based on their content, title, and URL
- * Inject content scripts to  scripts   using an arbitrary classifier in reponse to messages from content scripts
+ * This module periodically runs analysis scripts (in a separate thread) and
+ * reports the results.
  * @module WebScience.Measurements.PageClassification
  */
 import * as Messaging from "../Utilities/Messaging.js";
@@ -29,8 +29,9 @@ var nextPageClassificationIdCounter = null;
  */
 var storage = null;
 /**
- * Store worker objects keyed by classifier id
- * 
+ * A Map that stores worker objects. The keys are message types (used when
+ * registering classifiers) and the values
+ * are worker objects that has functions such as postMessage
  * @private
  * @const {Map<string,Worker>}
  */
@@ -52,25 +53,25 @@ async function initialize() {
  * Injects readability content scripts that match given patterns. The content
  * script extracts page metadata and sends it back.
  * @param {Array.string} matchPatterns - Match patterns of the form scheme://<host><path>
- * @param {string} workerId - an identifier for the background script and content
+ * @param {string} messageType - an identifier for the background script and content
  * script to communicate
  */
-async function registerContentScript(matchPatterns, workerId) {
+async function registerContentScript(matchPatterns, messageType) {
     // setup content script injection
-    var injectWorkerId = ['/* Inject worker id: */ let workerId =  "' + workerId + '";',
+    var injectClassifierName = ['/* Inject classifier name: */ let name =  "' + messageType + '";',
     '// code ----->'].join('\n');
 
-    debugLog(injectWorkerId);
+    debugLog(injectClassifierName);
     await browser.contentScripts.register({
         matches: matchPatterns,
         js: [{
-            code: injectWorkerId
+            code: injectClassifierName
         },
         {
             file: "/WebScience/Measurements/content-scripts/Readability.js"
         },
         {
-            file: "/WebScience/Measurements/content-scripts/page-content.js"
+            file: "/WebScience/Measurements/content-scripts/metadata.js"
         }
         ],
         runAt: "document_idle"
@@ -82,38 +83,38 @@ async function registerContentScript(matchPatterns, workerId) {
  * classification results and sends back results to the registered result
  * listener function
  * 
- * @param {string} workerId the id of the worker associated with the content script
+ * @param {string} messageType listen for messages of this type from content script
  * @param {function} resultListener result listener function
  */
-function listenForContentScriptMessages(workerId, resultListener) {
-    Messaging.registerListener(workerId, (pageContent, sender) => {
+function listenForContentScriptMessages(messageType, resultListener) {
+    Messaging.registerListener(messageType, (metadata, sender) => {
         if (!("tab" in sender)) {
-            debugLog("Warning: unexpected message");
+            debugLog("Warning: unexpected metadata message");
             return;
         }
         // add tab id to metadata
-        pageContent.context["tabID"] = sender.tab.id;
+        metadata.context["tabID"] = sender.tab.id;
         /**
          * Handler for errors from worker threads
          * @param {Event} err - error 
          */
         function workerError(err) {
-            debugLog(err.message + err.filename + err.lineno);
+            debugLog("error :" + err);
         }
         async function resultReceiver(result) {
             let data = result.data;
-            let classificationStorageObj = {...data, ...pageContent.context};
+            let classificationStorageObj = {...data, ...metadata.context};
             debugLog("storing " + JSON.stringify(classificationStorageObj));
             storage.set("" + nextPageClassificationIdCounter.get(), classificationStorageObj);
             await nextPageClassificationIdCounter.increment();
             resultListener({...data, ...metadata.context});
         }
-        // fetch worker associated with this
-        let worker = workers.get(workerId);
-        // send page content as a message to the classifier script
+        // fetch worker associated with this 
+        let worker = workers.get(messageType);
+        // send metadata as a message to the classifier script
         worker.postMessage({
             type: "classify",
-            payload: pageContent,
+            payload: metadata
         });
         // receive the result classification result.
         worker.addEventListener('message', async (result) => { await resultReceiver(result)});
@@ -137,35 +138,36 @@ function listenForContentScriptMessages(workerId, resultListener) {
  * @param {string} classifierFilePath Location of the classifier worker script
  * @param {Object} initArgs Data for initializing classifier (viz feature
  * weights). JSON object can be imported via .js file with export.
- * @param {string} workerId unique identifier for the classifier
+ * @param {string} messageType Name for identifying this classifier
  * @param {function} listener Callback for classification result
  */
-export async function registerPageClassifier(matchPatterns, classifierFilePath, initArgs, workerId, listener) {
-    // TODO: check that id is not in use
-    if(workerId in workers) {
-        debugLog("worker exists with same name");
+export async function registerPageClassifier(matchPatterns, classifierFilePath, initArgs, messageType, listener) {
+    // initialize module
+    await initialize();
+    // TODO : check that name is not in use
+    if(messageType in workers) {
+        debugLog("classifier exists with same name");
         return;
     }
-
-    workers.set(workerId, setupClassifier(workerId, classifierFilePath, initArgs));
-    // setup content scripts for extracting content from matched pages
-    await registerContentScript(matchPatterns, workerId);
+    workers.set(messageType, setupClassifier(messageType, classifierFilePath, initArgs));
+    // setup content scripts for extracting metadata from matched pages
+    await registerContentScript(matchPatterns, messageType);
     // setup comunication with worker via message passing
-    listenForContentScriptMessages(workerId, listener);
+    listenForContentScriptMessages(messageType, listener);
 
 }
 
 /**
  * A helper function for initializing classifier 
- * @param {string} workerId unique identifier for the classifier
- * @param {string} classifierFilePath location of the classifier script
- * @param {Object} initArgs initialization data for the classifier
+ * @param {string} classifierName Classifier name
+ * @param {string} classifierFilePath Location of classifier script
+ * @param {Object} initArgs Data for initializing classifier
  */
-function setupClassifier(workerId, classifierFilePath, initArgs) {
+function setupClassifier(classifierName, classifierFilePath, initArgs) {
     let worker = new Worker(classifierFilePath);
     worker.postMessage({
         type: "init",
-        name: workerId,
+        name: classifierName,
         args : initArgs
     });
     return worker;
