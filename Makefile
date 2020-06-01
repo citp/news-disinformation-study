@@ -9,6 +9,10 @@ dev: check-ffdev
 	web-ext lint
 	web-ext run --firefox=$(FFDEVLOC)/firefox/firefox \
 	  --pref extensions.experiments.enabled=true
+nightly: check-ffnightly
+	web-ext lint
+	web-ext run --firefox=$(FFNIGHTLYLOC)/firefox/firefox \
+	  --pref extensions.experiments.enabled=true
 
 check-ffbeta:
 ifndef FFBETALOC
@@ -18,6 +22,11 @@ endif
 check-ffdev:
 ifndef FFDEVLOC
 	$(error FFDEVLOC should be set to the location of a developer version of Firefox)
+endif
+
+check-ffnightly:
+ifndef FFNIGHTLYLOC
+	$(error FFNIGHTLYLOC should be set to the location of a nightly version of Firefox)
 endif
 
 docs:
