@@ -14,41 +14,33 @@
  *   * (Optional) The user has provided input to the browser within the last N seconds
  *   
  * If the user's attention is on a tab and the tab closes, the sequence of events
- * will be Page Attention Stop -> Page Visit Stop. The timestamp is syncronized for
+ * will be Page Attention Stop -> Page Visit Stop. The timestamp is synchronized for
  * the events.
  *
  * If the user's attention is on a tab and the page in the tab changes, the sequence
  * of events will be Page Attention Stop -> Page Visit Stop -> Page Visit Start ->
- * Page Attention Start. The timestamp is syncronized for the events.
+ * Page Attention Start. The timestamp is synchronized for the events.
  *
  * The page visit and attention events are implemented in one module in order to
  * guarantee the ordering of events.
  *
  * Represented as a finite-state automaton, the research abstraction consists of
- * the following states and transitions.  
+ * the following states and transitions.
  * ```   
  *        Page Attention Start <----------------------> Page Attention Stop  
  *                  ^                                              |  
  *                  |                                              |  
  *                  |                                              V  
  *   Page Visit Start -------------------------------------------> Page Visit Stop  
- * ```   
- * Note that this module depends on the idle API, which has a couple quirks in Firefox:
- *   * There is a five-second interval when polling idle status from the operating
- *     system.
- *   * Depending on the platform, the idle API reports either time since user input to
- *     the browser or time since user input to the operating system.
- *
- * The polling interval coarsens the timing of page attention events related to idle state.
- * As long as the polling interval is relatively short in comparison to the idle threshold,
- * that should not be an issue.
+ * ```
  * 
- * The platform-specific meaning of idle state should also not be an issue. There is only a
- * difference between the two meanings of idle state when the user is providing input to
- * another application; if the user is providing input to the browser, or is not providing
- * input at all, the two meanings are identical. In the scenario where the user is providing
- * input to another application, the browser will lose focus in the operating system; this
- * module will detect that with the windows API and fire a page attention stop (if needed).
+ * This module also provide optional functionality to bind the content script environment
+ * to the background script research abstraction. In the WebExtensions API, content scripts are
+ * currently identified by tabs rather than pages. That approach leads to a set of possible
+ * race conditions, where the background page and the content script have inconsistent views
+ * about which page is currently loaded in a tab. This module solves that problem by exposing
+ * the `webRequests` request ID associated with a page visit to the content scripts environment
+ * on that page.
  * 
  * Some known limitations to be aware of:
  *   * The module does not currently filter tab-level content by protocol or content type. We
@@ -63,6 +55,20 @@
  *     referrers for pages open when the module initializes are currently set to `""`.
  * 
  * And some implementation quirks to be aware of for future development on this module:
+ *   * This module depends on the `idle` WebExtensions API (via the `Idle` utility module),
+ *     which introduces a couple quirks.
+ *     * There is a five-second interval when polling idle status from the operating
+ *       system. The polling interval coarsens the timing of page attention events related to idle state.
+ *       As long as the polling interval is relatively short in comparison to the idle threshold,
+ *       that should not be an issue.
+ *     * Depending on the platform, the idle API reports either time since user input to
+ *       the browser or time since user input to the operating system. The platform-specific meaning of
+ *       idle state should also not be an issue. There is only a difference between the two meanings of
+ *       idle state when the user is providing input to another application; if the user is providing input
+ *       to the browser, or is not providing input at all, the two meanings are identical. In the scenario
+ *       where the user is providing input to another application, the browser will lose focus in the operating
+ *       system; this module will detect that with the `windows` WebExtensions API and fire a page attention
+ *       stop (if needed).
  *   * The `tabs.onCreated` event appears to consistently fire before the `windows.onCreated`
  *     event, so this module listens to the `tabs.onCreated` event to get an earlier view of
  *     window details. The module assumes that a `tabs.onCreated` event with a positive tab
@@ -79,6 +85,17 @@
  *   * The module listens for `tabs.onAttached` to track tab movement between windows. It does
  *     not listen for `tabs.onDetached` so that tabs remain associated with valid windows and
  *     because it's likely the user is just moving the tab within the tab strip in a window.
+ *   * The module optionally tags each tab-level document load with the request ID from the
+ *     `webRequests` WebExtensions API by setting a cookie in the response headers, then
+ *     reading the value in a content script, saving the request ID, and then expiring the
+ *     cookie. We use this roundabout approach because there is not currently a better way to
+ *     bind page loads visible to background scripts (via the `webRequest`, `webNavigation`, and
+ *     `tabs` WebExtensions APIs) to page loads visible to content scripts. There should be no
+ *     side effects of this approach, other than a slight performance hit from blocking HTTP(S)
+ *     responses and the (negligible) possibility of exceeding cookie storage limits. While this
+ *     approach does not completely eliminate the risk of a race condition—multiple tabs could
+ *     load the same URL at the same time, clobbering each other's cookies—that's at least
+ *     detectable by checking the tab ID and request ID for consistency.
  *     
  * @module WebScience.Utilities.PageEvents
  */
@@ -110,8 +127,10 @@ const considerUserInputForAttention = true;
  * Note that tabs can subsequently move between windows.
  * @param {string} details.url - The URL of the page loading in the tab.
  * @param {string} details.referrer - The referrer URL for the page loading in the tab, or `""` if
- * there is no referrer.
+ * there is no referrer or the referrer is unknown.
  * @param {number} details.timeStamp - The time when the underlying browser event fired.
+ * @param {string} details.requestId - The request ID for the page loading in the tab. This value
+ * may be set to `""` if the request ID is unknown.
  */
 
 /**
@@ -155,8 +174,10 @@ export async function registerPageVisitStartListener(pageVisitStartListener, not
  * there is no referrer.
  * @param {boolean} privateWindow - Whether the event is in a private window.
  * @param {number} [timeStamp=Date.now()] - The time when the underlying browser event fired.
+ * @param {string} [requestId=""] - The request ID for the page loading in the tab, or `""` if
+ * there is no request ID.
  */
-function notifyPageVisitStartListeners(tabId, windowId, url, referrer, privateWindow, timeStamp = Date.now()) {
+function notifyPageVisitStartListeners(tabId, windowId, url, referrer, privateWindow, timeStamp = Date.now(), requestId = "") {
     for (const pageVisitStartListenerDetails of pageVisitStartListenerSet)
         if(!privateWindow || pageVisitStartListenerDetails.privateWindows)
             pageVisitStartListenerDetails.listener({
@@ -165,7 +186,8 @@ function notifyPageVisitStartListeners(tabId, windowId, url, referrer, privateWi
                 url: url.repeat(1), // copy the string in case a listener modifies it
                 referrer: referrer.repeat(1),
                 privateWindow,
-                timeStamp
+                timeStamp,
+                requestId
             });
 }
 
@@ -189,7 +211,8 @@ async function notifyPageVisitStartListenerAboutCurrentPages(pageVisitStartListe
                 url: tabDetails.url.repeat(1), // copy the string in case a listener modifies it
                 referrer: tabDetails.referrer.repeat(1),
                 privateWindow: tabDetails.privateWindow,
-                timeStamp: timeStamp
+                timeStamp: timeStamp,
+                requestId: tabDetails.requestId
             });
 }
 
@@ -551,6 +574,7 @@ function isPrivateWindow(windowId, windowDetails) {
  * @property {number} windowId - The ID of the window containing the tab.
  * @property {boolean} isWebContent - Whether the tab contains ordinary web
  * content (i.e., a URL starting with `"http://"` or `"https://"`).
+ * @property {string} requestId - The `webRequest` request ID for the request.
  */
 
 /**
@@ -575,8 +599,9 @@ const tabState = new Map();
  * @param {string} privateWindow - Whether the tab is in a private
  * window.
  * @param {string} windowId - The ID of the window containing the tab.
+ * @param {string} requestId - The request ID for the page loaded in the tab.
  */
-function updateTabState(tabId, url, referrer, privateWindow, windowId) {
+function updateTabState(tabId, url, referrer, privateWindow, windowId, requestId) {
     // If the URL parses successfully and has an HTTP or HTTPS protocol,
     // consider it web content
     var isWebContent;
@@ -589,7 +614,7 @@ function updateTabState(tabId, url, referrer, privateWindow, windowId) {
         isWebContent = false;
     }
 
-    tabState.set(tabId, { url, referrer, privateWindow, windowId, isWebContent });
+    tabState.set(tabId, { url, referrer, privateWindow, windowId, isWebContent, requestId });
 }
 
 /**
@@ -597,6 +622,7 @@ function updateTabState(tabId, url, referrer, privateWindow, windowId) {
  * @property {string} url - The URL for the request.
  * @property {string} referrer - The value of the `Referer` HTTP header for
  * the request or `""` if there is no header.
+ * @property {string} requestId - The request ID.
  */
 
 /**
@@ -608,6 +634,64 @@ function updateTabState(tabId, url, referrer, privateWindow, windowId) {
  * @default
  */
 const webRequestCache = new Map();
+
+/**
+ * Whether the content script binding functionality has been enabled.
+ * @private
+ * @type {boolean}
+ * @default
+ */
+var contentScriptBindingEnabled = false;
+
+/**
+ * How quickly to expire the content script binding cookie (in seconds),
+ * if it is not previously expired by a content script.
+ * @private
+ * @type {boolean}
+ * @default
+ */
+var contentScriptCookieExpiration = 5;
+
+/**
+ * Enables the functionality for binding page visits to content scripts, by exposing
+ * request IDs to content scripts.
+ */
+export async function enableContentScriptBinding() {
+    if(contentScriptBindingEnabled)
+        return;
+    contentScriptBindingEnabled = true;
+    initialize();
+
+    // Inject request IDs into HTTP(S) responses as cookies
+    browser.webRequest.onHeadersReceived.addListener(details => {
+        // Ignore responses that aren't associated with browsing tabs
+        if(details.tabId < 0)
+            return;
+        // Inject the request ID with a Set-Cookie response header
+        // Limit the cookie to just this path and set a short expiry
+        details.responseHeaders.push({
+            name: "Set-Cookie",
+            value: `webScienceRequestId=${details.requestId}; Path=${(new URL(details.url)).pathname}; Max-Age=${contentScriptCookieExpiration}`
+        });
+        return {
+            responseHeaders: details.responseHeaders
+        };
+    }, {
+        urls: [ "http://*/*", "https://*/*" ],
+        types: [ "main_frame" ]
+    },
+    [ "responseHeaders", "blocking" ]);
+
+    // Inject a content script into HTTP(S) tab-level pages that will
+    // recover the request ID
+    browser.contentScripts.register({
+        matches: [ "http://*/*", "https://*/*" ],
+        js: {
+            file: "/WebScience/Utilities/content-scripts/pageEvents.js"
+        },
+        runAt: "document_start"
+    });
+}
 
 /**
  * Whether the browser is active or idle. Ignored if the module is configured to
@@ -647,7 +731,7 @@ async function initialize() {
     // Note that we have to call Idle.registerIdleStateListener before we call
     // Idle.queryState, so this comes before caching the initial state
 
-    // Handle tab-level web requests
+    // Handle tab-level web requests by caching the URL, referrer, and request ID
     browser.webRequest.onBeforeSendHeaders.addListener(details => {
         // Ignore requests that aren't associated with browsing tabs
         if(details.tabId < 0)
@@ -659,7 +743,8 @@ async function initialize() {
                 referrer = requestHeader.value;
         webRequestCache.set(details.tabId, {
             url: details.url,
-            referrer
+            referrer,
+            requestId: details.requestId
         });
     }, {
         urls: [ "<all_urls>" ],
@@ -677,18 +762,23 @@ async function initialize() {
         if (!("url" in changeInfo))
             return;
 
-        // Try to get the referrer from the web request cache and consume
-        // the most recent entry in the web request cache
+        // Try to get the referrer and request ID from the webRequest cache and consume
+        // the most recent entry in the webRequest cache
         var referrer = "";
-        var webRequestDetails;
-        if((webRequestDetails = webRequestCache.get(tabId)) !== undefined) {
-            if(webRequestDetails.url === changeInfo.url)
+        var webRequestDetails = webRequestCache.get(tabId);
+        var requestId = "";
+        if(webRequestDetails !== undefined) {
+            // As a sanity check, make sure the URL from the tabs API matches the URL
+            // from the webRequest API
+            if(webRequestDetails.url === changeInfo.url) {
                 referrer = webRequestDetails.referrer;
+                requestId = webRequestDetails.requestId;
+            }
             webRequestCache.delete(tabId);
         }
 
         // Update the tab state cache
-        updateTabState(tabId, changeInfo.url, referrer, tab.incognito, tab.windowId);
+        updateTabState(tabId, changeInfo.url, referrer, tab.incognito, tab.windowId, requestId);
 
         // If this is the active tab and focused window, and (optionally) the browser is active, end the attention span
         var hasAttention = checkForAttention(tabId, tab.windowId);
@@ -943,7 +1033,7 @@ async function initialize() {
             for(const tab of openWindow.tabs) {
                 if(tab.active)
                     activeTabInOpenWindow = tab.id;
-                updateTabState(tab.id, tab.url, "", openWindow.incognito, openWindow.id);
+                updateTabState(tab.id, tab.url, "", openWindow.incognito, openWindow.id, "");
             }
         updateWindowState(openWindow.id, {
             type: openWindow.type,
