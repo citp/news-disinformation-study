@@ -11,19 +11,12 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
  *  in response to study events (e.g. stating the necessity of consent)
  *  and user actions (e.g. giving or revoking consent).
  */
-WebScience.Utilities.Consent.registerStudyStartedListener(runStudy);
-WebScience.Utilities.Consent.registerStudyEndedListener(stopStudy);
-
-/* This is a study that won't involve identifiable data or any intervention,
- *  so we're disabling the study-specific consent feature.
- * The user can still opt-out by going to the settings page and
- *  turning off the data collection.
- */
-//WebScience.Utilities.Consent.disableStudySpecificConsent();
+WebScience.Utilities.Lifecycle.registerStudyStartedListener(runStudy);
+WebScience.Utilities.Lifecycle.registerStudyEndedListener(stopStudy);
 
 /* Will get consent, if necessary, and start the study when ready.
  */
-WebScience.Utilities.Consent.requestConsentAndBegin();
+WebScience.Utilities.Lifecycle.requestBegin();
 
 function stopStudy() {
     // TODO -- send Telemetry message to delete remote data, and uninstall

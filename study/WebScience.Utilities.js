@@ -12,8 +12,8 @@ export { Storage }
 import * as Messaging from "../WebScience/Utilities/Messaging.js"
 export { Messaging }
 
-import * as Consent from "../WebScience/Utilities/Consent.js"
-export { Consent }
+import * as Lifecycle from "../WebScience/Utilities/Lifecycle.js"
+export { Lifecycle }
 
 import * as Idle from "../WebScience/Utilities/Idle.js"
 export { Idle }
