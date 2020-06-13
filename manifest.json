@@ -8,19 +8,8 @@
 
     "description": "A research project on how web users consume, are exposed to, and share news.",
 
-    "icons": {
-        "48": "icons/princeton_university_shield_book_gray.svg",
-        "96": "icons/princeton_university_shield_book_gray.svg"
-    },
-
-    "web_accessible_resources": ["images/*.png"],
-
-    "options_ui": {
-        "page": "settings/Options.html"
-    },
-
     "background": {
-        "page": "study/study.html",
+        "page": "background-page.html",
         "persistent": true
     },
 
@@ -45,17 +34,6 @@
             "id": "news.study@princeton.edu",
             "strict_min_version": "60.0"
         }
-    },
-
-    "experiment_apis": {
-        "privileged": {
-            "schema": "./privileged/schema.json",
-            "parent": {
-                "scopes": [ "addon_parent" ],
-                "script": "./privileged/api.js",
-                "paths": [[ "privileged" ]]
-            }
-        }
     }
-
+    
 }
