@@ -1,0 +1,30 @@
+{
+    "type": "object", "properties": {
+        "numUntrackedVisits": {"type": "number"},
+        "trackedVisitsByDomain": {"type": "array",
+            "items": { "type": "object", "properties": {
+                "domain" : {"type": "string"},
+                "numSessions": {"type": "number"},
+                "visitsByReferrer": {"type": "array",
+                    "items": {"type": "object", "properties": {
+                        "referrerDomain": {"type": "string"},
+                        "dayOfWeek": {"type": "string",
+                            "enum": ["mon", "tues", "weds", "thurs", "fri", "sat", "sun"]},
+                        "timeOfDay": {"type": "string",
+                            "enum": ["0-4", "4-8", "8-12", "12-16", "16-20", "20-24"]},
+                        "pageCategory": {"type": "string",
+                            "enum": ["politicalNews", "nonpoliticalNews", "other"]},
+                        "numVisits": {"type": "number"},
+                        "totalAttention": {"type": "number"}
+                    },
+                    "required": ["referrerDomain", "dayOfWeek", "timeOfDay", "pageCategory",
+                        "numVisits", "totalAttention"]
+                    }
+                }
+            },
+            "required": ["domain", "numSessions", "visitsByReferrer"]
+            }
+        }
+    },
+    "required": ["numUntrackedVisits", "trackedVisitsByDomain"]
+}

@@ -1,0 +1,34 @@
+{
+    "linkSharesByPlatform": [
+        {
+            "platform": "facebook",
+            "numUntrackedShares": 30,
+            "trackedShares": [
+                {
+                    "domain": "nytimes.com",
+                    "classification": "pol news",
+                    "audience": "public",
+                    "numShares": 5
+                },
+                {
+                    "domain": "nytimes.com",
+                    "classification": "nonpol news",
+                    "audience": "restricted",
+                    "numShares": 3
+                }
+            ]
+        },
+        {
+            "platform": "twitter",
+            "numUntrackedShares": 10,
+            "trackedShares": [
+                {
+                    "domain": "nytimes.com",
+                    "classification": "other",
+                    "audience": "public",
+                    "numShares": 2
+                }
+            ]
+        }
+    ]
+}

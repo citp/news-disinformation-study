@@ -1,0 +1,23 @@
+{
+    "type": "object", "properties": {
+        "linkSharesByPlatform": {"type": "array",
+            "items": { "type": "object", "properties": {
+                "platform": {"type": "string", "enum": ["facebook", "twitter", "reddit"]},
+                "numUntrackedShares": {"type": "number"},
+                "trackedShares": {"type": "array",
+                    "items": { "type": "object", "properties": {
+                        "domain" : {"type": "string"},
+                        "classification": {"type": "string", "enum": ["pol news", "nonpol news", "other"] },
+                        "audience": {"type": "string", "enum": ["public", "restricted"] },
+                        "numShares": {"type": "number"}
+                    },
+                    "required": ["domain", "classification", "audience", "numShares"]
+                    }
+                }
+            },
+            "required": ["platform", "numUntrackedShares", "trackedShares"]
+            }
+        }
+    },
+    "required": ["linkSharesByPlatform"]
+}
