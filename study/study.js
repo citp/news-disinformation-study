@@ -65,7 +65,9 @@ async function runStudy() {
         analysisTemplate : {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : (result) => {
-                debugLog("Listener received result = " + JSON.stringify(result));
+                //debugLog("Listener received result = " + JSON.stringify(result));
+                console.log("listener received result", result);
+
             }
         }
     });

@@ -14,3 +14,6 @@ export { SocialMediaAccountExposure };
 
 import * as SocialMediaLinkSharing from "../WebScience/Measurements/SocialMediaLinkSharing.js"
 export { SocialMediaLinkSharing }
+
+import * as AggregateStatistics from "../WebScience/Measurements/AggregateStatistics.js"
+export { AggregateStatistics }

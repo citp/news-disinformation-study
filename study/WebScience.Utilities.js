@@ -47,3 +47,6 @@ export { SocialMediaActivity }
 
 import * as DataAnalysis from "../WebScience/Utilities/DataAnalysis.js"
 export { DataAnalysis }
+
+import * as Readability from "../WebScience/Utilities/Readability.js"
+export { Readability }
