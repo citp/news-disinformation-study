@@ -39,17 +39,21 @@ async function runStudy() {
     });
 
     // Configure social media account exposure study
+    /*
     WebScience.Measurements.SocialMediaAccountExposure.runStudy({
         fbaccounts: facebookAccounts,
         ytchannels: youtubeChannels,
         twitterHandles : twitterHandles,
         privateWindows : false,
     });
+    */
 
     // Configure social media news exposure study
+    /*
     WebScience.Measurements.SocialMediaNewsExposure.runStudy({
         privateWindows : false,
     });
+    */
 
     // Configure social media sharing collection
     WebScience.Measurements.SocialMediaLinkSharing.runStudy({
@@ -59,15 +63,18 @@ async function runStudy() {
         reddit: true,
         privateWindows: false
     });
+
+    WebScience.Measurements.PageDepth.runStudy({
+        domains: studyDomains
+    });
     
     // Configure data analysis
     WebScience.Utilities.DataAnalysis.runStudy({
         analysisTemplate : {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : (result) => {
-                //debugLog("Listener received result = " + JSON.stringify(result));
-                console.log("listener received result", result);
-
+                //browser.telemetry.submitEncryptedPing(result);
+                debugLog("Listener received result = " + JSON.stringify(result));
             }
         }
     });
