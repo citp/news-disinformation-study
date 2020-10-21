@@ -8,13 +8,17 @@
                     "domain": "nytimes.com",
                     "classification": "pol news",
                     "audience": "public",
-                    "numShares": 5
+                    "numShares": 5,
+                    "dayOfWeek": 2,
+                    "timeOfDay": 20
                 },
                 {
                     "domain": "nytimes.com",
                     "classification": "nonpol news",
                     "audience": "restricted",
-                    "numShares": 3
+                    "numShares": 3,
+                    "dayOfWeek": 2,
+                    "timeOfDay": 20
                 }
             ]
         },
@@ -26,7 +30,9 @@
                     "domain": "nytimes.com",
                     "classification": "other",
                     "audience": "public",
-                    "numShares": 2
+                    "numShares": 2,
+                    "dayOfWeek": 2,
+                    "timeOfDay": 20
                 }
             ]
         }

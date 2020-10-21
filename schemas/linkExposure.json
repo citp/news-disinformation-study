@@ -1,0 +1,25 @@
+{
+    "type": "object", "properties": {
+        "untrackedLinkExposures": {"type": "object",
+            "propertyNames": { "pattern": "^[0-9]*$" },
+            "additionalProperties": { "type" : "number" } 
+        },
+        "linkExposures": {"type": "array",
+            "items": { "type": "object", "properties": {
+                "sourceDomain": {"type": "string"},
+                "destinationDomain": {"type": "string"},
+                "dayOfWeek": {"type": "number", 
+                    "minimum": 0, "maximum": 6 },
+                "timeOfDay": {"type": "number",
+                    "multipleOf": 4, "minimum": 0, "maximum": 20},
+                "numExposures": {"type": "number"},
+                "laterSharedCount": {"type": "number"},
+                "laterVisitedCount": {"type": "number"}
+            },
+            "required": ["sourceDomain", "destinationDomain", "dayOfWeek", "timeOfDay",
+                "numExposures", "laterSharedCount", "laterVisitedCount"]
+            }
+        }
+    },
+    "required": ["untrackedLinkExposures", "linkExposures"]
+}

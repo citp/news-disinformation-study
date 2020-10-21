@@ -7,35 +7,47 @@
             "visitsByReferrer": [
                 {
                     "referrerDomain": "google.com",
-                    "dayOfWeek": "mon",
-                    "timeOfDay": "8-12",
-                    "pageCategory": "politicalNews",
+                    "dayOfWeek": 1,
+                    "timeOfDay": 8,
+                    "pageCategory": 1,
                     "numVisits": 10,
-                    "totalAttention": 500
+                    "totalAttention": 500,
+                    "totalScroll": 400,
+                    "prevExposedCount": 3,
+                    "laterSharedCount": 1
                 },
                 {
                     "referrerDomain": "google.com",
-                    "dayOfWeek": "mon",
-                    "timeOfDay": "8-12",
-                    "pageCategory": "nonpoliticalNews",
+                    "dayOfWeek": 1,
+                    "timeOfDay": 8,
+                    "pageCategory": 0,
                     "numVisits": 5,
-                    "totalAttention": 2000
+                    "totalAttention": 2000,
+                    "totalScroll": 400,
+                    "prevExposedCount": 3,
+                    "laterSharedCount": 1
                 },
                 {
                     "referrerDomain": "google.com",
-                    "dayOfWeek": "mon",
-                    "timeOfDay": "12-16",
-                    "pageCategory": "nonpoliticalNews",
+                    "dayOfWeek": 1,
+                    "timeOfDay": 12,
+                    "pageCategory": 0,
                     "numVisits": 3,
-                    "totalAttention": 300
+                    "totalAttention": 300,
+                    "totalScroll": 400,
+                    "prevExposedCount": 3,
+                    "laterSharedCount": 1
                 },
                 {
                     "referrerDomain": "facebook.com",
-                    "dayOfWeek": "mon",
-                    "timeOfDay": "0-4",
-                    "pageCategory": "nonpoliticalNews",
+                    "dayOfWeek": 1,
+                    "timeOfDay": 0,
+                    "pageCategory": 0,
                     "numVisits": 3,
-                    "totalAttention": 1000
+                    "totalAttention": 1000,
+                    "totalScroll": 400,
+                    "prevExposedCount": 3,
+                    "laterSharedCount": 1
                 }
             ]
         }
