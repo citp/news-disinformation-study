@@ -20,6 +20,8 @@ The study includes logic and data specific to this research project. This is, by
 
 ## Running the Extension
 Launch an instance of Firefox with a temporary profile using `web-ext run` in the extension directory.
+To submit encrypted pings through Telemetry, run on a Nightly build with the `extensions.experiments.enabled` pref set, for example:
+`web-ext run --pref=extensions.experiments.enabled=true -f nightly`.
 
 ## Debugging the Extension
 Debugging output is available in Tools → Web Developer → Browser Console. Make sure that the Show Content Messages option is checked. You might find it helpful to set a filter for debugging messages of interest.

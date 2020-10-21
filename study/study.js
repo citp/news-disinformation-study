@@ -73,7 +73,7 @@ async function runStudy() {
         analysisTemplate : {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : (result) => {
-                //browser.telemetry.submitEncryptedPing(result);
+                browser.telemetry.submitEncryptedPing(result);
                 debugLog("Listener received result = " + JSON.stringify(result));
             }
         }
