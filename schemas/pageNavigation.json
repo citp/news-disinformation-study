@@ -1,4 +1,5 @@
 {
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object", "properties": {
         "numUntrackedVisits": {"type": "number"},
         "trackedVisitsByDomain": {"type": "array",
@@ -20,15 +21,13 @@
                         "prevExposedCount": {"type": "number"},
                         "laterSharedCount": {"type": "number"}
                     },
-                    "required": ["referrerDomain", "dayOfWeek", "timeOfDay", "pageCategory",
-                        "numVisits", "totalAttention", "totalScroll", "prevExposedCount",
-                        "laterSharedCount"]
+                    "additionalProperties": false
                     }
                 }
             },
-            "required": ["domain", "numSessions", "visitsByReferrer"]
+            "additionalProperties": false
             }
         }
     },
-    "required": ["numUntrackedVisits", "trackedVisitsByDomain"]
+    "additionalProperties": false
 }
