@@ -20,13 +20,6 @@ XPCOMUtils.defineLazyModuleGetter(
     "resource:///modules/BrowserWindowTracker.jsm",
 );
 
-/**
- * Message to show when presenting consent popup
- * @constant
- * @type {string}
- * @private
- */
-const CONSENT_MSG = "Firefox has partnered with researchers from Princeton University to study the health of the web. Learn how you can opt in to participating.";
 
 /**
  * Message to show when presenting survey
@@ -42,12 +35,10 @@ const STUDY_MSG = "A survey is available for the study you joined.";
  * 
  * @type {Object}
  * @property {Set} onSurveyPopupListeners - listeners registered to survey popup
- * @property {Set} onConsentPopupListeners - listeners registered to consent popup
  * @private
  */
 let listenerManager = {
     onSurveyPopupListeners: new Set(),
-    onConsentPopupListeners: new Set(),
 };
 
 /**
@@ -78,71 +69,6 @@ this.privileged = class extends ExtensionAPI {
     getAPI(context) {
         return {
             privileged: {
-                /**
-                 * Creates a consent popup with given icon and fires events
-                 * based on the user action
-                 * @param {string} iconURL - mozextension path to the icon image
-                 */
-                createConsentPopup(iconURL) {
-                    var currentWindow = BrowserWindowTracker.getTopWindow({
-                        private: false,
-                        allowPopups: false,
-                    });
-
-                    /**
-                     * @summary Displays a popup and fires listeners based on
-                     * the user action.
-                     * 0 : If user clicked on Learn more
-                     * 1 : If user clicked on Accept/Agree
-                     * -1 : If user clicked on Disagree
-                     */
-                    currentWindow.PopupNotifications.show(
-                        currentWindow.gBrowser.selectedBrowser, // browser
-                        "uxmockup-popup", // id
-                        CONSENT_MSG, // Message to display
-                        null, // anchor id
-                        { // main action
-                            label: "Learn more",
-                            accessKey: "L",
-                            callback: function () {
-                                // Fire all event listeners with a value 0
-                                listenerManager.onConsentPopupListeners.forEach((listener) => {
-                                    listener(0);
-                                });
-                            }
-                        },
-                        [ // secondary actions
-                            {
-                                label: "Yes, I agree",
-                                accessKey: "1",
-                                callback: function () {
-                                    // Fire all event listeners with a value 1
-                                    listenerManager.onConsentPopupListeners.forEach((listener) => {
-                                        listener(1);
-                                    });
-                                }
-                            },
-                            {
-                                label: "No, I disagree",
-                                accessKey: "2",
-                                callback: function () {
-                                    // Fire all event listeners with a value -1
-                                    listenerManager.onConsentPopupListeners.forEach((listener) => {
-                                        listener(-1);
-                                    });
-                                }
-                            }
-                        ],
-                        // temporary options
-                        {
-                            "persistence": 10,
-                            "persistWhileVisible": true,
-                            "dismissed": false,
-                            "popupIconURL": iconURL
-                        }
-                    );
-
-                },
                 /**
                  * Creates a survey popup with given icon and fires events
                  * based on the user action. 
@@ -209,6 +135,13 @@ this.privileged = class extends ExtensionAPI {
                                 accessKey: "N",
                                 callback: function () {
                                 }
+                            },
+                            {
+                                label: "Later",
+                                accessKey: "L",
+                                callback: function () {
+                                    // TODO set timeout
+                                }
                             }
                         ],
                         {
@@ -235,24 +168,6 @@ this.privileged = class extends ExtensionAPI {
                         listenerManager.onSurveyPopupListeners.add(listener);
                         return () => {
                             listenerManager.onSurveyPopupListeners.delete(listener);
-                        };
-                    }
-                }).api(),
-                /**
-                 * An event manager object for consent popup
-                 * It has methods to support adding and removing callbacks
-                 * @type {Object}
-                 */
-                onConsentPopup: new ExtensionCommon.EventManager({
-                    context: context,
-                    name: "privileged.onConsentPopup",
-                    register: (fire) => {
-                        let listener = (id, data) => {
-                            fire.async(id, data);
-                        };
-                        listenerManager.onConsentPopupListeners.add(listener);
-                        return () => {
-                            listenerManager.onConsentPopupListeners.delete(listener);
                         };
                     }
                 }).api()

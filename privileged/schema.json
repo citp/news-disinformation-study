@@ -3,19 +3,6 @@
         "namespace": "privileged",
         "functions": [
             {
-                "name": "createConsentPopup",
-                "type": "function",
-                "description": "Present a popup asking the user to join the study",
-                "async": false,
-                "parameters": [ 
-                    {
-                        "name": "iconUrl",
-                        "type": "string",
-                        "description": "URL of the icon to use in popup"
-                    }
-                ]
-            },
-            {
                 "name": "createSurveyPopup",
                 "type": "function",
                 "description": "Present a popup asking the user to fill out a survey",
@@ -47,16 +34,6 @@
                 {
                   "type": "string",
                   "name": "survey url"
-                }
-              ]
-            },
-            {
-              "name": "onConsentPopup",
-              "type": "function",
-              "parameters": [
-                {
-                  "type": "integer",
-                  "name": "consent state (0: learn more, 1 : accept -1: reject)"
                 }
               ]
             }

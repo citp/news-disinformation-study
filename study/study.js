@@ -7,22 +7,6 @@ import * as WebScience from "./WebScience.js"
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 
-/* These will be called depending on the consent setting for this study,
- *  in response to study events (e.g. stating the necessity of consent)
- *  and user actions (e.g. giving or revoking consent).
- */
-WebScience.Utilities.Lifecycle.registerStudyStartedListener(runStudy);
-WebScience.Utilities.Lifecycle.registerStudyEndedListener(stopStudy);
-
-/* Will get consent, if necessary, and start the study when ready.
- */
-WebScience.Utilities.Lifecycle.requestBegin();
-
-function stopStudy() {
-    // TODO -- send Telemetry message to delete remote data, and uninstall
-    debugLog("Ending study");
-}
-
 async function runStudy() {
     debugLog("Beginning study");
     // Configure navigation collection
@@ -86,3 +70,4 @@ async function runStudy() {
     });
     
 }
+runStudy();

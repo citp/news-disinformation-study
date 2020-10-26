@@ -15,10 +15,6 @@
 
     "web_accessible_resources": ["images/*.png"],
 
-    "options_ui": {
-        "page": "settings/Options.html"
-    },
-
     "background": {
         "page": "study/study.html",
         "persistent": true
