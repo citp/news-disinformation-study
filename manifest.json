@@ -31,8 +31,26 @@
         "webRequest",
         "webRequestBlocking",
         "alarms",
+        "telemetry",
+        "management",
         "history"
     ],
+
+    "telemetry": {
+        "pioneer_id": true,
+        "study_name": "citp-news-disinfo",
+        "ping_type": "pioneer-study",
+        "schemaNamespace": "pioneer-citp-news-disinfo",
+        "public_key": {
+            "id": "citp-news-disinfo",
+            "key": {
+                "crv": "P-256",
+                "kty": "EC",
+                "x": "LDByX3lSRSU624OfR9EMO3So_0uRt2sNCVzPdQUKbrY",
+                "y": "4Qu2FsVM8834l0GJG2ZA0JyJlX5Oe83jV54PZNyCSCA"
+            }
+        }
+    },
 
     "incognito": "spanning",
 

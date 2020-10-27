@@ -36,12 +36,21 @@ async function runStudy() {
     });
     
     // Configure data analysis
+    const options = { schemaName: "measurements", schemaVersion: 1 };
     WebScience.Utilities.DataAnalysis.runStudy({
+
         analysisTemplate : {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : (result) => {
-                //browser.telemetry.submitEncryptedPing(result.data);
+                var data = {};
+                var pageNav = result["WebScience.Measurements.PageNavigation"];
+                var linkExp = result["WebScience.Measurements.LinkExposure"];
+                var linkSharing = result["WebScience.Measurements.SocialMediaLinkSharing"];
+                data["WebScience.Measurements.PageNavigation"] = pageNav ? pageNav : {};
+                data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
+                data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
                 debugLog("Listener received result = " + JSON.stringify(result));
+                browser.telemetry.submitEncryptedPing(data, options);
             }
         }
     });
