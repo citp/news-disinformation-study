@@ -22,23 +22,6 @@ async function runStudy() {
         privateWindows : false,
     });
 
-    // Configure social media account exposure study
-    /*
-    WebScience.Measurements.SocialMediaAccountExposure.runStudy({
-        fbaccounts: facebookAccounts,
-        ytchannels: youtubeChannels,
-        twitterHandles : twitterHandles,
-        privateWindows : false,
-    });
-    */
-
-    // Configure social media news exposure study
-    /*
-    WebScience.Measurements.SocialMediaNewsExposure.runStudy({
-        privateWindows : false,
-    });
-    */
-
     // Configure social media sharing collection
     WebScience.Measurements.SocialMediaLinkSharing.runStudy({
         domains: studyDomains,
@@ -57,7 +40,7 @@ async function runStudy() {
         analysisTemplate : {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : (result) => {
-                browser.telemetry.submitEncryptedPing(result.data);
+                //browser.telemetry.submitEncryptedPing(result.data);
                 debugLog("Listener received result = " + JSON.stringify(result));
             }
         }

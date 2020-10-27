@@ -13,9 +13,6 @@ nightly: check-ffnightly
 	web-ext lint
 	web-ext run --firefox=$(FFNIGHTLYLOC)/firefox/firefox \
 	  --pref extensions.experiments.enabled=true
-prepare:
-	rm WebScience/Measurements/SocialMediaAccountExposure.js
-	rm WebScience/Measurements/SocialMediaNewsExposure.js
 
 check-ffbeta:
 ifndef FFBETALOC

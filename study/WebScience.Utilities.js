@@ -24,17 +24,11 @@ export { Scheduling }
 import * as PageEvents from "../WebScience/Utilities/PageEvents.js"
 export { PageEvents }
 
-import * as ResponseBody from "../WebScience/Utilities/ResponseBody.js"
-export { ResponseBody }
-
 import * as LinkResolution from "../WebScience/Utilities/LinkResolution.js"
 export { LinkResolution }
 
 import * as Randomization from "../WebScience/Utilities/Randomization.js"
 export { Randomization }
-
-import * as StudyTelemetry from "../WebScience/Utilities/StudyTelemetry.js"
-export { StudyTelemetry }
 
 import * as UserSurvey from "../WebScience/Utilities/UserSurvey.js"
 export { UserSurvey }
