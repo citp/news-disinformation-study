@@ -61,14 +61,10 @@
         }
     },
 
-    "experiment_apis": {
-        "privileged": {
-            "schema": "./privileged/schema.json",
-            "parent": {
-                "scopes": [ "addon_parent" ],
-                "script": "./privileged/api.js",
-                "paths": [[ "privileged" ]]
-            }
+    "browser_action": {
+        "browser_style": true,
+        "default_icon": {
+            "16": "icons/princeton_university_shield_book_gray.svg"
         }
     }
 
