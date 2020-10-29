@@ -10,15 +10,7 @@
     }
   </style>
 
-  <script>
-    function decline(){
-      alert("Declined");
-    }
-
-    function agree(){
-      alert("Agreed");
-    }
-  </script>
+  <script src="consent.js"></script>
 </head>
 <body>
 <main>
@@ -99,8 +91,8 @@
   <p>I hereby give my consent to be the subject of the research.</p>
 
   <div>
-    <button onclick="decline()">Decline</button>
-    <button onclick="agree()">Agree</button>
+    <button id=disagree>Decline</button>
+    <button id=agree>Agree</button>
   </div>
 </main>
 </body>
