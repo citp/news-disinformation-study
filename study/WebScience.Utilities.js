@@ -41,3 +41,6 @@ export { DataAnalysis }
 
 import * as Readability from "../WebScience/Utilities/Readability.js"
 export { Readability }
+
+import * as Consent from "../WebScience/Utilities/Consent.js"
+export { Consent }

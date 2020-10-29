@@ -1,5 +1,5 @@
 import { studyDomains } from "/study/newsDomains.js"
-import { referrerDomains } from "/study/referrerDomains.js"
+import { refDomains } from "/study/referrerDomains.js"
 import { youtubeChannels } from "/study/newsYouTubeChannels.js";
 import { facebookAccounts } from "/study/newsFacebookAccounts.js";
 import { twitterHandles } from "/study/newsTwitterHandles.js";
@@ -10,22 +10,25 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 
 async function runStudy() {
     debugLog("Beginning study");
+
+    var studyPaths = WebScience.Utilities.Matching.getStudyPaths();
+
     // Configure navigation collection
     WebScience.Measurements.PageNavigation.runStudy({
-        domains: studyDomains,
+        domains: studyPaths.destinationPaths,
         trackUserAttention: true
       });
 
     // Configure link exposure collection
     WebScience.Utilities.LinkResolution.initialize();
     WebScience.Measurements.LinkExposure.runStudy({
-        domains: studyDomains,
+        domains: studyPaths.destinationPaths,
         privateWindows : false,
     });
 
     // Configure social media sharing collection
     WebScience.Measurements.SocialMediaLinkSharing.runStudy({
-        domains: studyDomains,
+        domains: studyPaths.destinationPaths,
         facebook: true,
         twitter: true,
         reddit: true,
@@ -33,8 +36,9 @@ async function runStudy() {
     });
 
     WebScience.Measurements.PageDepth.runStudy({
-        domains: studyDomains
+        domains: studyPaths.destinationPaths,
     });
+    
 
     // Configure data analysis
     const options = { schemaName: "measurements", schemaVersion: 1 };
@@ -55,12 +59,12 @@ async function runStudy() {
                 browser.telemetry.submitEncryptedPing(data, options);
             }
         }
-    });
+    }, studyPaths);
+
     // Configure surveys (pending choices)
-    
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_0rnei0ZdDL45zZH"
+        surveyUrl: "https://citpsurveys.cs.princeton.edu/polInfoSurvey"
     });
     
 }
-runStudy();
+WebScience.Utilities.Consent.runStudy(runStudy);
