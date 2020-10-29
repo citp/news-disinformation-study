@@ -4304,7 +4304,7 @@ export const fbPages = [
 "www.facebook.com/268914272540", "www.facebook.com/NYDailyNew",
 "www.facebook.com/268914272540", "www.facebook.com/NYDailyNew",
 "www.facebook.com/134486075205", "www.facebook.com/NYPo",
-"www.facebook.com/105213616212942", "www.facebook.com/EastStLouisMonitor",
+"www.facebook.com/105213616212942", "www.facebook.com/nytimes",
 "www.facebook.com/nyunew", "www.facebook.com/nyunew",
 "www.facebook.com/168740799835879", "www.facebook.com/OakCliffAdvocate",
 "www.facebook.com/374737662543003", "www.facebook.com/oakdaleleader",
