@@ -4,12 +4,12 @@
     height: 50px;
     display: table;
     border-colapse: separate;
-    border-spacing: 5px;
+    border-spacing: 0px;
 }
 
-.button-container .buttonBlue {
-  background-color: #22b3e3;
-  border: none;
+.buttonBlue {
+  background-color: #4cb1f5;
+  width: 100px;
   color: black;
   padding: 15px;
   text-align: center;
@@ -19,9 +19,13 @@
   cursor: pointer;
   float: left;
 }
-.button-container .buttonGray {
-  background-color: lightgray;
-  border: none;
+.buttonBlue:hover {
+    background-color: #31a6f5;
+}
+
+.buttonGray {
+  background-color: #d9d9d9;
+  width: 100px;
   color: black;
   padding: 15px;
   text-align: center;
@@ -31,7 +35,13 @@
   cursor: pointer;
   float: left;
 }
-
-div {
-    width: 200px;
+.buttonGray:hover {
+    background-color: #b5b5b5;
 }
+
+.paragraph {
+    width: 300px;
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
