@@ -13,8 +13,6 @@
         "96": "icons/princeton_university_shield_book_gray.svg"
     },
 
-    "web_accessible_resources": ["images/*.png"],
-
     "background": {
         "page": "study/study.html",
         "persistent": true
@@ -22,14 +20,12 @@
 
     "permissions": [
         "<all_urls>",
-        "downloads",
         "idle",
         "notifications",
         "storage",
         "tabs",
         "unlimitedStorage",
         "webRequest",
-        "webRequestBlocking",
         "alarms",
         "telemetry",
         "management",

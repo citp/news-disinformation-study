@@ -27,9 +27,6 @@ export { PageEvents }
 import * as LinkResolution from "../WebScience/Utilities/LinkResolution.js"
 export { LinkResolution }
 
-import * as Randomization from "../WebScience/Utilities/Randomization.js"
-export { Randomization }
-
 import * as UserSurvey from "../WebScience/Utilities/UserSurvey.js"
 export { UserSurvey }
 
