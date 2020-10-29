@@ -28,7 +28,6 @@
         "webRequest",
         "alarms",
         "telemetry",
-        "management",
         "history"
     ],
 
