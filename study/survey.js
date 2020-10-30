@@ -4,8 +4,9 @@ function listenForClicks() {
             await browser.runtime.sendMessage({ type: "WebScience.Utilities.UserSurvey.openSurveyTab" });
         } else if (e.target.name == "never") {
             await browser.runtime.sendMessage({ type: "WebScience.Utilities.UserSurvey.cancelSurveyRequest" });
+        } else if (e.target.id == "notice") {
+            await browser.runtime.sendMessage({ type: "WebScience.Utilities.Consent.openNotice" });
         }
-        window.close();
     });
 }
 listenForClicks();

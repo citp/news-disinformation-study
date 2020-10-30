@@ -1,18 +1,3 @@
-//function listenForClicks() {
-//    document.addEventListener("click", async (e) => {
-//        console.log(e.target.id);
-//        if (e.target.id && e.target.id == "disagree") {
-//            await browser.runtime.sendMessage({ type: "WebScience.Utilities.Consent.disagree" });
-//            await closeTab();
-//        } else if (e.target.id && e.target.id == "agree") {
-//            await browser.runtime.sendMessage({ type: "WebScience.Utilities.Consent.agree" });
-//            await closeTab();
-//        }
-//    });
-//}
-//
-//listenForClicks();
-
 function ready(fn) {
     if (document.readyState != 'loading'){
       fn();
@@ -57,7 +42,8 @@ ready(() => {
         mozillaNotice.style.display = 'none';
         // show princeton notice.
         princetonNotice.style.display = 'block';
-        
+        window.scrollTo(0, 0);
+
     };
     mozillaAgreeButton.addEventListener('click', agreeToMozillaNotice);
 
@@ -66,6 +52,5 @@ ready(() => {
     princetonAgreeButton.addEventListener('click', async () => {
         console.log("Agreed to Princeton Notice!");
         await browser.runtime.sendMessage({ type: "WebScience.Utilities.Consent.agree" });
-        await closeTab();
     });
 });
