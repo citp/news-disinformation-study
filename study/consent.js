@@ -1,6 +1,5 @@
 function listenForClicks() {
     document.addEventListener("click", async (e) => {
-        console.log(e.target.id);
         if (e.target.id && e.target.id == "disagree") {
             await browser.runtime.sendMessage({ type: "WebScience.Utilities.Consent.disagree" });
             var tabInfo = await browser.tabs.getCurrent();
@@ -13,4 +12,3 @@ function listenForClicks() {
     });
 }
 listenForClicks();
-console.log("foo");
