@@ -52,6 +52,7 @@ async function runStudy() {
                 data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
                 data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
                 data["WebScience.version"] = version;
+                // TODO for debugging, remove for final
                 console.log(data);
                 debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
                 browser.telemetry.submitEncryptedPing(data, options);
