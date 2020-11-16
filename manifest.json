@@ -4,9 +4,9 @@
 
     "name": "Princeton University News Study",
 
-    "version": "1.1",
+    "version": "1.2", // sync with study.js
 
-    "description": "A research project on how web users consume, are exposed to, and share news.",
+    "description": "An Ion study on how web users consume, are exposed to, and share news.",
 
     "icons": {
         "48": "icons/princeton_university_shield_book_gray.svg",
@@ -46,8 +46,6 @@
             }
         }
     },
-
-    "incognito": "spanning",
 
     "browser_specific_settings": {
         "gecko": {

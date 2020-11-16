@@ -1,5 +1,6 @@
 import * as WebScience from "./WebScience.js"
 
+const version = "1.2"; // sync with manifest
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 
@@ -50,6 +51,8 @@ async function runStudy() {
                 data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
                 data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
                 data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
+                data["WebScience.version"] = version;
+                console.log(data);
                 debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
                 browser.telemetry.submitEncryptedPing(data, options);
             }
