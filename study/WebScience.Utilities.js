@@ -24,6 +24,9 @@ export { Scheduling }
 import * as PageEvents from "../WebScience/Utilities/PageEvents.js"
 export { PageEvents }
 
+import * as PageManager from "../WebScience/Utilities/PageManager.js"
+export { PageManager }
+
 import * as LinkResolution from "../WebScience/Utilities/LinkResolution.js"
 export { LinkResolution }
 
