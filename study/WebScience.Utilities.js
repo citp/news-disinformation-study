@@ -6,6 +6,9 @@
 import * as Debugging from "../WebScience/Utilities/Debugging.js"
 export { Debugging }
 
+import * as Events from "../WebScience/Utilities/Events.js"
+export { Events }
+
 import * as Storage from "../WebScience/Utilities/Storage.js"
 export { Storage }
 
