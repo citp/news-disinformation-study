@@ -11,6 +11,3 @@ export { SocialMediaLinkSharing }
 
 import * as AggregateStatistics from "../WebScience/Measurements/AggregateStatistics.js"
 export { AggregateStatistics }
-
-import * as PageDepth from "../WebScience/Measurements/PageDepth.js"
-export { PageDepth }
