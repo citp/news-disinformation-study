@@ -24,9 +24,6 @@ export { Matching }
 import * as Scheduling from "../WebScience/Utilities/Scheduling.js"
 export { Scheduling }
 
-import * as PageEvents from "../WebScience/Utilities/PageEvents.js"
-export { PageEvents }
-
 import * as PageManager from "../WebScience/Utilities/PageManager.js"
 export { PageManager }
 
