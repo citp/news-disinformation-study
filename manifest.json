@@ -48,6 +48,8 @@
         }
     },
 
+    "incognito": "spanning",
+
     "browser_specific_settings": {
         "gecko": {
             "id": "news.study@princeton.edu",
