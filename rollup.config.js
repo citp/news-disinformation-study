@@ -18,7 +18,7 @@ function isDevMode(cliArgs) {
 
 export default (cliArgs) => [
   {
-    input: "src/background.js",
+    input: "study/study.js",
     output: {
       file: "dist/background.js",
       sourcemap: isDevMode(cliArgs) ? "inline" : false,
@@ -37,7 +37,7 @@ export default (cliArgs) => [
     ],
   },
   {
-    input: "src/content-script.js",
+    input: "study/content-script.js",
     output: {
       file: "dist/content-script.js",
       sourcemap: isDevMode(cliArgs) ? "inline" : false,
