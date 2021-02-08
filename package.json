@@ -1,0 +1,48 @@
+{
+  "name": "rally-study-template",
+  "version": "0.3.1",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --config-enable-developer-mode",
+    "lint": "eslint . && web-ext lint",
+    "package": "npm run build && web-ext build --overwrite-dest --ignore-files \"./tests/**/*\" --ignore-files \"./src/**/*\" --ignore-files \"./rollup.config.js\"",
+    "start": "npm run build && web-ext run",
+    "test-integration": "npm run package && mv web-ext-artifacts/*.zip web-ext-artifacts/study.xpi && mocha --timeout 30000 \"./tests/integration/*.js\"",
+    "watch": "npm-run-all --parallel watch-raw watch-bundled",
+    "watch-raw": "npm run dev -- -w",
+    "watch-bundled": "web-ext run --watch-file dist/background.js"
+  },
+  "devDependencies": {
+    "@mozilla/rally": "^0.3.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@rollup/plugin-replace": "^2.3.4",
+    "eslint": "^7.12.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "geckodriver": "^1.21.0",
+    "mocha": "^8.1.3",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.38.0",
+    "selenium-webdriver": "^4.0.0-alpha.7",
+    "web-ext": "^5.5.0",
+    "webextension-polyfill": "^0.7.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "description": "This a basic template for a Rally study.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla-rally/study-template.git"
+  },
+  "keywords": [],
+  "author": "Mozilla",
+  "license": "MPL-2.0",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/mozilla-rally/study-template/issues"
+  },
+  "homepage": "https://github.com/mozilla-rally/study-template#readme"
+}
