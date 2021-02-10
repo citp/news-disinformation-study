@@ -14,16 +14,6 @@ module.exports = {
     "plugin:import/warnings",
     "plugin:node/recommended",
   ],
-  globals: {
-    ChromeUtils: false,
-    ExtensionAPI: false,
-    // NOTE: These get injected via Rollup.
-    __API_ENDPOINT__: false,
-    __ION_STUDIES_LIST__: false,
-    __ION_WEBSITE_URL__: false,
-    __DISABLE_LOCALE_CHECK__: false,
-    __ENABLE_DATA_SUBMISSION__: false,
-  },
   overrides: [
     {
       files: "tests/**",
@@ -34,21 +24,20 @@ module.exports = {
         "plugin:mocha/recommended",
       ],
     },
-    {
-      files: ["*.svelte"],
-      processor: "svelte3/svelte3",
-    },
   ],
+  globals: {
+    ChromeUtils: false,
+    ExtensionAPI: false,
+    __ENABLE_DEVELOPER_MODE__: false,
+  },
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: "module",
   },
   plugins: [
     "import",
-    "mocha",
     "node",
-    "notice",
-    "svelte3",
+    "mocha"
   ],
   root: true,
   rules: {
@@ -59,11 +48,9 @@ module.exports = {
     "node/no-unpublished-require": "off",
     "node/no-unsupported-features/es-syntax": "off",
 
-    "notice/notice":[ "error", { mustMatch: "This Source Code Form is subject to the terms of the Mozilla Public", "templateFile": "copyright.txt" } ],
-
-    "eol-last": "warn",
+    "no-multi-spaces": "error",
     "no-unused-vars": [ "error", { vars: "all", args: "none", ignoreRestSiblings: false } ],
-    "no-var": "off", // TODO: "warn",
-    "prefer-const": "off", // TODO: "warn",
+    "no-var": "warn",
+    "prefer-const": "warn",
   },
 };
