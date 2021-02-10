@@ -1,6 +1,15 @@
 import "webextension-polyfill";
 import * as WebScience from "./WebScience.js"
 import Rally from "@mozilla/rally";
+import * as EventHandling from "./EventHandling.js"
+import { destinationMatchPatterns } from "./paths/destinationMatchPatterns.js"
+/*
+import { destinationDomains } from "./paths/destinationDomains.js"
+import { referrerDomains } from "./paths/referrerDomains.js"
+import { fbPages } from "./paths/pages-fb.js"
+import { ytPages } from "./paths/pages-yt.js"
+import { twPages } from "./paths/pages-tw.js"
+*/
 
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
@@ -8,23 +17,25 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 async function runStudy() {
     debugLog("Beginning study");
 
-    var studyPaths = WebScience.Utilities.Matching.getStudyPaths();
+    const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
 
     // Configure navigation collection
-    WebScience.Measurements.PageNavigation.runStudy({
-        domains: studyPaths.destinationPaths,
+    EventHandling.startPageNavigationMeasurement({
+        matchPatterns: destinationMatchPatterns,
         trackUserAttention: true
-      });
+    });
 
     // Configure link exposure collection
     WebScience.Utilities.LinkResolution.initialize();
-    WebScience.Measurements.LinkExposure.runStudy({
-        domains: studyPaths.destinationPaths,
+    /*
+    EventHandling.startLinkExposureMeasurement({
+        matchPatterns: destinationMatchPatterns,
         privateWindows : false,
     });
+    */
 
     // Configure social media sharing collection
-    WebScience.Measurements.SocialMediaLinkSharing.runStudy({
+    EventHandling.startSMLSMeasurement({
         domains: studyPaths.destinationPaths,
         facebook: true,
         twitter: true,
@@ -32,29 +43,26 @@ async function runStudy() {
         privateWindows: false
     });
 
-    WebScience.Measurements.PageDepth.runStudy({
-        domains: studyPaths.destinationPaths,
-    });
-    
-
     // Configure data analysis
-    const options = { schemaName: "measurements", schemaVersion: 1 };
+    //const options = { schemaName: "measurements", schemaVersion: 1 };
     WebScience.Utilities.DataAnalysis.runStudy({
 
         analysisTemplate : {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : async (result) => {
-                var data = {};
-                var pageNav = result["WebScience.Measurements.PageNavigation"];
-                var linkExp = result["WebScience.Measurements.LinkExposure"];
-                var linkSharing = result["WebScience.Measurements.SocialMediaLinkSharing"];
+                const data = {};
+                const pageNav = result["WebScience.Measurements.PageNavigation"];
+                const linkExp = result["WebScience.Measurements.LinkExposure"];
+                const linkSharing = result["WebScience.Measurements.SocialMediaLinkSharing"];
                 data["WebScience.Measurements.PageNavigation"] = pageNav ? pageNav : {};
                 data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
                 data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
                 data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
                 data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
+                /*
                 debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
                 browser.telemetry.submitEncryptedPing(data, options);
+                */
             }
         }
     }, studyPaths);
@@ -63,7 +71,7 @@ async function runStudy() {
     WebScience.Utilities.UserSurvey.runStudy({
         surveyUrl: "https://citpsurveys.cs.princeton.edu/polInfoSurvey"
     });
-    
+
 }
 
 const rally = new Rally();
