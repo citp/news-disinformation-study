@@ -2,7 +2,7 @@ import "webextension-polyfill";
 import * as WebScience from "./WebScience.js"
 import Rally from "@mozilla/rally";
 import * as EventHandling from "./EventHandling.js"
-import { destinationMatchPatterns } from "./paths/destinationMatchPatterns.js"
+//import { destinationMatchPatterns } from "./paths/destinationDomainsOfInterest.js"
 /*
 import { destinationDomains } from "./paths/destinationDomains.js"
 import { referrerDomains } from "./paths/referrerDomains.js"
@@ -17,16 +17,19 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 async function runStudy() {
     debugLog("Beginning study");
 
-    const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
+    const studyPaths = null;// TODO WebScience.Utilities.Matching.getStudyPaths();
+    await EventHandling.startStudy();
 
     // Configure navigation collection
+    /*
     EventHandling.startPageNavigationMeasurement({
         matchPatterns: destinationMatchPatterns,
         trackUserAttention: true
     });
+    */
 
     // Configure link exposure collection
-    WebScience.Utilities.LinkResolution.initialize();
+    //WebScience.Utilities.LinkResolution.initialize();
     /*
     EventHandling.startLinkExposureMeasurement({
         matchPatterns: destinationMatchPatterns,
@@ -35,13 +38,14 @@ async function runStudy() {
     */
 
     // Configure social media sharing collection
+    /*
     EventHandling.startSMLSMeasurement({
         domains: studyPaths.destinationPaths,
         facebook: true,
         twitter: true,
-        reddit: true,
-        privateWindows: false
+        reddit: true
     });
+    */
 
     // Configure data analysis
     //const options = { schemaName: "measurements", schemaVersion: 1 };
@@ -51,9 +55,9 @@ async function runStudy() {
             path : "/WebScience/Measurements/AggregateStatistics.js",
             resultListener : async (result) => {
                 const data = {};
-                const pageNav = result["WebScience.Measurements.PageNavigation"];
-                const linkExp = result["WebScience.Measurements.LinkExposure"];
-                const linkSharing = result["WebScience.Measurements.SocialMediaLinkSharing"];
+                const pageNav = result["NewsAndDisinfo.Measurements.PageNavigation"];
+                const linkExp = result["NewsAndDisinfo.Measurements.LinkExposure"];
+                const linkSharing = result["NewsAndDisinfo.Measurements.SocialMediaLinkSharing"];
                 data["WebScience.Measurements.PageNavigation"] = pageNav ? pageNav : {};
                 data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
                 data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
@@ -67,9 +71,8 @@ async function runStudy() {
         }
     }, studyPaths);
 
-    // Configure surveys (pending choices)
     WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://citpsurveys.cs.princeton.edu/polInfoSurvey"
+        surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
     });
 
 }
