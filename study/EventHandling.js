@@ -6,11 +6,15 @@ import { twPages } from "./paths/pages-tw.js"
 import { ytPages } from "./paths/pages-yt.js"
 
 const onLinkExposure = WebScience.Measurements.LinkExposure.onLinkExposure;
-let LECounter;
 const onPageData = WebScience.Measurements.PageNavigation.onPageData;
 const onShare = WebScience.Measurements.SocialMediaLinkSharing.onShare;
-let SMLSCounter;
+
 let integrationStorage;
+
+let storagePN;
+let storageLE;
+let storageSMLS;
+
 const allDestinationPaths = [...destinationMatchPatterns, ...fbPages, ...twPages, ...ytPages];
 const allDestinationPatterns = WebScience.Utilities.Matching.createUrlMatchPatternArray(allDestinationPaths);
 const allReferrerPatterns = WebScience.Utilities.Matching.createUrlMatchPatternArray([...allDestinationPaths, ...referrerDomains]);
@@ -21,11 +25,9 @@ export async function startStudy() {
 
     //const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
 
-    integrationStorage = await (new WebScience.Utilities.Storage.KeyValueStorage(
-        "NewsAndDisinfo.Integration")).initialize();
+    integrationStorage = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.Integration", {integration: "url"});
 
-    LECounter = await (new WebScience.Utilities.Storage.Counter(
-        "NewsAndDisinfo.nextLinkExposureID")).initialize();
     await startLinkExposureMeasurement({
         linkMatchPatterns: allDestinationPatterns,
         pageMatchPatterns: allReferrerPatterns,
@@ -37,36 +39,71 @@ export async function startStudy() {
         matchPatterns: allDestinationPatterns,
         trackUserAttention: true});
 
-    SMLSCounter = await (new WebScience.Utilities.Storage.Counter(
-        "NewsAndDisinfo.nextShareId")).initialize();
     await startSMLSMeasurement({
         domains: allDestinationPaths,//studyPaths.destinationPaths,
         facebook: true,
         twitter: true,
         reddit: true
     });
+
+    WebScience.Utilities.DataAnalysis.runStudy({
+
+        analysisTemplate : {
+            path : "/WebScience/Measurements/AggregateStatistics.js",
+            resultListener : async (result) => {
+                const data = {};
+                const pageNav = result["NewsAndDisinfo.Measurements.PageNavigation"];
+                const linkExp = result["NewsAndDisinfo.Measurements.LinkExposure"];
+                const linkSharing = result["NewsAndDisinfo.Measurements.SocialMediaLinkSharing"];
+                data["WebScience.Measurements.PageNavigation"] = pageNav ? pageNav : {};
+                data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
+                data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
+                data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
+                data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
+                /*
+                debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
+                browser.telemetry.submitEncryptedPing(data, options);
+                */
+            }
+        }
+    }, {
+        destinationDomains: WebScience.Utilities.Matching.domainsToRegExpString(destinationMatchPatterns),
+        fbPages: WebScience.Utilities.Matching.domainsToRegExpString(fbPages),
+        ytPages: WebScience.Utilities.Matching.domainsToRegExpString(ytPages),
+        twPages: WebScience.Utilities.Matching.domainsToRegExpString(twPages),
+        referrerOnlyDomains: referrerDomains
+    }, [
+        {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
+        {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
+        {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"}
+    ]);
 }
 
 async function startPageNavigationMeasurement(options) {
-    const storage = await (new WebScience.Utilities.Storage.KeyValueStorage(
-        "NewsAndDisinfo.Measurements.PageNavigation")).initialize();
+    storagePN = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.Measurements.PageNavigation",
+        {pageVisits: "pageId, url, pageVisitStartTime"});
 
-    onPageData.addListener(pageNavListener.bind(null, storage), options);
+    onPageData.addListener(pageNavListener, options);
 }
 
 async function startSMLSMeasurement(options) {
-    const storage = await (new WebScience.Utilities.Storage.KeyValueStorage(
-        "NewsAndDisinfo.Measurements.SocialMediaLinkSharing")).initialize();
-    onShare.addListener(linkShareListener.bind(null, storage), options);
+    storageSMLS = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.Measurements.SocialMediaLinkSharing",
+        {linkShares:"shareId++, url, shareTime",
+         untrackedCounts: "platform"});
+    onShare.addListener(linkShareListener, options);
 }
 
 async function startLinkExposureMeasurement(options) {
-    const storage = await (new WebScience.Utilities.Storage.KeyValueStorage(
-        "NewsAndDisinfo.Measurements.LinkExposure")).initialize();
-    onLinkExposure.addListener(linkExposureListener.bind(null, storage), options);
+    storageLE = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.Measurements.LinkExposure",
+        {linkExposures: "exposureId++, url, firstSeen"});
+    onLinkExposure.addListener(linkExposureListener, options);
 }
 
-async function linkShareListener(storage, shareData) {
+async function linkShareListener(shareData) {
+    const storage = storageSMLS;
     if (shareData.type == "share") {
         shareData = shareData.value;
         shareData.url = WebScience.Utilities.Matching.normalizeUrl(shareData.url);
@@ -74,36 +111,48 @@ async function linkShareListener(storage, shareData) {
         const urlEvents = await integrationStorage.get(shareData.url);
         shareData.previouslyExposed = urlEvents["exposure"].length > 0;
         shareData.previouslyVisited = urlEvents["visit"].length > 0;
-        await storage.set((await SMLSCounter.getAndIncrement()).toString(), shareData);
+        await storage.set(shareData);
     } else if (shareData.type == "untrackedTwitter") {
-        await storage.set("numUntrackedSharesTwitter", 
-            {"type": "numUntrackedSharesTwitter", "twitter": shareData.value});
+        await storage.set(
+            {platform: "twitter", "count": shareData.value},
+            "untrackedCounts");
     } else if (shareData.type == "untrackedFacebook") {
-        await storage.set("numUntrackedSharesFacebook",
-            {"type": "numUntrackedSharesFacebook", "facebook": shareData.value});
+        await storage.set(
+            {platform: "facebook", "count": shareData.value},
+            "untrackedCounts");
     } else if (shareData.type == "untrackedReddit") {
-        await storage.set("numUntrackedSharesReddit",
-            {"type": "numUntrackedSharesReddit", "reddit": shareData.value});
+        await storage.set(
+            {platform: "reddit", "count": shareData.value},
+            "untrackedCounts");
     }
 
 }
 
-async function linkExposureListener(storage, exposureData) {
+async function linkExposureListener(exposureData) {
+    const storage = storageLE;
     exposureData.url = WebScience.Utilities.Matching.normalizeUrl(exposureData.url);
     const exposedUrl = exposureData.url;
-    await storage.set((await LECounter.getAndIncrement()).toString(), exposureData);
-    await addEvent("exposure", exposedUrl, exposureData.pageVisitStartTime);
+    await storage.set(exposureData);
+    await addEvent("exposure", exposedUrl, exposureData.firstSeen);
 }
 
-async function pageNavListener(storage, pageData) {
+async function pageNavListener(pageData) {
+    const storage = storagePN;
     pageData.url = WebScience.Utilities.Matching.normalizeUrl(pageData.url);
-    await storage.set(pageData.url + " " + pageData.pageId, pageData);
+    pageData.type = "pageVisit";
+    await storage.set(pageData);
     await addEvent("visit", pageData.url, pageData.pageVisitStartTime);
 }
 
 async function addEvent(typeOfEvent, url, timestamp) {
     let urlEvents = await integrationStorage.get(url);
-    if (!urlEvents) urlEvents = {"exposure": [], "visit": [], "share": []};
+    if (!urlEvents) urlEvents = {
+        url: url,
+        exposure: [],
+        visit: [],
+        share: []
+    };
     urlEvents[typeOfEvent].push(timestamp);
-    await integrationStorage.set(url, urlEvents);
+    console.log(urlEvents);
+    await integrationStorage.set(urlEvents);
 }

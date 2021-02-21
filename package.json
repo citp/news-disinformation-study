@@ -44,5 +44,8 @@
   "bugs": {
     "url": "https://github.com/mozilla-rally/study-template/issues"
   },
-  "homepage": "https://github.com/mozilla-rally/study-template#readme"
+  "homepage": "https://github.com/mozilla-rally/study-template#readme",
+  "dependencies": {
+    "dexie": "^3.0.3"
+  }
 }
