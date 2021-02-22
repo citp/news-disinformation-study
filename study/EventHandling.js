@@ -29,14 +29,14 @@ export async function startStudy() {
     //const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
 
     // TODO: use new regexp functions for the urls here
-    await onClassificationResult.addListener(saveClassificationResult,
+    await onClassificationResult.addListener(saveClassificationResultPol,
         {
             workerId: "pol-page-classifier",
             filePath: "/study/PolClassifier.js",
             matchPatterns: ["https://*.nytimes.com/*"],
             initArgs: polClassifierData
         });
-    await onClassificationResult.addListener(saveClassificationResult,
+    await onClassificationResult.addListener(saveClassificationResultCov,
         {
             workerId: "covid-page-classifier",
             filePath: "/study/CovidClassifier.js",
@@ -176,6 +176,10 @@ async function addEvent(typeOfEvent, url, timestamp) {
     await integrationStorage.set(urlEvents);
 }
 
-function saveClassificationResult(result) {
+function saveClassificationResultPol(result) {
+    console.log(result);
+}
+
+function saveClassificationResultCov(result) {
     console.log(result);
 }
