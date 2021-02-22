@@ -4,10 +4,13 @@ import { referrerDomains } from "./paths/referrerDomains.js"
 import { fbPages } from "./paths/pages-fb.js"
 import { twPages } from "./paths/pages-tw.js"
 import { ytPages } from "./paths/pages-yt.js"
+import polClassifierData from "./weights/pol-linearsvc_data.js"
+import covidClassifierData from "./weights/covid-linearsvc_data.js"
 
 const onLinkExposure = WebScience.Measurements.LinkExposure.onLinkExposure;
 const onPageData = WebScience.Measurements.PageNavigation.onPageData;
 const onShare = WebScience.Measurements.SocialMediaLinkSharing.onShare;
+const onClassificationResult = WebScience.Utilities.PageClassification.onClassificationResult;
 
 let integrationStorage;
 
@@ -24,6 +27,22 @@ export async function startStudy() {
     WebScience.Utilities.LinkResolution.initialize();
 
     //const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
+
+    // TODO: use new regexp functions for the urls here
+    await onClassificationResult.addListener(saveClassificationResult,
+        {
+            workerId: "pol-page-classifier",
+            filePath: "/study/PolClassifier.js",
+            matchPatterns: ["https://*.nytimes.com/*"],
+            initArgs: polClassifierData
+        });
+    await onClassificationResult.addListener(saveClassificationResult,
+        {
+            workerId: "covid-page-classifier",
+            filePath: "/study/CovidClassifier.js",
+            matchPatterns: ["https://*.nytimes.com/*", "https://*.npr.org/*"],
+            initArgs: covidClassifierData
+        });
 
     integrationStorage = new WebScience.Utilities.Storage.IndexedStorage(
         "NewsAndDisinfo.Integration", {integration: "url"});
@@ -155,4 +174,8 @@ async function addEvent(typeOfEvent, url, timestamp) {
     urlEvents[typeOfEvent].push(timestamp);
     console.log(urlEvents);
     await integrationStorage.set(urlEvents);
+}
+
+function saveClassificationResult(result) {
+    console.log(result);
 }

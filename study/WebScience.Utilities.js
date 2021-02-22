@@ -44,3 +44,6 @@ export { Readability }
 
 import * as Consent from "../WebScience/Utilities/Consent.js"
 export { Consent }
+
+import * as PageClassification from "../WebScience/Utilities/PageClassification.js"
+export { PageClassification }
