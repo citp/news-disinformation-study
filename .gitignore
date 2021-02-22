@@ -42,3 +42,6 @@ docs
 # Generated study files
 dist
 web-ext-artifacts/
+
+# npm
+node_modules/

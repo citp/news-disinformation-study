@@ -1,9 +1,12 @@
 {
-    "plugins": ["plugins/markdown"],
     "opts": {
         "destination": "./docs/",
         "recurse": true,
         "private": true
+    },
+    "plugins": ["plugins/markdown"],
+    "source": {
+        "excludePattern": "(rollup\\.config\\.js)|(web-ext-config\\.js)|(dist\\/)|(node_modules\\/)|((^|\\/|\\\\)_)"
     },
     "templates": {
         "default": {
