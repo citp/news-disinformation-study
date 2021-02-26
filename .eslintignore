@@ -2,4 +2,4 @@ dist
 WebScience/dependencies/localforage.es6.js
 WebScience/dependencies/localforage-startswith.js
 WebScience/Utilities/Readability.js
-WebScience/Measurements/content-scripts/Readability.js
+WebScience/Utilities/content-scripts/Readability.js

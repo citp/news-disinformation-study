@@ -17,13 +17,15 @@ let integrationStorage;
 let storagePN;
 let storageLE;
 let storageSMLS;
+let storageClassifications;
+const classificationsPN = {};
+const classificationsSMLS = {};
 
 const allDestinationPaths = [...destinationMatchPatterns, ...fbPages, ...twPages, ...ytPages];
 const allDestinationPatterns = WebScience.Utilities.Matching.createUrlMatchPatternArray(allDestinationPaths);
 const allReferrerPatterns = WebScience.Utilities.Matching.createUrlMatchPatternArray([...allDestinationPaths, ...referrerDomains]);
 
 export async function startStudy() {
-
     WebScience.Utilities.LinkResolution.initialize();
 
     //const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
@@ -46,6 +48,8 @@ export async function startStudy() {
 
     integrationStorage = new WebScience.Utilities.Storage.IndexedStorage(
         "NewsAndDisinfo.Integration", {integration: "url"});
+    storageClassifications = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.classification", {classResults: "++,url,pageId"});
 
     await startLinkExposureMeasurement({
         linkMatchPatterns: allDestinationPatterns,
@@ -124,13 +128,20 @@ async function startLinkExposureMeasurement(options) {
 async function linkShareListener(shareData) {
     const storage = storageSMLS;
     if (shareData.type == "share") {
-        shareData = shareData.value;
-        shareData.url = WebScience.Utilities.Matching.normalizeUrl(shareData.url);
-        await addEvent("share", shareData.url, shareData.shareTime);
-        const urlEvents = await integrationStorage.get(shareData.url);
-        shareData.previouslyExposed = urlEvents["exposure"].length > 0;
-        shareData.previouslyVisited = urlEvents["visit"].length > 0;
-        await storage.set(shareData);
+        const classResults = await storageClassifications.get({url:shareData.value.url});
+        if (classResults == null ||
+            !("pol-page-classifier" in classResults) ||
+            !("covid-page-classifier" in classResults)) {
+            WebScience.Utilities.PageClassification.fetchClassificationResult(
+                shareData.value.url,
+                "covid-page-classifier");
+
+            WebScience.Utilities.PageClassification.fetchClassificationResult(
+                shareData.value.url,
+                "pol-page-classifier");
+
+            setTimeout(storeLinkShare, 10000, shareData);
+        } else storeLinkShare(shareData, classResults);
     } else if (shareData.type == "untrackedTwitter") {
         await storage.set(
             {platform: "twitter", "count": shareData.value},
@@ -147,6 +158,24 @@ async function linkShareListener(shareData) {
 
 }
 
+async function storeLinkShare(shareData, classResults = null) {
+    const storage = storageSMLS;
+
+    if (classResults == null) classResults = classificationsSMLS[shareData.value.url];
+
+    shareData = shareData.value;
+    shareData.classifierResults = classResults;
+    shareData.url = WebScience.Utilities.Matching.normalizeUrl(shareData.url);
+
+    await addEvent("share", shareData.url, shareData.shareTime);
+
+    const urlEvents = await integrationStorage.get(shareData.url);
+    shareData.previouslyExposed = urlEvents["exposure"].length > 0;
+    shareData.previouslyVisited = urlEvents["visit"].length > 0;
+
+    await storage.set(shareData);
+}
+
 async function linkExposureListener(exposureData) {
     const storage = storageLE;
     exposureData.url = WebScience.Utilities.Matching.normalizeUrl(exposureData.url);
@@ -155,10 +184,30 @@ async function linkExposureListener(exposureData) {
     await addEvent("exposure", exposedUrl, exposureData.firstSeen);
 }
 
+/**
+ * Store the results from a page visit. If the classifier results haven't
+ * arrived yet (likely because the page was closed quickly after opening)
+ * wait 5 seconds to give them time, then save the event with or without them.
+ * @param {Object} pageData - visit information
+ */
 async function pageNavListener(pageData) {
+    const classResults = classificationsPN[pageData.pageId];
+    if (!("pol-page-classifier" in classResults) ||
+        !("cov-page-classifier" in classResults)) {
+        setTimeout(storePageNavResult, 5000, pageData);
+    } else {
+        storePageNavResult(pageData);
+    }
+}
+
+async function storePageNavResult(pageData) {
     const storage = storagePN;
+
     pageData.url = WebScience.Utilities.Matching.normalizeUrl(pageData.url);
     pageData.type = "pageVisit";
+
+    pageData.classResults = classificationsPN[pageData.pageId];
+    delete classificationsPN[pageData.pageId];
     await storage.set(pageData);
     await addEvent("visit", pageData.url, pageData.pageVisitStartTime);
 }
@@ -172,14 +221,32 @@ async function addEvent(typeOfEvent, url, timestamp) {
         share: []
     };
     urlEvents[typeOfEvent].push(timestamp);
-    console.log(urlEvents);
     await integrationStorage.set(urlEvents);
 }
 
+function saveClassificationResult(result) {
+    storageClassifications.set(result);
+    if (result.pageId != null) {
+        if (!classificationsPN[result.pageId]) classificationsPN[result.pageId] = {};
+        classificationsPN[result.pageId][result.className] = result.classification;
+    } else {
+        if (!classificationsSMLS[result.url]) classificationsSMLS[result.url] = {};
+        classificationsSMLS[result.url][result.className] = result.classification;
+    }
+}
+
 function saveClassificationResultPol(result) {
-    console.log(result);
+    saveClassificationResult({
+        className: "pol-page-classifier",
+        classification: result.predicted_class,
+        pageId: result.pageId,
+        url: result.url});
 }
 
 function saveClassificationResultCov(result) {
-    console.log(result);
+    saveClassificationResult({
+        className: "covid-page-classifier",
+        classification: result.predicted_class,
+        pageId: result.pageId,
+        url: result.url});
 }
