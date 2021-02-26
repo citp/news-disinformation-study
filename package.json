@@ -4,6 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --config-enable-developer-mode",
+    "docs": "jsdoc . -c jsdoc-conf.json",
     "lint": "eslint . && web-ext lint",
     "package": "npm run build && web-ext build --overwrite-dest --ignore-files \"./tests/**/*\" --ignore-files \"./src/**/*\" --ignore-files \"./rollup.config.js\"",
     "start": "npm run build && web-ext run",

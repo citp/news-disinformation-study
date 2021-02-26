@@ -2,23 +2,32 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "firefox",
+            "name": "Build Study",
+            "type": "node",
             "request": "launch",
-            "reAttach": true,
-            "name": "Launch add-on",
-            "addonPath": "${workspaceFolder}",
-            "log": {
-                "fileName": "${workspaceFolder}/log.txt",
-                "fileLevel": {
-                    "default": "Debug"
-                }
-            }
+            "runtimeArgs": [
+                "run-script",
+                "build"
+            ],
+            "runtimeExecutable": "npm"
         },
+
+        {
+            "name": "Build Study (Developer Mode)",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "run-script",
+                "dev"
+            ],
+            "runtimeExecutable": "npm"
+        },
+
         // Note: automatic extension reloading is not reliable... after the first reload, the debugger appears
         // to remain connected, but the Visual Studio debug console disconnects and the Firefox debug console
         // shows errors
         {
-            "name": "Launch WebExtension (With Automatic Extension Reloading)",
+            "name": "Launch Study (Automatic Reloading)",
             "type": "firefox",
             // To use the privileged API, you'll need to run a developer version of Firefox.
             //   Set the environment variable FFDEVLOC to the folder containing a dev version,
@@ -50,7 +59,7 @@
         },
         // Note: it's possible to manually reload the extension inside Firefox from about:debugging
         {
-            "name": "Launch WebExtension (Without Automatic Extension Reloading)",
+            "name": "Launch Study",
             "type": "firefox",
             // To use the privileged API, you'll need to run a developer version of Firefox.
             //   Set the environment variable FFDEVLOC to the folder containing a dev version,
