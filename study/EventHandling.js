@@ -1,9 +1,9 @@
 import * as WebScience from "./WebScience.js"
-import { destinationMatchPatterns } from "./paths/destinationDomainsOfInterest.js"
-import { referrerDomains } from "./paths/referrerDomains.js"
-import { fbPages } from "./paths/pages-fb.js"
-import { twPages } from "./paths/pages-tw.js"
-import { ytPages } from "./paths/pages-yt.js"
+import { destinationDomainMatchPatterns } from "./paths/destinationDomainMatchPatterns.js"
+import { referrerOnlyMatchPatterns } from "./paths/referrerOnlyMatchPatterns.js"
+import { facebookPageMatchPatterns } from "./paths/facebookPageMatchPatterns.js"
+import { twitterPageMatchPatterns } from "./paths/twitterPageMatchPatterns.js"
+import { youtubePageMatchPatterns } from "./paths/youtubePageMatchPatterns.js"
 import polClassifierData from "./weights/pol-linearsvc_data.js"
 import covidClassifierData from "./weights/covid-linearsvc_data.js"
 
@@ -11,26 +11,37 @@ const onLinkExposure = WebScience.Measurements.LinkExposure.onLinkExposure;
 const onPageData = WebScience.Measurements.PageNavigation.onPageData;
 const onShare = WebScience.Measurements.SocialMediaLinkSharing.onShare;
 const onClassificationResult = WebScience.Utilities.PageClassification.onClassificationResult;
+const onPageVisitStart = WebScience.Utilities.PageManager.onPageVisitStart;
 
 let integrationStorage;
 
 let storagePN;
 let storageLE;
 let storageSMLS;
+let numUntrackedShares;
+let numUntrackedVisits;
 let storageClassifications;
+let destinationMatcher;
+let referrerMatcher;
 const classificationsPN = {};
 const classificationsSMLS = {};
 
-const allDestinationPaths = [...destinationMatchPatterns, ...fbPages, ...twPages, ...ytPages];
-const allDestinationPatterns = WebScience.Utilities.Matching.createUrlMatchPatternArray(allDestinationPaths);
-const allReferrerPatterns = WebScience.Utilities.Matching.createUrlMatchPatternArray([...allDestinationPaths, ...referrerDomains]);
+const allDestinationMatchPatterns = [
+    ...destinationDomainMatchPatterns,
+    ...facebookPageMatchPatterns,
+    ...twitterPageMatchPatterns,
+    ...youtubePageMatchPatterns];
+
+const allReferrerMatchPatterns = [
+    ...allDestinationMatchPatterns,
+    ...referrerOnlyMatchPatterns];
 
 export async function startStudy() {
     WebScience.Utilities.LinkResolution.initialize();
 
-    //const studyPaths = WebScience.Utilities.Matching.getStudyPaths();
+    destinationMatcher = new WebScience.Utilities.Matching.MatchPatternSet(allDestinationMatchPatterns);
+    referrerMatcher = new WebScience.Utilities.Matching.MatchPatternSet(allReferrerMatchPatterns);
 
-    // TODO: use new regexp functions for the urls here
     await onClassificationResult.addListener(saveClassificationResultPol,
         {
             workerId: "pol-page-classifier",
@@ -52,22 +63,35 @@ export async function startStudy() {
         "NewsAndDisinfo.classification", {classResults: "++,url,pageId"});
 
     await startLinkExposureMeasurement({
-        linkMatchPatterns: allDestinationPatterns,
-        pageMatchPatterns: allReferrerPatterns,
-        domains: allDestinationPaths,
+        linkMatchPatterns: allDestinationMatchPatterns,
+        pageMatchPatterns: allReferrerMatchPatterns,
         privateWindows : false,
     });
 
     await startPageNavigationMeasurement({
-        matchPatterns: allDestinationPatterns,
+        matchPatterns: allDestinationMatchPatterns,
         trackUserAttention: true});
 
     await startSMLSMeasurement({
-        domains: allDestinationPaths,//studyPaths.destinationPaths,
+        destinationMatchPatterns: allDestinationMatchPatterns,
         facebook: true,
         twitter: true,
         reddit: true
     });
+
+    numUntrackedVisits = await (new WebScience.Utilities.Storage.Counter(
+        "NewsAndDisinfo.untrackedVisits")).initialize();
+    numUntrackedShares = {
+        facebook: await (new WebScience.Utilities.Storage.Counter(
+            "NewsAndDisinfo.untrackedShares.facebook")).initialize(),
+        twitter: await (new WebScience.Utilities.Storage.Counter(
+            "NewsAndDisinfo.untrackedShares.twitter")).initialize(),
+        reddit: await (new WebScience.Utilities.Storage.Counter(
+            "NewsAndDisinfo.untrackedShares.reddit")).initialize()
+    };
+
+
+    onPageVisitStart.addListener(countUntrackedPageVisits);
 
     WebScience.Utilities.DataAnalysis.runStudy({
 
@@ -83,6 +107,13 @@ export async function startStudy() {
                 data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
                 data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
                 data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
+                data["WebScience.Measurements.PageNavigation"]["numUntrackedVisits"] = numUntrackedVisits.get();
+                data["WebScience.Measurements.SocialMediaLinkSharing"]["linkSharesByPlatform"].
+                    forEach((platform) => {
+                    platform.numUntrackedVisits = numUntrackedShares[platform.platform].get();
+                }
+                );
+                console.log(data);
                 /*
                 debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
                 browser.telemetry.submitEncryptedPing(data, options);
@@ -90,16 +121,27 @@ export async function startStudy() {
             }
         }
     }, {
+        destinationMatcher: WebScience.Utilities.Matching.matchPatternsToRegExp(
+            allDestinationMatchPatterns),
+        referrerMatcher: WebScience.Utilities.Matching.matchPatternsToRegExp(allReferrerMatchPatterns),
+        fbMatcher: WebScience.Utilities.Matching.matchPatternsToRegExp(facebookPageMatchPatterns),
+        ytMatcher: WebScience.Utilities.Matching.matchPatternsToRegExp(youtubePageMatchPatterns),
+        twMatcher: WebScience.Utilities.Matching.matchPatternsToRegExp(twitterPageMatchPatterns)
+        /*
         destinationDomains: WebScience.Utilities.Matching.domainsToRegExpString(destinationMatchPatterns),
-        fbPages: WebScience.Utilities.Matching.domainsToRegExpString(fbPages),
-        ytPages: WebScience.Utilities.Matching.domainsToRegExpString(ytPages),
-        twPages: WebScience.Utilities.Matching.domainsToRegExpString(twPages),
         referrerOnlyDomains: referrerDomains
+        */
     }, [
         {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
         {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
-        {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"}
+        {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"},
+        {storage: storageSMLS, store: "untrackedShares", timeKey: "timeStamp"}
     ]);
+}
+
+function countUntrackedPageVisits(pageData) {
+    if (destinationMatcher.matches(pageData)) return;
+    numUntrackedVisits.increment();
 }
 
 async function startPageNavigationMeasurement(options) {
@@ -112,9 +154,10 @@ async function startPageNavigationMeasurement(options) {
 
 async function startSMLSMeasurement(options) {
     storageSMLS = new WebScience.Utilities.Storage.IndexedStorage(
-        "NewsAndDisinfo.Measurements.SocialMediaLinkSharing",
-        {linkShares:"shareId++, url, shareTime",
-         untrackedCounts: "platform"});
+        "NewsAndDisinfo.Measurements.SocialMediaLinkSharing", {
+            linkShares:"shareId++, url, shareTime",
+            untrackedShares: "platform, timeStamp"
+        });
     onShare.addListener(linkShareListener, options);
 }
 
@@ -127,6 +170,7 @@ async function startLinkExposureMeasurement(options) {
 
 async function linkShareListener(shareData) {
     const storage = storageSMLS;
+    const currentTime = Date.now();
     if (shareData.type == "share") {
         const classResults = await storageClassifications.get({url:shareData.value.url});
         if (classResults == null ||
@@ -143,17 +187,35 @@ async function linkShareListener(shareData) {
             setTimeout(storeLinkShare, 10000, shareData);
         } else storeLinkShare(shareData, classResults);
     } else if (shareData.type == "untrackedTwitter") {
-        await storage.set(
-            {platform: "twitter", "count": shareData.value},
-            "untrackedCounts");
+        numUntrackedShares.twitter.incrementBy(shareData.value);
+        /*
+        await storage.set( {
+            platform: "twitter",
+            "count": shareData.value,
+            timeStamp: currentTime
+        },
+            "untrackedShares");
+            */
     } else if (shareData.type == "untrackedFacebook") {
-        await storage.set(
-            {platform: "facebook", "count": shareData.value},
-            "untrackedCounts");
+        numUntrackedShares.facebook.incrementBy(shareData.value);
+        /*
+        await storage.set( {
+            platform: "facebook",
+            "count": shareData.value,
+            timeStamp: currentTime
+        },
+            "untrackedShares");
+            */
     } else if (shareData.type == "untrackedReddit") {
-        await storage.set(
-            {platform: "reddit", "count": shareData.value},
-            "untrackedCounts");
+        numUntrackedShares.reddit.incrementBy(shareData.value);
+        /*
+        await storage.set( {
+            platform: "reddit",
+            "count": shareData.value,
+            timeStamp: currentTime
+        },
+            "untrackedShares");
+            */
     }
 
 }
@@ -192,7 +254,8 @@ async function linkExposureListener(exposureData) {
  */
 async function pageNavListener(pageData) {
     const classResults = classificationsPN[pageData.pageId];
-    if (!("pol-page-classifier" in classResults) ||
+    if (classResults == null ||
+        !("pol-page-classifier" in classResults) ||
         !("cov-page-classifier" in classResults)) {
         setTimeout(storePageNavResult, 5000, pageData);
     } else {
