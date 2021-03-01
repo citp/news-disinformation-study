@@ -13,6 +13,7 @@ const SocialMediaLinkSharing = WebScience.Measurements.SocialMediaLinkSharing;
 const PageClassification = WebScience.Utilities.PageClassification;
 const PageManager = WebScience.Utilities.PageManager;
 const Matching = WebScience.Utilities.Matching;
+const Debugging = WebScience.Utilities.Debugging;
 
 let integrationStorage;
 
@@ -23,6 +24,7 @@ let storageClassifications;
 let destinationMatcher;
 const classificationsPN = {};
 const classificationsSMLS = {};
+const debugLog = Debugging.getDebuggingLog("NewsAndDisinfo.EventHandling");
 
 const allDestinationMatchPatterns = [
     ...destinationDomainMatchPatterns,
@@ -116,6 +118,7 @@ async function addListeners() {
 
 async function processAnalysisResult(result) {
     const data = {};
+    const options = { schemaName: "measurements", schemaVersion: 1 };
     const pageNav = result["NewsAndDisinfo.Measurements.PageNavigation.pageVisits"];
     const linkExp = result["NewsAndDisinfo.Measurements.LinkExposure.linkExposures"];
     const linkSharing = result["NewsAndDisinfo.Measurements.SocialMediaLinkSharing.linkShares"];
@@ -124,11 +127,8 @@ async function processAnalysisResult(result) {
     data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
     data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
     data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
-    console.log(data);
-    /*
     debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
     browser.telemetry.submitEncryptedPing(data, options);
-    */
 }
 
 
