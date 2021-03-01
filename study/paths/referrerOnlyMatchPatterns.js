@@ -77,6 +77,7 @@ export const referrerOnlyMatchPatterns = [
 "*://*.tumblr.com/*",
 "*://*.twitch.com/*",
 "*://*.twitter.com/*",
+"*://*.t.co/*",
 "*://*.usepanda.com/*",
 "*://*.washingtonpost.com/news/fact-checker/*",
 "*://*.webmail.excite.com/*",
