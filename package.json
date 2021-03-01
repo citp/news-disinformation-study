@@ -5,7 +5,7 @@
     "build": "rollup -c",
     "dev": "rollup -c --config-enable-developer-mode",
     "docs": "jsdoc . -c jsdoc-conf.json",
-    "lint": "eslint . && web-ext lint",
+    "lint": "eslint . && web-ext lint --ignore-files */*/Readability.js */*/*/Readability.js",
     "package": "npm run build && web-ext build --overwrite-dest --ignore-files \"./tests/**/*\" --ignore-files \"./src/**/*\" --ignore-files \"./rollup.config.js\"",
     "start": "npm run build && web-ext run",
     "test-integration": "npm run package && mv web-ext-artifacts/*.zip web-ext-artifacts/study.xpi && mocha --timeout 30000 \"./tests/integration/*.js\"",
