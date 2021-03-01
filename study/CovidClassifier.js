@@ -1,7 +1,7 @@
 /**
  * @module WebScience.Measurements.CovidClassifier
  */
-/* ngramExports is defined by another content script eslint to ignore it */
+/* ngramExports will be brought into scope by the importScripts call, tell eslint to ignore it */
 /* global ngramExports */
 (
     async function() {
@@ -110,6 +110,7 @@
          * @returns {Object} ngram frequency counts
          */
         function getFeaturesFromPage(url, title, content) {
+            self.importScripts("../WebScience/Utilities/Ngrams.js");
             let ngrams = [];
 
             // Tokenize the title and compute ngrams

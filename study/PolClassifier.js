@@ -1,10 +1,11 @@
 /**
  * @module WebScience.Measurements.PolClassifier
  */
-/* ngramExports is defined by another content script, tell eslint to ignore it */
+/* ngramExports is brought into scope by the importScripts call, tell eslint to ignore it */
 /* global ngramExports */
 (
     async function() {
+
         // Classifier state
         let name, featureLabels, coefficients, intercepts, tokenizationParams, idfVector = null;
 
@@ -110,6 +111,7 @@
          * @returns {Object} ngram frequency counts
          */
         function getFeaturesFromPage(url, title, content) {
+            self.importScripts("../WebScience/Utilities/Ngrams.js");
             let ngrams = [];
 
             // Tokenize the title and compute ngrams

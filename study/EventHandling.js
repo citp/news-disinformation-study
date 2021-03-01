@@ -12,6 +12,7 @@ const PageNavigation = WebScience.Measurements.PageNavigation;
 const SocialMediaLinkSharing = WebScience.Measurements.SocialMediaLinkSharing;
 const PageClassification = WebScience.Utilities.PageClassification;
 const PageManager = WebScience.Utilities.PageManager;
+const Matching = WebScience.Utilities.Matching;
 
 let integrationStorage;
 
@@ -33,11 +34,49 @@ const allReferrerMatchPatterns = [
     ...allDestinationMatchPatterns,
     ...referrerOnlyMatchPatterns];
 
+/**
+ * Starts the study by adding listeners and initializing measurement modules.
+ * This study runs the PageNavigation, LinkExposure, and SocialMediaLinkSharing modules.
+ */
 export async function startStudy() {
+    await initialize();
+
+    await addListeners();
+
+    WebScience.Utilities.DataAnalysis.runStudy({
+        analysisTemplate : {
+            path : "/WebScience/Measurements/AggregateStatistics.js",
+            resultListener : processAnalysisResult
+        }}, {
+            destinationMatches: (new Matching.MatchPatternSet(allDestinationMatchPatterns)).export(),
+            referrerMatches: (new Matching.MatchPatternSet(allReferrerMatchPatterns)).export(),
+            fbMatches: (new Matching.MatchPatternSet(facebookPageMatchPatterns)).export(),
+            ytMatches: (new Matching.MatchPatternSet(youtubePageMatchPatterns)).export(),
+            twMatches: (new Matching.MatchPatternSet(twitterPageMatchPatterns)).export()
+        }, [
+            {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
+            {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
+            {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"},
+        ]);
+
+    WebScience.Utilities.UserSurvey.runStudy({
+        surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
+    });
+}
+
+async function initialize() {
     WebScience.Utilities.LinkResolution.initialize();
 
     destinationMatcher = new WebScience.Utilities.Matching.MatchPatternSet(allDestinationMatchPatterns);
 
+    integrationStorage = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.Integration", {integration: "url"});
+
+    storageClassifications = new WebScience.Utilities.Storage.IndexedStorage(
+        "NewsAndDisinfo.Classification", {classResults: "++,url,pageId"});
+}
+
+async function addListeners() {
     await PageClassification.onClassificationResult.addListener(saveClassificationResultPol,
         {
             workerId: "pol-page-classifier",
@@ -54,11 +93,6 @@ export async function startStudy() {
             exportedMatcher: destinationMatcher.export(),
             initArgs: covidClassifierData
         });
-
-    integrationStorage = new WebScience.Utilities.Storage.IndexedStorage(
-        "NewsAndDisinfo.Integration", {integration: "url"});
-    storageClassifications = new WebScience.Utilities.Storage.IndexedStorage(
-        "NewsAndDisinfo.Classification", {classResults: "++,url,pageId"});
 
     await startLinkExposureMeasurement({
         linkMatchPatterns: allDestinationMatchPatterns,
@@ -77,47 +111,26 @@ export async function startStudy() {
         reddit: true
     });
 
-
     PageManager.onPageVisitStart.addListener(pageVisitStartListener);
-
-    WebScience.Utilities.DataAnalysis.runStudy({
-
-        analysisTemplate : {
-            path : "/WebScience/Measurements/AggregateStatistics.js",
-            resultListener : async (result) => {
-                const data = {};
-                const pageNav = result["NewsAndDisinfo.Measurements.PageNavigation.pageVisits"];
-                const linkExp = result["NewsAndDisinfo.Measurements.LinkExposure.linkExposures"];
-                const linkSharing = result["NewsAndDisinfo.Measurements.SocialMediaLinkSharing.linkShares"];
-                data["WebScience.Measurements.PageNavigation"] = pageNav ? pageNav : {};
-                data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
-                data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
-                data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
-                data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
-                console.log(data);
-                /*
-                debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
-                browser.telemetry.submitEncryptedPing(data, options);
-                */
-            }
-        }
-    }, {
-        destinationMatches: (new WebScience.Utilities.Matching.MatchPatternSet(
-            allDestinationMatchPatterns)).export(),
-        referrerMatches: (new WebScience.Utilities.Matching.MatchPatternSet(allReferrerMatchPatterns)).export(),
-        fbMatches: (new WebScience.Utilities.Matching.MatchPatternSet(facebookPageMatchPatterns)).export(),
-        ytMatches: (new WebScience.Utilities.Matching.MatchPatternSet(youtubePageMatchPatterns)).export(),
-        twMatches: (new WebScience.Utilities.Matching.MatchPatternSet(twitterPageMatchPatterns)).export()
-    }, [
-        {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
-        {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
-        {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"},
-    ]);
-
-    WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
-    });
 }
+
+async function processAnalysisResult(result) {
+    const data = {};
+    const pageNav = result["NewsAndDisinfo.Measurements.PageNavigation.pageVisits"];
+    const linkExp = result["NewsAndDisinfo.Measurements.LinkExposure.linkExposures"];
+    const linkSharing = result["NewsAndDisinfo.Measurements.SocialMediaLinkSharing.linkShares"];
+    data["WebScience.Measurements.PageNavigation"] = pageNav ? pageNav : {};
+    data["WebScience.Measurements.LinkExposure"] = linkExp ? linkExp : {};
+    data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
+    data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
+    data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
+    console.log(data);
+    /*
+    debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
+    browser.telemetry.submitEncryptedPing(data, options);
+    */
+}
+
 
 function pageVisitStartListener(pageData) {
     pageData.url = WebScience.Utilities.Matching.normalizeUrl(pageData.url);
@@ -172,13 +185,21 @@ async function linkShareListener(shareData) {
             setTimeout(storeLinkShare, 10000, shareData);
         } else storeLinkShare(shareData, classResults);
     } else if (shareData.type == "untrackedTwitter") {
-        storageSMLS.set({type: "untracked", platform: "twitter", count: shareData.value, shareTime: currentTime}, "linkShares");
+        storageSMLS.set({
+            type: "untracked", platform: "twitter",
+            count: shareData.value, shareTime: currentTime
+        }, "linkShares");
     } else if (shareData.type == "untrackedFacebook") {
-        storageSMLS.set({type: "untracked", platform: "facebook", count: shareData.value, shareTime: currentTime}, "linkShares");
+        storageSMLS.set({
+            type: "untracked", platform: "facebook",
+            count: shareData.value, shareTime: currentTime
+        }, "linkShares");
     } else if (shareData.type == "untrackedReddit") {
-        storageSMLS.set({type: "untracked", platform: "reddit", count: shareData.value, shareTime: currentTime}, "linkShares");
+        storageSMLS.set({
+            type: "untracked", platform: "reddit",
+            count: shareData.value, shareTime: currentTime
+        }, "linkShares");
     }
-
 }
 
 async function storeLinkShare(shareData, classResults = null) {
@@ -200,10 +221,11 @@ function checkPrevVisitReferrer(shareData, urlEvents) {
     return urlEvents ? urlEvents.visit : "";
 }
 
-
 async function untrackedLEListener(untrackedData) {
-    storageLE.set(
-        {type: "untracked", count: untrackedData.count, firstSeen: untrackedData.timeStamp},
+    storageLE.set({
+        type: "untracked", count: untrackedData.count,
+        firstSeen: untrackedData.timeStamp
+    },
         "linkExposures");
 }
 
@@ -242,10 +264,9 @@ async function storePageNavResult(pageData) {
      * Consider the following scenario:
      * - user browses to a news article
      * - user opens Facebook another tab and pastes the article url in to share
-     * - without ever closing the article, user completes the share
+     * - without closing the article, user completes the share
      * - if we hadn't logged the article visit when it started, we'd miss that it had happened in the share
      */
-    //await addEvent("visit", pageData.url, pageData.pageVisitStartTime);
 }
 
 async function addEvent(typeOfEvent, url, referrer="") {
@@ -265,6 +286,7 @@ async function addEvent(typeOfEvent, url, referrer="") {
 }
 
 function saveClassificationResult(result) {
+    console.log(result);
     storageClassifications.set(result);
     if (result.pageId != null) {
         if (!classificationsPN[result.pageId]) classificationsPN[result.pageId] = {};

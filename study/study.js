@@ -10,11 +10,6 @@ async function runStudy() {
     debugLog("Beginning study");
 
     await EventHandling.startStudy();
-
-    WebScience.Utilities.UserSurvey.runStudy({
-        surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
-    });
-
 }
 
 const rally = new Rally();
@@ -30,7 +25,7 @@ rally.initialize(
   // the build system.
   __ENABLE_DEVELOPER_MODE__,
 ).then(resolve => {
-    runStudy
+    runStudy();
 }, reject =>{
   // Do not start the study in this case. Something
   // went wrong.
