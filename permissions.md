@@ -1,0 +1,15 @@
+## Permissions used by the extension
+-  `<all_urls>`
+  - Used throughout -- we register content scripts for most websites.
+- `alarms`
+  - Used in `UserSurvey.js` to schedule reminders for the user to take the survey.
+- `idle`
+  - Used in `Idle.js` to track attention and schedule CPU-intensive tasks.
+- `notifications`
+  - Used in `UserSurvey.js` to alert the user to take the survey.
+- `storage` and `unlimitedStorage`
+  - We expect to store extensive data locally.
+- `webNavigation`
+  - Used in `PageManager.js` to detect oage updates made via the history API.
+- `webRequest`
+  - Used throughout, but especially in `SocialMediaActivity.js` to catch events being sent to Facebook, YouTube, and Reddit.
