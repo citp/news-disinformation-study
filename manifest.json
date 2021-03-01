@@ -21,11 +21,9 @@
     "permissions": [
         "<all_urls>",
         "alarms",
-        "history",
         "idle",
         "notifications",
         "storage",
-        "tabs",
         "unlimitedStorage",
         "webNavigation",
         "webRequest"
