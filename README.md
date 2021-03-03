@@ -1,5 +1,5 @@
 # News and Disinformation Study
-A research project on how web users consume, are exposed to, and share news.
+A research project on how web users consume, are exposed to, and share news. 2
 
 ## Requirements
 * [Node.js](https://nodejs.org/en/), available via [Homebrew](https://brew.sh/) on macOS
