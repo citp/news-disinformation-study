@@ -7,8 +7,6 @@ function listenForClicks() {
         } else if (e.target.name == "never") {
             await browser.runtime.sendMessage({ type: "WebScience.Utilities.UserSurvey.cancelSurveyRequest" });
             window.close();
-        } else if (e.target.id == "notice") {
-            await browser.runtime.sendMessage({ type: "WebScience.Utilities.Consent.openNotice" });
         }
     });
 }
