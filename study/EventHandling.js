@@ -41,6 +41,7 @@ const allReferrerMatchPatterns = [
  * This study runs the PageNavigation, LinkExposure, and SocialMediaLinkSharing modules.
  */
 export async function startStudy() {
+    console.log(__ENABLE_DEVELOPER_MODE__);
     await initialize();
 
     await addListeners();
@@ -128,6 +129,7 @@ async function processAnalysisResult(result) {
     data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
     data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
     debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
+    if (__ENABLE_DEVELOPER_MODE__) console.log(data);
     browser.telemetry.submitEncryptedPing(data, options);
 }
 

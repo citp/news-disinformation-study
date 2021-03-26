@@ -8,7 +8,7 @@ import {
   getDebuggingLog
 } from './Debugging.js';
 import * as Storage from "./Storage.js"
-//import * as Idle from "./Idle.js"
+import * as Idle from "./Idle.js"
 import * as Scheduling from "../Utilities/Scheduling.js"
 
 const debugLog = getDebuggingLog("Utilities.DataAnalysis");
@@ -55,7 +55,7 @@ async function initialize() {
         await storage.set("lastAnalysisRangeEndTime", lastAnalysisRangeEndTime);
     }
     console.log(lastAnalysisRangeEndTime);
-    //Idle.registerIdleStateListener(idleStateListener, 1); // for testing
+    if (__ENABLE_DEVELOPER_MODE__) Idle.registerIdleStateListener(idleStateListener, 1);
     Scheduling.onIdleDaily.addListener(idleStateListener);
 }
 
@@ -75,14 +75,11 @@ async function idleStateListener() {
         await storage.set("lastAnalysisRangeEndTime", lastAnalysisRangeEndTime);
         await triggerAnalysisScripts(analysisStartTime, analysisEndTime);
     }
-    /*
-    else {
-        // TODO this is useful for testing but should be removed before launch
+    else if (__ENABLE_DEVELOPER_MODE__){
         console.log("I would have pulled analysis results in this range",
                     analysisStartTime, analysisEndTime);
         await triggerAnalysisScripts(currentTime - 86400 * 1000, currentTime);
     }
-    */
 }
 
 /**
