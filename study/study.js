@@ -17,9 +17,10 @@ rally.initialize(
   "citp-news-disinfo",
   {
     "crv": "P-256",
+    "kid": "citp-news-disinfo-two",
     "kty": "EC",
-    "x": "LDByX3lSRSU624OfR9EMO3So_0uRt2sNCVzPdQUKbrY",
-    "y": "4Qu2FsVM8834l0GJG2ZA0JyJlX5Oe83jV54PZNyCSCA"
+    "x": "Q20tsJdrryWJeuPXTM27wIPb_YbsdYPpkK2N9O6aXwM",
+    "y": "1onW1swaCcN1jkmkIwhXpCm55aMP8GRJln5E8WQKLJk"
   },
   // The following constant is automatically provided by
   // the build system.
