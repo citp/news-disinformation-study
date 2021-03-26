@@ -6,7 +6,7 @@
 
     "version": "2.0",
 
-    "description": "An Ion study on how web users consume, are exposed to, and share news.",
+    "description": "A Rally study on how web users engage with news about politics and COVID-19.",
 
     "icons": {
         "48": "icons/princeton_university_shield_book_gray.svg",
@@ -31,8 +31,8 @@
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "news.study@princeton.edu",
-            "strict_min_version": "78.0"
+            "id": "rally.news.study@princeton.edu",
+            "strict_min_version": "87.0"
         }
     },
 
@@ -41,6 +41,8 @@
         "default_icon": {
             "16": "icons/princeton_university_shield_book_gray.svg"
         }
-    }
+    },
+    
+    "incognito": "not_allowed"
 
 }
