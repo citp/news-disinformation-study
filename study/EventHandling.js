@@ -36,12 +36,14 @@ const allReferrerMatchPatterns = [
     ...allDestinationMatchPatterns,
     ...referrerOnlyMatchPatterns];
 
+let rally;
+
 /**
  * Starts the study by adding listeners and initializing measurement modules.
  * This study runs the PageNavigation, LinkExposure, and SocialMediaLinkSharing modules.
  */
-export async function startStudy() {
-    console.log(__ENABLE_DEVELOPER_MODE__);
+export async function startStudy(rallyArg) {
+    rally = rallyArg;
     await initialize();
 
     await addListeners();
@@ -119,7 +121,6 @@ async function addListeners() {
 
 async function processAnalysisResult(result) {
     const data = {};
-    const options = { schemaName: "measurements", schemaVersion: 1 };
     const pageNav = result["NewsAndDisinfo.Measurements.PageNavigation.pageVisits"];
     const linkExp = result["NewsAndDisinfo.Measurements.LinkExposure.linkExposures"];
     const linkSharing = result["NewsAndDisinfo.Measurements.SocialMediaLinkSharing.linkShares"];
@@ -128,9 +129,9 @@ async function processAnalysisResult(result) {
     data["WebScience.Measurements.SocialMediaLinkSharing"] = linkSharing ? linkSharing : {};
     data["WebScience.SurveyId"] = await WebScience.Utilities.UserSurvey.getSurveyId();
     data["WebScience.version"] = WebScience.Utilities.Debugging.getExtensionVersion();
-    debugLog("Submitting results to Telemetry = " + JSON.stringify(data));
+    debugLog("Submitting results through Rally = " + JSON.stringify(data));
     if (__ENABLE_DEVELOPER_MODE__) console.log(data);
-    browser.telemetry.submitEncryptedPing(data, options);
+    rally.sendPing("measurements", data);
 }
 
 

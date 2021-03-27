@@ -9,7 +9,7 @@ const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 async function runStudy() {
     debugLog("Beginning study");
 
-    await EventHandling.startStudy();
+    await EventHandling.startStudy(rally);
 }
 
 const rally = new Rally();
