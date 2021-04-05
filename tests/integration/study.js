@@ -45,6 +45,6 @@ describe("Study Template integration test example", function () {
     // switch to browser UI context to interact with Firefox add-on install prompts.
     await this.driver.setContext(firefox.Context.CHROME);
     await findAndAct(this.driver, By.css(`[label="Add"]`), e => e.click());
-    await findAndAct(this.driver, By.css(`[label="Okay, Got It"]`), e => e.click());
+    await findAndAct(this.driver, By.css(`[label="Okay"]`), e => e.click());
   });
 });
