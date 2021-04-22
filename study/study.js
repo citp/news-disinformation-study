@@ -1,10 +1,10 @@
 import "webextension-polyfill";
-import * as WebScience from "./WebScience.js"
+import * as webScience from "./webScience.js"
 import Rally from "@mozilla/rally";
 import * as EventHandling from "./EventHandling.js"
 
-WebScience.Utilities.Debugging.enableDebugging();
-const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
+webScience.debugging.enableDebugging();
+const debugLog = webScience.debugging.getDebuggingLog("study");
 
 async function runStudy() {
     debugLog("Beginning study");

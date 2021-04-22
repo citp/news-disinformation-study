@@ -5,6 +5,7 @@
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
 
 /**
  * Helper to detect developer mode.
@@ -17,6 +18,32 @@ function isDevMode(cliArgs) {
 }
 
 export default (cliArgs) => [
+  {
+    input: "study/polClassifier.js",
+    //input: "study/simpleClass.js",
+    output: {
+      file: "dist/polClassifier.js",
+      format: "esm",
+    },
+    plugins: [
+      resolve(),
+      terser({
+        warnings: true,
+        mangle: {
+          module: true,
+        },
+        format: {
+          ascii_only: true,
+        },
+      }),
+      {
+        name: "worker-to-string",
+        renderChunk(code) {
+          return `export default '${code}';`;
+        },
+      },
+    ],
+  },
   {
     input: "study/study.js",
     output: {
