@@ -3,8 +3,6 @@
 import {nGram} from "n-gram"
 (
     async function() {
-        console.log("hello from worker");
-
         // Classifier state
         let name, featureLabels, coefficients, intercepts, tokenizationParams, idfVector = null;
 
@@ -26,12 +24,11 @@ import {nGram} from "n-gram"
         }
 
         function onTextParsedListener(textParsedDetails) {
-            console.log("textParsedDetails", textParsedDetails);
-                sendMessageToCaller("pol-page-classifier",
-                    classify(textParsedDetails),
-                    textParsedDetails.url,
-                    textParsedDetails.pageId
-                );
+            sendMessageToCaller("covid-page-classifier",
+                classify(textParsedDetails),
+                textParsedDetails.url,
+                textParsedDetails.pageId
+            );
         }
         /**
          * Handle events from the main thread
@@ -43,7 +40,6 @@ import {nGram} from "n-gram"
          * @listens MessageEvent
          */
         self.addEventListener("message", event => {
-            console.log("message", event);
             if ((typeof event.data === "object") &&
                 ("eventName" in event.data) &&
                 (event.data.eventName === "webScience.pageText.onTextParsed")) {
@@ -128,29 +124,24 @@ import {nGram} from "n-gram"
 
             // Tokenize the title and compute ngrams
             let tokens = tokenizeText(title).map(token => "title__"+token);
-            const splitRegex = new RegExp("\\\\D", "g");
-            let ngramRange = tokenizationParams["title"]["ngram_range"].split(splitRegex).filter(t => {
-                if (t != ""){
+            let ngramRange = tokenizationParams['title']['ngram_range'].split(/\D/g).filter(t => {
+                if (t != ''){
                     return t;
                 }
             });
             for (let i = Number(ngramRange[0]); i <= Number(ngramRange[1]); i++) {
                 try {
-                    console.log("i nGram(i)(tokens)", i, nGram(i)(tokens));
                     ngrams = ngrams.concat((nGram(i)(tokens)).map(t => t.join(" ")).flat());
-                    //ngrams = ngrams.concat(ngramExports.fromSync(tokens,i).map(t => t.join(" ")).flat());
                 }
-                // it's ok if we don't get ngrams from every source
                 catch (err) {
-                    console.log("err1", err);
                     // it's ok if we don't get ngrams from every source
                 }
             }
 
             // Tokenize the content and compute ngrams
             tokens = tokenizeText(content).map(token => "content__"+token);
-            ngramRange = tokenizationParams["content"]["ngram_range"].split(splitRegex).filter(t => {
-                if (t != ""){
+            ngramRange = tokenizationParams['content']['ngram_range'].split(/\D/g).filter(t => {
+                if (t != ''){
                     return t;
                 }
             });
@@ -160,23 +151,20 @@ import {nGram} from "n-gram"
      //ngrams = ngrams.concat(ngramExports.fromSync(tokens,i).map(t => t.join(" ")).flat());
                 }
                 catch (err) {
-                    console.log("err2", err);
                     // it's ok if we don't get ngrams from every source
                 }
             }
 
             // Tokenize the URL and compute ngrams
             // Tokenization: parse the pathname, split on a regex, and lowercase
-            //const urlRegex = /htm|html|\/|-|_|\.|\?|=|\b[0-9]+\b/ig
-            /* eslint no-useless-escape: 0 */
-            const urlRegex = new RegExp("htm|html|/|-|_|.|\\\\?|=|\\\\b[0-9]+\\\\b", "ig");
+            const urlRegex = /htm|html|\/|-|_|\.|\?|=|\b[0-9]+\b/ig
             tokens = new URL(url).pathname.split(urlRegex).filter(t => {
-                if (t != ""){
+                if (t != ''){
                     return t;
                 }
             }).map(token => "URL__"+token.toLowerCase());
-            ngramRange = tokenizationParams["url"]["ngram_range"].split(splitRegex).filter(t => {
-                if (t != ""){
+            ngramRange = tokenizationParams['url']['ngram_range'].split(/\D/g).filter(t => {
+                if (t != ''){
                     return t;
                 }
             });
@@ -186,14 +174,13 @@ import {nGram} from "n-gram"
                     //ngrams = ngrams.concat(ngramExports.fromSync(tokens,i).map(t => t.join(" ")).flat());
                 }
                 catch (err) {
-                    console.log("err3", err);
                     // it's ok if we don't get ngrams from every source
                 }
             }
             // Get rid of all ngrams not in the classifier vocabulary, then compute counts
             ngrams = ngrams.filter(n => featureLabels.includes(n));
             const ngramCounts = ngrams.reduce(function (acc, curr) {
-                if (typeof acc[curr] == "undefined") {
+                if (typeof acc[curr] == 'undefined') {
                     acc[curr] = 1;
                 } else {
                     acc[curr] += 1;
@@ -201,11 +188,10 @@ import {nGram} from "n-gram"
 
                 return acc;
             }, {})
-            console.log("ngrams", ngrams);
 
             // Turn the counts into a feature vector (array), adding 0's for features not in this sample
             const featureVector = featureLabels.map(label => {
-                if (typeof ngramCounts[label] == "undefined"){
+                if (typeof ngramCounts[label] == 'undefined'){
                     return 0;
                 } else {
                     return ngramCounts[label];
@@ -237,13 +223,12 @@ import {nGram} from "n-gram"
          * @returns {Array} array of tokens
          */
         function tokenizeText(text) {
-            const str = "’|".concat(String.fromCharCode(39));
-            const apostropheRegex = new RegExp(str, "g");
+            //const str = "’|".concat(String.fromCharCode(39));
+            //const apostropheRegex = new RegExp(str, "g");
             //const apostropheRegex = new RegExp("'|’", "g");
-            //let t = text.replace(/'|’/g, "") // Remove apostrophes
-            let t = text.replace(apostropheRegex, "") // Remove apostrophes
-            const alphanumRegex = new RegExp("[^A-Za-z0-9]+", "g");
-            t = t.replace(alphanumRegex, " ") // Replace non-alphanum chars with spaces
+            let t = text.replace(/'|’/g, "") // Remove apostrophes
+            //let t = text.replace(apostropheRegex, "") // Remove apostrophes
+            t = t.replace(/[^A-Za-z0-9]+/g, " ") // Replace non-alphanum chars with spaces
             t = t.toLowerCase() // Lowercase all letters
             t = t.split(" ") // Create array
             return t

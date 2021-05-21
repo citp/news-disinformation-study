@@ -1,32 +1,57 @@
 /**
  */
-import * as webScience from "./webScience.js"
-import polClassifierData from "./weights/pol-linearsvc_data.js"
-import covidClassifierData from "./weights/covid-linearsvc_data.js"
-import polWorkerString from "../dist/polClassifier.js"
 
-export function registerWorkers(matchPatterns) {
-    console.log("reg running");
-    console.log(matchPatterns);
-    const workerBlob = new Blob([polWorkerString]);
-    console.log(workerBlob);
-    const workerUrl = URL.createObjectURL(workerBlob);
-    const worker = new Worker(workerUrl);
-//    const worker = new Worker("/study/polClassifier.js");
-    console.log(worker);
+import * as webScience from "./webScience.js";
+import Readability from '@mozilla/readability';
+
+const registeredWorkers = {};
+
+export function registerWorker(path, matchPatterns, name, initData, listener) {
+    const worker = new Worker(path);
     worker.postMessage({
         type: "init",
-        name: "pol-page-classifier",
-        args: polClassifierData
+        name: name,
+        args: initData
     });
 
     worker.onmessage = event => {
-        console.log(event.data.predicted_class);
+        listener(event.data);
     };
 
     webScience.pageText.onTextParsed.addListener(
         webScience.workers.createEventListener(worker),
         {
             matchPatterns: matchPatterns
-        });
+        }
+    );
+
+    registeredWorkers[name] = worker;
 }
+
+
+export function fetchClassificationResult(url, workerName) {
+    if (!(workerName in registeredWorkers)) return {};
+    const worker = registeredWorkers[workerName];
+    fetch(url).then((response) => {
+        response.text().then((resp) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(resp, 'text/html');
+            const pageContent = new Readability.Readability(doc).parse();
+            const toSend = {
+                url : url,
+                title: pageContent.title,
+                textContent : pageContent.textContent,
+                pageId: null,
+                context : {
+                    timestamp : Date.now(),
+                    referrer : ""
+                }
+            }
+            worker.postMessage({
+                eventName: "webScience.pageText.onTextParsed",
+                listenerArguments: [toSend]
+            });
+        });
+    });
+}
+

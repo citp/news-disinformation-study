@@ -1,6 +1,7 @@
 import * as webScience from "./webScience.js"
 import * as indexedStorage from "./indexedStorage.js"
 import * as pageClassification from "./pageClassification.js"
+import * as dataAnalysis from "./dataAnalysis.js"
 import { destinationDomainMatchPatterns } from "./paths/destinationDomainMatchPatterns.js"
 import { referrerOnlyMatchPatterns } from "./paths/referrerOnlyMatchPatterns.js"
 import { facebookPageMatchPatterns } from "./paths/facebookPageMatchPatterns.js"
@@ -10,11 +11,12 @@ import polClassifierData from "./weights/pol-linearsvc_data.js"
 import covidClassifierData from "./weights/covid-linearsvc_data.js"
 
 const linkExposure = webScience.linkExposure;
-const PageNavigation = webScience.pageNavigation;
-const SocialMediaLinkSharing = webScience.socialMediaLinkSharing;
-const PageManager = webScience.pageManager;
+const pageNavigation = webScience.pageNavigation;
+const socialMediaLinkSharing = webScience.socialMediaLinkSharing;
+const pageManager = webScience.pageManager;
+const pageTransition = webScience.pageTransition;
 const matching = webScience.matching;
-const Debugging = webScience.debugging;
+const debugging = webScience.debugging;
 
 let integrationStorage;
 
@@ -24,8 +26,9 @@ let storageSMLS;
 let storageClassifications;
 let destinationMatcher;
 const classificationsPN = {};
+const transitionsPN = {};
 const classificationsSMLS = {};
-const debugLog = Debugging.getDebuggingLog("NewsAndDisinfo.EventHandling");
+const debugLog = debugging.getDebuggingLog("newsAndDisinfo.eventHandling");
 
 const allDestinationMatchPatterns = [
     ...destinationDomainMatchPatterns,
@@ -41,7 +44,7 @@ let rally;
 
 /**
  * Starts the study by adding listeners and initializing measurement modules.
- * This study runs the PageNavigation, linkExposure, and SocialMediaLinkSharing modules.
+ * This study runs the pageNavigation, linkExposure, and socialMediaLinkSharing modules.
  */
 export async function startStudy(rallyArg) {
     rally = rallyArg;
@@ -49,26 +52,32 @@ export async function startStudy(rallyArg) {
 
     await addListeners();
 
-    /* TODO
-    webScience.dataAnalysis.runStudy({
-        analysisTemplate : {
-            path : "/webScience/aggregateStatistics.js",
-            resultListener : processAnalysisResult
-        }}, {
+    dataAnalysis.registerAnalysisScript("/dist/aggregateStatistics.worker.js",
+        processAnalysisResult, 
+        [
+            {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
+            {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
+            {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"},
+        ],
+        {
             destinationMatches: (matching.createMatchPatternSet(allDestinationMatchPatterns)).export(),
             referrerMatches: (matching.createMatchPatternSet(allReferrerMatchPatterns)).export(),
             fbMatches: (matching.createMatchPatternSet(facebookPageMatchPatterns)).export(),
             ytMatches: (matching.createMatchPatternSet(youtubePageMatchPatterns)).export(),
             twMatches: (matching.createMatchPatternSet(twitterPageMatchPatterns)).export()
-        }, [
-            {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
-            {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
-            {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"},
-        ]);
-        */
+        });
 
-    /* TODO
-    webScience.userSurvey.runStudy({
+
+    // TODO re-enable 
+    /*
+    webScience.userSurvey.setSurvey({
+        surveyName: "Initial Survey",
+        popupNoPromptMessage: "<p>You are currently participating in the Political and COVID-19 News Information Flows Study. If you would like to hide this icon, right click and select <i>Remove from Toolbar</i>. </p>",
+        popupPromptMessage: "<p>You are currently participating in the Political and COVID-19 News Information Flows Study. </p> <p> Please answer a few survey questions for the Political and COVID-19 News Information Flows Study. Clicking Continue will take you to Princeton’s survey.",
+        reminderInterval: 60 * 60 * 24 *3,
+        reminderMessage: "A survey is available for your Rally study. Click the Princeton logo in the toolbar to continue.",
+        reminderTitle: "Rally survey available",
+        surveyCompletionUrl: "https://citpsurveys.cs.princeton.edu/thankyou",
         surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
     });
     */
@@ -85,33 +94,24 @@ async function initialize() {
 }
 
 async function addListeners() {
-    pageClassification.registerWorkers(allDestinationMatchPatterns);
-    /*
-    await pageClassification.onClassificationResult.addListener(saveClassificationResultPol,
-        {
-            workerId: "pol-page-classifier",
-            filePath: "/study/PolClassifier.js",
-            matchPatterns: allDestinationMatchPatterns,
-            exportedMatcher: destinationMatcher.export(),
-            initArgs: polClassifierData
-        });
-    await pageClassification.onClassificationResult.addListener(saveClassificationResultCov,
-        {
-            workerId: "covid-page-classifier",
-            filePath: "/study/CovidClassifier.js",
-            matchPatterns: allDestinationMatchPatterns,
-            exportedMatcher: destinationMatcher.export(),
-            initArgs: covidClassifierData
-        });
-        */
+    pageClassification.registerWorker("/dist/polClassifier.worker.js",
+        allDestinationMatchPatterns,
+        "pol-page-classifier",
+        polClassifierData,
+        saveClassificationResultPol
+    );
+    pageClassification.registerWorker("/dist/covidClassifier.worker.js",
+        allDestinationMatchPatterns,
+        "covid-page-classifier",
+        covidClassifierData,
+        saveClassificationResultCovid
+    );
 
-    /* TODO
     await startLinkExposureMeasurement({
         linkMatchPatterns: allDestinationMatchPatterns,
         pageMatchPatterns: allReferrerMatchPatterns,
         privateWindows : false,
     });
-    */
 
     await startPageNavigationMeasurement({
         matchPatterns: allDestinationMatchPatterns,
@@ -124,19 +124,24 @@ async function addListeners() {
         reddit: true
     });
 
-    PageManager.onPageVisitStart.addListener(pageVisitStartListener);
+    await startPageTransitionMeasurement({
+        matchPatterns: allDestinationMatchPatterns,
+    });
+
+    pageManager.onPageVisitStart.addListener(pageVisitStartListener);
 }
 
 async function processAnalysisResult(result) {
+    const analysisResult = result.data.data;
     const data = {};
-    const pageNav = result["NewsAndDisinfo.pageNavigation.pageVisits"];
-    const linkExp = result["NewsAndDisinfo.linkExposure.linkExposures"];
-    const linkSharing = result["NewsAndDisinfo.socialMediaLinkSharing.linkShares"];
+    const pageNav = analysisResult["NewsAndDisinfo.pageNavigation.pageVisits"];
+    const linkExp = analysisResult["NewsAndDisinfo.linkExposure.linkExposures"];
+    const linkSharing = analysisResult["NewsAndDisinfo.socialMediaLinkSharing.linkShares"];
     data["webScience.pageNavigation"] = pageNav ? pageNav : {};
     data["webScience.linkExposure"] = linkExp ? linkExp : {};
     data["webScience.socialMediaLinkSharing"] = linkSharing ? linkSharing : {};
     data["webScience.SurveyId"] = await webScience.userSurvey.getSurveyId();
-    data["webScience.version"] = webScience.debugging.getExtensionVersion();
+    data["webScience.version"] = getExtensionVersion();
     debugLog("Submitting results through Rally = " + JSON.stringify(data));
     if (__ENABLE_DEVELOPER_MODE__) console.log(data);
     rally.sendPing("measurements", data);
@@ -157,7 +162,7 @@ async function startPageNavigationMeasurement(options) {
         "NewsAndDisinfo.pageNavigation", {
             pageVisits: "++, pageId, url, pageVisitStartTime",
         });
-    PageNavigation.onPageData.addListener(pageNavListener, options);
+    pageNavigation.onPageData.addListener(pageNavListener, options);
 }
 
 async function startSMLSMeasurement(options) {
@@ -165,7 +170,7 @@ async function startSMLSMeasurement(options) {
         "NewsAndDisinfo.socialMediaLinkSharing", {
             linkShares:"shareId++, url, shareTime",
         });
-    SocialMediaLinkSharing.onShare.addListener(linkShareListener, options);
+    socialMediaLinkSharing.onShare.addListener(linkShareListener, options);
 }
 
 async function startLinkExposureMeasurement(options) {
@@ -173,8 +178,18 @@ async function startLinkExposureMeasurement(options) {
         "NewsAndDisinfo.linkExposure", {
             linkExposures: "exposureId++, url, firstSeen",
         });
-    linkExposure.onLinkExposure.addListener(linkExposureListener, options);
-    linkExposure.onUntracked.addListener(untrackedLEListener);
+    linkExposure.onLinkExposureData.addListener(linkExposureListener, options);
+}
+
+async function startPageTransitionMeasurement(options) {
+    pageTransition.onPageTransitionData.addListener(pageTransitionListener, options);
+}
+
+function pageTransitionListener(details) {
+    const sourceUrl = details.tabSourceUrl;
+    const pageId = details.pageId;
+
+    transitionsPN[pageId] = {sourceUrl};
 }
 
 async function linkShareListener(shareData) {
@@ -185,11 +200,11 @@ async function linkShareListener(shareData) {
         if (classResults == null ||
             !("pol-page-classifier" in classResults) ||
             !("covid-page-classifier" in classResults)) {
-            webScience.pageClassification.fetchClassificationResult(
+            pageClassification.fetchClassificationResult(
                 shareData.value.url,
                 "covid-page-classifier");
 
-            webScience.pageClassification.fetchClassificationResult(
+            pageClassification.fetchClassificationResult(
                 shareData.value.url,
                 "pol-page-classifier");
 
@@ -232,20 +247,27 @@ function checkPrevVisitReferrer(shareData, urlEvents) {
     return urlEvents ? urlEvents.visit : "";
 }
 
-async function untrackedLEListener(untrackedData) {
-    storageLE.set({
-        type: "untracked", count: untrackedData.count,
-        firstSeen: untrackedData.timeStamp
-    },
-        "linkExposures");
-}
-
 async function linkExposureListener(exposureData) {
+    const firstSeen = Date.now();
     exposureData.url = webScience.matching.normalizeUrl(exposureData.url);
-    const exposedUrl = exposureData.url;
-    exposureData.type = "exposure";
-    await storageLE.set(exposureData, "linkExposures");
-    await addEvent("exposure", exposedUrl);
+    for (const exposedUrl of exposureData.matchingLinkUrls) {
+        addEvent("exposure", exposedUrl);
+        const singleExposure = {
+            type: "exposure",
+            url: webScience.matching.normalizeUrl(exposedUrl),
+            pageUrl: exposureData.url,
+            firstSeen: firstSeen
+        };
+        storageLE.set(singleExposure, "linkExposures");
+    }
+    if (exposureData.nonmatchingLinkCount > 0) {
+        const untrackedData = {
+            type: "untracked",
+            count: exposureData.nonmatchingLinkCount,
+            firstSeen: firstSeen
+        };
+        storageLE.set(untrackedData, "linkExposures");
+    }
 }
 
 /**
@@ -256,9 +278,11 @@ async function linkExposureListener(exposureData) {
  */
 async function pageNavListener(pageData) {
     const classResults = classificationsPN[pageData.pageId];
+    const transitionResult = transitionsPN[pageData.pageId];
     if (classResults == null ||
         !("pol-page-classifier" in classResults) ||
-        !("cov-page-classifier" in classResults)) {
+        !("cov-page-classifier" in classResults) ||
+        transitionResult == null) {
         setTimeout(storePageNavResult, 5000, pageData);
     } else {
         storePageNavResult(pageData);
@@ -270,6 +294,10 @@ async function storePageNavResult(pageData) {
     pageData.type = "pageVisit";
     pageData.classResults = classificationsPN[pageData.pageId];
     delete classificationsPN[pageData.pageId];
+    if (pageData.pageId in transitionsPN) {
+        pageData.sourceUrl = transitionsPN[pageData.pageId].sourceUrl;
+    }
+    delete transitionsPN[pageData.pageId];
     await storagePN.set(pageData, "pageVisits");
     /* Note: we don't call addEvent here because it gets called from pageVisitStartListener instead.
      * Consider the following scenario:
@@ -297,7 +325,6 @@ async function addEvent(typeOfEvent, url, referrer="") {
 }
 
 function saveClassificationResult(result) {
-    console.log(result);
     storageClassifications.set(result);
     if (result.pageId != null) {
         if (!classificationsPN[result.pageId]) classificationsPN[result.pageId] = {};
@@ -316,10 +343,16 @@ function saveClassificationResultPol(result) {
         url: result.url});
 }
 
-function saveClassificationResultCov(result) {
+function saveClassificationResultCovid(result) {
     saveClassificationResult({
         className: "covid-page-classifier",
         classification: result.predicted_class,
         pageId: result.pageId,
         url: result.url});
+}
+
+function getExtensionVersion() {
+    const manifest = browser.runtime.getManifest();
+    if ("version" in manifest) return manifest.version;
+    return "";
 }

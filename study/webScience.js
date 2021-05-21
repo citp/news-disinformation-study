@@ -41,10 +41,8 @@ export { userSurvey }
 import * as socialMediaActivity from "../webScience/dist/socialMediaActivity.js"
 export { socialMediaActivity }
 
-/*
-import * as pageClassification from "../webScience/dist/pageClassification.js"
-export { pageClassification }
-*/
+import * as pageTransition from "../webScience/dist/pageTransition.js"
+export { pageTransition }
 
 import * as pageNavigation from "../webScience/dist/pageNavigation.js"
 export { pageNavigation }
