@@ -4,7 +4,7 @@
  */
 
 import * as webScience from "./webScience.js"
-import * as indexedStorage from "./indexedStorage.js"
+//import * as indexedStorage from "./indexedStorage.js"
 
 let storage;
 
@@ -15,9 +15,9 @@ let storage;
  */
 let initialized = false;
 
-let paramsToSend = null;
+//let paramsToSend = null;
 
-let storageInstances = null;
+//let storageInstances = null;
 
 /**
  * The end of the time range that the last aggregation run considered.
@@ -85,9 +85,12 @@ async function runAnalysis() {
         startTime = currentTime - 86400 * 1000;
         endTime = currentTime;
     } else return;
-    const storageObjs = await indexedStorage.getEventsByRange(startTime, endTime, storageInstances);
-    const toSend = paramsToSend;
-    toSend.fromStorage = storageObjs;
+    //const storageObjs = await indexedStorage.getEventsByRange(startTime, endTime, storageInstances);
+    const toSend = {};//paramsToSend;
+    //toSend.fromStorage = storageObjs;
+    toSend.type = "aggregate";
+    toSend.startTime = startTime;
+    toSend.endTime = endTime;
 
     analysisWorker.postMessage(toSend);
 }
@@ -100,8 +103,13 @@ export function registerAnalysisScript(scriptPath, listener, storageNames, param
     analysisWorker.onerror = event => {
         console.error("Error from analysis script:", event.data);
     }
-    storageInstances = storageNames;
-    paramsToSend = params;
+
+    analysisWorker.postMessage({
+        type: "init",
+        ...params
+    });
+    //storageInstances = storageNames;
+    //paramsToSend = params;
 
     webScience.scheduling.onIdleDaily.addListener(runAnalysis);
     if (__ENABLE_DEVELOPER_MODE__) {

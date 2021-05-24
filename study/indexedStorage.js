@@ -5,8 +5,6 @@
 
 import Dexie from 'dexie';
 
-export const storageInstances = [];
-
 export class indexedStorage {
     /**
      * Create a storage area with indexed fields.
@@ -22,6 +20,11 @@ export class indexedStorage {
 
         this.storageInstance = new Dexie(this.storageAreaName);
         this.storageInstance.version(1).stores(stores);
+        this.timeKey = "";
+    }
+
+    setTimeKey(timeKeyName) {
+        this.timeKey = timeKeyName;
     }
 
     async set(item, store="") {
@@ -33,8 +36,13 @@ export class indexedStorage {
         return result;
     }
 
-    async getEventsByRange(startTime, endTime, timeKey, store=""){
-        const result = await this.storageInstance[store=="" ? this.defaultStore : store].where(timeKey)
+    search(query, store="") {
+        return this.storageInstance[store == "" ? this.defaultStore : store].where(query).toArray();
+    }
+
+    async getEventsByRange(startTime, endTime, store=""){
+        const result = await this.storageInstance[store=="" ? this.defaultStore : store]
+            .where(this.timeKey)
             .inAnyRange([[startTime, endTime]])
             .toArray();
         return result;
@@ -42,18 +50,11 @@ export class indexedStorage {
 
 }
 
-export async function getEventsByRange(startTime, endTime, instances) {
-    const events = {};
-    for (const instance of instances) {
-        const storage = instance.storage;
-        const store = instance.store;
-        const timeKey = instance.timeKey;
-        events[instance.storage.storageAreaName + "." + store] = await storage.getEventsByRange(startTime, endTime, timeKey, store);
-    }
-    return events;
-}
-
 // Prevents IndexedDB data from getting deleted without user intervention
 // Ignoring the promise resolution because we still want to use storage
 // even if Firefox won't guarantee persistence
+try {
 navigator.storage.persist();
+} catch {
+    // ignore
+}

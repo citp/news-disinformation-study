@@ -1,4 +1,4 @@
-export const referrerOnlyMatchPatterns = [
+export const sourceOnlyMatchPatterns = [
 "*://*.alltop.com/*",
 "*://*.aol.com/*",
 "*://*.apps.rackspace.com/*",
