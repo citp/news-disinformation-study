@@ -2,15 +2,17 @@
  * This module facilitates checking that required permissions are
  * provided in the WebExtensions manifest.
  * 
- * @module webScience.permissions
+ * @module permissions
  */
+
+import * as matching from "./matching.js";
 
 /**
  * An object where keys are Content Security Policy directive names and values are arrays of directive values.
  * @typedef {Object} ContentSecurityPolicy
  * @example
  * {
- *   "script-src": [ "'self'", "www.example.com"],
+ *   "script-src": [ "'self'", "www.example.com" ],
  *   "object-src": [ 'self' ]
  * }
  */
@@ -104,9 +106,11 @@ function checkContentSecurityPolicyDirective(directiveName, directiveValue, cont
  * @param {string[]} [options.suggestedOrigins=[]] - Origin permissions that are recommended.
  * @param {ContentSecurityPolicy} [options.requiredContentSecurityPolicy = {}] - Content Security Policy directives that are required.
  * @param {ContentSecurityPolicy} [options.suggestedContentSecurityPolicy = {}] - Content Security Policy directives that are recommended.
- * @param {string} [options.warn=true] - Whether to output any permissions errors on console.warn.
- * @param {string} [options.module="moduleNameNotProvided"] - The name of the module having its permissions checked.
- * @returns {boolean} Whether the permissions check passed.
+ * @param {string} [options.warn=true] - Whether to output any missing required or suggested permissions with `console.warn()`.
+ * @param {string} [options.module="moduleNameNotProvided"] - The name of the module having its permissions checked, used in warning
+ * output.
+ * @returns {boolean} Whether the WebExtensions manifest includes the required WebExtensions API permissions, origin permissions, and
+ * Content Security Policy directives.
  */
 export async function check({
     requiredPermissions = [],
@@ -118,10 +122,13 @@ export async function check({
     warn = true,
     module = "moduleNameNotProvided"
 }) {
-    // If this function is called in an environment other than a background script (e.g., a content script),
-    // that very likely means the call was left in as a possible side effect during bundling when we wanted
-    // it to be tree shaken out. If that's the case, just return true.
-    if(!("permissions" in browser)) {
+    // If this function is called in an environment other than a background script (e.g., a content script
+    // or a worker script), that could mean the call isn't in the right location (i.e., the check is running
+    // on a code path that doesn't depend on the permissions), or that could mean the call reflects incorrect
+    // use of background script code in a non-background environment. Since we cannot distinguish these
+    // situations, we output a warning to the console and return true.
+    if((typeof browser !== "object") || !("permissions" in browser)) {
+        console.warn(`Unable to check ${module} permissions in an environment without browser.permissions. This warning may indicate incorrect use of a background script function in a content script or worker script.`);
         return true;
     }
 
@@ -158,9 +165,11 @@ export async function check({
     }
 
     // Content Security Policy directives
-    let manifestContentSecurityPolicyString = "";
+    // The default CSP for WebExtensions is "script-src 'self'; object-src 'self';"
+    // See https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy
+    let manifestContentSecurityPolicyString = "script-src 'self'; object-src 'self';";
     const manifest = browser.runtime.getManifest();
-    if("content_security_policy" in manifest) {
+    if(("content_security_policy" in manifest) && (manifest["content_security_policy"] !== null)) {
         manifestContentSecurityPolicyString = manifest["content_security_policy"];
     }
     const manifestContentSecurityPolicy = parseContentSecurityPolicy(manifestContentSecurityPolicyString);
@@ -186,4 +195,24 @@ export async function check({
     }
 
     return passed;
+}
+
+/**
+ * Retrieve the origin match patterns permitted by the extension manifest.
+ */
+export function getManifestOriginMatchPatterns() {
+    const manifest = browser.runtime.getManifest();
+    const matchPatterns = [ ];
+    if(("permissions" in manifest) && Array.isArray(manifest.permissions)) {
+        for(const permission of manifest.permissions) {
+            try {
+                matching.matchPatternsToRegExp([ permission ]);
+                matchPatterns.push(permission);
+            }
+            catch(error) {
+                continue;
+            }
+        }
+    }
+    return matchPatterns;
 }

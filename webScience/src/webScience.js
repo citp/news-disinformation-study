@@ -8,6 +8,9 @@ export { inline }
 import * as debugging from "./debugging.js"
 export { debugging }
 
+import * as timing from "./timing.js"
+export { timing }
+
 import * as permissions from "./permissions.js"
 export { permissions }
 
@@ -61,3 +64,6 @@ export { randomization }
 
 import * as workers from "./workers.js"
 export { workers }
+
+import * as pageTransition from "./pageTransition.js"
+export { pageTransition }
