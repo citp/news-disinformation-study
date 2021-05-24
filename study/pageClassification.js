@@ -28,7 +28,6 @@ export function registerWorker(path, matchPatterns, name, initData, listener) {
     registeredWorkers[name] = worker;
 }
 
-
 export function fetchClassificationResult(url, workerName) {
     if (!(workerName in registeredWorkers)) return {};
     const worker = registeredWorkers[workerName];

@@ -15,16 +15,16 @@ let storage;
  */
 let initialized = false;
 
-//let paramsToSend = null;
-
-//let storageInstances = null;
-
 /**
  * The end of the time range that the last aggregation run considered.
  * @private
  */
 let lastAnalysisRangeEndTime;
 
+/**
+ * Object for the registered worker.
+ * @private
+ */
 let analysisWorker;
 
 /**
@@ -58,19 +58,9 @@ function roundTimeDown(timeStamp) {
 }
 
 /**
- * Registers analysis scripts and associated listener functions.
- * For each analysis name (identified by object keys), the function expects a
- * script and listener for the result. The analysis script is scheduled to
- * execute in a worker thread during browser idle time. The results from
- * analysis script are forwarded to the listener function.
- *
- * @param {Object} scripts
- * @param {Object.any.path} path - path for analysis script
- * @param {Object.any.resultListener} path - Listener function for processing
- * the result from analysis script
+ * Calculate starting and ending times for this analysis period, then run the
+ * analysis script.
  */
-
-
 async function runAnalysis() {
     const currentTime = Date.now();
     let startTime = lastAnalysisRangeEndTime;
@@ -78,16 +68,13 @@ async function runAnalysis() {
     if (lastAnalysisRangeEndTime < endTime) {
         lastAnalysisRangeEndTime = endTime;
         await storage.set("lastAnalysisRangeEndTime", lastAnalysisRangeEndTime);
-        //await triggerAnalysisScripts(analysisStartTime, analysisEndTime);
     } else if (__ENABLE_DEVELOPER_MODE__){
         console.log("I would have pulled analysis results in this range",
             startTime, endTime);
         startTime = currentTime - 86400 * 1000;
         endTime = currentTime;
     } else return;
-    //const storageObjs = await indexedStorage.getEventsByRange(startTime, endTime, storageInstances);
-    const toSend = {};//paramsToSend;
-    //toSend.fromStorage = storageObjs;
+    const toSend = {};
     toSend.type = "aggregate";
     toSend.startTime = startTime;
     toSend.endTime = endTime;
@@ -95,8 +82,13 @@ async function runAnalysis() {
     analysisWorker.postMessage(toSend);
 }
 
-
-export function registerAnalysisScript(scriptPath, listener, storageNames, params=null) {
+/**
+ * Register an analysis script to run approximately every 24 hours.
+ * @param {string} scriptPath - Location of the worker script to run.
+ * @param {callback} listener - The callback function to receive the worker's results.
+ * @param {Object} params - Additional parameters to pass to the worker on initialization.
+ */
+export function registerAnalysisScript(scriptPath, listener, params=null) {
     initialize();
     analysisWorker = new Worker(scriptPath);
     analysisWorker.onmessage = listener;
@@ -108,8 +100,6 @@ export function registerAnalysisScript(scriptPath, listener, storageNames, param
         type: "init",
         ...params
     });
-    //storageInstances = storageNames;
-    //paramsToSend = params;
 
     webScience.scheduling.onIdleDaily.addListener(runAnalysis);
     if (__ENABLE_DEVELOPER_MODE__) {
@@ -117,5 +107,4 @@ export function registerAnalysisScript(scriptPath, listener, storageNames, param
             {detectionInterval: 15}
         );
     }
-
 }
