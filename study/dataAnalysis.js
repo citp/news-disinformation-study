@@ -4,7 +4,6 @@
  */
 
 import * as webScience from "./webScience.js"
-//import * as indexedStorage from "./indexedStorage.js"
 
 let storage;
 

@@ -18,6 +18,8 @@ const pageTransition = webScience.pageTransition;
 const matching = webScience.matching;
 const debugging = webScience.debugging;
 
+console.log("15");
+
 /*
 let integrationStorage;
 
@@ -53,11 +55,6 @@ export async function startStudy(rallyArg) {
 
     dataAnalysis.registerAnalysisScript("/dist/aggregateStatistics.worker.js",
         processAnalysisResult,
-        [
-            {storage: storagePN, store: "pageVisits", timeKey: "pageVisitStartTime"},
-            {storage: storageLE, store: "linkExposures", timeKey: "firstSeen"},
-            {storage: storageSMLS, store: "linkShares", timeKey: "shareTime"},
-        ],
         {
             destinationMatches: (matching.createMatchPatternSet(allDestinationMatchPatterns)).export(),
             sourceMatches: (matching.createMatchPatternSet(allSourceMatchPatterns)).export(),
