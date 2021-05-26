@@ -3,9 +3,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 import commonjs from "@rollup/plugin-commonjs";
+import copy from "rollup-plugin-copy";
 import replace from "@rollup/plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
+import globby from "globby";
+
+const sourceDirectory = "study";
+const intermediateDirectory = "dist";
 
 /**
  * Helper to detect developer mode.
@@ -17,38 +21,32 @@ function isDevMode(cliArgs) {
   return Boolean(cliArgs["config-enable-developer-mode"]);
 }
 
-export default (cliArgs) => [
+export default (cliArgs) => {
+  const rollupConfig = [
   {
-    input: "study/polClassifier.js",
-    //input: "study/simpleClass.js",
-    output: {
-      file: "dist/polClassifier.js",
-      format: "esm",
-    },
+    input: ".empty.js",
+    output: {file: `${intermediateDirectory}/.empty.js`},
     plugins: [
-      resolve(),
-      terser({
-        warnings: true,
-        mangle: {
-          module: true,
-        },
-        format: {
-          ascii_only: true,
-        },
-      }),
-      {
-        name: "worker-to-string",
-        renderChunk(code) {
-          return `export default '${code}';`;
-        },
-      },
-    ],
+      copy({
+        targets: [{
+          src: [
+            `${sourceDirectory}/**/*.js`,
+            `${sourceDirectory}/**/*.html`,
+            `!${sourceDirectory}/**/*.worker.js`
+          ],
+          dest: `${intermediateDirectory}`
+        }],
+        flatten: false
+      })
+    ]
   },
   {
     input: "study/study.js",
     output: {
       file: "dist/background.js",
       sourcemap: isDevMode(cliArgs) ? "inline" : false,
+      preserveModulesRoot: intermediateDirectory,
+      format: "es"
     },
     plugins: [
       replace({
@@ -62,18 +60,25 @@ export default (cliArgs) => [
       }),
       commonjs(),
     ],
-  },
-  {
-    input: "study/content-script.js",
-    output: {
-      file: "dist/content-script.js",
-      sourcemap: isDevMode(cliArgs) ? "inline" : false,
-    },
-    plugins: [
-      resolve({
-        browser: true,
-      }),
-      commonjs(),
-    ],
-  },
-];
+  }];
+
+  const workerPaths = globby.sync(`${sourceDirectory}/**/*.worker.js`);
+  for (const workerPath of workerPaths) {
+    rollupConfig.push({
+      input: workerPath,
+      output: {
+        file: `${intermediateDirectory}${workerPath.slice(sourceDirectory.length)}`,
+        format: "iife"
+      },
+      plugins: [
+        commonjs(),
+        resolve({
+          browser: true
+        })
+      ]
+    });
+  }
+
+  return rollupConfig;
+
+};
