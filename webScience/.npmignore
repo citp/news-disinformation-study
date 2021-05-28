@@ -1,5 +1,0 @@
-test/
-src/
-.*
-intermediate/
-rollup.config.*.js
