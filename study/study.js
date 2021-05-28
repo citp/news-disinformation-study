@@ -1,5 +1,5 @@
 import "webextension-polyfill";
-import * as webScience from "./webScience.js"
+import * as webScience from "@mozilla/web-science"
 import Rally from "@mozilla/rally";
 import * as EventHandling from "./EventHandling.js"
 

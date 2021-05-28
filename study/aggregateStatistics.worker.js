@@ -2,7 +2,7 @@
  * @file Script for computing aggregate statistics
  */
 
-import * as webScience from "./webScience.js"
+import * as webScience from "@mozilla/web-science"
 import { storageTransitions, storageClassifications, storagePN, storageSMLS, storageLE } from "./databases.js"
 
 const fbRegex = /(facebook.com\/pages\/[0-9|a-z|A-Z|-]*\/[0-9]*(\/|$))|(facebook\.com\/[0-9|a-z|A-Z|.]*(\/|$))/i;
@@ -205,7 +205,7 @@ function aggregateLinkExposure(linkExposureEvents) {
             } else {
                 const current = stats.trackedExposuresByCategory[category];
                 stats.trackedExposuresByCategory[category] = {
-                    categoryExposuresCount: current.numExposures + 1
+                    categoryExposuresCount: current.categoryExposuresCount + 1
                 }
             }
         } else if (linkExposureEvent.type == "untracked") {

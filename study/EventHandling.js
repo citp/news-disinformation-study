@@ -1,4 +1,4 @@
-import * as webScience from "./webScience.js"
+import * as webScience from "@mozilla/web-science"
 import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"

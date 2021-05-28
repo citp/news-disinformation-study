@@ -3,7 +3,7 @@
  * on page content for pages from specific domains.
  */
 
-import * as webScience from "./webScience.js";
+import * as webScience from "@mozilla/web-science";
 import Readability from '@mozilla/readability';
 
 const registeredWorkers = {};

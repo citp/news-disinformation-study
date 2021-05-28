@@ -3,7 +3,7 @@
  * reports the results.
  */
 
-import * as webScience from "./webScience.js"
+import * as webScience from "@mozilla/web-science"
 
 let storage;
 
