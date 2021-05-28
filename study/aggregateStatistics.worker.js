@@ -243,8 +243,8 @@ async function aggregateLinkSharing(linkShareEvents) {
     for (const linkShareEvent of linkShareEvents) {
         if (linkShareEvent.type == "untracked") {
             stats.linkSharesByPlatform[JSON.stringify({platform: linkShareEvent.platform})]
-                .numUntrackedShares += linkShareEvent.count;
-        } else if (linkShareEvent.type == "share") {
+                .untrackedSharesCount += linkShareEvent.untrackedCount;
+        } else if (linkShareEvent.type == "tracked") {
             let platformIndex = "";
             if (linkShareEvent.platform == "facebook") platformIndex = fbIndex;
             if (linkShareEvent.platform == "twitter") platformIndex = twIndex;
@@ -324,7 +324,10 @@ function formatLinkShare(unformattedLinkShareStats) {
             formattedPlatformData.push(category);
         }
         let platform = JSON.parse(platformIndex);
-        platform = {...platform, trackedSharesByCategory: formattedPlatformData};
+        platform = {...platform,
+            trackedSharesByCategory: formattedPlatformData,
+            untrackedSharesCount: rawPlatformData.untrackedSharesCount
+        };
         formattedLinkShareStats.linkSharesByPlatform.push(platform);
     }
 
@@ -345,6 +348,17 @@ function getDomain(url) {
     return urlObj.hostname;
 }
 
+/**
+ * Given a full URL, reduce it to the part that should be reported.
+ * For most pages, this is just the domain, with no other URL parts.
+ * For tracked social media pages, it also includes part of the path,
+ * in order to indicate which orgnaization's social media page it is.
+ * For example, https://twitter.com/nytimes/status/tweetID
+ * would become twitter.com/nytimes, but a tweet from a non-tracked
+ * account would just be reported as twitter.com.
+ * @param {string} url - The full URL of the page.
+ * @return {string} - The input URL stripped to the reportable portion.
+ */
 function getTrackedPathDest(url) {
     // if this is a dest, it must have passed a destination check already
     const fbResult = fbRegex.exec(url);
@@ -356,6 +370,17 @@ function getTrackedPathDest(url) {
     return getDomain(url);
 }
 
+/**
+ * Given a full URL of a page that was a referrer for a page visit or a source
+ * for a link exposure, reduce it to the part that should be reported.
+ * See `getTrackedPathDest` for more details. This function is separate because:
+ * 1. A few sites are only reported when they are sources (e.g. google.com)
+ * 2. We store sources without checking whether they are part of the tracked
+ *   set of domains, so this function turns untracked sources into the string
+ *   `"other"`.
+ * @param {string} url - The full URL of the page.
+ * @return {string} - The input URL stripped to the reportable portion.
+ */
 function getTrackedPathSource(url) {
     // a referrer hasn't necessarily passed a check
     const fbResult = fbRegex.exec(url);

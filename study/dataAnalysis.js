@@ -42,6 +42,12 @@ async function initialize() {
     }
 }
 
+/**
+ * Round a timestamp to the future time that ends a four-hour reporting block.
+ * @param {number} timeStamp - The time to round.
+ * @return {number} - The last timestamp that is part of the four-hour reporting
+ *   block of the input timestamp.
+ */
 function roundTimeUp(timeStamp) {
     const timeStampObj = new Date(timeStamp);
     const endHour = Math.ceil(timeStampObj.getUTCHours() / 4) * 4;
@@ -49,6 +55,12 @@ function roundTimeUp(timeStamp) {
                     timeStampObj.getUTCDay(), endHour) - 1;
 }
 
+/**
+ * Round a timestamp to the past time that begins a four-hour reporting block.
+ * @param {number} timeStamp - The time to round.
+ * @return {number} - The first timestamp that is part of the four-hour reporting
+ *   block of the input timestamp.
+ */
 function roundTimeDown(timeStamp) {
     const timeStampObj = new Date(timeStamp);
     const endHour = Math.floor(timeStampObj.getUTCHours() / 4) * 4;

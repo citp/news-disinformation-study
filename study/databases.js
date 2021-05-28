@@ -1,7 +1,13 @@
+/**
+ * Provides indexedStorage objects for the data stored by the study.
+ * Listing these in an external file allows them to be shared by the
+ * background page and the analysis script/
+ */
+
 import * as indexedStorage from "./indexedStorage.js"
 
 export const storageClassifications = new indexedStorage.indexedStorage(
-    "newsAndDisinfo.Classification", {classResults: "++,url,pageId"});
+    "newsAndDisinfo.classifications", {classResults: "++,url,pageId"});
 
 export const storagePN = new indexedStorage.indexedStorage(
     "newsAndDisinfo.pageNavigation", {

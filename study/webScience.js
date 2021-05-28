@@ -1,6 +1,5 @@
-// Convenience ES6 module re-exports to assemble the webScience.Measurements namespace
-// Note that the order of module imports matters, since utility
-// modules can depend on other utility modules
+// Convenience ES6 module re-exports to assemble the webScience namespace
+// Note that the order of module imports matters, since modules can depend on other modules
 
 import * as debugging from "../webScience/dist/debugging.js"
 export { debugging }
