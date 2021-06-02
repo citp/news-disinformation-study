@@ -1,6 +1,6 @@
 {
-  "name": "rally-study-template",
-  "version": "0.3.1",
+  "name": "PrincetonUniversityNewsStudy",
+  "version": "2.0.0",
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dev": "rollup -w --config-enable-developer-mode -c rollup.config.js",
@@ -11,6 +11,11 @@
     "start": "npm run build && web-ext run",
     "test-integration": "npm run package && mv web-ext-artifacts/*.zip web-ext-artifacts/study.xpi && mocha --timeout 30000 \"./tests/integration/*.js\"",
     "watch-bundled": "web-ext run --watch-file dist/background.js dist/aggregateStatistics.worker.js dist/polClassifier.worker.js dist/covidClassifier.worker.js"
+  },
+  "dependencies": {
+    "dexie": "^3.0.3",
+    "n-gram": "^2.0.1",
+    "@mozilla/readability": "^0.4.1"
   },
   "devDependencies": {
     "@mozilla/rally": "^0.3.0",
@@ -36,22 +41,17 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "description": "This a basic template for a Rally study.",
+  "description": "A Rally study on how web users engage with news about politics and COVID-19.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mozilla-rally/study-template.git"
+    "url": "git+https://github.com/citp/news-disinformation-study.git"
   },
   "keywords": [],
-  "author": "Mozilla",
+  "author": "Princeton University Center for Information Technology Policy",
   "license": "MPL-2.0",
   "private": true,
   "bugs": {
-    "url": "https://github.com/mozilla-rally/study-template/issues"
+    "url": "https://github.com/citp/news-disinformation-study/issues"
   },
-  "homepage": "https://github.com/mozilla-rally/study-template#readme",
-  "dependencies": {
-    "dexie": "^3.0.3",
-    "n-gram": "^2.0.1",
-    "@mozilla/readability": "^0.4.1"
-  }
+  "homepage": "https://github.com/citp/news-disinformation-study#readme"
 }
