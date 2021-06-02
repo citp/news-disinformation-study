@@ -1,4 +1,4 @@
-import * as webScience from "@mozilla/web-science"
+import { linkExposure, pageNavigation, socialMediaLinkSharing, pageTransition, matching, debugging, userSurvey } from "@mozilla/web-science"
 import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
@@ -9,15 +9,6 @@ import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
 import polClassifierData from "./weights/pol-linearsvc_data.js"
 import covidClassifierData from "./weights/covid-linearsvc_data.js"
 import { storageTransitions, storageClassifications, storagePN, storageSMLS, storageLE } from "./databases.js"
-
-// Module mappings for brevity
-const linkExposure = webScience.linkExposure;
-const pageNavigation = webScience.pageNavigation;
-const socialMediaLinkSharing = webScience.socialMediaLinkSharing;
-const pageManager = webScience.pageManager;
-const pageTransition = webScience.pageTransition;
-const matching = webScience.matching;
-const debugging = webScience.debugging;
 
 const debugLog = debugging.getDebuggingLog("newsAndDisinfo.eventHandling");
 
@@ -41,26 +32,21 @@ let rally;
  */
 export async function startStudy(rallyArg) {
     rally = rallyArg;
-    destinationMatcher = webScience.matching.createMatchPatternSet(allDestinationMatchPatterns);
+    destinationMatcher = matching.createMatchPatternSet(allDestinationMatchPatterns);
 
     // Configure and start measurement modules
     await addListeners();
 
     dataAnalysis.registerAnalysisScript("/dist/aggregateStatistics.worker.js",
         processAnalysisResult,
-        {
-            destinationMatches: (matching.createMatchPatternSet(allDestinationMatchPatterns)).export(),
-            sourceMatches: (matching.createMatchPatternSet(allSourceMatchPatterns)).export(),
-            fbMatches: (matching.createMatchPatternSet(facebookPageMatchPatterns)).export(),
-            ytMatches: (matching.createMatchPatternSet(youtubePageMatchPatterns)).export(),
-            twMatches: (matching.createMatchPatternSet(twitterPageMatchPatterns)).export()
-        });
+        {}
+    );
 
 
-    webScience.userSurvey.setSurvey({
+    userSurvey.setSurvey({
         surveyName: "Initial Survey",
-        popupNoPromptMessage: "<p>You are currently participating in the Political and COVID-19 News Information Flows Study. If you would like to hide this icon, right click and select <i>Remove from Toolbar</i>. </p>",
-        popupPromptMessage: "<p>You are currently participating in the Political and COVID-19 News Information Flows Study. </p> <p> Please answer a few survey questions for the Political and COVID-19 News Information Flows Study. Clicking Continue will take you to Princeton’s survey.",
+        popupNoPromptMessage: "You are currently participating in the Political and COVID-19 News Information Flows Study. If you would like to hide this icon, right click and select \"Remove from Toolbar\".",
+        popupPromptMessage: "You are currently participating in the Political and COVID-19 News Information Flows Study. Please answer a few survey questions for the Political and COVID-19 News Information Flows Study. Clicking Continue will take you to Princeton’s survey.",
         reminderInterval: 60 * 60 * 24 *3,
         reminderMessage: "A survey is available for your Rally study. Click the Princeton logo in the toolbar to continue.",
         reminderTitle: "Rally survey available",
@@ -94,8 +80,8 @@ async function addListeners() {
         privateWindows : false,
     });
 
-    pageNavigation.onPageData.addListener(storePageNavResult, {
-        matchPatterns: allDestinationMatchPatterns,
+    pageNavigation.onPageData.addListener(pageNavigationListener, {
+        matchPatterns: [ "<all_urls>" ],
         trackUserAttention: true});
 
     socialMediaLinkSharing.onShare.addListener(linkShareListener, {
@@ -109,9 +95,6 @@ async function addListeners() {
     pageTransition.onPageTransitionData.addListener(pageTransitionListener, {
         matchPatterns: allDestinationMatchPatterns,
     });
-
-    // Counting page visit starts lets us count untracked page visits.
-    pageManager.onPageVisitStart.addListener(pageVisitStartListener);
 }
 
 /**
@@ -128,26 +111,11 @@ async function processAnalysisResult(result) {
     data["newsAndDisinfo.pageNavigation"] = pageNav ? pageNav : {};
     data["newsAndDisinfo.linkExposure"] = linkExp ? linkExp : {};
     data["newsAndDisinfo.socialMediaLinkSharing"] = linkSharing ? linkSharing : {};
-    data["newsAndDisinfo.surveyId"] = await webScience.userSurvey.getSurveyId();
+    data["newsAndDisinfo.surveyId"] = await userSurvey.getSurveyId();
     data["newsAndDisinfo.version"] = getExtensionVersion();
     debugLog("Submitting results through Rally = " + JSON.stringify(data));
     if (__ENABLE_DEVELOPER_MODE__) console.log(data);
     rally.sendPing("measurements", data);
-}
-
-/**
- * Callback for the beginning of a page visit. Counts a new untracked page visit
- * if the page doesn't match our list of domains.
- * @param {Object} pageData - Information about the page visit start event.
- * @param {string} pageData.url - Url of the page the user is visiting.
- * @param {number} pageData.pageVisitStartTime - Timestamp of the start of the page visit.
- */
-function pageVisitStartListener(pageData) {
-    pageData.url = webScience.matching.normalizeUrl(pageData.url);
-    if (!destinationMatcher.matches(pageData.url)) {
-        storagePN.set(
-            {type: "untracked", pageVisitStartTime: pageData.pageVisitStartTime}, "pageVisits");
-    }
 }
 
 /**
@@ -175,7 +143,7 @@ function pageTransitionListener(details) {
  */
 async function linkShareListener(shareData) {
     if (shareData.type == "tracked") {
-        shareData.url = webScience.matching.normalizeUrl(shareData.url);
+        shareData.url = matching.normalizeUrl(shareData.url);
         storageSMLS.set(shareData, "linkShares");
     } else if (shareData.type == "untracked" && shareData.untrackedCount > 0) {
         storageSMLS.set(shareData, "linkShares");
@@ -192,11 +160,11 @@ async function linkShareListener(shareData) {
  */
 async function linkExposureListener(exposureData) {
     const firstSeen = Date.now();
-    exposureData.url = webScience.matching.normalizeUrl(exposureData.url);
+    exposureData.url = matching.normalizeUrl(exposureData.url);
     for (const exposedUrl of exposureData.matchingLinkUrls) {
         const singleExposure = {
             type: "exposure",
-            url: webScience.matching.normalizeUrl(exposedUrl),
+            url: matching.normalizeUrl(exposedUrl),
             pageUrl: exposureData.url,
             firstSeen: firstSeen
         };
@@ -217,10 +185,19 @@ async function linkExposureListener(exposureData) {
  * @param {Object} pageData - Information about the page visit event.
  * @param {string} pageData.url - URL of the visited page.
  */
-async function storePageNavResult(pageData) {
-    pageData.url = webScience.matching.normalizeUrl(pageData.url);
-    pageData.type = "pageVisit";
-    await storagePN.set(pageData, "pageVisits");
+async function pageNavigationListener(pageData) {
+    console.log(pageData);
+    if (destinationMatcher.matches(pageData.url)) {
+        pageData.url = matching.normalizeUrl(pageData.url);
+        pageData.type = "pageVisit";
+        await storagePN.set(pageData, "pageVisits");
+    } else {
+        storagePN.set({
+            type: "untracked",
+            pageVisitStartTime: pageData.pageVisitStartTime,
+            attentionDuration: pageData.attentionDuration
+        }, "pageVisits");
+    }
 }
 
 /**

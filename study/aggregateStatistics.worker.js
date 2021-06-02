@@ -4,6 +4,11 @@
 
 import * as webScience from "@mozilla/web-science"
 import { storageTransitions, storageClassifications, storagePN, storageSMLS, storageLE } from "./databases.js"
+import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
+import { sourceOnlyMatchPatterns } from "./data/sourceOnlyMatchPatterns.js"
+import { facebookPageMatchPatterns } from "./data/facebookPageMatchPatterns.js"
+import { twitterPageMatchPatterns } from "./data/twitterPageMatchPatterns.js"
+import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
 
 const fbRegex = /(facebook.com\/pages\/[0-9|a-z|A-Z|-]*\/[0-9]*(\/|$))|(facebook\.com\/[0-9|a-z|A-Z|.]*(\/|$))/i;
 const ytRegex = /(youtube.com\/(user|channel)\/[0-9|a-z|A-Z|_|-]*(\/videos)?)(\/|$)|(youtube\.com\/[0-9|A-Z|a-z]*)(\/|$)|(youtube\.com\/profile\?user=[0-9|A-Z|a-z]*)(\/|$)/i;
@@ -13,6 +18,16 @@ let sourceMatcher;
 let fbMatcher;
 let twMatcher;
 let ytMatcher;
+
+const allDestinationMatchPatterns = [
+    ...destinationDomainMatchPatterns,
+    ...facebookPageMatchPatterns,
+    ...twitterPageMatchPatterns,
+    ...youtubePageMatchPatterns];
+
+const allSourceMatchPatterns = [
+    ...allDestinationMatchPatterns,
+    ...sourceOnlyMatchPatterns];
 
 /**
  * Event handler for messages from the main thread
@@ -26,7 +41,7 @@ onmessage = async event => {
     const type = event.data.type;
     const data = event.data;
     if (type == "init") {
-        initialize(data);
+        initialize();
         return;
     } else if (type == "aggregate") {
         runAggregation(data);
@@ -41,21 +56,12 @@ onmessage = async event => {
  * @param {Object} initializationData.ytMatches - Serialized MatchPatternSet containing tracked YouTube channels.
  * @param {Object} initializationData.twMatches - Serialized MatchPatternSet containing tracked Twitter handles.
  */
-function initialize(initializationData) {
-    destinationMatcher = webScience.matching.createMatchPatternSet([]);
-    destinationMatcher.import(initializationData.destinationMatches);
-
-    sourceMatcher = webScience.matching.createMatchPatternSet([])
-    sourceMatcher.import(initializationData.sourceMatches);
-
-    fbMatcher = webScience.matching.createMatchPatternSet([])
-    fbMatcher.import(initializationData.fbMatches);
-
-    ytMatcher = webScience.matching.createMatchPatternSet([])
-    ytMatcher.import(initializationData.ytMatches);
-
-    twMatcher = webScience.matching.createMatchPatternSet([])
-    twMatcher.import(initializationData.twMatches);
+function initialize() {
+    destinationMatcher = webScience.matching.createMatchPatternSet(allDestinationMatchPatterns);
+    sourceMatcher = webScience.matching.createMatchPatternSet(allSourceMatchPatterns);
+    fbMatcher = webScience.matching.createMatchPatternSet(facebookPageMatchPatterns);
+    ytMatcher = webScience.matching.createMatchPatternSet(youtubePageMatchPatterns);
+    twMatcher = webScience.matching.createMatchPatternSet(twitterPageMatchPatterns);
 }
 
 /**
@@ -114,7 +120,8 @@ function sendMessageToCaller(messageType, data) {
 async function aggregatePageNav(pageNavEvents) {
     const stats = {
         trackedVisitsByCategory: {},
-        untrackedVisitsCount: 0
+        untrackedVisitsCount: 0,
+        untrackedAttention: 0.0
     };
     for (const pageNavEvent of pageNavEvents) {
         if (pageNavEvent.type == "pageVisit") {
@@ -148,16 +155,17 @@ async function aggregatePageNav(pageNavEvents) {
             if (categoryObj) {
                 categoryObj.categoryVisitsCount += 1;
                 categoryObj.categoryAttention += pageNavEvent.attentionDuration;
-                categoryObj.categoryScroll += Math.floor(pageNavEvent.maxRelativeScrollDepth * 100);
+                categoryObj.categoryScroll += pageNavEvent.maxRelativeScrollDepth;
             } else {
                 categoryObj = {};
                 categoryObj.categoryVisitsCount = 1;
                 categoryObj.categoryAttention = pageNavEvent.attentionDuration;
-                categoryObj.categoryScroll = Math.floor(pageNavEvent.maxRelativeScrollDepth * 100);
+                categoryObj.categoryScroll = pageNavEvent.maxRelativeScrollDepth;
                 stats.trackedVisitsByCategory[index] = categoryObj;
             }
         } else if (pageNavEvent.type == "untracked") {
             stats.untrackedVisitsCount += 1;
+            stats.untrackedAttention += pageNavEvent.attentionDuration;
         }
     }
 
@@ -174,6 +182,7 @@ function formatPageNav(unformattedPageNavStats) {
         formattedPageNavStats.trackedVisitsByCategory.push(category);
     }
     formattedPageNavStats.untrackedVisitsCount = unformattedPageNavStats.untrackedVisitsCount;
+    formattedPageNavStats.untrackedAttention = unformattedPageNavStats.untrackedAttention;
     return formattedPageNavStats;
 }
 

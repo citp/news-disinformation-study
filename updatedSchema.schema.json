@@ -16,7 +16,8 @@
     "newsAndDisinfo.pageNavigation": {
       "type": "object",
       "properties": {
-        "untrackedVisitsCount": { "type": "integer" },
+        "untrackedVisitsCount": { "type": "number" },
+        "untrackedAttention": { "type": "number" },
         "trackedVisitsByCategory": {
           "type": "array",
           "items": {
@@ -35,8 +36,8 @@
                 "description": "additional properties are the name of the classifier, with the classification result as the value"
                 },
               "categoryVisitsCount": { "type": "integer" },
-              "categoryAttention": { "type": "integer" },
-              "categoryScroll": { "type": "integer" }
+              "categoryAttention": { "type": "number" },
+              "categoryScroll": { "type": "number" }
             },
             "additionalProperties": false
           }
