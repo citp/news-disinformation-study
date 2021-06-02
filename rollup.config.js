@@ -2,14 +2,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+// This is the Rollup configuration for the study template. It is
+// part of the build system, and you should not have to modify it.
+
 import commonjs from "@rollup/plugin-commonjs";
-import copy from "rollup-plugin-copy";
 import replace from "@rollup/plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
+import copy from "rollup-plugin-copy";
 import globby from "globby";
-
-const sourceDirectory = "study";
-const intermediateDirectory = "dist";
 
 /**
  * Helper to detect developer mode.
@@ -22,63 +22,72 @@ function isDevMode(cliArgs) {
 }
 
 export default (cliArgs) => {
+  // Configuration for the main background script, study/background.js.
+  // The script will be output to dist/background.js with any module
+  // dependencies (your own modules or modules from NPM) bundled in.
   const rollupConfig = [
-  {
-    input: ".empty.js",
-    output: {file: `${intermediateDirectory}/.empty.js`},
-    plugins: [
-      copy({
-        targets: [{
-          src: [
-            `${sourceDirectory}/**/*.js`,
-            `${sourceDirectory}/**/*.html`,
-            `!${sourceDirectory}/**/*.worker.js`
-          ],
-          dest: `${intermediateDirectory}`
-        }],
-        flatten: false
-      })
-    ]
-  },
-  {
-    input: "study/study.js",
-    output: {
-      file: "dist/background.js",
-      sourcemap: isDevMode(cliArgs) ? "inline" : false,
-      preserveModulesRoot: intermediateDirectory,
-      format: "es"
-    },
-    plugins: [
-      replace({
-        // In Developer Mode, the study does not submit data and
-        // gracefully handles communication errors with the Core
-        // Add-on.
-        __ENABLE_DEVELOPER_MODE__: isDevMode(cliArgs),
-      }),
-      resolve({
-        browser: true,
-      }),
-      commonjs(),
-    ],
-  }];
-
-  const workerPaths = globby.sync(`${sourceDirectory}/**/*.worker.js`);
-  for (const workerPath of workerPaths) {
-    rollupConfig.push({
-      input: workerPath,
+    {
+      input: "study/study.js",
       output: {
-        file: `${intermediateDirectory}${workerPath.slice(sourceDirectory.length)}`,
-        format: "iife"
+        file: "dist/background.js",
+        sourcemap: isDevMode(cliArgs) ? "inline" : false,
       },
       plugins: [
-        commonjs(),
+        replace({
+          // In Developer Mode, the study does not submit data and
+          // gracefully handles communication errors with the Core
+          // Add-on.
+          __ENABLE_DEVELOPER_MODE__: isDevMode(cliArgs),
+        }),
         resolve({
-          browser: true
-        })
-      ]
+          browser: true,
+        }),
+        commonjs(),
+        // Configuration for non-JavaScript assets (study/**/*) that
+        // are not JavaScript files (i.e., do not end in .js). These
+        // files will be copied to dist/ with the same relative path
+        // they have in study/.
+        copy({
+          targets: [{
+            src: [
+              "study/**/*",
+              "!study/**/*.js",
+            ],
+            dest: "dist/",
+          }],
+          flatten: false,
+        }),
+      ],
+    }
+  ];
+
+  // Configuration for content scripts (study/**/*.content.js) and
+  // worker scripts (study/**/*.worker.js). These files will be
+  // output to dist/ with the same relative path they have in
+  // study/, but with any module dependencies (your own modules or
+  // modules from npm) bundled in. We provide this configuration
+  // because content scripts and worker scripts have separate
+  // execution environments from background scripts, and a
+  // background script might want to reference the bundled
+  // scripts (e.g., browser.contentScripts.register() or new
+  // Worker()).
+  const scriptPaths = globby.sync([ `study/**/*.content.js`, `study/**/*.worker.js` ]);
+  for(const scriptPath of scriptPaths) {
+    rollupConfig.push({
+      input: scriptPath,
+      output: {
+        file: `dist/${scriptPath.slice("study/".length)}`,
+        format: "iife",
+        sourcemap: isDevMode(cliArgs) ? "inline" : false,
+      },
+      plugins: [
+        resolve({
+          browser: true,
+        }),
+        commonjs(),
+      ],
     });
   }
 
   return rollupConfig;
-
-};
+}
