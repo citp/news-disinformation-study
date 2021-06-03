@@ -17,12 +17,14 @@ let initialized = false;
 /**
  * The end of the time range that the last aggregation run considered.
  * @private
+ * @type {number}
  */
 let lastAnalysisRangeEndTime;
 
 /**
  * Object for the registered worker.
  * @private
+ * @type {Object}
  */
 let analysisWorker;
 
@@ -37,7 +39,7 @@ async function initialize() {
     storage = webScience.storage.createKeyValueStorage("analysisStore");
     lastAnalysisRangeEndTime = await storage.get("lastAnalysisRangeEndTime");
     if (lastAnalysisRangeEndTime == null) {
-        lastAnalysisRangeEndTime = roundTimeUp(Date.now());
+        lastAnalysisRangeEndTime = roundTimeUp(webScience.timing.now());
         await storage.set("lastAnalysisRangeEndTime", lastAnalysisRangeEndTime);
     }
 }
@@ -73,13 +75,18 @@ function roundTimeDown(timeStamp) {
  * analysis script.
  */
 async function runAnalysis() {
-    const currentTime = Date.now();
+    const currentTime = webScience.timing.now();
     let startTime = lastAnalysisRangeEndTime;
     let endTime = roundTimeDown(currentTime)
     if (lastAnalysisRangeEndTime < endTime) {
         lastAnalysisRangeEndTime = endTime;
         await storage.set("lastAnalysisRangeEndTime", lastAnalysisRangeEndTime);
     } else if (__ENABLE_DEVELOPER_MODE__){
+        // Normally we don't run aggregation if we don't have at least one full
+        //  four-hour aggregation block since the last aggregation run. However,
+        //  when testing, we always want to run aggregation. Log the values
+        //  that would've been used in non-developer mode, then aggregate on the
+        //  last day of events anyway.
         console.log("I would have pulled analysis results in this range",
             startTime, endTime);
         startTime = currentTime - 86400 * 1000;
@@ -99,8 +106,8 @@ async function runAnalysis() {
  * @param {callback} listener - The callback function to receive the worker's results.
  * @param {Object} params - Additional parameters to pass to the worker on initialization.
  */
-export function registerAnalysisScript(scriptPath, listener, params=null) {
-    initialize();
+export async function registerAnalysisScript(scriptPath, listener, params=null) {
+    await initialize();
     analysisWorker = new Worker(scriptPath);
     analysisWorker.onmessage = listener;
     analysisWorker.onerror = event => {
@@ -114,6 +121,8 @@ export function registerAnalysisScript(scriptPath, listener, params=null) {
 
     webScience.scheduling.onIdleDaily.addListener(runAnalysis);
     if (__ENABLE_DEVELOPER_MODE__) {
+        // When testing, we want to be able to test aggregation easily. This triggers
+        //  it to run after 15 seconds of inactivity when the extension is in development mode.
         webScience.idle.onStateChanged.addListener(runAnalysis,
             {detectionInterval: 15}
         );

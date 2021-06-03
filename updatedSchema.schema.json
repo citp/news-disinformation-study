@@ -23,9 +23,9 @@
           "items": {
             "type": "object",
             "properties": {
-              "visitDomain": { "type": "string" },
-              "sourceDomainFromReferrer": { "type": "string" },
-              "sourceDomainFromTransitions": { "type": "string" },
+              "visitTrimmedUrl": { "type": "string" },
+              "sourceTrimmedUrlFromReferrer": { "type": "string" },
+              "sourceTrimmedUrlFromTransitions": { "type": "string" },
               "dayOfWeek": { "type": "integer" },
               "timeOfDay": { "type": "integer" },
               "classifierResults": {
@@ -63,8 +63,8 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "sharedDomain": { "type": "string" },
-                    "visitSourceFromReferrer": { "type": "string" },
+                    "sharedTrimmedUrl": { "type": "string" },
+                    "visitPresentInPageNavigation": { "type": "boolean" },
                     "visitSourceFromTransitions": { "type": "string" },
                     "facebookReshareSource": { "type": "string" },
                     "dayOfWeek": { "type": "integer" },
@@ -101,8 +101,8 @@
           "items": {
             "type": "object",
             "properties": {
-              "exposureSourceDomain": { "type": "string" },
-              "exposureDestinationDomain": { "type": "string" },
+              "exposureSourceTrimmedUrl": { "type": "string" },
+              "exposureDestinationTrimmedUrl": { "type": "string" },
               "dayOfWeek": { "type": "integer" },
               "timeOfDay": { "type": "integer" },
               "categoryExposuresCount": { "type": "integer" }

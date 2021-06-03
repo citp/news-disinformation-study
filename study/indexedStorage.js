@@ -45,7 +45,7 @@ export class indexedStorage {
      * Look up an item in the default (or specified) store.
      * @param {Object} query - The key and value to find.
      * @param {string} store - Which store to use. If not specified, the default is used.
-     * @return {Object} - One result matching the givven query.
+     * @return {Object} - One result matching the given query.
      */
     async get(query, store="") {
         const result = await this.storageInstance[store == "" ? this.defaultStore : store].get(query);
@@ -56,7 +56,7 @@ export class indexedStorage {
      * Look up mathing items in the default (or specified) store.
      * @param {Object} query - The key and value to look for.
      * @param {string} store - Which store to use. If not specified, the default is used.
-     * @return {Object} - All results matching the givven query.
+     * @return {Object} - All results matching the given query.
      */
     search(query, store="") {
         return this.storageInstance[store == "" ? this.defaultStore : store].where(query).toArray();

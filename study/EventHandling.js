@@ -1,4 +1,4 @@
-import { linkExposure, pageNavigation, socialMediaLinkSharing, pageTransition, matching, debugging, userSurvey } from "@mozilla/web-science"
+import { timing, linkExposure, pageNavigation, socialMediaLinkSharing, pageTransition, matching, debugging, userSurvey } from "@mozilla/web-science"
 import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
 
@@ -65,7 +65,7 @@ export async function startStudy(rallyArg) {
     );
 
     // Register listener for link exposure events where the exposed link goes to a tracked domain
-    linkExposure.onLinkExposureData.addListener(linkExposureListener, {
+    linkExposure.onLinkExposureUpdate.addListener(linkExposureListener, {
         linkMatchPatterns: allDestinationMatchPatterns,
         pageMatchPatterns: allSourceMatchPatterns,
         privateWindows : false,
@@ -112,24 +112,24 @@ export async function startStudy(rallyArg) {
 }
 
 /**
- * Callback for aggregation runs. Submits data to Rally pipeline.
+ * Callback for responses from the aggregateStatistics.js script. Submits data to Rally pipeline.
  * @param {Object} result - message from analysis script.
  * @param {Object} result.data - aggregated data from analysis script
  */
 async function processAnalysisResult(result) {
     const analysisResult = result.data;
-    const data = {};
-    const pageNav = analysisResult["newsAndDisinfo.pageNavigation"];
-    const linkExp = analysisResult["newsAndDisinfo.linkExposure"];
-    const linkSharing = analysisResult["newsAndDisinfo.socialMediaLinkSharing"];
-    data["newsAndDisinfo.pageNavigation"] = pageNav ? pageNav : {};
-    data["newsAndDisinfo.linkExposure"] = linkExp ? linkExp : {};
-    data["newsAndDisinfo.socialMediaLinkSharing"] = linkSharing ? linkSharing : {};
-    data["newsAndDisinfo.surveyId"] = await userSurvey.getSurveyId();
-    data["newsAndDisinfo.version"] = getExtensionVersion();
-    debugLog("Submitting results through Rally = " + JSON.stringify(data));
-    if (__ENABLE_DEVELOPER_MODE__) console.log(data);
-    rally.sendPing("measurements", data);
+    if (analysisResult.type === "stats") {
+        delete analysisResult.type;
+        // Report survey ID given to Qualtrics, so that survey responses can be linked to
+        //  browsing data.
+        analysisResult["newsAndDisinfo.surveyId"] = await userSurvey.getSurveyId();
+        analysisResult["newsAndDisinfo.version"] = browser.runtime.getManifest().version;
+        debugLog("Submitting results through Rally = " + JSON.stringify(analysisResult));
+        if (__ENABLE_DEVELOPER_MODE__) console.log(analysisResult);
+        rally.sendPing("measurements", analysisResult);
+    } else {
+        console.warn("Unexpected message from analysis script:", result);
+    }
 }
 
 /**
@@ -158,8 +158,9 @@ function pageTransitionListener(details) {
 async function linkShareListener(shareData) {
     if (shareData.type == "tracked") {
         shareData.url = matching.normalizeUrl(shareData.url);
-        storageSMLS.set(shareData, "linkShares");
-    } else if (shareData.type == "untracked" && shareData.untrackedCount > 0) {
+    }
+    if (shareData.type == "tracked" ||
+        (shareData.type == "untracked" && shareData.untrackedCount > 0)) {
         storageSMLS.set(shareData, "linkShares");
     }
 }
@@ -173,7 +174,7 @@ async function linkShareListener(shareData) {
  *   were not part of the tracked set.
  */
 async function linkExposureListener(exposureData) {
-    const firstSeen = Date.now();
+    const firstSeen = timing.now();
     exposureData.url = matching.normalizeUrl(exposureData.url);
     for (const exposedUrl of exposureData.matchingLinkUrls) {
         const singleExposure = {
@@ -200,7 +201,6 @@ async function linkExposureListener(exposureData) {
  * @param {string} pageData.url - URL of the visited page.
  */
 async function pageNavigationListener(pageData) {
-    console.log(pageData);
     if (destinationMatcher.matches(pageData.url)) {
         pageData.url = matching.normalizeUrl(pageData.url);
         pageData.type = "pageVisit";
@@ -215,13 +215,6 @@ async function pageNavigationListener(pageData) {
 }
 
 /**
- * Store a classification result to storage.
- */
-function saveClassificationResult(result) {
-    storageClassifications.set(result);
-}
-
-/**
  * Callback for a classification result from the political news classifier.
  * Stores the event.
  * @param {Object} result - Information about the classification result.
@@ -230,11 +223,12 @@ function saveClassificationResult(result) {
  * @param {string} result.url - URL of the classified page.
  */
 function saveClassificationResultPol(result) {
-    saveClassificationResult({
+    storageClassifications.set({
         className: "pol-page-classifier",
         classification: result.predicted_class,
         pageId: result.pageId,
-        url: result.url});
+        url: result.url
+    });
 }
 
 /**
@@ -246,19 +240,9 @@ function saveClassificationResultPol(result) {
  * @param {string} result.url - URL of the classified page.
  */
 function saveClassificationResultCovid(result) {
-    saveClassificationResult({
+    storageClassifications.set({
         className: "covid-page-classifier",
         classification: result.predicted_class,
         pageId: result.pageId,
         url: result.url});
-}
-
-/**
- * Return the extension version specified in the manifest.
- * @return {string} - The study version.
- */
-function getExtensionVersion() {
-    const manifest = browser.runtime.getManifest();
-    if ("version" in manifest) return manifest.version;
-    return "";
 }

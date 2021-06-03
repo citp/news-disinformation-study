@@ -11,19 +11,19 @@ export const storageClassifications = new indexedStorage.indexedStorage(
 
 export const storagePN = new indexedStorage.indexedStorage(
     "newsAndDisinfo.pageNavigation", {
-        pageVisits: "++, pageId, url, pageVisitStartTime",
+        pageVisits: "++, url, pageVisitStartTime",
     });
 storagePN.setTimeKey("pageVisitStartTime");
 
 export const storageSMLS = new indexedStorage.indexedStorage(
     "newsAndDisinfo.socialMediaLinkSharing", {
-        linkShares:"shareId++, url, shareTime",
+        linkShares:"shareId++, shareTime",
     });
 storageSMLS.setTimeKey("shareTime");
 
 export const storageLE = new indexedStorage.indexedStorage(
     "newsAndDisinfo.linkExposure", {
-        linkExposures: "exposureId++, url, firstSeen",
+        linkExposures: "exposureId++, firstSeen",
     });
 storageLE.setTimeKey("firstSeen");
 

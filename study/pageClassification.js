@@ -4,12 +4,15 @@
  */
 
 import * as webScience from "@mozilla/web-science";
-import Readability from '@mozilla/readability';
 
 const registeredWorkers = {};
 
 /**
  * @callback classificationCallback
+ * @param {string} workerId - ID of the classifier.
+ * @param {number} data - Prediction of the classifier.
+ * @param {string} url - URL of the page that was classified.
+ * @param {string} pageId - WebScience pageId assigned to the classified page.
  */
 
 /**
@@ -44,36 +47,3 @@ export function registerWorker(path, matchPatterns, name, initData, listener) {
 
     registeredWorkers[name] = worker;
 }
-
-/**
- * Send a network request for a page's contents, then run the classifier on them.
- * Results are sent to the listener previously registered for the worker.
- * @param {string} url - The page to fetch and classify.
- * @param {string} workerName - The name of the classifier to run on the page.
- */
-export function fetchClassificationResult(url, workerName) {
-    if (!(workerName in registeredWorkers)) return {};
-    const worker = registeredWorkers[workerName];
-    fetch(url).then((response) => {
-        response.text().then((resp) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(resp, 'text/html');
-            const pageContent = new Readability.Readability(doc).parse();
-            const toSend = {
-                url : url,
-                title: pageContent.title,
-                textContent : pageContent.textContent,
-                pageId: null,
-                context : {
-                    timestamp : Date.now(),
-                    referrer : ""
-                }
-            }
-            worker.postMessage({
-                eventName: "webScience.pageText.onTextParsed",
-                listenerArguments: [toSend]
-            });
-        });
-    });
-}
-
