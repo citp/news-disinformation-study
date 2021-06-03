@@ -3,7 +3,7 @@ In developer mode, the aggregation code will run after 15 seconds of inactivity 
 View this (and other) output by going to `about:debugging`, then "This Firefox", then "Inspect" on the study, then the "Console" tab.
 
 ### PageNavigation
-- Search Google for a site listed in `study/paths/destinationDomainMatchPatterns.js`, and follow a search result to the site.
+- Search Google for a site listed in `study/data/destinationDomainMatchPatterns.js`, and follow a search result to the site.
 - Follow a link to a different page on the same domain.
 - Close the tab
 - Wait for an aggregation run (15 seconds of inactivity) and check that both visits appear in the output for
@@ -71,7 +71,7 @@ first article, then closing the tab:
 - Go to a page that contains links to one of the study domains, but isn't that exact domain (we ignore link exposures
 that link to the same domain they're on).
   - Wikipedia can be good for getting links to news sites.
-  - [Text-only NPR](https://text.npr.org/) is also useful, since it links to other news sites and it's simplicity means it's easy
+  - [Text-only NPR](https://text.npr.org/) is also useful, since it links to other news sites and its simplicity means it's easy
   to know exactly what links are visible.
 - Stay on the page, with the links visible, for at least five seconds, then wait for an aggregation run.
 - Check that the "edges" (source domain is the site you visited, destination is where the links went) are in the aggregation output.
@@ -156,7 +156,7 @@ in the "Choose a community" dropdown.
 #### Twitter
 Creating a fake Twitter account is a bit trickier. They often require a phone number for verification, and are aware
 of most of the online SMS services. You may have to use your own phone number to make the account. Another option is to
-use a real Twitter account, and just undo any testing activity.
+use a real Twitter account, and just undo (delete, un-favorite, un-retweet, etc) any testing activity.
 
 #### Facebook
 Facebook is the hardest. I was never able to create and maintain a fake account -- Facebook's "real name" rules, and
@@ -173,6 +173,11 @@ We also track favorites on Twitter. Here's the full list of tracked actions:
 - Facebook: post, reshare
 - Twitter: tweet, retweet, favorite
 - Reddit: post
+
+Note that we don't track quote tweets where the quote-tweeted tweet contains a link. In these situations,
+no link preview is shown to viewers of the quote tweet. Quote tweets are also frequently used to
+disagree with the original tweet, so quote-tweeting a tweet with a link is not necessarily
+a sharing action.
 
 If you're testing re{sharing, tweeting} or favoriting, choose a post that has a tracked link.
 Make the share and then wait for the aggregation run. Note that logging shares can take a while (especially
@@ -203,7 +208,7 @@ the 15 seconds of inactivity to trigger aggregation. In the end, the `SocialMedi
             },
             "audience": "unknown",
             "source": "",
-            "visitReferrer": "https://text.npr.org/",
+            "visitReferrer": "text.npr.org/",
             "prevExposed": 0,
             "dayOfWeek": 6,
             "timeOfDay": 4,
