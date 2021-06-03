@@ -1,3 +1,7 @@
+/**
+ * Youtube channels that are run by news or health organizations. We track these as if they were the
+ * organization's own website (e.g., we track both nj.com and youtube.com/user/tvjersey).
+ */
 export const youtubePageMatchPatterns = [
 "*://*.youtube.com/5citytv/*",
 "*://*.youtube.com/BizTime/*",

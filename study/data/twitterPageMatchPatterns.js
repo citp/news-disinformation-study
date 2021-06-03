@@ -1,3 +1,7 @@
+/**
+ * Twitter handles that are run by health organizations. We track these as if they were the
+ * organization's own website (e.g., we track both nj.gov/health and twitter.com/NJDeptofHealth).
+ */
 export const twitterPageMatchPatterns = [
 "*://*.twitter.com/Alaska_DHSS/*",
 "*://*.twitter.com/CAPublicHealth/*",

@@ -1,3 +1,7 @@
+/**
+ * Domains that post news or health information. We track visits, exposures, and shares
+ * of pages on these domains.
+ */
 export const destinationDomainMatchPatterns = [
 "*://*.100percentfedup.com/*",
 "*://*.1011now.com/*",

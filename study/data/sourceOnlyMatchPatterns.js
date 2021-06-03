@@ -1,3 +1,7 @@
+/**
+ * Domains that are reported explicitly only when they are sources: referrers for page visits
+ * to tracked domains, or pages on which a link exposure to a tracked domain occurs.
+ */
 export const sourceOnlyMatchPatterns = [
 "*://*.alltop.com/*",
 "*://*.aol.com/*",

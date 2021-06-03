@@ -1,3 +1,7 @@
+/**
+ * Facebook pages that are run by news or health organizations. We track these as if they were the
+ * organization's own website (e.g., we track both nytimes.com and facebook.com/nytimes/).
+ */
 export const facebookPageMatchPatterns = [
 "*://*.facebook.com/highlandscurren/*",
 "*://*.facebook.com/#!/TheClockOnline/*",
