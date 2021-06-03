@@ -1,29 +1,45 @@
 import { linkExposure, pageNavigation, socialMediaLinkSharing, pageTransition, matching, debugging, userSurvey } from "@mozilla/web-science"
 import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
+
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
 import { sourceOnlyMatchPatterns } from "./data/sourceOnlyMatchPatterns.js"
 import { facebookPageMatchPatterns } from "./data/facebookPageMatchPatterns.js"
 import { twitterPageMatchPatterns } from "./data/twitterPageMatchPatterns.js"
 import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
+
 import polClassifierData from "./weights/pol-linearsvc_data.js"
 import covidClassifierData from "./weights/covid-linearsvc_data.js"
+
 import { storageTransitions, storageClassifications, storagePN, storageSMLS, storageLE } from "./databases.js"
 
 const debugLog = debugging.getDebuggingLog("newsAndDisinfo.eventHandling");
 
+// We track visits, exposures, and shares for specific sites. The majority
+//  are identified by the domain (destinationDomainMatchPatterns), and the rest are
+//  profiles owned by news organizations on social media platforms (facebookPageMatchPatterns,
+//  twitterPageMatchPatterns, and youtubePageMatchPatterns).
 const allDestinationMatchPatterns = [
     ...destinationDomainMatchPatterns,
     ...facebookPageMatchPatterns,
     ...twitterPageMatchPatterns,
     ...youtubePageMatchPatterns];
 
+// A tracked visit, exposure, or share can have an associated source: for a visit this is the
+//  referrer, for an exposure it's the page on which the exposed link was displayed, and for
+//  a share it's the referrer of a visit to the shared page (if one exists). Sources are
+//  not reported by default, but are included when they match a tracked source. Tracked sources
+//  include all tracked destinations as well as a small set of source-only sites.
 const allSourceMatchPatterns = [
     ...allDestinationMatchPatterns,
     ...sourceOnlyMatchPatterns];
 
 let destinationMatcher;
 let rally;
+
+const secondsPerMinute = 60;
+const minutesPerHour = 60;
+const hoursPerDay = 24;
 
 /**
  * Starts the study by adding listeners and initializing measurement modules.
@@ -34,33 +50,7 @@ export async function startStudy(rallyArg) {
     rally = rallyArg;
     destinationMatcher = matching.createMatchPatternSet(allDestinationMatchPatterns);
 
-    // Configure and start measurement modules
-    await addListeners();
-
-    dataAnalysis.registerAnalysisScript("/dist/aggregateStatistics.worker.js",
-        processAnalysisResult,
-        {}
-    );
-
-
-    userSurvey.setSurvey({
-        surveyName: "Initial Survey",
-        popupNoPromptMessage: "You are currently participating in the Political and COVID-19 News Information Flows Study. If you would like to hide this icon, right click and select \"Remove from Toolbar\".",
-        popupPromptMessage: "You are currently participating in the Political and COVID-19 News Information Flows Study. Please answer a few survey questions for the Political and COVID-19 News Information Flows Study. Clicking Continue will take you to Princeton’s survey.",
-        reminderInterval: 60 * 60 * 24 *3,
-        reminderMessage: "A survey is available for your Rally study. Click the Princeton logo in the toolbar to continue.",
-        reminderTitle: "Rally survey available",
-        surveyCompletionUrl: "https://citpsurveys.cs.princeton.edu/thankyou",
-        surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
-    });
-}
-
-/**
- * Starts measurements for link exposure, page navigation,
- * and social media link sharing, with associated extra utlities.
- */
-async function addListeners() {
-    // Run political and covid news classifiers on pages from relevant domains
+    // Register classifiers to evaluate content from pages from relevant domains
     pageClassification.registerWorker("/dist/polClassifier.worker.js",
         allDestinationMatchPatterns,
         "pol-page-classifier",
@@ -74,16 +64,21 @@ async function addListeners() {
         saveClassificationResultCovid
     );
 
+    // Register listener for link exposure events where the exposed link goes to a tracked domain
     linkExposure.onLinkExposureData.addListener(linkExposureListener, {
         linkMatchPatterns: allDestinationMatchPatterns,
         pageMatchPatterns: allSourceMatchPatterns,
         privateWindows : false,
     });
 
+    // Regsiter listener for page visits. The listener separates tracked visits from untracked.
+    // Receiving data about untracked visits allows us to reporthihgly-aggregated baseline
+    // browsing data for comparisons with tracked visits.
     pageNavigation.onPageData.addListener(pageNavigationListener, {
-        matchPatterns: [ "<all_urls>" ],
-        trackUserAttention: true});
+        matchPatterns: [ "<all_urls>" ]
+    });
 
+    // Register listener for shares of links to tracked domains on Facebook, Twitter, and Reddit.
     socialMediaLinkSharing.onShare.addListener(linkShareListener, {
         destinationMatchPatterns: allDestinationMatchPatterns,
         facebook: true,
@@ -94,6 +89,25 @@ async function addListeners() {
     // We'll add page transitions data to page visit events.
     pageTransition.onPageTransitionData.addListener(pageTransitionListener, {
         matchPatterns: allDestinationMatchPatterns,
+    });
+
+    // Run periodic aggregation.
+    dataAnalysis.registerAnalysisScript("/dist/aggregateStatistics.worker.js", processAnalysisResult, {});
+
+
+    // Prompt the participant to respond to an initial demographic survey.
+    // If they do not complete it, they will be reminded every three days until they complete it
+    //  or ask to no longer be reminded.
+    userSurvey.setSurvey({
+        surveyName: "Initial Survey",
+        popupNoPromptMessage: "You are currently participating in the Political and COVID-19 News Information Flows Study. If you would like to hide this icon, right click and select \"Remove from Toolbar\".",
+        popupPromptMessage: "You are currently participating in the Political and COVID-19 News Information Flows Study. Please answer a few survey questions for the Political and COVID-19 News Information Flows Study. Clicking Continue will take you to Princeton’s survey.",
+        // Interval specifed in seconds
+        reminderInterval: secondsPerMinute * minutesPerHour * hoursPerDay * 3,
+        reminderMessage: "A survey is available for your Rally study. Click the Princeton logo in the toolbar to continue.",
+        reminderTitle: "Rally survey available",
+        surveyCompletionUrl: "https://citpsurveys.cs.princeton.edu/thankyou",
+        surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
     });
 }
 

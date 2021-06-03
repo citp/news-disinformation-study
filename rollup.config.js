@@ -2,9 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// This is the Rollup configuration for the study template. It is
-// part of the build system, and you should not have to modify it.
-
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
@@ -22,7 +19,7 @@ function isDevMode(cliArgs) {
 }
 
 export default (cliArgs) => {
-  // Configuration for the main background script, study/background.js.
+  // Configuration for the main background script, study/study.js.
   // The script will be output to dist/background.js with any module
   // dependencies (your own modules or modules from NPM) bundled in.
   const rollupConfig = [
