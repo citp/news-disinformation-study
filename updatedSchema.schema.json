@@ -63,8 +63,6 @@
                   "type": "object",
                   "properties": {
                     "sharedTrimmedUrl": { "type": "string" },
-                    "visitPresentInPageNavigation": { "type": "boolean" },
-                    "visitPresentInHistory": { "type": "boolean" },
                     "visitSourceFromTransitions": { "type": "string" },
                     "facebookReshareSource": { "type": "string" },
                     "dayOfWeek": { "type": "integer" },
@@ -81,7 +79,9 @@
                       "enum": ["public", "restricted", "unknown"]
                     },
                     "categorySharesCount": { "type": "integer" },
-                    "categoryVisitAttention": { "type": "number" }
+                    "categoryVisitAttention": { "type": "number" },
+                    "categoryVisitsInPageNavigationCount" : { "type": "integer" },
+                    "categoryVisitsInHistoryCount" : { "type": "integer" }
                   },
                   "additionalProperties": false
                 }

@@ -274,7 +274,8 @@ async function aggregateLinkSharing(linkShareEvents) {
             let foundPageVisit = null;
             for (const pageVisit of pageVisits) {
                 const distance = Math.abs(pageVisit.pageVisitStartTime - linkShareEvent.shareTime);
-                if (distance < bestDistance) {
+                if (pageVisit.pageVisitStartTime < linkShareEvent.shareTime &&
+                    distance < bestDistance) {
                     foundPageVisit = pageVisit;
                     bestDistance = distance;
                 }
@@ -319,11 +320,9 @@ async function aggregateLinkSharing(linkShareEvents) {
             const index = JSON.stringify({
                 sharedTrimmedUrl,
                 visitSourceFromTransitions,
-                visitPresentInPageNavigation,
                 classifierResults,
                 shareAudience: linkShareEvent.audience,
                 facebookReshareSource: linkShareEvent.source,
-                visitPresentInHistory: linkShareEvent.visitPresentInHistory,
                 dayOfWeek: dayOfWeek,
                 timeOfDay: timeOfDay
             });
@@ -334,16 +333,18 @@ async function aggregateLinkSharing(linkShareEvents) {
             let categoryObj = platformObj.trackedSharesByCategory[index];
             if (categoryObj) {
                 categoryObj.categorySharesCount += 1;
-                if (visitPresentInPageNavigation) {
-                    categoryObj.categoryVisitAttention += visitAttentionDuration;
-                }
+                categoryObj.categoryVisitsInPageNavigationCount += visitPresentInPageNavigation ? 1 : 0;
+                categoryObj.categoryVisitAttention += visitAttentionDuration;
+                categoryObj.categoryVisitsInHistoryCount += linkShareEvent.visitPresentInHistory ? 1 : 0;
             } else {
                 categoryObj = {};
+
                 categoryObj.categorySharesCount = 1;
+                categoryObj.categoryVisitsInPageNavigationCount = visitPresentInPageNavigation ? 1 : 0;
+                categoryObj.categoryVisitAttention = visitAttentionDuration;
+                categoryObj.categoryVisitsInHistoryCount = linkShareEvent.visitPresentInHistory ? 1 : 0;
+
                 platformObj.trackedSharesByCategory[index] = categoryObj;
-                if (visitPresentInPageNavigation) {
-                    categoryObj.categoryVisitAttention = visitAttentionDuration;
-                }
             }
         }
     }

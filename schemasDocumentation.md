@@ -15,7 +15,7 @@ ajv validate -s pathToSchema.json -d savedSampleDataFromStudy.json
 This part of the document describes the data being collected by this study.
 This study will send a ping using the Rally platform, through Firefox, approximately once per day.
 
-The encrypted part of the payload follows the [`measurement` schema (TODO update link)](#) (here is a [conforming example (TODO update link)](#)), with the following salient sections.
+The encrypted part of the payload follows the [`rallymeasurement` schema (TODO update link)](#) (here is a [conforming example (TODO update link)](#)), with the following salient sections.
 
 ## `newsAndDisinfo.pageNavigation`
 This section of the ping contains a list of websites known to be sources of authoritative or misleading information about health and politics, browsed by the user who joined the study.
@@ -71,7 +71,6 @@ This section of the ping contains a list of platforms study links were shared on
         "trackedSharesByCategory": [
           {
             "sharedTrimmedUrl": "somedomain.com",
-            "visitPresentInPageNavigation": true,
             "visitSourceFromTransitions": "somereferrer.com",
             "facebookReshareSource": "page",
             "dayOfWeek": 2,
@@ -81,7 +80,10 @@ This section of the ping contains a list of platforms study links were shared on
               "pol-news-classifier": 0
             },
             "shareAudience": "public",
-            "categorySharesCount": 2
+            "categorySharesCount": 2,
+            "categoryVisitAttention": 34291,
+            "categoryVisitsInPageNavigationCount" : 1,
+            "categoryVisitsInHistoryCount" : 1
           }
         ]
       }
@@ -104,6 +106,9 @@ This section of the ping contains a list of platforms study links were shared on
            * `pol-page-classifier`: an integer representing the result of the classifier that looks for political news-related articles.
         * `shareAudience`: the target audience of the share on the social media platform.
         * `categorySharesCount`: the number of shares of content in this category was shared.
+        * `"categoryVisitAttention"`: for shared links that were also visited, the sum of time spent on the page during the visit.
+        * `"categoryVisitsInPageNavigationCount" : the number of shared links that were also visited.
+        * `"categoryVisitsInHistoryCount" : the number of shared links that appeared in the browsing history.
 
 ## `newsAndDisinfo.linkExposure`
 This section of the ping contains a list links seen by the user, only including links to domains known to be sources of news or health information.
@@ -130,3 +135,8 @@ This section of the ping contains a list links seen by the user, only including 
     * `dayOfWeek`: an integer representing the day of the week user was exposed to the link.
     * `timeOfDay`: an integer representing the time of the day user was exposed to the link.
     * `categoryExposuresCount`: the number of exposures to links in this category.
+
+## Miscellaneous Fields
+There are two remaining relevant fields in the ping:
+- `newsAndDisinfo.surveyId`: a unique, randomly-generated identifier that links survey responses to data collected through Rally.
+- `newsAndDisinfo.version`: the version of the study that generated this ping.

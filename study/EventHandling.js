@@ -3,7 +3,6 @@ import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
 
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
-//import { sourceOnlyMatchPatterns } from "./data/sourceOnlyMatchPatterns.js"
 import { facebookPageMatchPatterns } from "./data/facebookPageMatchPatterns.js"
 import { twitterPageMatchPatterns } from "./data/twitterPageMatchPatterns.js"
 import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
@@ -25,16 +24,6 @@ const allDestinationMatchPatterns = [
     ...twitterPageMatchPatterns,
     ...youtubePageMatchPatterns];
 
-// A tracked visit, exposure, or share can have an associated source: for a visit this is the
-//  referrer, for an exposure it's the page on which the exposed link was displayed, and for
-//  a share it's the referrer of a visit to the shared page (if one exists). Sources are
-//  not reported by default, but are included when they match a tracked source. Tracked sources
-//  include all tracked destinations as well as a small set of source-only sites.
-/*
-const allSourceMatchPatterns = [
-    ...allDestinationMatchPatterns,
-    ...sourceOnlyMatchPatterns];
-    */
 
 let destinationMatcher;
 let rally;
@@ -164,7 +153,8 @@ async function linkShareListener(shareData) {
         shareData.url = matching.normalizeUrl(shareData.url);
         const historyVisits = await browser.history.search({
             text: shareData.url,
-            startTime: 0 //search all history
+            startTime: 0, //search all history
+            endTime: shareData.shareTime
         });
         shareData.visitPresentInHistory = historyVisits.length > 0;
     }
