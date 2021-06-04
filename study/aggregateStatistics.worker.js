@@ -136,7 +136,7 @@ async function aggregatePageNav(pageNavEvents) {
             }
             const visitTrimmedUrl = trimUrlToReportedPortion(pageNavEvent.url);
 
-            const date = new Date(pageNavEvent.pageVisitStartTime);
+            const date = new Date(pageNavEvent.pageVisitStopTime);
             // Use UTC to avoid issues when participants change timezones.
             const dayOfWeek = date.getUTCDay();
             const hourOfDay = date.getUTCHours();
@@ -199,7 +199,6 @@ async function aggregatePageNav(pageNavEvents) {
  */
 function aggregateLinkExposure(linkExposureEvents) {
     const stats = {};
-    stats.untrackedExposuresCount = 0;
     stats.trackedExposuresByCategory = {};
 
     for (const linkExposureEvent of linkExposureEvents) {
@@ -232,8 +231,6 @@ function aggregateLinkExposure(linkExposureEvents) {
                     categoryExposuresCount: current.categoryExposuresCount + 1
                 }
             }
-        } else if (linkExposureEvent.type == "untracked") {
-            stats.untrackedExposuresCount += linkExposureEvent.count;
         }
     }
 
@@ -247,7 +244,6 @@ function aggregateLinkExposure(linkExposureEvents) {
         category = {...category, ...aggregateData};
         formattedLinkExposureStats.trackedExposuresByCategory.push(category);
     }
-    formattedLinkExposureStats.untrackedExposuresCount = stats.untrackedExposuresCount;
     return formattedLinkExposureStats;
 }
 
@@ -285,6 +281,11 @@ async function aggregateLinkSharing(linkShareEvents) {
             }
 
             const visitPresentInPageNavigation = foundPageVisit != null;
+            let visitAttentionDuration = 0;
+
+            if (visitPresentInPageNavigation) {
+                visitAttentionDuration = foundPageVisit.attentionDuration
+            }
 
             let visitSourceFromTransitions = "";
             const classifierResults = {};
@@ -322,6 +323,7 @@ async function aggregateLinkSharing(linkShareEvents) {
                 classifierResults,
                 shareAudience: linkShareEvent.audience,
                 facebookReshareSource: linkShareEvent.source,
+                visitPresentInHistory: linkShareEvent.visitPresentInHistory,
                 dayOfWeek: dayOfWeek,
                 timeOfDay: timeOfDay
             });
@@ -332,10 +334,16 @@ async function aggregateLinkSharing(linkShareEvents) {
             let categoryObj = platformObj.trackedSharesByCategory[index];
             if (categoryObj) {
                 categoryObj.categorySharesCount += 1;
+                if (visitPresentInPageNavigation) {
+                    categoryObj.categoryVisitAttention += visitAttentionDuration;
+                }
             } else {
                 categoryObj = {};
                 categoryObj.categorySharesCount = 1;
                 platformObj.trackedSharesByCategory[index] = categoryObj;
+                if (visitPresentInPageNavigation) {
+                    categoryObj.categoryVisitAttention = visitAttentionDuration;
+                }
             }
         }
     }

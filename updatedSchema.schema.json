@@ -64,6 +64,7 @@
                   "properties": {
                     "sharedTrimmedUrl": { "type": "string" },
                     "visitPresentInPageNavigation": { "type": "boolean" },
+                    "visitPresentInHistory": { "type": "boolean" },
                     "visitSourceFromTransitions": { "type": "string" },
                     "facebookReshareSource": { "type": "string" },
                     "dayOfWeek": { "type": "integer" },
@@ -79,7 +80,8 @@
                       "type": "string",
                       "enum": ["public", "restricted", "unknown"]
                     },
-                    "categorySharesCount": { "type": "integer" }
+                    "categorySharesCount": { "type": "integer" },
+                    "categoryVisitAttention": { "type": "number" }
                   },
                   "additionalProperties": false
                 }
@@ -94,7 +96,6 @@
     "newsAndDisinfo.linkExposure": {
       "type": "object",
       "properties": {
-        "untrackedExposuresCount": { "type": "integer" },
         "trackedExposuresByCategory": {
           "type": "array",
           "items": {

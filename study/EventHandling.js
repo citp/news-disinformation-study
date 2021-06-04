@@ -3,7 +3,7 @@ import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
 
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
-import { sourceOnlyMatchPatterns } from "./data/sourceOnlyMatchPatterns.js"
+//import { sourceOnlyMatchPatterns } from "./data/sourceOnlyMatchPatterns.js"
 import { facebookPageMatchPatterns } from "./data/facebookPageMatchPatterns.js"
 import { twitterPageMatchPatterns } from "./data/twitterPageMatchPatterns.js"
 import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
@@ -30,9 +30,11 @@ const allDestinationMatchPatterns = [
 //  a share it's the referrer of a visit to the shared page (if one exists). Sources are
 //  not reported by default, but are included when they match a tracked source. Tracked sources
 //  include all tracked destinations as well as a small set of source-only sites.
+/*
 const allSourceMatchPatterns = [
     ...allDestinationMatchPatterns,
     ...sourceOnlyMatchPatterns];
+    */
 
 let destinationMatcher;
 let rally;
@@ -64,10 +66,12 @@ export async function startStudy(rallyArg) {
         saveClassificationResultCovid
     );
 
-    // Register listener for link exposure events where the exposed link goes to a tracked domain
-    linkExposure.onLinkExposureUpdate.addListener(linkExposureListener, {
-        linkMatchPatterns: allDestinationMatchPatterns,
-        pageMatchPatterns: allSourceMatchPatterns,
+    // Register listener for link exposure events. We listen for all exposures,
+    //  but only report specific information about links to sites on our lists. This
+    //  reduction happens in the aggregation step.
+    linkExposure.onLinkExposureData.addListener(linkExposureListener, {
+        linkMatchPatterns: [ "<all_urls>" ],
+        pageMatchPatterns: [ "<all_urls>" ],
         privateWindows : false,
     });
 
@@ -126,7 +130,7 @@ async function processAnalysisResult(result) {
         analysisResult["newsAndDisinfo.version"] = browser.runtime.getManifest().version;
         debugLog("Submitting results through Rally = " + JSON.stringify(analysisResult));
         if (__ENABLE_DEVELOPER_MODE__) console.log(analysisResult);
-        rally.sendPing("measurements", analysisResult);
+        rally.sendPing("rally-measurements", analysisResult);
     } else {
         console.warn("Unexpected message from analysis script:", result);
     }
@@ -158,6 +162,11 @@ function pageTransitionListener(details) {
 async function linkShareListener(shareData) {
     if (shareData.type == "tracked") {
         shareData.url = matching.normalizeUrl(shareData.url);
+        const historyVisits = await browser.history.search({
+            text: shareData.url,
+            startTime: 0 //search all history
+        });
+        shareData.visitPresentInHistory = historyVisits.length > 0;
     }
     if (shareData.type == "tracked" ||
         (shareData.type == "untracked" && shareData.untrackedCount > 0)) {
@@ -185,14 +194,6 @@ async function linkExposureListener(exposureData) {
         };
         storageLE.set(singleExposure, "linkExposures");
     }
-    if (exposureData.nonmatchingLinkCount > 0) {
-        const untrackedData = {
-            type: "untracked",
-            count: exposureData.nonmatchingLinkCount,
-            firstSeen: firstSeen
-        };
-        storageLE.set(untrackedData, "linkExposures");
-    }
 }
 
 /**
@@ -208,6 +209,7 @@ async function pageNavigationListener(pageData) {
     } else {
         storagePN.set({
             type: "untracked",
+            pageVisitStopTime: pageData.pageVisitStopTime,
             pageVisitStartTime: pageData.pageVisitStartTime,
             attentionDuration: pageData.attentionDuration
         }, "pageVisits");

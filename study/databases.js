@@ -11,9 +11,9 @@ export const storageClassifications = new indexedStorage.indexedStorage(
 
 export const storagePN = new indexedStorage.indexedStorage(
     "newsAndDisinfo.pageNavigation", {
-        pageVisits: "++, url, pageVisitStartTime",
+        pageVisits: "++, url, pageVisitStopTime",
     });
-storagePN.setTimeKey("pageVisitStartTime");
+storagePN.setTimeKey("pageVisitStopTime");
 
 export const storageSMLS = new indexedStorage.indexedStorage(
     "newsAndDisinfo.socialMediaLinkSharing", {
