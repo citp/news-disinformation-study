@@ -119,7 +119,7 @@ async function processAnalysisResult(result) {
         analysisResult["newsAndDisinfo.version"] = browser.runtime.getManifest().version;
         debugLog("Submitting results through Rally = " + JSON.stringify(analysisResult));
         if (__ENABLE_DEVELOPER_MODE__) console.log(analysisResult);
-        rally.sendPing("rally-measurements", analysisResult);
+        rally.sendPing("rallymeasurements", analysisResult);
     } else {
         console.warn("Unexpected message from analysis script:", result);
     }
