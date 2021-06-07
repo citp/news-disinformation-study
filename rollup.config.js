@@ -25,7 +25,7 @@ export default (cliArgs) => {
   // dependencies (your own modules or modules from NPM) bundled in.
   const rollupConfig = [
     {
-      input: "study/study.js",
+      input: "src/background.js",
       output: {
         file: "dist/background.js",
         sourcemap: isDevMode(cliArgs) ? "inline" : false,
@@ -49,8 +49,8 @@ export default (cliArgs) => {
         copy({
           targets: [{
             src: [
-              "study/**/*",
-              "!study/**/*.js",
+              "src/**/*",
+              "!src/**/*.js",
             ],
             dest: "dist/",
           }],
@@ -70,7 +70,7 @@ export default (cliArgs) => {
   // background script might want to reference the bundled
   // scripts (e.g., browser.contentScripts.register() or new
   // Worker()).
-  const scriptPaths = globby.sync([ `study/**/*.content.js`, `study/**/*.worker.js` ]);
+  const scriptPaths = globby.sync([ `src/**/*.content.js`, `src/**/*.worker.js` ]);
   for(const scriptPath of scriptPaths) {
     rollupConfig.push({
       input: scriptPath,
