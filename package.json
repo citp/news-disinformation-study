@@ -1,5 +1,5 @@
 {
-  "name": "PrincetonUniversityNewsStudy",
+  "name": "princeton-university-news-study",
   "version": "2.0.0",
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@mozilla/rally": "0.6.0",
-    "@mozilla/web-science": "^0.2.0",
+    "@mozilla/web-science": "^0.4.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-replace": "^2.3.4",
