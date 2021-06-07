@@ -7,6 +7,7 @@ import replace from "@rollup/plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
 import copy from "rollup-plugin-copy";
 import globby from "globby";
+import webScienceRollupPlugin from "@mozilla/web-science/rollup-plugin";
 
 /**
  * Helper to detect developer mode.
@@ -36,6 +37,7 @@ export default (cliArgs) => {
           // Add-on.
           __ENABLE_DEVELOPER_MODE__: isDevMode(cliArgs),
         }),
+        webScienceRollupPlugin(),
         resolve({
           browser: true,
         }),
@@ -78,6 +80,7 @@ export default (cliArgs) => {
         sourcemap: isDevMode(cliArgs) ? "inline" : false,
       },
       plugins: [
+        webScienceRollupPlugin(),
         resolve({
           browser: true,
         }),
