@@ -75,7 +75,7 @@ export default (cliArgs) => {
     rollupConfig.push({
       input: scriptPath,
       output: {
-        file: `dist/${scriptPath.slice("study/".length)}`,
+        file: `dist/${scriptPath.slice("src/".length)}`,
         format: "iife",
         sourcemap: isDevMode(cliArgs) ? "inline" : false,
       },
