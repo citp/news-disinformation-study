@@ -1,5 +1,5 @@
 # Data Collection Schemas
-The schema for validating reported data is available [here (TODO update link)](#).
+The schema for validating reported data is available [here](https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/main/schemas/pioneer-citp-news-disinfo/rallymeasurements/rallymeasurements.1.schema.json).
 
 The schema is separated into sections for each of the main measurement modules as well as
 a section for miscellaneous other data, such as the study version.
@@ -15,7 +15,7 @@ ajv validate -s pathToSchema.json -d savedSampleDataFromStudy.json
 This part of the document describes the data being collected by this study.
 This study will send a ping using the Rally platform, through Firefox, approximately once per day.
 
-The encrypted part of the payload follows the [`rallymeasurement` schema (TODO update link)](#) (here is a [conforming example (TODO update link)](#)), with the following salient sections.
+The encrypted part of the payload follows the [`rallymeasurement` schema](https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/main/templates/pioneer-citp-news-disinfo/rallymeasurements/rallymeasurements.1.schema.json) (here is a [conforming example](https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/main/validation/pioneer-citp-news-disinfo/rallymeasurements.1.sample.pass.json)), with the following salient sections.
 
 ## `newsAndDisinfo.pageNavigation`
 This section of the ping contains a list of websites known to be sources of authoritative or misleading information about health and politics, browsed by the user who joined the study.
@@ -107,15 +107,14 @@ This section of the ping contains a list of platforms study links were shared on
         * `shareAudience`: the target audience of the share on the social media platform.
         * `categorySharesCount`: the number of shares of content in this category was shared.
         * `"categoryVisitAttention"`: for shared links that were also visited, the sum of time spent on the page during the visit.
-        * `"categoryVisitsInPageNavigationCount" : the number of shared links that were also visited.
-        * `"categoryVisitsInHistoryCount" : the number of shared links that appeared in the browsing history.
+        * `"categoryVisitsInPageNavigationCount"` : the number of shared links that were also visited.
+        * `"categoryVisitsInHistoryCount"` : the number of shared links that appeared in the browsing history.
 
 ## `newsAndDisinfo.linkExposure`
 This section of the ping contains a list links seen by the user, only including links to domains known to be sources of news or health information.
 
 ```json
   "newsAndDisinfo.linkExposure": {
-    "untrackedExposuresCount": 40,
     "trackedExposuresByCategory": [
       {
         "exposureSourceTrimmedUrl": "google.com",
@@ -128,7 +127,6 @@ This section of the ping contains a list links seen by the user, only including 
   }
 ```
 
-- `untrackedExposuresCount`: the number of links to domains outside the study domains that the user was exposed to.
 - `trackedExposuresByCategory`: an array of objects, each representing a link user was exposed to.
     * `exposureSourceTrimmedUrl`: the domain exposing the link.
     * `exposureDestinationTrimedUrl`: the domain of the link.
