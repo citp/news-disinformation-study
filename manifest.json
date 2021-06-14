@@ -30,10 +30,6 @@
         "history"
     ],
 
-    "content_security_policy":
-        "script-src 'self' 'sha256-csyiOLMfXk2f5pU99mqYFyshgnVYbdp6o9bnQ9hntPA=' 'sha256-nYNRfLKTaKqgi4+CK/mcp9hdSsmD8F17GWuo+vQGfqU='; object-src 'self'; worker-src 'self';",
-
-
     "browser_specific_settings": {
         "gecko": {
             "id": "princeton-news-study@rally.mozilla.org",
