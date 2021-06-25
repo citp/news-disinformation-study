@@ -39,7 +39,7 @@ async function initialize() {
     storage = webScience.storage.createKeyValueStorage("analysisStore");
     lastAnalysisRangeEndTime = await storage.get("lastAnalysisRangeEndTime");
     if (lastAnalysisRangeEndTime == null) {
-        lastAnalysisRangeEndTime = roundTimeUp(webScience.timing.now());
+        lastAnalysisRangeEndTime = roundTimeUp(webScience.timing.now()) + 1;
         await storage.set("lastAnalysisRangeEndTime", lastAnalysisRangeEndTime);
     }
 }
@@ -54,7 +54,7 @@ function roundTimeUp(timeStamp) {
     const timeStampObj = new Date(timeStamp);
     const endHour = Math.ceil(timeStampObj.getUTCHours() / 4) * 4;
     return Date.UTC(timeStampObj.getUTCFullYear(), timeStampObj.getUTCMonth(),
-                    timeStampObj.getUTCDay(), endHour) - 1;
+                    timeStampObj.getUTCDate(), endHour) - 1;
 }
 
 /**
@@ -67,7 +67,7 @@ function roundTimeDown(timeStamp) {
     const timeStampObj = new Date(timeStamp);
     const endHour = Math.floor(timeStampObj.getUTCHours() / 4) * 4;
     return Date.UTC(timeStampObj.getUTCFullYear(), timeStampObj.getUTCMonth(),
-                    timeStampObj.getUTCDay(), endHour);
+                    timeStampObj.getUTCDate(), endHour);
 }
 
 /**
