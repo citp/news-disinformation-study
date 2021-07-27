@@ -1,6 +1,6 @@
 {
   "name": "princeton-university-news-study",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "dev": "rollup -w --config-enable-developer-mode -c rollup.config.js",
