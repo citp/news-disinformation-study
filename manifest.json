@@ -2,9 +2,11 @@
 
     "manifest_version": 2,
 
-    "name": "Princeton University News Study",
+    "name": "Political and COVID-19 News Study",
 
-    "version": "2.0.4",
+    "author": "Princeton CITP",
+
+    "version": "3.0.0",
 
     "description": "A Rally study on how web users engage with news about politics and COVID-19.",
 
@@ -32,7 +34,7 @@
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "princeton-news-study@rally.mozilla.org",
+            "id": "princeton-political-and-covid-19-news-study@rally.mozilla.org",
             "strict_min_version": "87.0"
         }
     },
