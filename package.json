@@ -13,7 +13,7 @@
     "watch-bundled": "web-ext run --watch-file dist/background.js dist/aggregateStatistics.worker.js dist/polClassifier.worker.js dist/covidClassifier.worker.js"
   },
   "dependencies": {
-    "dexie": "^3.0.3",
+    "dexie": "^3.2.2",
     "n-gram": "^2.0.1",
     "@mozilla/readability": "^0.4.1"
   },
