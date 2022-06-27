@@ -31,3 +31,9 @@ export const storageTransitions = new indexedStorage.indexedStorage(
     "newsAndDisinfo.pageTransitions", {
         transitions: "++, pageId",
     });
+
+export const storageMethodology = new indexedStorage.indexedStorage(
+    "newsAndDisinfo.methodology", {
+        pageRecords: "++, pageId",
+    });
+storageMethodology.setTimeKey("pageVisitStopTime");
