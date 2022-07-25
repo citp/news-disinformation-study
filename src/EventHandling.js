@@ -1,38 +1,35 @@
 import {
-    //socialMediaActivity,
-    //timing,
-    //linkExposure,
+    timing,
+    linkExposure,
     pageNavigation,
     socialMediaLinkSharing,
-    //pageTransition,
+    pageTransition,
     matching,
-    //debugging,
-    //userSurvey
+    debugging,
+    userSurvey
 } from "@mozilla/web-science"
-//import * as pageClassification from "./pageClassification.js"
-//import * as dataAnalysis from "./dataAnalysis.js"
+import * as pageClassification from "./pageClassification.js"
+import * as dataAnalysis from "./dataAnalysis.js"
 
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
 import { facebookPageMatchPatterns } from "./data/facebookPageMatchPatterns.js"
 import { twitterPageMatchPatterns } from "./data/twitterPageMatchPatterns.js"
 import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
 
-//import polClassifierData from "./weights/pol-linearsvc_data.js"
-//import covidClassifierData from "./weights/covid-linearsvc_data.js"
+import polClassifierData from "./weights/pol-linearsvc_data.js"
+import covidClassifierData from "./weights/covid-linearsvc_data.js"
 
 import {
-    //storageTransitions,
-    //storageClassifications,
+    storageTransitions,
+    storageClassifications,
     storagePN,
-    //storageSMLS,
-    //storageLE
+    storageSMLS,
+    storageLE,
 } from "./databases.js"
 
-import {
-    registerListeners
-} from "./methodology.js"
+import { initializeMethodology } from "./methodology.js"
 
-//const debugLog = debugging.getDebuggingLog("newsAndDisinfo.eventHandling");
+const debugLog = debugging.getDebuggingLog("newsAndDisinfo.eventHandling");
 
 // We track visits, exposures, and shares for specific sites. The majority
 //  are identified by the domain (destinationDomainMatchPatterns), and the rest are
@@ -46,11 +43,11 @@ const allDestinationMatchPatterns = [
 
 
 let destinationMatcher;
-//let rally;
+let rally;
 
-//const secondsPerMinute = 60;
-//const minutesPerHour = 60;
-//const hoursPerDay = 24;
+const secondsPerMinute = 60;
+const minutesPerHour = 60;
+const hoursPerDay = 24;
 
 /**
  * Starts the study by adding listeners and initializing measurement modules.
@@ -58,34 +55,15 @@ let destinationMatcher;
  * @param {Object} rally - Rally study object, used for sending data pings.
  */
 export async function startStudy(rallyArg) {
-    console.log("test");
-    //rally = rallyArg;
+    rally = rallyArg;
     destinationMatcher = matching.createMatchPatternSet(allDestinationMatchPatterns);
 
-    registerListeners(allDestinationMatchPatterns);
-
-    /*
-    socialMediaActivity.onTwitterActivity.addListener(smTestingListener, {eventTypes: ["tweet", "retweet", "favorite"], blocking: true});
-    socialMediaActivity.onFacebookActivity.addListener(smTestingListener, {eventTypes: ["post", "comment", "reshare", "react"], blocking: true});
-    socialMediaActivity.onRedditActivity.addListener(smTestingListener, {eventTypes: ["post", "comment", "postVote", "commentVote"], blocking: true});
-    */
-
-
-    socialMediaLinkSharing.onShare.addListener(nytListener, {
-        destinationMatchPatterns: [ "https://*.nytimes.com/*" ],
-        facebook: true,
-        twitter: true,
-        reddit: true
-    });
-    socialMediaLinkSharing.onShare.addListener(wapoListener, {
-        destinationMatchPatterns: [ "https://*.washingtonpost.com/*" ],
-        facebook: true,
-        twitter: true,
-        reddit: true
-    });
+    // Start the methodology module. Note that it collects runtime data on all urls,
+    // but that URLs not matching predetermined study domains are removed before
+    // reporting data.
+    initializeMethodology([ "<all_urls>" ]);
 
     // Register classifiers to evaluate content from pages from relevant domains
-    /*
     pageClassification.registerWorker("/dist/polClassifier.worker.js",
         allDestinationMatchPatterns,
         "pol-page-classifier",
@@ -108,8 +86,15 @@ export async function startStudy(rallyArg) {
         privateWindows : false,
     });
 
-*/
-    // Regsiter listener for page visits. The listener separates tracked visits from untracked.
+    // Register listener for shares of links to tracked domains on Facebook, Twitter, and Reddit.
+    socialMediaLinkSharing.onShare.addListener(linkShareListener, {
+        destinationMatchPatterns: allDestinationMatchPatterns,
+        facebook: true,
+        twitter: true,
+        reddit: true
+    });
+
+    // Register listener for page visits. The listener separates tracked visits from untracked.
     // Receiving data about untracked visits allows us to reporthihgly-aggregated baseline
     // browsing data for comparisons with tracked visits.
     pageNavigation.onPageData.addListener(pageNavigationListener, {
@@ -117,16 +102,13 @@ export async function startStudy(rallyArg) {
     });
 
     // Register listener for shares of links to tracked domains on Facebook, Twitter, and Reddit.
-    /*
     socialMediaLinkSharing.onShare.addListener(linkShareListener, {
         destinationMatchPatterns: allDestinationMatchPatterns,
         facebook: true,
         twitter: true,
         reddit: true
     });
-    */
 
-    /*
     // We'll add page transitions data to page visit events.
     pageTransition.onPageTransitionData.addListener(pageTransitionListener, {
         matchPatterns: allDestinationMatchPatterns,
@@ -150,30 +132,13 @@ export async function startStudy(rallyArg) {
         surveyCompletionUrl: "https://citpsurveys.cs.princeton.edu/thankyou",
         surveyUrl: "https://citpsurveys.cs.princeton.edu/rallyPolInfoSurvey"
     });
-    */
 }
-
-function nytListener(details) {
-    console.log("nyt got:", details);
-}
-
-function wapoListener(details) {
-    console.log("wapo got:", details);
-}
-
-/*
-function smTestingListener(details) {
-    console.log(details);
-    return {cancel: true};
-}
-*/
 
 /**
  * Callback for responses from the aggregateStatistics.js script. Submits data to Rally pipeline.
  * @param {Object} result - message from analysis script.
  * @param {Object} result.data - aggregated data from analysis script
  */
-/*
 async function processAnalysisResult(result) {
     const analysisResult = result.data;
     if (analysisResult.type === "stats") {
@@ -189,7 +154,6 @@ async function processAnalysisResult(result) {
         console.warn("Unexpected message from analysis script:", result);
     }
 }
-*/
 
 /**
  * Callback for page transition events. Stores the source of the transition.
@@ -198,14 +162,12 @@ async function processAnalysisResult(result) {
  *   the last page in the same tab (or opener tab, if page is opening in a new tab).
  * @param {string} details.pageId - The unique ID for the visited page.
  */
-/*
 function pageTransitionListener(details) {
     const sourceUrl = details.tabSourceUrl;
     const pageId = details.pageId;
 
     storageTransitions.set({pageId: pageId, sourceUrl: sourceUrl});
 }
-*/
 
 /**
  * Callback for social media link share events. Stores the event.
@@ -216,7 +178,6 @@ function pageTransitionListener(details) {
  * @param {number} shareData.untrackedCount - For an untracked share event, the number of
  *   untracked URLs that were shared.
  */
-/*
 async function linkShareListener(shareData) {
     if (shareData.type == "tracked") {
         shareData.url = matching.normalizeUrl(shareData.url);
@@ -232,7 +193,6 @@ async function linkShareListener(shareData) {
         storageSMLS.set(shareData, "linkShares");
     }
 }
-*/
 
 /**
  * Callback for link exposure events. Stores the event.
@@ -242,7 +202,6 @@ async function linkShareListener(shareData) {
  * @param {number} exposureData.nonmatchingLinkCount - Number of exposured URLs whose domains
  *   were not part of the tracked set.
  */
-/*
 async function linkExposureListener(exposureData) {
     const firstSeen = timing.now();
     exposureData.url = matching.normalizeUrl(exposureData.url);
@@ -256,7 +215,6 @@ async function linkExposureListener(exposureData) {
         storageLE.set(singleExposure, "linkExposures");
     }
 }
-*/
 
 /**
  * Callback for a tracked page visit. Stores the event.
@@ -286,7 +244,6 @@ async function pageNavigationListener(pageData) {
  * @param {string} result.pageId - Unique ID for the classified page.
  * @param {string} result.url - URL of the classified page.
  */
-/*
 function saveClassificationResultPol(result) {
     storageClassifications.set({
         className: "pol-page-classifier",
@@ -295,7 +252,6 @@ function saveClassificationResultPol(result) {
         url: result.url
     });
 }
-*/
 
 /**
  * Callback for a classification result from the covid news classifier.
@@ -305,7 +261,6 @@ function saveClassificationResultPol(result) {
  * @param {string} result.pageId - Unique ID for the classified page.
  * @param {string} result.url - URL of the classified page.
  */
-/*
 function saveClassificationResultCovid(result) {
     storageClassifications.set({
         className: "covid-page-classifier",
@@ -313,4 +268,3 @@ function saveClassificationResultCovid(result) {
         pageId: result.pageId,
         url: result.url});
 }
-*/

@@ -134,6 +134,70 @@ This section of the ping contains a list links seen by the user, only including 
     * `timeOfDay`: an integer representing the time of the day user was exposed to the link.
     * `categoryExposuresCount`: the number of exposures to links in this category.
 
+
+
+## `newsAndDisinfo.methodology`
+This section of the ping contains a record of each page visited by the user, with
+the user's attention and path to visited the page measured via several different
+methods.
+
+```json
+  "newsAndDisinfo.methodology": {
+    "measuredPageVisits": [
+      {
+        "visitTrimmedUrl": "somedomain.com",
+        "attentionDwellTime": 21079,
+        "attentionDwellTimePlus": 15234,
+        "attentionTimeToNextLoad": 35000,
+        "attentionWebScience": 15123,
+        "parentHistory": "referrer.com",
+        "parentLoadTime": "other.com",
+        "parentWebScience": "referrer.com",
+        "parentReferrer": "referrer.com",
+        "isHistoryChange": false,
+        "parentReferrerPathPresent": false,
+        "parentWebSciencePathPresent": true,
+        "parentLoadTimeToHistory": true,
+        "parentReferrerToHistory": true,
+        "parentReferrerToLoadTime": false,
+        "parentWebScienceToHistory": true,
+        "parentWebScienceToLoadTime": false,
+        "parentWebScienceToReferrer": true,
+        "prevTTNL": 2312,
+        "timeOfDayStart": 12,
+        "dayOfMonthStart": 24,
+        "monthOfYearStart": 6,
+        "yearStart": 2022
+      }
+    ]
+  }
+```
+
+- `measuredPageVisits`: an array of objects, each representing a page visit.
+    * `visitTrimmedUrl`: the visited domain, or "other" if the visit was to an untracked domain.
+    * `attentionDwellTime`: the amount of time between the page loading in the browser and unloading.
+    * `attentionDwellTimePlus`: the amount of time the page was visible to the user and focused.
+    * `attentionWebScience`: the amount of time the user was paying attention to the page, as documented in the [WebScience code](https://github.com/mozilla-rally/web-science/blob/main/src/pageManager.js).
+    * `parentHistory`: the domain of the parent page as reported by the History API.
+    * `parentLoadTime`: the domain of the page that loaded chronologically before this one.
+    * `parentWebScience`: the domain of the page that WebScience judged to be the parent of this one.
+    * `parentReferrer`: the domain of the page listed as the `document.referrer`.
+    * `isHistoryChange`: whether this page visit started via a change through the History API instead of a regular navigation.
+    * `parentReferrerPathPresent`: whether the page listed as the `parentReferrer` had a path. Note that the path itself is removed before reporting -- this value states whether it was *ever* present.
+    * `parentWebSciencePathPresent`: same as the above, for the `parentWebScience`.
+    * `parentLoadtimeToHistory`: whether the pages listed as `parentLoadTime` and `parentHistory` were the same (before removing the path for reporting).
+    * `parentReferrerToHistory`: whether the pages listed as `parentReferrer` and `parentHistory` were the same (before removing the path for reporting).
+    * `parentReferrerToLoadTime`: whether the pages listed as `parentReferrer` and `parentLoadTime` were the same (before removing the path for reporting).
+    * `parentWebScienceToHistory`: whether the pages listed as `parentWebScience` and `parentHistory` were the same (before removing the path for reporting).
+    * `parentWebScienceToLoadTime`: whether the pages listed as `parentWebScience` and `parentLoadTime` were the same (before removing the path for reporting).
+    * `parentWebScienceToReferrer`: whether the pages listed as `parentWebScience` and `parentReferrer` were the same (before removing the path for reporting).
+    * `prevTTNL`: the amount of time between the loading of the page chronologically before and the loading of this page (for estimating boundaries of browsing sessions).
+    * `timeOfDayStart`: the time of day the page visit started, represented as the start of a four-hour span.
+    * `dayOfMonthStart`: the day of the month the page visit started.
+    * `monthOfYearStart`: the month of the year the page visit started (note that months are 0-indexed).
+    * `yearStart`: the year the page visit started.
+
+
 ## Miscellaneous Fields
 There are two remaining relevant fields in the ping:
 - `newsAndDisinfo.surveyId`: a unique, randomly-generated identifier that links survey responses to data collected through Rally.
