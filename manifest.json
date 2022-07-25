@@ -2,9 +2,11 @@
 
     "manifest_version": 2,
 
-    "name": "Princeton University News Study",
+    "name": "Political and COVID-19 News Study",
 
-    "version": "2.1.0",
+    "author": "Princeton CITP",
+
+    "version": "3.0.0",
 
     "description": "A Rally study on how web users engage with news about politics and COVID-19.",
 
@@ -30,13 +32,9 @@
         "history"
     ],
 
-    "content_security_policy":
-        "script-src 'self' 'sha256-csyiOLMfXk2f5pU99mqYFyshgnVYbdp6o9bnQ9hntPA=' 'sha256-nYNRfLKTaKqgi4+CK/mcp9hdSsmD8F17GWuo+vQGfqU='; object-src 'self'; worker-src 'self';",
-
-
     "browser_specific_settings": {
         "gecko": {
-            "id": "princeton-news-study@rally.mozilla.org",
+            "id": "princeton-political-and-covid-19-news-study@rally.mozilla.org",
             "strict_min_version": "87.0"
         }
     },
