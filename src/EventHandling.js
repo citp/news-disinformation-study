@@ -1,4 +1,13 @@
-import { timing, linkExposure, pageNavigation, socialMediaLinkSharing, pageTransition, matching, debugging, userSurvey } from "@mozilla/web-science"
+import {
+    timing,
+    linkExposure,
+    pageNavigation,
+    socialMediaLinkSharing,
+    pageTransition,
+    matching,
+    debugging,
+    userSurvey
+} from "@mozilla/web-science"
 import * as pageClassification from "./pageClassification.js"
 import * as dataAnalysis from "./dataAnalysis.js"
 
@@ -10,7 +19,15 @@ import { youtubePageMatchPatterns } from "./data/youtubePageMatchPatterns.js"
 import polClassifierData from "./weights/pol-linearsvc_data.js"
 import covidClassifierData from "./weights/covid-linearsvc_data.js"
 
-import { storageTransitions, storageClassifications, storagePN, storageSMLS, storageLE } from "./databases.js"
+import {
+    storageTransitions,
+    storageClassifications,
+    storagePN,
+    storageSMLS,
+    storageLE,
+} from "./databases.js"
+
+import { initializeMethodology } from "./methodology.js"
 
 const debugLog = debugging.getDebuggingLog("newsAndDisinfo.eventHandling");
 
@@ -41,6 +58,11 @@ export async function startStudy(rallyArg) {
     rally = rallyArg;
     destinationMatcher = matching.createMatchPatternSet(allDestinationMatchPatterns);
 
+    // Start the methodology module. Note that it collects runtime data on all urls,
+    // but that URLs not matching predetermined study domains are removed before
+    // reporting data.
+    initializeMethodology([ "<all_urls>" ]);
+
     // Register classifiers to evaluate content from pages from relevant domains
     pageClassification.registerWorker("/dist/polClassifier.worker.js",
         allDestinationMatchPatterns,
@@ -64,7 +86,15 @@ export async function startStudy(rallyArg) {
         privateWindows : false,
     });
 
-    // Regsiter listener for page visits. The listener separates tracked visits from untracked.
+    // Register listener for shares of links to tracked domains on Facebook, Twitter, and Reddit.
+    socialMediaLinkSharing.onShare.addListener(linkShareListener, {
+        destinationMatchPatterns: allDestinationMatchPatterns,
+        facebook: true,
+        twitter: true,
+        reddit: true
+    });
+
+    // Register listener for page visits. The listener separates tracked visits from untracked.
     // Receiving data about untracked visits allows us to reporthihgly-aggregated baseline
     // browsing data for comparisons with tracked visits.
     pageNavigation.onPageData.addListener(pageNavigationListener, {

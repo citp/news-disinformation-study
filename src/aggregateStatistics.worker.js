@@ -5,7 +5,8 @@
  */
 
 import * as webScience from "@mozilla/web-science"
-import { storageTransitions, storageClassifications, storagePN, storageSMLS, storageLE } from "./databases.js"
+import { storageTransitions, storageClassifications, storagePN,
+    storageSMLS, storageLE, storageMethodology } from "./databases.js"
 import { destinationDomainMatchPatterns } from "./data/destinationDomainMatchPatterns.js"
 import { sourceOnlyMatchPatterns } from "./data/sourceOnlyMatchPatterns.js"
 import { facebookPageMatchPatterns } from "./data/facebookPageMatchPatterns.js"
@@ -84,11 +85,13 @@ async function runAggregation(aggregationData) {
     const pageNavEvents = await storagePN.getEventsByRange(startTime, endTime);
     const linkShareEvents = await storageSMLS.getEventsByRange(startTime, endTime);
     const linkExposureEvents = await storageLE.getEventsByRange(startTime, endTime);
+    const methodologyEvents = await storageMethodology.getEventsByRange(startTime, endTime, "pageNavigationRecords");
 
     // Run each measurement's aggregation function on its events and store the results.
     stats["newsAndDisinfo.pageNavigation"] = await aggregatePageNav(pageNavEvents);
     stats["newsAndDisinfo.socialMediaLinkSharing"] = await aggregateLinkSharing(linkShareEvents);
     stats["newsAndDisinfo.linkExposure"] = await aggregateLinkExposure(linkExposureEvents);
+    stats["newsAndDisinfo.methodology"] = await aggregateMethodology(methodologyEvents);
 
     // Send the aggregated data back to the caller.
     postMessage({
@@ -372,6 +375,193 @@ async function aggregateLinkSharing(linkShareEvents) {
     }
 
     return formattedLinkShareStats;
+}
+
+/**
+ * Function for computing methodology statistics
+ * @param {Object} methodologyEvents - Methodology storage object
+ */
+async function aggregateMethodology(methodologyEvents) {
+    // create object to hold processed records
+    const stats = { methodologyVisits: [] };
+
+    // We'll process each raw event from the methodologyEvents database by combining
+    // it with data from the other databases and then add it to the stats object.
+    for (const pageVisitRecord of methodologyEvents) {
+        const methodologyRecord = createEmptyMethodologyRecord();
+
+        methodologyRecord.visitTrimmedUrl = trimUrlToReportedPortion(pageVisitRecord.url);
+
+        // ATTENTION MEASURES
+        // Here, we collect four measures of attention:
+        //   - attentionWebScience and attentionDwellTime are in the visit record itself
+        //   - attentionDwellTimePlus is in the simpleAttention database
+        //   - attentionTimeToNextLoad is in the transitions database
+
+        methodologyRecord.attentionDwellTime = pageVisitRecord.attentionDwellTime;
+        methodologyRecord.attentionWebScience = pageVisitRecord.attentionWebScience;
+
+        // simple attention is a study-specific module, so its records are in a separate
+        // database, indexed by the pageId.
+        const simpleAttentionRecord = await storageMethodology.get(
+            {pageId: pageVisitRecord.pageId},
+            "simpleAttentionRecords");
+        if (simpleAttentionRecord) {
+            methodologyRecord.attentionDwellTimePlus = simpleAttentionRecord.attentionDwellTimePlus;
+        }
+
+        // the "time child" is the chronologically next page to load after the current page.
+        const timeChildsTransitionRecord = await storageMethodology.get(
+            {pageId: pageVisitRecord.pageId},
+            "nextTransitionsRecords");
+        if (timeChildsTransitionRecord) {
+            const timeChildsPageRecord = await storageMethodology.get(
+                {pageId: timeChildsTransitionRecord.timeSourceChildPageId},
+                "pageNavigationRecords");
+            if (timeChildsPageRecord) {
+                methodologyRecord.attentionTimeToNextLoad = timeChildsPageRecord.pageVisitStartTime -
+                    pageVisitRecord.pageVisitStartTime;
+            }
+        }
+
+        // PARENT MEASURES
+        // We collect four measures of parent pages:
+        //   - parentLoadTime, parentWebScience, and parentReferrer are in the transitions database
+        //   - parentHistory is in the history database
+        // We also grab the prevTTNL here, see below.
+
+        // The URLs that we report will be trimmed versions of the originals, with either the
+        // path or the entire URL removed. However, before that happens, we want to compare
+        // the raw values to each other.
+        let parentLoadTimeRaw = "";
+        let parentWebScienceRaw = "";
+        let parentReferrerRaw = "";
+        let parentHistoryRaw = "";
+
+        const transitionRecord = await storageMethodology.get(
+            {pageId: pageVisitRecord.pageId},
+            "transitionsRecords");
+        if (transitionRecord) {
+            methodologyRecord.isHistoryChange = transitionRecord.isHistoryChange;
+
+            parentWebScienceRaw = transitionRecord.parentWebScience;
+            parentLoadTimeRaw = transitionRecord.parentLoadTime;
+            parentReferrerRaw = transitionRecord.parentReferrer;
+            // Using the pageId of the parentLoadTime, we can look up the
+            // `prevTTNL` -- the amount of time between when
+            // parentLoadTime loaded and when this page loaded. We need this to be able to mimic
+            // choosing a threshold for dividing browsing into sessions. Previous work in this space
+            // usually chooses an amount of time (say, five minutes) and says that when users load
+            // pages less than five minutes apart, those page loads are part of the same logical
+            // session -- they are connected in the user's mind. Page loads separated by more
+            // than five minutes are considered to be part of different sessions. `parentLoadTime` is
+            // only relevant when the pages are part of the same sesssion. Since we don't have a
+            // threshold defined a priori, we instead report the raw time between loads, so that we
+            // can consider possible thresholds during analysis.
+            if (transitionRecord.timeSourceParentPageId) {
+                const timeParentsPageRecord = await storageMethodology.get(
+                    {pageId: transitionRecord.timeSourceParentPageId},
+                    "pageNavigationRecords");
+                if (timeParentsPageRecord) {
+                    methodologyRecord.prevTTNL = pageVisitRecord.pageVisitStartTime -
+                        timeParentsPageRecord.pageVisitStartTime;
+                }
+            }
+        }
+
+        const historyParentRecord = await storageMethodology.get(
+            {historyNumericId: pageVisitRecord.historyReferringVisitNumericId},
+            "pageNavigationRecords");
+        if (historyParentRecord) {
+            parentHistoryRaw = historyParentRecord.url;
+        }
+
+        // Report whether the parentReferrer has a path at all, since it often gets stripped.
+        if (parentReferrerRaw) {
+            methodologyRecord.parentReferrerPathPresent =
+                (new URL(parentReferrerRaw)).pathname !== "/";
+        }
+
+        // For ground truth, report whether the parentWebScience has a path.
+        if (parentWebScienceRaw) {
+            methodologyRecord.parentWebSciencePathPresent =
+                (new URL(parentWebScienceRaw)).pathname !== "/";
+        }
+
+        // Trim the parent page URLs to just the domain. Note that we include a few more
+        // match patterns when reporting a source URL (e.g., Google is included as a source,
+        // but not as a destination).
+        methodologyRecord.parentWebScience = trimUrlToReportedPortion(parentWebScienceRaw, true);
+        methodologyRecord.parentReferrer = trimUrlToReportedPortion(parentReferrerRaw, true);
+        methodologyRecord.parentLoadTime = trimUrlToReportedPortion(parentLoadTimeRaw, true);
+        methodologyRecord.parentHistory = trimUrlToReportedPortion(parentHistoryRaw, true);
+
+        // Since we're removing the paths for the parent page URLs, do a pairwise comparison
+        // between them all.
+        methodologyRecord.parentWebScienceToReferrer = parentWebScienceRaw === parentReferrerRaw;
+        methodologyRecord.parentWebScienceToLoadTime = parentWebScienceRaw === parentLoadTimeRaw;
+        methodologyRecord.parentWebScienceToHistory = parentWebScienceRaw === parentHistoryRaw;
+        methodologyRecord.parentReferrerToLoadTime = parentReferrerRaw === parentLoadTimeRaw;
+        methodologyRecord.parentReferrerToHistory = parentReferrerRaw === parentHistoryRaw;
+        methodologyRecord.parentLoadTimeToHistory = parentLoadTimeRaw === parentHistoryRaw;
+
+        // Report the time of day, day of month, month of year, and year that the page visit
+        // started. Note that time of day is bucketed into four-hour time periods.
+        // Also note that the day of the month is 1-indexed (i.e., the same way we talk about
+        // dates normally), while the month is 0-indexed.
+        const date = new Date(pageVisitRecord.pageVisitStartTime);
+        // Use UTC to avoid issues when participants change timezones.
+        const hourOfDay = date.getUTCHours();
+        methodologyRecord.timeOfDayStart = Math.floor(hourOfDay / 4) * 4;
+        methodologyRecord.dayOfMonthStart = date.getUTCDate(); // 1-31
+        methodologyRecord.monthOfYearStart = date.getUTCMonth(); // 0-11
+        methodologyRecord.yearStart = date.getUTCFullYear();
+
+        // Add the completed record to the stats object.
+        stats.methodologyVisits.push(methodologyRecord);
+    }
+    return stats;
+}
+
+/**
+ * Creates an object for a visit tracked by methodology, with all the fields present
+ * and initialized. Ensures that fields are present even when we can't find the value
+ * during aggregation.
+ * @return {Object}
+ */
+function createEmptyMethodologyRecord() {
+    return {
+        visitTrimmedUrl: "",
+
+        attentionDwellTime: -1,
+        attentionDwellTimePlus: -1,
+        attentionTimeToNextLoad: -1,
+        attentionWebScience: -1,
+
+        parentHistory: "",
+        parentLoadTime: "",
+        parentWebScience: "",
+        parentReferrer: "",
+
+        isHistoryChange: false,
+
+        parentReferrerPathPresent: false,
+        parentWebSciencePathPresent: false,
+
+        parentLoadTimeToHistory: false,
+        parentReferrerToHistory: false,
+        parentReferrerToLoadTime: false,
+        parentWebScienceToHistory: false,
+        parentWebScienceToLoadTime: false,
+        parentWebScienceToReferrer: false,
+
+        prevTTNL: -1,
+
+        timeOfDayStart: -1,
+        yearStart: -1,
+        dayOfMonthStart: -1,
+        monthOfYearStart: -1
+    };
 }
 
 /**
